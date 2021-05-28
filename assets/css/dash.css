@@ -1,3 +1,9 @@
+::-webkit-scrollbar {
+    width: 0px;
+    height: 0px;
+}
+
+
 body, html{
     background-color: #F6F4E4;
     height: 100%;
@@ -31,12 +37,20 @@ footer{
     background-color: #B6A9DA;
     border-radius: 20px;
     box-shadow: 5px 5px 25px black;
+    overflow: scroll;
+    overflow-x: hidden;
 }
 
 h2{
     text-align: center;
     color: white;
     border-bottom: 1px solid white;
+    transition: 0.3s;
+}
+h2:hover{
+    color: #41AFA4;
+    border-bottom: 1px solid #41AFA4;
+    transition: 0.5s;
 }
 #topChat{
     background-color: #41AFA4;
@@ -68,4 +82,39 @@ h2{
 #chatBloc{
     border : 1px solid black
 }
-
+.noteEl{
+    border: 1px solid black;
+}
+.notationBloc{
+    width: 30%;
+    border-right: 1px solid black;
+}
+#notation{
+    height: 50%;
+    text-align: center;
+    background-color: #A99BD4;
+    color: white;
+    border-bottom: 1px solid black;
+}
+#onTwenty{
+    height: 50%;
+    text-align: center;
+    color: white;
+    background-color: #4F3B8A;
+}
+.prof{
+    font-size: 0.8em;
+}
+.bg-egg{
+    background-color: #F6F4E4;
+}
+#hwDate{
+    width: 60px;
+    height: 50px;
+}
+#hwEl{
+    height: 50px;
+}
+.subInfo{
+    background-color: #4F3B8A;
+}
