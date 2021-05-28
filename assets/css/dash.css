@@ -29,6 +29,8 @@ footer{
 
 .resumeBloc{
     background-color: #B6A9DA;
+    border-radius: 20px;
+    box-shadow: 5px 5px 25px black;
 }
 
 h2{
