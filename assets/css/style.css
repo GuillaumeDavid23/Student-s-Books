@@ -1,0 +1,46 @@
+body, html{
+    background-color: #F6F4E4;
+    height: 100%;
+    font-family: 'Roboto', sans-serif;
+}
+.imgConnexion{
+    border-radius: 30%;
+}
+
+#connectBloc{
+    border-radius: 40px;
+    background-color: #41AFA4;
+    box-shadow: 10px 10px 25px black;
+    font-weight: bold;
+}
+
+#btnSubmit{
+    width: 6em;
+    height: 6em;
+    background-color: #A99BD4;
+    border: 2px solid grey;
+    transform: scale(1);
+    transition: 0.5s;
+}
+#btnSubmit:hover{
+    transform: scale(1.1);
+    transition: 0.5s;
+}
+label{
+    color: white;
+}
+input{
+    width: 80%;
+    border-radius: 30px;
+    border: 2px solid grey;
+    padding-left: 10px;
+    outline: none;
+    transform: scale(1);
+    transition: 0.5s;
+}
+
+input:focus{
+    border:2px solid greenyellow;
+    transform: scale(1.1);
+    transition: 0.5s;
+}

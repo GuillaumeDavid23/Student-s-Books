@@ -1,0 +1,33 @@
+body, html{
+    background-color: #F6F4E4;
+    height: 100%;
+    font-family: 'Roboto', sans-serif;
+    position: relative;
+}
+header{
+    height: 10%;
+    background-color: #41AFA4;
+    color: white;
+}
+.navBtnMob{
+    background-color: #4F3B8A;
+    border-radius: 20px;
+    padding: 20px;
+}
+
+#connectStatut{
+    display : inline-block;
+    height : 0;
+    width : 0;
+    border-top : 18px solid greenyellow;
+    border-right : 9px solid transparent;
+    border-left : 8px solid transparent;
+}
+
+footer{
+    position: fixed;
+    bottom: 0;
+    height: 10%;
+    width: 100%;
+    background-color: #41AFA4;
+}
