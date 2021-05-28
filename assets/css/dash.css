@@ -9,25 +9,61 @@ header{
     background-color: #41AFA4;
     color: white;
 }
+.logoBloc{
+    width: 10%;
+}
 .navBtnMob{
     background-color: #4F3B8A;
     border-radius: 20px;
     padding: 20px;
 }
 
-#connectStatut{
-    display : inline-block;
-    height : 0;
-    width : 0;
-    border-top : 18px solid greenyellow;
-    border-right : 9px solid transparent;
-    border-left : 8px solid transparent;
-}
-
 footer{
-    position: fixed;
+    margin-top: 50px;
+    position: relative;
     bottom: 0;
     height: 10%;
     width: 100%;
     background-color: #41AFA4;
 }
+
+.resumeBloc{
+    background-color: #B6A9DA;
+}
+
+h2{
+    text-align: center;
+    color: white;
+    border-bottom: 1px solid white;
+}
+#topChat{
+    background-color: #41AFA4;
+    width: 100%;
+    height: 90%;
+}
+#chatContact{
+    background-color: #B6A9DA;
+    width: 18%;
+    height: 100%;
+}
+
+#chatBar{
+    height: 10%;
+    width: 100%;
+}
+#chatBtnBloc{
+    height: 100%;
+    width: 20%;
+}
+#chatBtnSend{
+    height: 100%;
+    border: 1px solid black
+}
+#chatInput{
+    width: 90%;
+    resize: none;
+}
+#chatBloc{
+    border : 1px solid black
+}
+
