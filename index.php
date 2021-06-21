@@ -12,6 +12,8 @@
     <link rel="stylesheet" href="assets/css/bootstrap/bootstrap.css">
     <!-- CSS -->
     <link rel="stylesheet" href="assets/css/dash.css">
+    <!-- FavIcon -->
+    <link rel="shortcut icon" href="assets/img/favicon.ico" type="image/x-icon">
     <!-- META Description -->
     <meta name="description" content="Bienvenue sur Students'Books, c'est ici que commence la révolution scolaire.
      Emploi du temps/ devoirs/ absences... retrouver toutes les information scolaire içi">
@@ -47,11 +49,11 @@
                     <img src="assets/img/absences.webp" class="img-fluid w-75"  alt="">
                 </a>
             </div>
-            <div class="col-4 mt-5 navBtnMob ">
+            <!-- <div class="col-4 mt-5 navBtnMob ">
                 <a href="pages/agenda.html" class="d-flex justify-content-center">
                     <img src="assets/img/agenda.png" class="img-fluid w-75"  alt="">
                 </a>
-            </div>
+            </div> -->
             <div class="col-4 mt-5 offset-1 navBtnMob">
                 <a href="pages/tchat.html" class="d-flex justify-content-center">
                     <img src="assets/img/message.png" class="img-fluid w-75"  alt="">
