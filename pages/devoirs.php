@@ -28,38 +28,38 @@
             </a>
             <h1 class="ms-4 align-self-center text-center m-0">Devoirs</h1>
         </header>
-        <div class="row h-75 justify-content-center justify-content-lg-evenly">
-            <div class="col-10 col-lg-4 resumeBloc h-50 mb-4">
+        <div class="row h-50 justify-content-center justify-content-lg-evenly mb-5">
+            <div class="col-10 col-lg-4 resumeBloc h-100 mb-4">
                 <h2>A rendre</h2>
             </div>
-            <div class="col-10 col-lg-4 resumeBloc h-50">
+            <div class="col-10 col-lg-4 resumeBloc h-100">
                 <h2>Rendu</h2>
             </div>
         </div>
         <div class="row justify-content-evenly w-100 d-none d-lg-flex">
             <div class="col-1 navBtnMob">
                 <a href="note.html">
-                    <img src="../assets/img/LogoNote.webp" class="img-fluid" width="100" alt="">
+                    <img src="../assets/img/LogoNote.webp" class="img-fluid" width="100" alt="Page des notes" title="Vers les notes..">
                 </a>
             </div>
             <div class="col-1 navBtnMob">
                 <a href="edt.html">
-                    <img src="../assets/img/Edt.webp" class="img-fluid" width="100" alt="">
+                    <img src="../assets/img/Edt.webp" class="img-fluid" width="100" alt="Page emploi du temps" title="Vers l'emploi du temps..">
                 </a>
             </div>
             <div class="col-1  navBtnMob">
                 <a href="absences.html">
-                    <img src="../assets/img/absences.webp" class="img-fluid" width="100" alt="">
+                    <img src="../assets/img/absences.webp" class="img-fluid" width="100" alt="Page des absences" title="Vers les absences..">
                 </a>
             </div>
             <div class="col-1 navBtnMob ">
                 <a href="agenda.html">
-                    <img src="../assets/img/agenda.png" class="img-fluid" width="100" alt="">
+                    <img src="../assets/img/agenda.png" class="img-fluid" width="100" alt="Page de l'agenda" title="Vers les agenda..">
                 </a>
             </div>
             <div class="col-1 navBtnMob">
                 <a href="tchat.html">
-                    <img src="../assets/img/message.png" class="img-fluid" width="100" alt="">
+                    <img src="../assets/img/message.png" class="img-fluid" width="100" alt="Page de la messagerie" title="Vers la messagerie..">
                 </a>
             </div>
         </div>
