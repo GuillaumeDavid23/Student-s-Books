@@ -12,7 +12,7 @@
 <body>
     <h1>Inscription La Manu</h1>
     <!-- Formulaire -->
-    <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="POST">
+    <form action="<?= htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="POST">
         <!-- Affichage des erreurs -->
         <?php
             foreach ($stockError as $key => $value) { //boucle affichage ERROR

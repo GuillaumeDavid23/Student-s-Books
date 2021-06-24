@@ -337,6 +337,6 @@ session_start();
         $sql = "INSERT INTO `user`(`firstname`, `lastname`, `birthday`, `number`, `street`, `city`, `zip`, `mail`, `phone`, `degree`, `poleNumber`, `badge`, `link`, `secretAnswer`, `secretDesc`, `hackStory`, `finalQuestion`, `nationality`, `country`) 
         VALUES('$firstname', '$lastname', '$birthday', '$number', '$street', '$city', '$zip', '$mail', '$phone', '$degree', '$poleNumber', '$badge', '$codecademy', '$secretAnswer', '$secretDesc', '$hackStory', '$finalQuestion', '$nationality', '$country')";
         $pdo->query($sql);
-        include '../views/showRegister.php';
+        include '../views/profile.php';
     }
 ?>

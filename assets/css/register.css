@@ -52,3 +52,28 @@ label {
 .inputError {
     border: 2px solid red;
 }
+
+input {
+    width: 80%;
+    border-radius: 30px;
+    border: 2px solid grey;
+    padding-left: 10px;
+    outline: none;
+    transform: scale(1);
+    transition: 0.5s;
+}
+
+input:focus {
+    border: 2px solid greenyellow;
+    transform: scale(1.1);
+    transition: 0.5s;
+}
+
+.error {
+    color: red;
+    font-weight: bold;
+}
+
+.inputError {
+    border: 2px solid red;
+}
