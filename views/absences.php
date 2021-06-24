@@ -12,58 +12,63 @@
     <link rel="stylesheet" href="../assets/css/bootstrap/bootstrap.css">
     <!-- CSS -->
     <link rel="stylesheet" href="../assets/css/dash.css">
-    <!-- FavIcon -->
-    <link rel="shortcut icon" href="assets/img/favicon.ico" type="image/x-icon">    
+    <!-- FavIcon -->    
+    <link rel="shortcut icon" href="assets/img/favicon.ico" type="image/x-icon">
     <!-- META Description -->
     <meta name="description" content="Bienvenue sur Students'Books, c'est ici que commence la révolution scolaire.
      Emploi du temps/ devoirs/ absences... retrouver toutes les information scolaire içi">
     <!-- Titre du site -->
-    <title>Emploi du temps Students'Books : Les devoirs à la maison facilement</title>
+    <title>Page des absences, Students'Books : Les devoirs à la maison facilement</title>
 </head>
 
 <body>
     <div class="container-fluid h-100 p-0">
         <header class="w-100 mb-5 d-flex align-items-center">
             <img src="../assets/img/LOGO SOLO.png" class="ms-3 h-100" alt="">
-            <a href="../index.html" class="h-100 d-flex align-items-center">
+            <a href="../index.php" class="h-100 d-flex align-items-center">
                 <img src="../assets/img/backward.png" class="img-fluid" width="50" alt="">
             </a>
-            <h1 class="ms-4 align-self-center text-center m-0">Emploi du temps</h1>
+            <h1 class="ms-4 align-self-center text-center m-0">Absences / Retard</h1>
         </header>
         <div class="row h-50 justify-content-center justify-content-lg-evenly mb-5">
-            
+            <div class="col-10 col-lg-4 resumeBloc h-100 mb-4">
+                <h2>Retards</h2>
+            </div>
+            <div class="col-10 col-lg-4 resumeBloc h-100">
+                <h2>Absences</h2>
+            </div>
         </div>
         <div class="row justify-content-evenly w-100 d-none d-lg-flex">
+            <div class="col-1  navBtnMob">
+                <a href="devoirs.php">
+                    <img src="../assets/img/devoirs.webp" class="img-fluid" width="100" alt="Page des devoirs" title="Vers les devoirs..">
+                </a>
+            </div>
             <div class="col-1 navBtnMob">
-                <a href="note.html">
+                <a href="note.php">
                     <img src="../assets/img/LogoNote.webp" class="img-fluid" width="100" alt="Page des notes" title="Vers les notes..">
                 </a>
             </div>
             <div class="col-1 navBtnMob">
-                <a href="devoirs.html">
-                    <img src="../assets/img/devoirs.webp" class="img-fluid" width="100" alt="Page des devoirs" title="Vers les devoirs..">
-                </a>
-            </div>
-            <div class="col-1  navBtnMob">
-                <a href="absences.html">
-                    <img src="../assets/img/absences.webp" class="img-fluid" width="100" alt="Page des absences" title="Vers les absences..">
+                <a href="edt.php">
+                    <img src="../assets/img/Edt.webp" class="img-fluid" width="100" alt="Page emploi du temps" title="Vers l'emploi du temps..">
                 </a>
             </div>
             <!-- <div class="col-1 navBtnMob ">
-                <a href="agenda.html">
-                    <img src="../assets/img/agenda.png" class="img-fluid" width="100" alt="Page de l'agenda" title="Vers l'agenda..">
+                <a href="agenda.php">
+                    <img src="../assets/img/agenda.png" class="img-fluid" width="100" alt="Page de l'agenda" title="Vers les agenda..">
                 </a>
             </div> -->
             <div class="col-1 navBtnMob">
-                <a href="tchat.html">
+                <a href="tchat.php">
                     <img src="../assets/img/message.png" class="img-fluid" width="100" alt="Page des notes" title="Vers la messagerie..">
                 </a>
             </div>
         </div>
         <footer class="d-flex flex-column justify-content-center align-items-center">
-            <a href="pages/mention.html" class="text-white " data-bs-toggle="modal" data-bs-target="#exampleModal">Un
+            <a href="views/mention.php" class="text-white " data-bs-toggle="modal" data-bs-target="#exampleModal">Un
                 problème ?</a>
-            <a href="pages/mention.html" class="text-white">Mentions légales</a>
+            <a href="views/mention.php" class="text-white">Mentions légales</a>
         </footer>
     </div>
     <!-- Bootstrap JavaScript -->

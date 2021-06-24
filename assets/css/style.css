@@ -1,20 +1,22 @@
-body, html{
+body,
+html {
     background-color: #F6F4E4;
     height: 100%;
     font-family: 'Roboto', sans-serif;
 }
-.imgConnexion{
+
+.imgConnexion {
     border-radius: 30%;
 }
 
-#connectBloc{
+#connectBloc {
     border-radius: 40px;
     background-color: #41AFA4;
     box-shadow: 10px 10px 25px black;
     font-weight: bold;
 }
 
-#btnSubmit{
+#btnSubmit {
     width: 6em;
     height: 6em;
     background-color: #A99BD4;
@@ -22,14 +24,17 @@ body, html{
     transform: scale(1);
     transition: 0.5s;
 }
-#btnSubmit:hover{
+
+#btnSubmit:hover {
     transform: scale(1.1);
     transition: 0.5s;
 }
-label{
+
+label {
     color: white;
 }
-input{
+
+input {
     width: 80%;
     border-radius: 30px;
     border: 2px solid grey;
@@ -39,8 +44,17 @@ input{
     transition: 0.5s;
 }
 
-input:focus{
-    border:2px solid greenyellow;
+input:focus {
+    border: 2px solid greenyellow;
     transform: scale(1.1);
     transition: 0.5s;
+}
+
+.error {
+    color: red;
+    font-weight: bold;
+}
+
+.inputError {
+    border: 2px solid red;
 }

@@ -30,40 +30,40 @@
         </header>
         <div class="row justify-content-center w-100">
             <div class="col-4 navBtnMob ">
-                <a href="pages/devoirs.html" class="d-flex justify-content-center">
+                <a href="views/devoirs.php" class="d-flex justify-content-center">
                     <img src="assets/img/devoirs.webp" class="img-fluid w-75"  alt="">
                 </a>
             </div>
             <div class="col-4 offset-1 navBtnMob">
-                <a href="pages/note.html" class="d-flex justify-content-center">
+                <a href="views/note.php" class="d-flex justify-content-center">
                     <img src="assets/img/LogoNote.webp" class="img-fluid w-75"  alt="">
                 </a>
             </div>
             <div class="col-4 mt-5 navBtnMob">
-                <a href="pages/edt.html" class="d-flex justify-content-center">
+                <a href="views/edt.php" class="d-flex justify-content-center">
                     <img src="assets/img/Edt.webp" class="img-fluid w-75"  alt="">
                 </a>
             </div>
             <div class="col-4 mt-5  offset-1 navBtnMob">
-                <a href="pages/absences.html" class="d-flex justify-content-center">
+                <a href="views/absences.php" class="d-flex justify-content-center">
                     <img src="assets/img/absences.webp" class="img-fluid w-75"  alt="">
                 </a>
             </div>
             <!-- <div class="col-4 mt-5 navBtnMob ">
-                <a href="pages/agenda.html" class="d-flex justify-content-center">
+                <a href="views/agenda.php" class="d-flex justify-content-center">
                     <img src="assets/img/agenda.png" class="img-fluid w-75"  alt="">
                 </a>
             </div> -->
             <div class="col-4 mt-5 offset-1 navBtnMob">
-                <a href="pages/tchat.html" class="d-flex justify-content-center">
+                <a href="views/tchat.php" class="d-flex justify-content-center">
                     <img src="assets/img/message.png" class="img-fluid w-75"  alt="">
                 </a>
             </div>
         </div>
         <footer class="d-flex flex-column justify-content-center align-items-center position-fixed bottom-0">
-            <a href="pages/mention.html" class="text-white " data-bs-toggle="modal" data-bs-target="#exampleModal">Un
+            <a href="views/mention.php" class="text-white " data-bs-toggle="modal" data-bs-target="#exampleModal">Un
                 problème ?</a>
-            <a href="pages/mention.html" class="text-white">Mentions légales</a>
+            <a href="views/mention.php" class="text-white">Mentions légales</a>
         </footer>
 
     </div>
@@ -85,7 +85,7 @@
             <div class="row h-100 w-75 ">
                 <div class="row w-100 h-50">
                     <div class="offset-1 col-3 h-100 resumeBloc">
-                        <a href="pages/note.html" class="text-decoration-none">
+                        <a href="views/note.php" class="text-decoration-none">
                             <h2>Notes</h2>
                         </a>
                         
@@ -103,7 +103,7 @@
                         </div>
                     </div>
                     <div class="offset-1 col-5 h-100 resumeBloc">
-                        <a href="pages/devoirs.html" class="text-decoration-none">
+                        <a href="views/devoirs.php" class="text-decoration-none">
                             <h2>Devoirs</h2>
                         </a>
                         
@@ -167,7 +167,7 @@
                 </div>
                 <div class="row w-100 h-50 mt-4">
                     <div class="col-5 h-100 resumeBloc">
-                        <a href="pages/edt.html" class="text-decoration-none">
+                        <a href="views/edt.php" class="text-decoration-none">
                             <h2>Emploi du temps</h2>
                         </a>
                         
@@ -187,7 +187,7 @@
                         </div>
                     </div>
                     <div class="offset-1 col-3 h-100 resumeBloc">
-                        <a href="pages/absences.html" class="text-decoration-none">
+                        <a href="views/absences.php" class="text-decoration-none">
                             <h2>Absences</h2>
                         </a>
                         
@@ -241,10 +241,10 @@
 
         <footer class="d-flex flex-column justify-content-center align-items-center">
 
-            <a href="pages/mention.html" class="text-white " data-bs-toggle="modal" data-bs-target="#exampleModal">
+            <a href="views/mention.php" class="text-white " data-bs-toggle="modal" data-bs-target="#exampleModal">
                 Un problème ?
             </a>
-            <a href="pages/mention.html" class="text-white">Mentions légales</a>
+            <a href="views/mention.php" class="text-white">Mentions légales</a>
         </footer>
     </div>
     <!-- Modal -->
