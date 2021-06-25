@@ -2,7 +2,7 @@
 <?php 
     session_start();
     if(empty($_SESSION['rank'])){
-        header('Location: controllers/connectCtrl.php');
+        header('Location: ../controllers/connectCtrl.php');
     }
 ?>
 <div class="container h-100">
