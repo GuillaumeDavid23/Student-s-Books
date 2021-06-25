@@ -54,10 +54,10 @@ label {
 }
 
 input {
+    margin-bottom: 5px;
     width: 80%;
     border-radius: 30px;
     border: 2px solid grey;
-    padding-left: 10px;
     outline: none;
     transform: scale(1);
     transition: 0.5s;

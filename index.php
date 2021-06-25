@@ -1,3 +1,9 @@
+<?php 
+    session_start();
+    if(empty($_SESSION['rank'])){
+        header('Location: controllers/connectCtrl.php');
+    }
+?>
 <!DOCTYPE html>
 <html lang="fr">
 
@@ -16,7 +22,7 @@
     <link rel="shortcut icon" href="assets/img/favicon.ico" type="image/x-icon">
     <!-- META Description -->
     <meta name="description" content="Bienvenue sur Students'Books, c'est ici que commence la révolution scolaire.
-     Emploi du temps/ devoirs/ absences... retrouver toutes les information scolaire içi">
+    Emploi du temps/ devoirs/ absences... retrouver toutes les information scolaire içi">
     <!-- Titre du site -->
     <title>Accueil Students'Books : Les devoirs à la maison facilement</title>
 </head>
