@@ -7,7 +7,7 @@
         session_start();
     }
 
-    require('../models/model.php');
+    require_once('../model/model.php');
 
     //Déclaration des variables
     $error = '';
@@ -105,6 +105,6 @@
                     echo "<div class='error'>$value</div>";
                 }
             }
-            require("../views/connect.php");
+            require("../view/connect.php");
     }
 

@@ -177,5 +177,5 @@
         }
     }
     
-    include "../views/agenda.php";
+    include "../view/agenda.php";
 ?>

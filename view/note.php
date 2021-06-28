@@ -1,7 +1,7 @@
 <?php 
     session_start();
     if(empty($_SESSION['rank'])){
-        header('Location: ../controllers/connectCtrl.php');
+        header('Location: ../controller/connectCtrl.php');
     }
 ?>
 <!DOCTYPE html>
@@ -235,9 +235,9 @@
             </div>
         </div>
         <footer class="d-flex flex-column justify-content-center align-items-center">
-            <a href="views/mention.php" class="text-white " data-bs-toggle="modal" data-bs-target="#exampleModal">Un
+            <a href="view/mention.php" class="text-white " data-bs-toggle="modal" data-bs-target="#exampleModal">Un
                 problème ?</a>
-            <a href="views/mention.php" class="text-white">Mentions légales</a>
+            <a href="view/mention.php" class="text-white">Mentions légales</a>
         </footer>
     </div>
     <!-- Bootstrap JavaScript -->

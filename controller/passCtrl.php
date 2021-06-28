@@ -1,9 +1,9 @@
 <?php
     session_start();
     if(empty($_SESSION['rank'])){
-        header('Location: controllers/connectCtrl.php');
+        header('Location: controller/connectCtrl.php');
     }
-    require('../models/model.php');
+    require('../model/model.php');
 
     //Déclaration des variables
     $error = '';
@@ -69,5 +69,5 @@
                     echo "<div class='error'>$value</div>";
                 }
             }
-            require("../views/changePass.php");
+            require("../view/changePass.php");
     } 

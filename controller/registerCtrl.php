@@ -150,7 +150,7 @@
     if($testForm){
         session_destroy();
         session_start();
-        include '../views/register.php';
+        include '../view/register.php';
     }else{
         session_destroy();
         session_start();
@@ -160,7 +160,7 @@
         $sql = "INSERT INTO `users`(`mail`, `password`, `firstname`, `lastname`,`birthday`, `rank`, `changePass`) 
         VALUES('$mail', '$password','$firstname', '$lastname', '$birthday', '$rank', '1' )";
         $pdo->query($sql);
-        // include '../views/profile.php';
-        include '../views/register.php';
+        // include '../view/profile.php';
+        include '../view/register.php';
     }
 ?>
