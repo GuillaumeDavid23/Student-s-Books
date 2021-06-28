@@ -3,28 +3,7 @@
     if(empty($_SESSION['rank'])){
         header('Location: controllers/connectCtrl.php');
     }
-    $host = 'localhost';
-    $dbname = 'studentbook';
-    $username = 'root';
-    $password = ''; 
-    $connect = "mysql:host=$host;dbname=$dbname"; 
-
-    // récupérer tous les utilisateurs
-    $sql = "SELECT * FROM users";
-    
-    //CONNEXION A LA BDD
-    try{
-        $pdo = new PDO($connect, $username, $password);
-        $stmt = $pdo->query($sql);
-    
-        if($stmt === false){
-            die("Erreur");
-        }
-    }
-    catch (PDOException $e)
-    {
-        echo $e->getMessage();
-    }
+    require('../models/model.php');
 
     //Déclaration des variables
     $error = '';
@@ -64,11 +43,11 @@
             }
             if (!empty($firstPass) && !empty($ctrlPass)){
                 if($firstPass == $ctrlPass){
-                    echo "YES";
+                    //MOT DE PASSE OK
                     $mail = $_SESSION['mail'];
                     $ctrlPass = password_hash($ctrlPass, PASSWORD_BCRYPT);
-                    
-                    while ($data = $stmt->fetch(PDO::FETCH_ASSOC)){
+                    $bdd = bddConnect();
+                    while ($data = $bdd->fetch(PDO::FETCH_ASSOC)){
                         if ($data['mail'] == $_SESSION["mail"]){
                             $sql = "UPDATE users SET changePass = '0', password = '$ctrlPass' WHERE mail = '$mail' ";
                             $pdo->query($sql);
@@ -84,40 +63,11 @@
             }   
             
     }
-    
-?>
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- FONTS -->
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="../assets/css/bootstrap/bootstrap.css">
-    <!-- CSS -->
-    <link rel="stylesheet" href="../assets/css/general.css">
-    <link rel="stylesheet" href="../assets/css/connect.css">
-    <!-- META Description -->
-    <meta name="description" content="Bienvenue sur Students'Books, c'est ici que commence la révolution scolaire.
-     Emploi du temps/ devoirs/ absences... retrouver toutes les information scolaire içi">
-    <!-- Titre du site -->
-    <title>Connexion Student's Books : Les devoirs à la maison facilement</title>
-</head>
-<body>
-    <?php
-        if(!empty($_SESSION["rank"]) && $_SESSION["changePass"]){
+    if(!empty($_SESSION["rank"]) && $_SESSION["changePass"]){
             if($errorInForm){
                 foreach ($stockError as $key => $value) { //boucle affichage ERROR
                     echo "<div class='error'>$value</div>";
                 }
             }
-            include "../views/changePass.php";
-        } 
-    ?>
-    <!-- Bootstrap JavaScript -->
-    <script src="../assets/js/bootstrap/bootstrap.js"></script>
-</body>
-</html>
+            require("../views/changePass.php");
+    } 

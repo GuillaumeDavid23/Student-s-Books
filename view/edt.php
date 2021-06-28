@@ -15,59 +15,54 @@
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="../assets/css/bootstrap/bootstrap.css">
+    <link rel="stylesheet" href="../public/css/bootstrap/bootstrap.css">
     <!-- CSS -->
-    <link rel="stylesheet" href="../assets/css/dash.css">
-    <!-- FavIcon -->    
-    <link rel="shortcut icon" href="assets/img/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="../public/css/dash.css">
+    <!-- FavIcon -->
+    <link rel="shortcut icon" href="public/img/favicon.ico" type="image/x-icon">    
     <!-- META Description -->
     <meta name="description" content="Bienvenue sur Students'Books, c'est ici que commence la révolution scolaire.
      Emploi du temps/ devoirs/ absences... retrouver toutes les information scolaire içi">
     <!-- Titre du site -->
-    <title>Page des absences, Students'Books : Les devoirs à la maison facilement</title>
+    <title>Emploi du temps Students'Books : Les devoirs à la maison facilement</title>
 </head>
 
 <body>
     <div class="container-fluid h-100 p-0">
         <header class="w-100 mb-5 d-flex align-items-center">
-            <img src="../assets/img/LOGO SOLO.png" class="ms-3 h-100" alt="">
+            <img src="../public/img/LOGO SOLO.png" class="ms-3 h-100" alt="">
             <a href="../index.php" class="h-100 d-flex align-items-center">
-                <img src="../assets/img/backward.png" class="img-fluid" width="50" alt="">
+                <img src="../public/img/backward.png" class="img-fluid" width="50" alt="">
             </a>
-            <h1 class="ms-4 align-self-center text-center m-0">Absences / Retard</h1>
+            <h1 class="ms-4 align-self-center text-center m-0">Emploi du temps</h1>
         </header>
         <div class="row h-50 justify-content-center justify-content-lg-evenly mb-5">
-            <div class="col-10 col-lg-4 resumeBloc h-100 mb-4">
-                <h2>Retards</h2>
-            </div>
-            <div class="col-10 col-lg-4 resumeBloc h-100">
-                <h2>Absences</h2>
-            </div>
+            
         </div>
         <div class="row justify-content-evenly w-100 d-none d-lg-flex">
-            <div class="col-1  navBtnMob">
-                <a href="devoirs.php">
-                    <img src="../assets/img/devoirs.webp" class="img-fluid" width="100" alt="Page des devoirs" title="Vers les devoirs..">
-                </a>
-            </div>
             <div class="col-1 navBtnMob">
                 <a href="note.php">
-                    <img src="../assets/img/LogoNote.webp" class="img-fluid" width="100" alt="Page des notes" title="Vers les notes..">
+                    <img src="../public/img/LogoNote.webp" class="img-fluid" width="100" alt="Page des notes" title="Vers les notes..">
                 </a>
             </div>
             <div class="col-1 navBtnMob">
-                <a href="edt.php">
-                    <img src="../assets/img/Edt.webp" class="img-fluid" width="100" alt="Page emploi du temps" title="Vers l'emploi du temps..">
+                <a href="devoirs.php">
+                    <img src="../public/img/devoirs.webp" class="img-fluid" width="100" alt="Page des devoirs" title="Vers les devoirs..">
+                </a>
+            </div>
+            <div class="col-1  navBtnMob">
+                <a href="absences.php">
+                    <img src="../public/img/absences.webp" class="img-fluid" width="100" alt="Page des absences" title="Vers les absences..">
                 </a>
             </div>
             <!-- <div class="col-1 navBtnMob ">
                 <a href="agenda.php">
-                    <img src="../assets/img/agenda.png" class="img-fluid" width="100" alt="Page de l'agenda" title="Vers les agenda..">
+                    <img src="../public/img/agenda.png" class="img-fluid" width="100" alt="Page de l'agenda" title="Vers l'agenda..">
                 </a>
             </div> -->
             <div class="col-1 navBtnMob">
                 <a href="tchat.php">
-                    <img src="../assets/img/message.png" class="img-fluid" width="100" alt="Page des notes" title="Vers la messagerie..">
+                    <img src="../public/img/message.png" class="img-fluid" width="100" alt="Page des notes" title="Vers la messagerie..">
                 </a>
             </div>
         </div>
@@ -78,7 +73,7 @@
         </footer>
     </div>
     <!-- Bootstrap JavaScript -->
-    <script src="../assets/js/bootstrap/bootstrap.js"></script>
+    <script src="../public/js/bootstrap/bootstrap.js"></script>
 </body>
 
 </html>

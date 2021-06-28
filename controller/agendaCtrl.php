@@ -15,7 +15,7 @@
         $pdo = new PDO($connect, $username, $password);
         $stmt = $pdo->query($sql);
         if($stmt === false){
-        die("Erreur");
+            die("Erreur");
         }
     }catch (PDOException $e){
     echo $e->getMessage();
@@ -31,7 +31,7 @@
         $sql = "INSERT INTO events(day,month,year,message) 
             VALUES($eventDay,'$eventMonth',$eventYear,'$eventName')";
         $pdo->exec($sql);
-        header("Location: index.php");
+        header("Location: ../index.php");
     }
     
     $empty = false;//Test du select

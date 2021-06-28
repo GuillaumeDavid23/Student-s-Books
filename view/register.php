@@ -1,9 +1,3 @@
-<?php 
-    session_start();
-    if(empty($_SESSION['rank'])){
-        header('Location: ../controllers/connectCtrl.php');
-    }
-?>
 <!DOCTYPE html>
 <html lang="fr">
 
@@ -11,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../assets/css/register.css">
+    <link rel="stylesheet" href="../public/css/register.css">
     <title>Inscription La Manu : inscrivez-vous afin de pouvoir accéder à votre espace personnel</title>
 </head>
 
@@ -57,7 +51,7 @@
         <button type="submit">Envoyer !</button>
     </form>
     
-    <script src="assets/js/main.js"></script>
+    <script src="public/js/main.js"></script>
 </body>
 
 </html>

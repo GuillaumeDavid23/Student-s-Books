@@ -15,11 +15,11 @@
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="assets/css/bootstrap/bootstrap.css">
+    <link rel="stylesheet" href="public/css/bootstrap/bootstrap.css">
     <!-- CSS -->
-    <link rel="stylesheet" href="assets/css/dash.css">
+    <link rel="stylesheet" href="public/css/dash.css">
     <!-- FavIcon -->
-    <link rel="shortcut icon" href="assets/img/favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="public/img/favicon.ico" type="image/x-icon">
     <!-- META Description -->
     <meta name="description" content="Bienvenue sur Students'Books, c'est ici que commence la révolution scolaire.
     Emploi du temps/ devoirs/ absences... retrouver toutes les information scolaire içi">
@@ -31,45 +31,45 @@
     <!-- VERSION MOBILE -->
     <div class="container-fluid h-100 p-0 d-flex flex-column align-items-center d-xl-none">
         <header class="w-100 mb-5 d-flex ">
-            <img src="assets/img/LOGO SOLO.png" class="ms-3 h-100" alt="">
+            <img src="public/img/LOGO SOLO.png" class="ms-3 h-100" alt="">
             <h1 class="ms-4 align-self-center text-center">Tableau de bord</h1>
         </header>
         <div class="row justify-content-center w-100">
             <div class="col-4 navBtnMob ">
-                <a href="views/devoirs.php" class="d-flex justify-content-center">
-                    <img src="assets/img/devoirs.webp" class="img-fluid w-75"  alt="">
+                <a href="../views/devoirs.php" class="d-flex justify-content-center">
+                    <img src="public/img/devoirs.webp" class="img-fluid w-75"  alt="">
                 </a>
             </div>
             <div class="col-4 offset-1 navBtnMob">
-                <a href="views/note.php" class="d-flex justify-content-center">
-                    <img src="assets/img/LogoNote.webp" class="img-fluid w-75"  alt="">
+                <a href="../views/note.php" class="d-flex justify-content-center">
+                    <img src="public/img/LogoNote.webp" class="img-fluid w-75"  alt="">
                 </a>
             </div>
             <div class="col-4 mt-5 navBtnMob">
-                <a href="views/edt.php" class="d-flex justify-content-center">
-                    <img src="assets/img/Edt.webp" class="img-fluid w-75"  alt="">
+                <a href="../views/edt.php" class="d-flex justify-content-center">
+                    <img src="public/img/Edt.webp" class="img-fluid w-75"  alt="">
                 </a>
             </div>
             <div class="col-4 mt-5  offset-1 navBtnMob">
-                <a href="views/absences.php" class="d-flex justify-content-center">
-                    <img src="assets/img/absences.webp" class="img-fluid w-75"  alt="">
+                <a href="../views/absences.php" class="d-flex justify-content-center">
+                    <img src="public/img/absences.webp" class="img-fluid w-75"  alt="">
                 </a>
             </div>
             <!-- <div class="col-4 mt-5 navBtnMob ">
-                <a href="views/agenda.php" class="d-flex justify-content-center">
-                    <img src="assets/img/agenda.png" class="img-fluid w-75"  alt="">
+                <a href="../views/agenda.php" class="d-flex justify-content-center">
+                    <img src="public/img/agenda.png" class="img-fluid w-75"  alt="">
                 </a>
             </div> -->
             <div class="col-4 mt-5 offset-1 navBtnMob">
-                <a href="views/tchat.php" class="d-flex justify-content-center">
-                    <img src="assets/img/message.png" class="img-fluid w-75"  alt="">
+                <a href="../views/tchat.php" class="d-flex justify-content-center">
+                    <img src="public/img/message.png" class="img-fluid w-75"  alt="">
                 </a>
             </div>
         </div>
         <footer class="d-flex flex-column justify-content-center align-items-center position-fixed bottom-0">
-            <a href="views/mention.php" class="text-white " data-bs-toggle="modal" data-bs-target="#exampleModal">Un
+            <a href="../views/mention.php" class="text-white " data-bs-toggle="modal" data-bs-target="#exampleModal">Un
                 problème ?</a>
-            <a href="views/mention.php" class="text-white">Mentions légales</a>
+            <a href="../views/mention.php" class="text-white">Mentions légales</a>
         </footer>
 
     </div>
@@ -77,21 +77,21 @@
     <div class="container-fluid d-none d-lg-none d-xl-block h-100 p-0 align-items-center">
         <header class="mb-5 d-flex w-100">
             <div class="logoBloc">
-                <img src="assets/img/LOGO SOLO.png" class="ms-3 h-100" alt="">
+                <img src="public/img/LOGO SOLO.png" class="ms-3 h-100" alt="">
             </div>
             <div class="ms-4 w-100 d-flex align-items-center justify-content-center">
                 <h1>Tableau de bord</h1>
             </div>
 
             <div class="logoBloc">
-                <img src="assets/img/LOGO SOLO.png" class="ms-3 h-100" alt="">
+                <img src="public/img/LOGO SOLO.png" class="ms-3 h-100" alt="">
             </div>
         </header>
         <div class="h-75 w-100 d-flex ps-5 pe-5">
             <div class="row h-100 w-75 ">
                 <div class="row w-100 h-50">
                     <div class="offset-1 col-3 h-100 resumeBloc">
-                        <a href="views/note.php" class="text-decoration-none">
+                        <a href="../views/note.php" class="text-decoration-none">
                             <h2>Notes</h2>
                         </a>
                         
@@ -109,7 +109,7 @@
                         </div>
                     </div>
                     <div class="offset-1 col-5 h-100 resumeBloc">
-                        <a href="views/devoirs.php" class="text-decoration-none">
+                        <a href="../views/devoirs.php" class="text-decoration-none">
                             <h2>Devoirs</h2>
                         </a>
                         
@@ -173,7 +173,7 @@
                 </div>
                 <div class="row w-100 h-50 mt-4">
                     <div class="col-5 h-100 resumeBloc">
-                        <a href="views/edt.php" class="text-decoration-none">
+                        <a href="../views/edt.php" class="text-decoration-none">
                             <h2>Emploi du temps</h2>
                         </a>
                         
@@ -193,7 +193,7 @@
                         </div>
                     </div>
                     <div class="offset-1 col-3 h-100 resumeBloc">
-                        <a href="views/absences.php" class="text-decoration-none">
+                        <a href="../views/absences.php" class="text-decoration-none">
                             <h2>Absences</h2>
                         </a>
                         
@@ -217,7 +217,7 @@
                 <div class="col-12 h-100 p-0" id="chatBloc">
                     <div id="topChat" class="d-flex">
                         <div id="chatContact" class="d-flex flex-column align-items-center pt-1">
-                            <img src="assets/img/avatar.jpg" class="img-fluid rounded-circle" width="50" alt="Avatar">
+                            <img src="public/img/avatar.jpg" class="img-fluid rounded-circle" width="50" alt="Avatar">
                             <div class="rounded-circle bg-light mt-2 d-flex justify-content-md-center align-items-center"
                                 style="width: 50px; height: 50px;">PROF</div>
                             <div class="rounded-circle bg-light mt-2 d-flex justify-content-md-center align-items-center"
@@ -234,7 +234,7 @@
                     <div id="chatBar" class="d-flex">
                         <div id="chatBtnBloc">
                             <button id="chatBtnSend">
-                                <img src="assets/img/envoie.png" alt="Bouton enoyer un message dans le tchat"
+                                <img src="public/img/envoie.png" alt="Bouton enoyer un message dans le tchat"
                                     class="img-fluid w-75">
                             </button>
                         </div>
@@ -247,10 +247,10 @@
 
         <footer class="d-flex flex-column justify-content-center align-items-center">
 
-            <a href="views/mention.php" class="text-white " data-bs-toggle="modal" data-bs-target="#exampleModal">
+            <a href="../views/mention.php" class="text-white " data-bs-toggle="modal" data-bs-target="#exampleModal">
                 Un problème ?
             </a>
-            <a href="views/mention.php" class="text-white">Mentions légales</a>
+            <a href="../views/mention.php" class="text-white">Mentions légales</a>
         </footer>
     </div>
     <!-- Modal -->
@@ -276,7 +276,7 @@
     </div>
 
     <!-- Bootstrap JavaScript -->
-    <script src="assets/js/bootstrap/bootstrap.js"></script>
+    <script src="public/js/bootstrap/bootstrap.js"></script>
 </body>
 
 </html>
