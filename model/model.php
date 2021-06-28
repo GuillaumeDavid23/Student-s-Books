@@ -7,23 +7,20 @@
 
         public function bddConnect()
         {
-            // récupérer tous les utilisateurs
-            $sql = "SELECT * FROM users";
-            
+            $host = 'localhost';
+            $dbname = 'studentbook';
+            $username = 'root';
+            $password = '';
+
             //CONNEXION A LA BDD
             try{
                 $pdo = new PDO("mysql:host=$host;dbname=$dbname", $username, $password);
-                $stmt = $pdo->query($sql);
-            
-                if($stmt === false){
-                    die("Erreur");
-                }
             }
             catch (PDOException $e)
             {
                 echo $e->getMessage();
             }
-            return $stmt;
+            return $pdo;
         }
         
     }

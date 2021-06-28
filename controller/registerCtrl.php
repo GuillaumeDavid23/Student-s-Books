@@ -10,27 +10,12 @@
     $testForm = true;
     //REGEX
     $nameReg = "/^[A-Za-z-éèàùëüöïäûîôâê]+$/";
-    $host = 'localhost';
-    $dbname = 'studentbook';
-    $username = 'root';
-    $password = ''; 
-    $connect = "mysql:host=$host;dbname=$dbname"; 
 
-    // récupérer tous les utilisateurs
-    $sql = "SELECT * FROM users";
-    
-    //CONNEXION A LA BDD
-    try{
-        $pdo = new PDO($connect, $username, $password);
-        $stmt = $pdo->query($sql);
-        if($stmt === false){  
-            die("Erreur");
-        }
-    }
-    catch (PDOException $e)
-    {
-        echo $e->getMessage();
-    }
+    //Connexion BDD
+    require('../model/model.php');
+    $bdd = new BDD();
+    $pdo = $bdd->bddConnect();
+
     
      //Fonction de validation des données
     function valid_data($index, $data)

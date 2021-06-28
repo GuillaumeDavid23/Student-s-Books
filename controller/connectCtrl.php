@@ -8,7 +8,7 @@
     }
 
     require_once('../model/model.php');
-
+    $bdd = new BDD();
     //Déclaration des variables
     $error = '';
     $stockError = [];
@@ -77,8 +77,10 @@
             }
 
             if(!$errorInForm){
-                $bdd = bddConnect();
-                while ($data = $bdd->fetch(PDO::FETCH_ASSOC)){
+                $pdo = $bdd->bddConnect();
+                $sql = "SELECT * FROM users";
+                $request = $pdo->query($sql);
+                while ($data = $request->fetch(PDO::FETCH_ASSOC)){
                     if ($data['mail'] == $mail && password_verify($password, $data["password"])){
                         session_start();
                         $_SESSION["rank"] = $data['rank'];

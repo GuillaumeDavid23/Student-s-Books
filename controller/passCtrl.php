@@ -1,7 +1,7 @@
 <?php
-    session_start();
+    
     if(empty($_SESSION['rank'])){
-        header('Location: controller/connectCtrl.php');
+        header('Location: connectCtrl.php');
     }
     require('../model/model.php');
 
@@ -46,14 +46,16 @@
                     //MOT DE PASSE OK
                     $mail = $_SESSION['mail'];
                     $ctrlPass = password_hash($ctrlPass, PASSWORD_BCRYPT);
-                    $bdd = bddConnect();
-                    while ($data = $bdd->fetch(PDO::FETCH_ASSOC)){
+                    $bdd = new BDD();
+                    $pdo = $bdd->bddConnect();
+                    $sql = "SELECT * FROM users";
+                    $request = $pdo->query($sql);
+                    while ($data = $request->fetch(PDO::FETCH_ASSOC)){
                         if ($data['mail'] == $_SESSION["mail"]){
                             $sql = "UPDATE users SET changePass = '0', password = '$ctrlPass' WHERE mail = '$mail' ";
                             $pdo->query($sql);
                             $_SESSION["password"] = $ctrlPass;
                             $_SESSION['changePass'] = $data['changePass'];
-                            var_dump($_SESSION);
                         }
                     }
                 }

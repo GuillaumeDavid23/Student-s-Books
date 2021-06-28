@@ -1,25 +1,12 @@
 <?php
-    $host = 'localhost';
-    $dbname = 'studentbook';
-    $username = 'root';
-    $password = '';
-
-    $arrayTestOfMonth = array('January','February', 'March', "April", 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'); //Tableau de test des mois
-
-    $connect = "mysql:host=$host;dbname=$dbname"; 
-    // récupérer tous les utilisateurs
-    $sql = "SELECT * FROM events";
+    //Tableau de test des mois
+    $arrayTestOfMonth = array('January','February', 'March', "April", 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'); 
     
-    //CONNEXION A LA BDD
-    try{
-        $pdo = new PDO($connect, $username, $password);
-        $stmt = $pdo->query($sql);
-        if($stmt === false){
-            die("Erreur");
-        }
-    }catch (PDOException $e){
-    echo $e->getMessage();
-    }
+    require_once('../model/model.php');
+    //Connexion à la base et récupération des données
+    $bdd = new BDD();
+    $pdo = $bdd->bddConnect();
+    
     //AJOUT DANS LA BDD
     if (!empty($_POST['dateEvent']) && !empty($_POST['eventName'])) {
         $fullDate = $_POST['dateEvent'];
@@ -31,7 +18,7 @@
         $sql = "INSERT INTO events(day,month,year,message) 
             VALUES($eventDay,'$eventMonth',$eventYear,'$eventName')";
         $pdo->exec($sql);
-        header("Location: ../index.php");
+        header("Location: agendaCtrl.php");
     }
     
     $empty = false;//Test du select
@@ -57,30 +44,14 @@
             $empty = false;//Test du select
             $emptyCase = '<td class="empty"></td>';
 
-            //INFO BDD
-            $host = 'localhost';
-            $dbname = 'calendar';
-            $username = 'calendar';
-            $password = 'jj8_XPRqanXwKu0d';
-            $connect = "mysql:host=$host;dbname=$dbname"; 
-            // récupérer tous les events
+            //Connexion à la base et récupération des données
+            $bdd = new BDD();
+            $pdo = $bdd->bddConnect();
+            // récupérer toutes les données
             $sql = "SELECT * FROM events";
+            $stmt = $pdo->query($sql);
+            $dataDB = $stmt->fetchAll();
             
-            //CONNEXION A LA BDD
-            try{
-                $pdo = new PDO($connect, $username, $password);
-                $stmt = $pdo->query($sql);
-                if($stmt === false){
-                die("Erreur");
-                }
-            }catch (PDOException $e){
-                echo $e->getMessage();
-            }
-            
-            $dataDB = $stmt -> fetchAll();
-            
-            
-
               //Attribution du premier jour.
             if((int)$keyOfFirstDay == 0){
                 $keyOfFirstDay = 7;

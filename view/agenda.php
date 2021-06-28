@@ -58,7 +58,6 @@
                         }
                     ?>
                 </tr>
-
             </thead>
             <tbody id="calendarTable">
                 <?php
