@@ -36,7 +36,7 @@
         </header>
         <div class="row justify-content-center w-100">
             <div class="col-4 navBtnMob ">
-                <a href="../view/devoirs.php" class="d-flex justify-content-center">
+                <a href="../controller/assignmentCtrl.php" class="d-flex justify-content-center">
                     <img src="public/img/devoirs.webp" class="img-fluid w-75"  alt="">
                 </a>
             </div>
@@ -109,7 +109,7 @@
                         </div>
                     </div>
                     <div class="offset-1 col-5 h-100 resumeBloc">
-                        <a href="../view/devoirs.php" class="text-decoration-none">
+                        <a href="../controller/assignmentCtrl.php" class="text-decoration-none">
                             <h2>Devoirs</h2>
                         </a>
                         

@@ -46,7 +46,7 @@
         </div>
         <div class="row justify-content-evenly w-100 d-none d-lg-flex">
             <div class="col-1  navBtnMob">
-                <a href="devoirs.php">
+                <a href="../controller/assignmentCtrl.php">
                     <img src="../public/img/devoirs.webp" class="img-fluid" width="100" alt="Page des devoirs" title="Vers les devoirs..">
                 </a>
             </div>
