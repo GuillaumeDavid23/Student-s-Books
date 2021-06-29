@@ -6,8 +6,7 @@
         
         session_start();
     }
-    var_dump($_SESSION);
-    require_once('../model/model.php');
+    require_once(dirname(__FILE__).'../model/model.php');
     $bdd = new BDD();
     //Déclaration des variables
     $error = '';
@@ -108,6 +107,6 @@
                     echo "<div class='error'>$value</div>";
                 }
             }
-            require("../view/connect.php");
+            require(dirname(__FILE__).'../view/connect.php');
     }
 

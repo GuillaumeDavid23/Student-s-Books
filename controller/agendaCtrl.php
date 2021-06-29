@@ -148,5 +148,5 @@
         }
     }
     
-    include "../view/agenda.php";
+    include(dirname(__FILE__).'../view/agenda.php');
 ?>

@@ -11,6 +11,6 @@
         $hwName = $_POST['assignmentName'];
     }
     var_dump($_SESSION);
-    require('../view/assignment.php');
+    require(dirname(__FILE__).'../view/assignment.php');
 
     
