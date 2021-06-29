@@ -45,7 +45,7 @@
             <option value="student">Etudiant</option>
             <option value="parent">Parent</option>
             <option value="teacher">Professeur</option>
-            <option value=""></option>
+            
         </select>
         <!-- Envoi du formulaire -->
         <button type="submit">Envoyer !</button>

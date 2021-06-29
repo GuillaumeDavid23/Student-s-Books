@@ -6,7 +6,7 @@
         
         session_start();
     }
-
+    var_dump($_SESSION);
     require_once('../model/model.php');
     $bdd = new BDD();
     //Déclaration des variables
@@ -85,6 +85,7 @@
                         session_start();
                         $_SESSION["rank"] = $data['rank'];
                         $_SESSION["mail"] = $data['mail'];
+                        $_SESSION["lastname"] = $data['lastname'];
                         $_SESSION["password"] = $data['password'];
                         if ($data['changePass']){
                             $_SESSION['changePass'] = $data['changePass'];

@@ -16,7 +16,7 @@
     <link rel="shortcut icon" href="public/img/favicon.ico" type="image/x-icon">
     <!-- META Description -->
     <meta name="description" content="Bienvenue sur Students'Books, c'est ici que commence la révolution scolaire.
-     Emploi du temps/ devoirs/ absences... retrouver toutes les information scolaire içi">
+    Emploi du temps/ devoirs/ absences... retrouver toutes les information scolaire içi">
     <!-- Titre du site -->
     <title>Accueil Students'Books : Les devoirs à la maison facilement</title>
 </head>
@@ -30,12 +30,34 @@
             </a>
             <h1 class="ms-4 align-self-center text-center m-0">Devoirs</h1>
         </header>
-        <div class="row h-50 justify-content-center justify-content-lg-evenly mb-5">
+        <div class="row justify-content-center justify-content-lg-evenly mb-5">
+        <!-- colonne à rendre -->
             <div class="col-10 col-lg-4 resumeBloc h-100 mb-4">
+            
                 <h2>A rendre</h2>
+                
+                <div class="hwEl d-flex w-100 mb-2">
+                    <div class="hwDateBloc h-100">
+                        <div id="hwDate" class="text-center fw-bold text-white subInfo">27 <br> février</div>
+                    </div>
+                    <div class="ps-1 w-100 bg-egg">
+                        <div id="hwMatter" class="fw-bold">Français - Expression écrite sur voltaire</div>
+                        <div id="hwProf" class="prof">Mme/Mr <?= $_SESSION['lastname']?></div>
+                    </div>
+                </div>
             </div>
+            <!-- colonne rendu -->
             <div class="col-10 col-lg-4 resumeBloc h-100">
                 <h2>Rendu</h2>
+            </div>
+            <div>
+                <form action="<?= htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="POST">
+                    <label for="assignmentDate">Date de rendu du devoirs</label>
+                    <input type="date" name="assignmentDate" id="assignmentDate">
+
+                    <label for="assignmentName">Nom du devoir</label>
+                    <input type="text" name="assignmentName" id="assignmentName">
+                </form>
             </div>
         </div>
         <div class="row justify-content-evenly w-100 d-none d-lg-flex">
