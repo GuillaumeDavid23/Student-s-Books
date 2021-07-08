@@ -3,7 +3,7 @@
     if(empty($_SESSION['rank'])){
         header('Location: connectCtrl.php');
     }
-    require(dirname(__FILE__).'../model/model.php');
+    require(dirname(__FILE__).'/../model/model.php');
 
     //Déclaration des variables
     $error = '';
@@ -71,5 +71,5 @@
                     echo "<div class='error'>$value</div>";
                 }
             }
-            require(dirname(__FILE__).'../view/changePass.php');
+            require(dirname(__FILE__).'/../view/changePass.php');
     } 

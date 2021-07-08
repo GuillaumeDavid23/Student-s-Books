@@ -12,7 +12,7 @@
     $nameReg = "/^[A-Za-z-éèàùëüöïäûîôâê]+$/";
 
     //Connexion BDD
-    require(dirname(__FILE__).'../model/model.php');
+    require(dirname(__FILE__).'/../model/model.php');
     $bdd = new BDD();
     $pdo = $bdd->bddConnect();
 
@@ -135,7 +135,7 @@
     if($testForm){
         session_destroy();
         session_start();
-        include (dirname(__FILE__).'../view/register.php');
+        include (dirname(__FILE__).'/../view/register.php');
     }else{
         session_destroy();
         session_start();
@@ -146,6 +146,6 @@
         VALUES('$mail', '$password','$firstname', '$lastname', '$birthday', '$rank', '1' )";
         $pdo->query($sql);
         // include '../view/profile.php';
-        include (dirname(__FILE__).'../view/register.php');
+        include (dirname(__FILE__).'/../view/register.php');
     }
 ?>

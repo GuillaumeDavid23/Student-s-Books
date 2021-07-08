@@ -6,14 +6,14 @@
         
         session_start();
     }
-    require_once(dirname(__FILE__).'../model/model.php');
+    require_once(dirname(__FILE__).'/../model/model.php');
     $bdd = new BDD();
     //Déclaration des variables
     $error = '';
     $stockError = [];
     $errorInForm = true;
-
-    
+    $verifyMail = false;
+    $verifyPass = false;
      //Fonction de validation des données
     function valid_data($index, $data)
     {
@@ -27,9 +27,11 @@
     if($_SERVER['REQUEST_METHOD'] == "POST"){
         //Test des champs
         if(empty($_POST['inputMail'])){
-            $errorInForm = true;
+            echo("<script>alert('VRAI')</script>");
             $error = 'mail vide !';
             $stockError['mail'] = $error;
+            $errorInForm = true;
+
             if(empty($_POST['inputPass'])){
                 $errorInForm = true;
                 $error = 'Mot de passe vide !';
@@ -58,28 +60,30 @@
             }
 
             //Assignation des données dans des variables
-            if(empty($_POST['inputMail'])){
-                $mail = '';
-            }else{
-                $mail = $_POST['inputMail'];
-            }
-            if(empty($_POST['inputPass'])){
-                $password = '';
-            }else{
-                $password = $_POST['inputPass'];
-            }
+            
+            filter_input(INPUT_POST, 'inputMail', FILTER_SANITIZE_EMAIL);
 
-            if(!filter_input(INPUT_POST, 'inputMail', FILTER_VALIDATE_EMAIL) && !empty($mail)){
+            if(!filter_input(INPUT_POST, 'inputMail', FILTER_VALIDATE_EMAIL) && !empty($_POST['inputMail'])){
                     $error = "<br>ERREUR une donnée est invalide : Mail";
                     $stockError['mail'] = $error;
                     $errorInForm = true;
+            }else{
+                $mail = $_POST['inputMail'];
             }
+
+            $password = $_POST['inputPass'];
 
             if(!$errorInForm){
                 $pdo = $bdd->bddConnect();
                 $sql = "SELECT * FROM users";
                 $request = $pdo->query($sql);
                 while ($data = $request->fetch(PDO::FETCH_ASSOC)){
+                    if ($data['mail'] == $mail){
+                        $verifyMail = true;
+                    }
+                    if(password_verify($password, $data["password"])){
+                        $verifyPass = true;
+                    }
                     if ($data['mail'] == $mail && password_verify($password, $data["password"])){
                         session_start();
                         $_SESSION["rank"] = $data['rank'];
@@ -96,17 +100,29 @@
                             exit;
                         }
                     }
+                    elseif($verifyMail == false && $verifyPass == false ){
+                        $error = "<br>Mail non trouvé";
+                        $stockError['mail'] = $error;
+                        $error = "<br>Le mot de passe ne correspond pas";
+                        $stockError['password'] = $error;
+                        $errorInForm = true;
+                    }
+                    elseif($verifyPass == false){
+                        $error = "<br>Le mot de passe ne correspond pas";
+                        $stockError['password'] = $error;
+                        $errorInForm = true;
+                    }
+                    else{
+                        $error = "<br>Mail non trouvé";
+                        $stockError['mail'] = $error;
+                        $errorInForm = true;
+                    }
                 }
             }
         }
     }
 
     if(empty($_SESSION["rank"])){
-            if($errorInForm){
-                foreach ($stockError as $key => $value) { //boucle affichage ERROR
-                    echo "<div class='error'>$value</div>";
-                }
-            }
-            require(dirname(__FILE__).'../view/connect.php');
+            require(dirname(__FILE__).'/../view/connect.php');
     }
 
