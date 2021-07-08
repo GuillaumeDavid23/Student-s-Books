@@ -3,7 +3,6 @@
     if(!empty($_SESSION)){
         $_SESSION = [];
         session_destroy();
-        
         session_start();
     }
     require_once(dirname(__FILE__).'/../model/model.php');
