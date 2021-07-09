@@ -16,9 +16,11 @@
      //Fonction de validation des données
     function valid_data($index, $data)
     {
+        if($index != "inputPass"){
+            $data = stripslashes($data);
+            $data = htmlspecialchars($data);
+        }
         $data = trim($data);
-        $data = stripslashes($data);
-        $data = htmlspecialchars($data);
         return $data;
     }
 
@@ -86,6 +88,7 @@
                     if ($data['mail'] == $mail && password_verify($password, $data["password"])){
                         session_start();
                         $_SESSION["rank"] = $data['rank'];
+                        $_SESSION["subject"] = $data['subject'];
                         $_SESSION["mail"] = $data['mail'];
                         $_SESSION["lastname"] = $data['lastname'];
                         $_SESSION["password"] = $data['password'];

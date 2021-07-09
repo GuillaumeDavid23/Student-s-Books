@@ -55,7 +55,8 @@
                             $sql = "UPDATE users SET changePass = '0', password = '$ctrlPass' WHERE mail = '$mail' ";
                             $pdo->query($sql);
                             $_SESSION["password"] = $ctrlPass;
-                            $_SESSION['changePass'] = $data['changePass'];
+                            $_SESSION['changePass'] = 0;
+                            header('Location: /index.php');
                         }
                     }
                 }

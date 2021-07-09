@@ -1,70 +1,48 @@
+html,
 body {
-    background-color: #F6F4E4;
+    overflow-x: hidden;
 }
 
-h1 {
-    text-align: center;
+.imgConnexion {
+    border-radius: 30%;
 }
 
-form {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-form h4 {
-    margin: 0;
-    padding: 0;
-}
-
-form div {
-    margin: 5px;
-}
-
-
-.column {
-    display: flex;
-    flex-direction: column;
-}
-
-label {
-    cursor: pointer;
-}
-
-.info {
-    text-align: center;
-}
-
-.list {
-    text-align: left;
-    font-size: 20px;
-}
-
-.poleNumber {
-    text-transform: uppercase;
-}
-
-.error {
-    color: red;
+#connectBloc {
+    border-radius: 40px;
+    background-color: #41AFA4;
+    box-shadow: 10px 10px 25px black;
     font-weight: bold;
 }
 
-.inputError {
-    border: 2px solid red;
+#btnSubmit {
+    width: 6em;
+    height: 6em;
+    background-color: #A99BD4;
+    border: 2px solid grey;
+    transform: scale(1);
+    transition: 0.5s;
+}
+
+#btnSubmit:hover {
+    transform: scale(1.1);
+    transition: 0.5s;
+}
+
+label {
+    color: white;
 }
 
 input {
-    margin-bottom: 5px;
     width: 80%;
     border-radius: 30px;
     border: 2px solid grey;
+    padding-left: 10px;
     outline: none;
     transform: scale(1);
     transition: 0.5s;
 }
 
 input:focus {
-    border: 2px solid greenyellow;
     transform: scale(1.1);
     transition: 0.5s;
 }

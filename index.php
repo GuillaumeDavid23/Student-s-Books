@@ -3,6 +3,11 @@
     if(empty($_SESSION['rank'])){
         header('Location: controller/connectCtrl.php');
     }
+    //Connexion BDD
+    require_once(dirname(__FILE__).'/model/model.php');
+    $bdd = new BDD();
+    $pdo = $bdd->bddConnect();
+    
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -114,60 +119,26 @@
                         </a>
                         
                         <div id="homeworkBloc">
+                            <?php 
+                            $sql = "SELECT * FROM assignment";
+                            $request = $pdo->query($sql);
+                            while ($data = $request->fetch(PDO::FETCH_ASSOC)){ 
+                                $save = explode("-", $data['date']);
+                                $year = $save[0];
+                                $month = $save[1];
+                                $day = $save[2];
+                                $month = strftime('%h', strtotime("$day-$month-$year"))
+                            ?>
                             <div class="hwEl d-flex w-100 mb-2">
                                 <div class="hwDateBloc h-100">
-                                    <div id="hwDate" class="text-center fw-bold text-white subInfo">27 <br> février</div>
+                                    <div id="hwDate" class="text-center fw-bold text-white subInfo"><?= $day ?> <br> <?= $month ?></div>
                                 </div>
                                 <div class="ps-1 w-100 bg-egg">
-                                    <div id="hwMatter" class="fw-bold">Français - Expression écrite sur voltaire</div>
-                                    <div id="hwProf" class="prof">Mme Lafoins</div>
+                                    <div id="hwMatter" class="fw-bold"><?= $data['subject'] ?> - <?= $data['name'] ?></div>
+                                    <div id="hwProf" class="prof">Mme/Mr <?= $data['teacherName']?></div>
                                 </div>
                             </div>
-                            <div class="hwEl d-flex w-100 mb-2">
-                                <div class="hwDateBloc h-100">
-                                    <div id="hwDate" class="text-center fw-bold text-white subInfo">29 <br> mai</div>
-                                </div>
-                                <div class="ps-1 w-100 bg-egg">
-                                    <div id="hwMatter" class="fw-bold">Anglais LV1  - Oral verbes irréguliers</div>
-                                    <div id="hwProf" class="prof">Mme Thomas</div>
-                                </div>
-                            </div>
-                            <div class="hwEl d-flex w-100 mb-2">
-                                <div class="hwDateBloc h-100">
-                                    <div id="hwDate" class="text-center fw-bold text-white subInfo">27 <br> juin</div>
-                                </div>
-                                <div class="ps-1 w-100 bg-egg">
-                                    <div id="hwMatter" class="fw-bold">Espagnol LV2 - Contrôle de séquence</div>
-                                    <div id="hwProf" class="prof">Mme Espegoles</div>
-                                </div>
-                            </div>
-                            <div class="hwEl d-flex w-100 mb-2">
-                                <div class="hwDateBloc h-100">
-                                    <div id="hwDate" class="text-center fw-bold text-white subInfo">17 <br> juillet</div>
-                                </div>
-                                <div class="ps-1 w-100 bg-egg">
-                                    <div id="hwMatter" class="fw-bold">Français - BAC oral</div>
-                                    <div id="hwProf" class="prof">Mme Lafoins</div>
-                                </div>
-                            </div>
-                            <div class="hwEl d-flex w-100 mb-2">
-                                <div class="hwDateBloc h-100">
-                                    <div id="hwDate" class="text-center fw-bold text-white subInfo">27 <br> Juillet</div>
-                                </div>
-                                <div class="ps-1 w-100 bg-egg">
-                                    <div id="hwMatter" class="fw-bold">Math  - Table de multiplication</div>
-                                    <div id="hwProf" class="prof">Mr Dieu</div>
-                                </div>
-                            </div>
-                            <div class="hwEl d-flex w-100 mb-2">
-                                <div class="hwDateBloc h-100">
-                                    <div id="hwDate" class="text-center fw-bold text-white subInfo">21 <br> Août</div>
-                                </div>
-                                <div class="ps-1 w-100 bg-egg">
-                                    <div id="hwMatter" class="fw-bold">Latin - DS sur la partie 2</div>
-                                    <div id="hwProf" class="prof">Mr Stuff</div>
-                                </div>
-                            </div>
+                            <?php } ?>
                         </div>
                     </div>
                 </div>

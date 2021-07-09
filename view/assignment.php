@@ -13,7 +13,7 @@
     <!-- CSS -->
     <link rel="stylesheet" href="../public/css/dash.css">
     <!-- FavIcon -->
-    <link rel="shortcut icon" href="public/img/favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="/public/img/favicon.ico" type="image/x-icon">
     <!-- META Description -->
     <meta name="description" content="Bienvenue sur Students'Books, c'est ici que commence la révolution scolaire.
     Emploi du temps/ devoirs/ absences... retrouver toutes les information scolaire içi">
@@ -30,26 +30,35 @@
             </a>
             <h1 class="ms-4 align-self-center text-center m-0">Devoirs</h1>
         </header>
-        <div class="row justify-content-center justify-content-lg-evenly mb-5">
+        <div class="row justify-content-center justify-content-lg-evenly m-0 mb-5">
         <!-- colonne à rendre -->
             <div class="col-10 col-lg-4 resumeBloc h-100 mb-4">
             
                 <h2>A rendre</h2>
-                
-                <div class="hwEl d-flex w-100 mb-2">
-                    <div class="hwDateBloc h-100">
-                        <div id="hwDate" class="text-center fw-bold text-white subInfo">27 <br> février</div>
+                <?php while ($data = $request->fetch(PDO::FETCH_ASSOC)){ 
+                        $save = explode("-", $data['date']);
+                        $year = $save[0];
+                        $month = $save[1];
+                        $day = $save[2];
+                        $month = strftime('%h', strtotime("$day-$month-$year"))
+                    ?>
+                    <div class="hwEl d-flex w-100 mb-2">
+                        <div class="hwDateBloc h-100">
+                            <div id="hwDate" class="text-center fw-bold text-white subInfo"><?= $day ?> <br> <?= $month ?></div>
+                        </div>
+                        <div class="ps-1 w-100 bg-egg">
+                            <div id="hwMatter" class="fw-bold"><?= $data['subject'] ?> - <?= $data['name'] ?></div>
+                            <div id="hwProf" class="prof">Mme/Mr <?= $data['teacherName']?></div>
+                        </div>
                     </div>
-                    <div class="ps-1 w-100 bg-egg">
-                        <div id="hwMatter" class="fw-bold">Français - Expression écrite sur voltaire</div>
-                        <div id="hwProf" class="prof">Mme/Mr <?= $_SESSION['lastname']?></div>
-                    </div>
-                </div>
+                <?php } ?>
             </div>
             <!-- colonne rendu -->
             <div class="col-10 col-lg-4 resumeBloc h-100">
                 <h2>Rendu</h2>
+                <div class="text-center text-white">Aucun devoirs rendu pour le moment.</div>
             </div>
+            <?php if($_SESSION['rank'] == 'teacher'){ ?>
             <div>
                 <form action="<?= htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="POST">
                     <label for="assignmentDate">Date de rendu du devoirs</label>
@@ -57,8 +66,20 @@
 
                     <label for="assignmentName">Nom du devoir</label>
                     <input type="text" name="assignmentName" id="assignmentName">
+                    
+                    <label for="class">Classe</label>
+                    <select name="class" id="class">
+                        <option value=""></option>
+                        <option value="6ème">6 ème</option>
+                        <option value="5ème">5 ème</option>
+                        <option value="4ème">4 ème</option>
+                        <option value="3ème">3 ème</option>
+                    </select>
+
+                    <button type="submit">Ajouter le devoir</button>
                 </form>
             </div>
+            <?php } ?>
         </div>
         <div class="row justify-content-evenly w-100 d-none d-lg-flex">
             <div class="col-1 navBtnMob">

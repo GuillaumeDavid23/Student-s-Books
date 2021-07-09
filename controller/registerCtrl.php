@@ -1,5 +1,8 @@
 <?php
-    define("REGEX_NAME", "^[A-Za-z-éèàùëüöïäûîôâê]+$");
+    //REGEX
+    define("REGEX_NAME", "^[a-zA-ZàâæçéèêëîïôœùûüÿÀÂÆÇnÉÈÊËÎÏÔŒÙÛÜŸ]{2,15}(-| |')?([a-zA-ZàâæçéèêëîïôœùûüÿÀÂÆÇnÉÈÊËÎÏÔŒÙÛÜŸ]{2,15})?$");
+    define("REGEX_BIRTHDAY", "^([12]\d{3}[-](0[1-9]|1[0-2])[-](0[1-9]|[12]\d|3[01]))$");
+    
     session_start();
     function passgen($nbChar){
         return substr(str_shuffle('abcdefghijklmnopqrstuvwxyzABCEFGHIJKLMNOPQRSTUVWXYZ0123456789!$?()'),1, $nbChar); 
@@ -8,11 +11,10 @@
     $error = '';
     $stockError = [];
     $testForm = true;
-    //REGEX
-    $nameReg = "/^[A-Za-z-éèàùëüöïäûîôâê]+$/";
+    
 
     //Connexion BDD
-    require(dirname(__FILE__).'/../model/model.php');
+    require_once(dirname(__FILE__).'/../model/model.php');
     $bdd = new BDD();
     $pdo = $bdd->bddConnect();
 
@@ -31,7 +33,7 @@
                 'lastname' => true,
                 'birthday' => true,
                 'mail'=> true,
-                'rank'=> true,
+                'rank'=> true
             ];
 
 
@@ -53,7 +55,8 @@
         && empty($_POST['lastname']) 
         && empty($_POST['birthday'])
         && empty($_POST['mail']) 
-        && empty($_POST['rank'])        
+        && empty($_POST['rank'])
+        && empty($_POST['subject'])          
         ){
             $testForm = true; //Affichage du formulaire si vide
             $error = 'Tout les champs sont vides';
@@ -72,7 +75,7 @@
         if(empty($_POST['firstname'])){
             
             $error = "<br>ERREUR Champs 'Rank' vide !";
-            array_push($stockError, $error);
+            $stockError['firstname'] = $error;
             $testForm = true;//Affichage du formulaire si vide
         }else{
             $firstname = $_POST['firstname'];
@@ -80,23 +83,23 @@
 
         if(empty($_POST['lastname'])){
             $error = "<br>ERREUR Champs 'Nom' vide !";
-            array_push($stockError, $error);
+            $stockError['lastname'] = $error;
             $testForm = true;//Affichage du formulaire si vide
         }else{
             $lastname = $_POST['lastname'];
         }
 
         if(empty($_POST['birthday'])){
-            $error = "<br>ERREUR Champs 'DA' vide !";
-            array_push($stockError, $error);
+            $error = "<br>ERREUR Champs 'birthday' vide !";
+            $stockError['birthday'] = $error;
             $testForm = true;//Affichage du formulaire si vide
         }else{
             $birthday = $_POST['birthday'];
         }
 
         if(empty($_POST['mail'])){
-            $error = "<br>ERREUR Champs 'Rank' vide !";
-            array_push($stockError, $error);
+            $error = "<br>ERREUR Champs 'mail' vide !";
+            $stockError['mail'] = $error;
             $testForm = true;//Affichage du formulaire si vide
         }else{
             $mail = $_POST['mail'];
@@ -104,31 +107,54 @@
 
         if(empty($_POST['rank'])){
             $error = "<br>ERREUR Champs 'Rank' vide !";
-            array_push($stockError, $error);
+            $stockError['rank'] = $error;
             $testForm = true;//Affichage du formulaire si vide
         }else{
             $rank = $_POST['rank'];
         }
 
-        //Test regex avant de rentrer dans la BDD
-        if(!preg_match("/".REGEX_NAME."/", $firstname) && !empty($firstname)){
-            $error = "<br>ERREUR une donnée est invalide : Prénom";
-            array_push($stockError, $error);
-            $testForm = true;//Affichage du formulaire si vide
+        if(empty($_POST['subject'])){
+            $subject = "";
+        }else{
+            $subject = $_POST['subject'];
         }
+        if(!$testForm){
+            //Test regex avant de rentrer dans la BDD
+            if(!preg_match("/".REGEX_NAME."/", $firstname)){
+                $error = "ERREUR une donnée est invalide : Prénom";
+                $stockError['firstname'] = $error;
+                $testForm = true;//Affichage du formulaire si vide
+            }
 
-        if(!preg_match("/".REGEX_NAME."/", $lastname) && !empty($lastname)){
-            $error = "<br>ERREUR une donnée est invalide : Nom";
-            $stockError['lastname'] = $error;
-            $testForm = true;//Affichage du formulaire si vide
+            if(!preg_match("/".REGEX_NAME."/", $lastname)){
+                $error = "ERREUR une donnée est invalide : Nom";
+                $stockError['lastname'] = $error;
+                $testForm = true;//Affichage du formulaire si vide
+            }
+
+            if(!filter_input(INPUT_POST, 'mail', FILTER_VALIDATE_EMAIL)){
+                $error = "ERREUR une donnée est invalide : Mail";
+                $stockError['mail'] = $error;
+                $testForm = true;//Affichage du formulaire si vide
+            }
+
+            if(!preg_match("/".REGEX_BIRTHDAY."/", $birthday)){
+                $error = "ERREUR Le format de la date de naissance est incorrect (Format : YYYY-MM-JJ)";
+                $stockError['birthday'] = $error;
+                $testForm = true;//Affichage du formulaire si vide
+            }else{
+                $save = explode("-", $birthday);
+                $year = $save[0];
+                $month = $save[1];
+                $day = $save[2];
+
+                if(!checkdate($month, $day, $year)){
+                    $error = "ERREUR La date saisie n'existe pas";
+                    $stockError['birthday'] = $error;
+                    $testForm = true;//Affichage du formulaire si vide
+                }
+            }
         }
-
-        if(!filter_input(INPUT_POST, 'mail', FILTER_VALIDATE_EMAIL) && !empty($mail)){
-            $error = "<br>ERREUR une donnée est invalide : Mail";
-            $stockError['mail'] = $error;
-            $testForm = true;//Affichage du formulaire si vide
-        }
-
         }
     }
     
@@ -142,8 +168,8 @@
         $password = passgen(12);
         mail('guillaume.david744@orange.fr', 'Première connexion', "$password && $mail");
         $password = password_hash($password, PASSWORD_BCRYPT);
-        $sql = "INSERT INTO `users`(`mail`, `password`, `firstname`, `lastname`,`birthday`, `rank`, `changePass`) 
-        VALUES('$mail', '$password','$firstname', '$lastname', '$birthday', '$rank', '1' )";
+        $sql = "INSERT INTO `users`(`mail`, `password`, `firstname`, `lastname`,`birthday`,`rank`, `subject`,`changePass`) 
+        VALUES('$mail', '$password','$firstname', '$lastname','$birthday', '$rank', '$subject', '1' )";
         $pdo->query($sql);
         // include '../view/profile.php';
         include (dirname(__FILE__).'/../view/register.php');
