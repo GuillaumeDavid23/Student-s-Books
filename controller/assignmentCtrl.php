@@ -90,7 +90,10 @@
     
     $sql = "SELECT * FROM assignment";
     $request = $pdo->query($sql);
-
+    $dataArray = [];
+    while ($data = $request->fetch(PDO::FETCH_ASSOC)){
+            array_push($dataArray, $data);
+    }
     include(dirname(__FILE__).'/../view/assignment.php');
 
     

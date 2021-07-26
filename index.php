@@ -8,6 +8,11 @@
     $bdd = new BDD();
     $pdo = $bdd->bddConnect();
     
+    if($_SERVER['REQUEST_METHOD'] == "POST"){
+        $object = $_POST['object'];
+        $prob = $_POST['prob'];
+        mail('guillaume.david744@orange.fr', "$object", "$prob");
+    }
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -46,7 +51,7 @@
                 </a>
             </div>
             <div class="col-4 offset-1 navBtnMob">
-                <a href="../view/note.php" class="d-flex justify-content-center">
+                <a href="../controller/noteCtrl.php" class="d-flex justify-content-center">
                     <img src="public/img/LogoNote.webp" class="img-fluid w-75"  alt="">
                 </a>
             </div>
@@ -96,7 +101,7 @@
             <div class="row h-100 w-75 ">
                 <div class="row w-100 h-50">
                     <div class="offset-1 col-3 h-100 resumeBloc">
-                        <a href="../view/note.php" class="text-decoration-none">
+                        <a href="../controller/noteCtrl.php" class="text-decoration-none">
                             <h2>Notes</h2>
                         </a>
                         
@@ -232,16 +237,18 @@
                     <h5 class="modal-title" id="exampleModalLabel">Un problème ?</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <div class="modal-body d-flex flex-column">
-                    <label for="object" class="mb-2">Titre de votre demande</label>
-                    <input type="text" name="object" id="" class="mb-3">
-                    <label for="prob">Décrivez votre problème</label>
-                    <textarea name="prob" id="" cols="30" rows="10"></textarea>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
-                    <button type="button" class="btn btn-info text-white">Envoyer</button>
-                </div>
+                <form action="#" method="post">
+                    <div class="modal-body d-flex flex-column">
+                        <label for="object" class="mb-2">Titre de votre demande</label>
+                        <input type="text" name="object" id="" class="mb-3">
+                        <label for="prob">Décrivez votre problème</label>
+                        <textarea name="prob" id="" cols="30" rows="10"></textarea>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+                        <button type="submit" class="btn btn-info text-white">Envoyer</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>

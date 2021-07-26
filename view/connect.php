@@ -41,6 +41,12 @@
             </div>
         </div>
     </div>
+
+    <footer>
+        <div class="d-flex justify-content-center">
+            COUCOU
+        </div>
+    </footer>
     <!-- Bootstrap JavaScript -->
     <script src="../public/js/bootstrap/bootstrap.js"></script>
 </body>

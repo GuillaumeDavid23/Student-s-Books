@@ -41,7 +41,7 @@
         </div>
         <div class="row justify-content-evenly w-100 d-none d-lg-flex">
             <div class="col-1 navBtnMob">
-                <a href="note.php">
+                <a href="../controller/noteCtrl.php">
                     <img src="../public/img/LogoNote.webp" class="img-fluid" width="100" alt="Page des notes" title="Vers les notes..">
                 </a>
             </div>

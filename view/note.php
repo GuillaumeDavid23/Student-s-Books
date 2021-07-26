@@ -1,9 +1,3 @@
-<?php 
-    session_start();
-    if(empty($_SESSION['rank'])){
-        header('Location: ../controller/connectCtrl.php');
-    }
-?>
 <!DOCTYPE html>
 <html lang="fr">
 
@@ -48,26 +42,20 @@
                     <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne"
                         data-bs-parent="#accordionFlushExample">
                         <div class="accordion-body">
-                            <div class="noteEl d-flex w-100 mb-2">
-                                <div class="notationBloc">
-                                    <div id="notation" class="d-flex justify-content-center align-items-center">14</div>
-                                    <div id="onTwenty" class="d-flex justify-content-center align-items-center">20</div>
+                            <?php foreach ($dataArray as $key => $currentArray) {
+                                if($currentArray['matter'] == "Math"){
+                                ?>
+                                <div class="noteEl d-flex w-100 mb-2 bg-egg">
+                                    <div class="notationBloc">
+                                        <div id="notation" class="d-flex justify-content-center align-items-center"><?=$currentArray['notation']?></div>
+                                        <div id="onTwenty" class="d-flex justify-content-center align-items-center">20</div>
+                                    </div>
+                                    <div class="ps-1 bg-egg" id="infoNote">
+                                        <div id="noteMatter" class="fw-bold"><?= $currentArray['matter'].' - '.$currentArray['name'] ?></div>
+                                        <div id="noteProf" class="prof">Mr/Mme <?=$currentArray['teacher']?></div>
+                                    </div>
                                 </div>
-                                <div class="ps-1 bg-egg" id="infoNote">
-                                    <div id="noteMatter" class="fw-bold">EPS - Course d'orientation</div>
-                                    <div id="noteProf" class="prof">Mr Delaporte</div>
-                                </div>
-                            </div>
-                            <div class="noteEl d-flex w-100 mb-2">
-                                <div class="notationBloc">
-                                    <div id="notation" class="d-flex justify-content-center align-items-center">14</div>
-                                    <div id="onTwenty" class="d-flex justify-content-center align-items-center">20</div>
-                                </div>
-                                <div class="ps-1 bg-egg" id="infoNote">
-                                    <div id="noteMatter" class="fw-bold">EPS - Course d'orientation</div>
-                                    <div id="noteProf" class="prof">Mr Delaporte</div>
-                                </div>
-                            </div>
+                            <?php }} ?>
                         </div>
                     </div>
                 </div>
@@ -81,7 +69,20 @@
                     <div id="flush-collapseTwo" class="accordion-collapse collapse" aria-labelledby="flush-headingTwo"
                         data-bs-parent="#accordionFlushExample">
                         <div class="accordion-body">
-
+                             <?php foreach ($dataArray as $dataKey => $currentArray) {
+                                if($currentArray['matter'] == "Histoire"){
+                                ?>
+                                <div class="noteEl d-flex w-100 mb-2 bg-egg">
+                                    <div class="notationBloc">
+                                        <div id="notation" class="d-flex justify-content-center align-items-center"><?=$currentArray['notation']?></div>
+                                        <div id="onTwenty" class="d-flex justify-content-center align-items-center">20</div>
+                                    </div>
+                                    <div class="ps-1 bg-egg" id="infoNote">
+                                        <div id="noteMatter" class="fw-bold"><?= $currentArray['matter'].' - '.$currentArray['name'] ?></div>
+                                        <div id="noteProf" class="prof">Mr/Mme <?=$currentArray['teacher']?></div>
+                                    </div>
+                                </div>
+                            <?php }} ?>
                         </div>
                     </div>
                 </div>
@@ -96,7 +97,20 @@
                     <div id="flush-collapseThree" class="accordion-collapse collapse"
                         aria-labelledby="flush-headingThree" data-bs-parent="#accordionFlushExample">
                         <div class="accordion-body">
-
+                            <?php while ($data = $request->fetch(PDO::FETCH_ASSOC)){ 
+                                if($data['matter'] == "Français"){
+                                ?>
+                                <div class="noteEl d-flex w-100 mb-2 bg-egg">
+                                    <div class="notationBloc">
+                                        <div id="notation" class="d-flex justify-content-center align-items-center"><?=$data['notation']?></div>
+                                        <div id="onTwenty" class="d-flex justify-content-center align-items-center">20</div>
+                                    </div>
+                                    <div class="ps-1 bg-egg" id="infoNote">
+                                        <div id="noteMatter" class="fw-bold"><?= $data['matter'].' - '.$data['name'] ?></div>
+                                        <div id="noteProf" class="prof">Mr/Mme <?=$data['teacher']?></div>
+                                    </div>
+                                </div>
+                            <?php }} ?>
                         </div>
                     </div>
                 </div>
@@ -111,7 +125,20 @@
                     <div id="flush-collapseFour" class="accordion-collapse collapse"
                         aria-labelledby="flush-headingFour" data-bs-parent="#accordionFlushExample">
                         <div class="accordion-body">
-
+                            <?php while ($data = $request->fetch(PDO::FETCH_ASSOC)){ 
+                                if($data['matter'] == "SVT"){
+                                ?>
+                                <div class="noteEl d-flex w-100 mb-2 bg-egg">
+                                    <div class="notationBloc">
+                                        <div id="notation" class="d-flex justify-content-center align-items-center"><?=$data['notation']?></div>
+                                        <div id="onTwenty" class="d-flex justify-content-center align-items-center">20</div>
+                                    </div>
+                                    <div class="ps-1 bg-egg" id="infoNote">
+                                        <div id="noteMatter" class="fw-bold"><?= $data['matter'].' - '.$data['name'] ?></div>
+                                        <div id="noteProf" class="prof">Mr/Mme <?=$data['teacher']?></div>
+                                    </div>
+                                </div>
+                            <?php }} ?>
                         </div>
                     </div>
                 </div>
@@ -126,7 +153,20 @@
                     <div id="flush-collapseFive" class="accordion-collapse collapse"
                         aria-labelledby="flush-headingFive" data-bs-parent="#accordionFlushExample">
                         <div class="accordion-body">
-
+                            <?php while ($data = $request->fetch(PDO::FETCH_ASSOC)){ 
+                                if($data['matter'] == "Sciences"){
+                                ?>
+                                <div class="noteEl d-flex w-100 mb-2 bg-egg">
+                                    <div class="notationBloc">
+                                        <div id="notation" class="d-flex justify-content-center align-items-center"><?=$data['notation']?></div>
+                                        <div id="onTwenty" class="d-flex justify-content-center align-items-center">20</div>
+                                    </div>
+                                    <div class="ps-1 bg-egg" id="infoNote">
+                                        <div id="noteMatter" class="fw-bold"><?= $data['matter'].' - '.$data['name'] ?></div>
+                                        <div id="noteProf" class="prof">Mr/Mme <?=$data['teacher']?></div>
+                                    </div>
+                                </div>
+                            <?php }} ?>
                         </div>
                     </div>
                 </div>
@@ -141,7 +181,20 @@
                     <div id="flush-collapseSix" class="accordion-collapse collapse"
                         aria-labelledby="flush-headingSix" data-bs-parent="#accordionFlushExample">
                         <div class="accordion-body">
-    
+                            <?php while ($data = $request->fetch(PDO::FETCH_ASSOC)){ 
+                                if($data['matter'] == "Technologie"){
+                                ?>
+                                <div class="noteEl d-flex w-100 mb-2 bg-egg">
+                                    <div class="notationBloc">
+                                        <div id="notation" class="d-flex justify-content-center align-items-center"><?=$data['notation']?></div>
+                                        <div id="onTwenty" class="d-flex justify-content-center align-items-center">20</div>
+                                    </div>
+                                    <div class="ps-1 bg-egg" id="infoNote">
+                                        <div id="noteMatter" class="fw-bold"><?= $data['matter'].' - '.$data['name'] ?></div>
+                                        <div id="noteProf" class="prof">Mr/Mme <?=$data['teacher']?></div>
+                                    </div>
+                                </div>
+                            <?php }} ?>
                         </div>
                     </div>
                 </div>
@@ -156,7 +209,20 @@
                     <div id="flush-collapseSeven" class="accordion-collapse collapse"
                         aria-labelledby="flush-headingSeven" data-bs-parent="#accordionFlushExample">
                         <div class="accordion-body">
-    
+                            <?php while ($data = $request->fetch(PDO::FETCH_ASSOC)){ 
+                                if($data['matter'] == "Musique"){
+                                ?>
+                                <div class="noteEl d-flex w-100 mb-2 bg-egg">
+                                    <div class="notationBloc">
+                                        <div id="notation" class="d-flex justify-content-center align-items-center"><?=$data['notation']?></div>
+                                        <div id="onTwenty" class="d-flex justify-content-center align-items-center">20</div>
+                                    </div>
+                                    <div class="ps-1 bg-egg" id="infoNote">
+                                        <div id="noteMatter" class="fw-bold"><?= $data['matter'].' - '.$data['name'] ?></div>
+                                        <div id="noteProf" class="prof">Mr/Mme <?=$data['teacher']?></div>
+                                    </div>
+                                </div>
+                            <?php }} ?>
                         </div>
                     </div>
                 </div>
@@ -171,7 +237,20 @@
                     <div id="flush-collapseEight" class="accordion-collapse collapse"
                         aria-labelledby="flush-headingEight" data-bs-parent="#accordionFlushExample">
                         <div class="accordion-body">
-    
+                            <?php while ($data = $request->fetch(PDO::FETCH_ASSOC)){ 
+                                if($data['matter'] == "Anglais"){
+                                ?>
+                                <div class="noteEl d-flex w-100 mb-2 bg-egg">
+                                    <div class="notationBloc">
+                                        <div id="notation" class="d-flex justify-content-center align-items-center"><?=$data['notation']?></div>
+                                        <div id="onTwenty" class="d-flex justify-content-center align-items-center">20</div>
+                                    </div>
+                                    <div class="ps-1 bg-egg" id="infoNote">
+                                        <div id="noteMatter" class="fw-bold"><?= $data['matter'].' - '.$data['name'] ?></div>
+                                        <div id="noteProf" class="prof">Mr/Mme <?=$data['teacher']?></div>
+                                    </div>
+                                </div>
+                            <?php }} ?>
                         </div>
                     </div>
                 </div>
@@ -186,7 +265,20 @@
                     <div id="flush-collapseNine" class="accordion-collapse collapse"
                         aria-labelledby="flush-headingNine" data-bs-parent="#accordionFlushExample">
                         <div class="accordion-body">
-    
+                            <?php while ($data = $request->fetch(PDO::FETCH_ASSOC)){ 
+                                if($data['matter'] == "Art"){
+                                ?>
+                                <div class="noteEl d-flex w-100 mb-2 bg-egg">
+                                    <div class="notationBloc">
+                                        <div id="notation" class="d-flex justify-content-center align-items-center"><?=$data['notation']?></div>
+                                        <div id="onTwenty" class="d-flex justify-content-center align-items-center">20</div>
+                                    </div>
+                                    <div class="ps-1 bg-egg" id="infoNote">
+                                        <div id="noteMatter" class="fw-bold"><?= $data['matter'].' - '.$data['name'] ?></div>
+                                        <div id="noteProf" class="prof">Mr/Mme <?=$data['teacher']?></div>
+                                    </div>
+                                </div>
+                            <?php }} ?>
                         </div>
                     </div>
                 </div>
@@ -201,11 +293,60 @@
                     <div id="flush-collapseTen" class="accordion-collapse collapse"
                         aria-labelledby="flush-headingTen" data-bs-parent="#accordionFlushExample">
                         <div class="accordion-body">
-    
+                            <?php while ($data = $request->fetch(PDO::FETCH_ASSOC)){ 
+                                if($data['matter'] == "EPS"){
+                                ?>
+                                <div class="noteEl d-flex w-100 mb-2 bg-egg">
+                                    <div class="notationBloc">
+                                        <div id="notation" class="d-flex justify-content-center align-items-center"><?=$data['notation']?></div>
+                                        <div id="onTwenty" class="d-flex justify-content-center align-items-center">20</div>
+                                    </div>
+                                    <div class="ps-1 bg-egg" id="infoNote">
+                                        <div id="noteMatter" class="fw-bold"><?= $data['matter'].' - '.$data['name'] ?></div>
+                                        <div id="noteProf" class="prof">Mr/Mme <?=$data['teacher']?></div>
+                                    </div>
+                                </div>
+                            <?php }} ?>
                         </div>
                     </div>
                 </div>
             </div>
+            <?php if($_SESSION['rank'] == 'teacher'){ ?>
+            <div class=" d-flex justify-content-center mb-5">
+                <form action="<?= htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="POST" class="d-flex flex-column w-25 justify-content-center">
+                    <label for="notationDate">Date de la note</label>
+                    <input type="date" name="notationDate" id="notationDate">
+
+                    <label for="notationName">Nom de la note</label>
+                    <input type="text" name="notationName" id="notationName">
+
+                    <label for="notationInput">Note sur 20</label>
+                    <input type="number" min="0" max="20" name="notationInput" id="notationInput">
+                    
+                    <label for="class">Classe</label>
+                    <select name="class" id="class">
+                        <option value=""></option>
+                        <option value="6ème">6 ème</option>
+                        <option value="5ème">5 ème</option>
+                        <option value="4ème">4 ème</option>
+                        <option value="3ème">3 ème</option>
+                    </select>
+
+                    <label for="student">élève :</label>
+                    <select name="student" id="student">
+                        <option value=""></option>
+                    <?php 
+                    $sql = "SELECT * FROM users";
+                    $request = $pdo->query($sql);
+                    while ($data = $request->fetch(PDO::FETCH_ASSOC)){ 
+                        if($data['rank'] == 'student'){?>
+                            <option value="<?=$data['lastname']?>"><?=$data['firstname'].' '.$data['lastname'] ?></option>
+                    <?php }}?>
+                    </select>
+                    <button type="submit">Ajouter la note</button>
+                </form>
+            </div>
+            <?php } ?>
         </div>
         <div class="row justify-content-evenly w-100 d-none d-lg-flex">
             <div class="col-1 navBtnMob">
