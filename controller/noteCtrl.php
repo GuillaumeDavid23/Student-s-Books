@@ -4,6 +4,12 @@ define("REGEX_BIRTHDAY", "^([12]\d{3}[-](0[1-9]|1[0-2])[-](0[1-9]|[12]\d|3[01]))
 if(empty($_SESSION['rank'])){
     header('Location: ../controller/connectCtrl.php');
 }
+var_dump($_SESSION);
+if($_SESSION['rank'] == "teacher"){
+    $matter = $_SESSION['subject'];
+    $teacher = $_SESSION['lastname'];
+}
+
 //Connexion BDD
 require_once(dirname(__FILE__).'/../model/model.php');
 $bdd = new BDD();
@@ -81,17 +87,29 @@ $pdo = $bdd->bddConnect();
             }
         }
 
-        $matter = $_SESSION['subject'];
-        $teacher = $_SESSION['lastname'];
+        
+
         if(!$testForm){
             $bdd->addNote($pdo, $notationDate, $matter, $notationName, $notationInput, $class, $student, $teacher);
             header('Location: /controller/noteCtrl.php');
         }
     }
-    $sql = "SELECT * FROM notation";
-    $request = $pdo->query($sql);
+    
+    $request = $bdd->selectAll($pdo, "notation");
+
     $dataArray = [];
+
     while ($data = $request->fetch(PDO::FETCH_ASSOC)){
-            array_push($dataArray, $data);
+        if($_SESSION['rank'] == "student"){
+            if($data['lastname'] == $_SESSION['lastname']){
+                array_push($dataArray, $data);
+            }
+        }
+        elseif($_SESSION['rank'] == "teacher"){
+            if($data['teacher'] == $_SESSION['lastname']){
+                array_push($dataArray, $data);
+            }
+        }
     }
+    
 include(dirname(__FILE__).'/../view/note.php');

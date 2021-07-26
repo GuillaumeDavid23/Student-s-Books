@@ -22,6 +22,12 @@
             }
             return $pdo;
         }
+        public function selectAll($pdo, $table)
+        {
+            $sql = "SELECT * FROM notation";
+            $request = $pdo->query($sql);
+            return $request;
+        }
 
         public function addNote($pdo, $notationDate, $matter, $notationName, $notationInput, $class, $student, $teacher )
         {
