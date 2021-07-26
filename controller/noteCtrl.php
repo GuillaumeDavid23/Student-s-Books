@@ -81,13 +81,10 @@ $pdo = $bdd->bddConnect();
             }
         }
 
-        $matter = "Histoire";
+        $matter = $_SESSION['subject'];
         $teacher = $_SESSION['lastname'];
         if(!$testForm){
-            $error = "C'est good !";
-            $sql = "INSERT INTO `notation`(`date`, `matter`, `name`, `notation`, `class`, `lastname`, `teacher`) 
-            VALUES('$notationDate', '$matter', '$notationName', '$notationInput', '$class', '$student', '$teacher')";
-            $pdo->query($sql);
+            $bdd->addNote($pdo, $notationDate, $matter, $notationName, $notationInput, $class, $student, $teacher);
             header('Location: /controller/noteCtrl.php');
         }
     }

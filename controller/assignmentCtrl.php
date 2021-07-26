@@ -81,9 +81,7 @@
         }
 
         if(!$testForm){
-            $sql = "INSERT INTO `assignment`(`date`, `name`, `teacherName`, `subject`, `class`) 
-            VALUES('$hwDate', '$hwName', '$teacherName', '$subject', '$class')";
-            $pdo->query($sql);
+            $bdd->addAssignment($pdo, $hwDate, $hwName,$teacherName, $subject,$class);
             header('Location: /controller/assignmentCtrl.php');
         }
     }
