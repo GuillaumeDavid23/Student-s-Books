@@ -47,9 +47,8 @@
             $bdd = new BDD();
             $pdo = $bdd->bddConnect();
             // récupérer toutes les données
-            $sql = "SELECT * FROM events";
-            $stmt = $pdo->query($sql);
-            $dataDB = $stmt->fetchAll();
+            $request = $bdd->selectAll($pdo, "events");
+            $dataDB = $request->fetchAll();
             
               //Attribution du premier jour.
             if((int)$keyOfFirstDay == 0){

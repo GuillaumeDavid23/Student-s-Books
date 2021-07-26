@@ -76,8 +76,7 @@
 
             if(!$errorInForm){
                 $pdo = $bdd->bddConnect();
-                $sql = "SELECT * FROM users";
-                $request = $pdo->query($sql);
+                $request = $bdd->selectAll($pdo, "users");
                 while ($data = $request->fetch(PDO::FETCH_ASSOC)){
                     if ($data['mail'] == $mail){
                         $verifyMail = true;

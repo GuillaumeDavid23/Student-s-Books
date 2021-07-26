@@ -4,7 +4,7 @@ define("REGEX_BIRTHDAY", "^([12]\d{3}[-](0[1-9]|1[0-2])[-](0[1-9]|[12]\d|3[01]))
 if(empty($_SESSION['rank'])){
     header('Location: ../controller/connectCtrl.php');
 }
-var_dump($_SESSION);
+
 if($_SESSION['rank'] == "teacher"){
     $matter = $_SESSION['subject'];
     $teacher = $_SESSION['lastname'];
@@ -86,9 +86,7 @@ $pdo = $bdd->bddConnect();
                 $testForm = true;//Affichage du formulaire si vide
             }
         }
-
         
-
         if(!$testForm){
             $bdd->addNote($pdo, $notationDate, $matter, $notationName, $notationInput, $class, $student, $teacher);
             header('Location: /controller/noteCtrl.php');

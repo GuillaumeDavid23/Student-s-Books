@@ -48,8 +48,7 @@
                     $ctrlPass = password_hash($ctrlPass, PASSWORD_BCRYPT);
                     $bdd = new BDD();
                     $pdo = $bdd->bddConnect();
-                    $sql = "SELECT * FROM users";
-                    $request = $pdo->query($sql);
+                    $request = $bdd->selectAll($pdo, "users");
                     while ($data = $request->fetch(PDO::FETCH_ASSOC)){
                         if ($data['mail'] == $_SESSION["mail"]){
                             $sql = "UPDATE users SET changePass = '0', password = '$ctrlPass' WHERE mail = '$mail' ";
