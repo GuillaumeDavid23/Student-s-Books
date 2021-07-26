@@ -15,9 +15,8 @@
         $eventDay = $dateCut[2];
         $eventMonth = $arrayTestOfMonth[(int)$dateCut[1]-1];
         $eventYear = $dateCut[0];
-        $sql = "INSERT INTO events(day,month,year,message) 
-            VALUES($eventDay,'$eventMonth',$eventYear,'$eventName')";
-        $pdo->exec($sql);
+        
+        $bdd->addEvent($pdo, $eventDay,$eventMonth,$eventYear,$eventName);
         header("Location: agendaCtrl.php");
     }
     

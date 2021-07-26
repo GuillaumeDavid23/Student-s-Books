@@ -162,11 +162,8 @@
         $password = passgen(12);
         mail('guillaume.david744@orange.fr', 'Première connexion', "$password && $mail");
         $password = password_hash($password, PASSWORD_BCRYPT);
-
         $bdd->addUser($pdo, $mail, $password,$firstname, $lastname,$birthday, $rank, $subject);
-
-        $sql = "INSERT INTO `users`(`mail`, `password`, `firstname`, `lastname`,`birthday`,`rank`, `subject`,`changePass`) 
-        VALUES('$mail', '$password','$firstname', '$lastname','$birthday', '$rank', '$subject', '1' )";
+        
         header('Location: /controller/registerCtrl.php');
     }
     include (dirname(__FILE__).'/../view/register.php');

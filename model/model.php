@@ -43,5 +43,12 @@
             VALUES('$hwDate', '$hwName', '$teacherName', '$subject', '$class')";
             $pdo->query($sql);
         }
+
+        public function addEvent($pdo, $eventDay,$eventMonth,$eventYear,$eventName)
+        {
+            $sql = "INSERT INTO events(day,month,year,message) 
+            VALUES($eventDay,'$eventMonth',$eventYear,'$eventName')";
+            $pdo->exec($sql);
+        }
         
     }
