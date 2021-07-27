@@ -1,9 +1,5 @@
 <?php    
     class BDD{
-        private $host = 'localhost';
-        private $dbname = 'studentbook';
-        private $username = 'root';
-        private $password = ''; 
 
         public function bddConnect()
         {
@@ -25,7 +21,6 @@
 
         public function selectAll($pdo, $table)
         {
-            
             $sql = $pdo->prepare("SELECT * FROM :selected");
             $sql->bindParam(':selected', $table);
             $sql->execute();
