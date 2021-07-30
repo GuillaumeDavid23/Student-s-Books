@@ -30,8 +30,8 @@
             </a>
             <h1 class="ms-4 align-self-center text-center m-0">Notes</h1>
         </header>
-        <div class="row">
-            <div class="accordion accordion-flush" id="accordionFlushExample">
+        <div class="row justify-content-center">
+            <div class="accordion accordion-flush col-12 col-lg-8" id="accordionFlushExample">
                 <div class="accordion-item">
                     <h2 class="accordion-header" id="flush-headingOne">
                         <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
@@ -69,7 +69,7 @@
                     <div id="flush-collapseTwo" class="accordion-collapse collapse" aria-labelledby="flush-headingTwo"
                         data-bs-parent="#accordionFlushExample">
                         <div class="accordion-body">
-                             <?php foreach ($dataArray as $dataKey => $currentArray) {
+                            <?php foreach ($dataArray as $dataKey => $currentArray) {
                                 if($currentArray['matter'] == "Histoire"){
                                 ?>
                                 <div class="noteEl d-flex w-100 mb-2 bg-egg">
@@ -352,7 +352,7 @@
                     <button type="submit">Ajouter la note</button>
                 </form>
             </div>
-            <?php var_dump($request);} ?>
+            <?php } ?>
         </div>
         <div class="row justify-content-evenly w-100 d-none d-lg-flex">
             <div class="col-1 navBtnMob">

@@ -7,11 +7,12 @@
     function passgen($nbChar){
         return substr(str_shuffle('abcdefghijklmnopqrstuvwxyzABCEFGHIJKLMNOPQRSTUVWXYZ0123456789!$?()'),1, $nbChar); 
     }
+
     //Déclaration des variables
     $error = '';
     $stockError = [];
     $testForm = true;
-    
+
 
     //Connexion BDD
     require_once(dirname(__FILE__).'/../model/model.php');
@@ -123,7 +124,7 @@
             if(!preg_match("/".REGEX_NAME."/", $firstname)){
                 $error = "ERREUR une donnée est invalide : Prénom";
                 $stockError['firstname'] = $error;
-                $testForm = true;//Affichage du formulaire si vide
+                $testForm = true; //Affichage du formulaire si vide
             }
 
             if(!preg_match("/".REGEX_NAME."/", $lastname)){
@@ -164,6 +165,6 @@
         $password = password_hash($password, PASSWORD_BCRYPT);
         $bdd->addUser($pdo, $mail, $password,$firstname, $lastname,$birthday, $rank, $subject);
         
-        header('Location: /controller/registerCtrl.php');
+        header('Refresh:0');
     }
     include (dirname(__FILE__).'/../view/register.php');

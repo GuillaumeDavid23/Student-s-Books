@@ -21,8 +21,7 @@
 
         public function selectAll($pdo, $table)
         {
-            $sql = $pdo->prepare("SELECT * FROM :selected");
-            $sql->bindParam(':selected', $table);
+            $sql = $pdo->prepare("SELECT * FROM".' '.$table);
             $sql->execute();
             return $sql;
         }

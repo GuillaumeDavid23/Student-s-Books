@@ -82,7 +82,7 @@
 
         if(!$testForm){
             $bdd->addAssignment($pdo, $hwDate, $hwName,$teacherName, $subject,$class);
-            header('Location: /controller/assignmentCtrl.php');
+            header('Refresh:0');
         }
     }
     

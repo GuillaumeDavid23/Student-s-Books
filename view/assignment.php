@@ -35,8 +35,8 @@
             <div class="col-10 col-lg-4 resumeBloc h-100 mb-4">
             
                 <h2>A rendre</h2>
-                <?php while ($data = $request->fetch(PDO::FETCH_ASSOC)){ 
-                        $save = explode("-", $data['date']);
+                <?php foreach ($dataArray as $key => $currentArray) {
+                        $save = explode("-", $currentArray['date']);
                         $year = $save[0];
                         $month = $save[1];
                         $day = $save[2];
@@ -47,8 +47,8 @@
                             <div id="hwDate" class="text-center fw-bold text-white subInfo"><?= $day ?> <br> <?= $month ?></div>
                         </div>
                         <div class="ps-1 w-100 bg-egg">
-                            <div id="hwMatter" class="fw-bold"><?= $data['subject'] ?> - <?= $data['name'] ?></div>
-                            <div id="hwProf" class="prof">Mme/Mr <?= $data['teacherName']?></div>
+                            <div id="hwMatter" class="fw-bold"><?= $currentArray['subject'] ?> - <?= $currentArray['name'] ?></div>
+                            <div id="hwProf" class="prof">Mme/Mr <?= $currentArray['teacherName']?></div>
                         </div>
                     </div>
                 <?php } ?>

@@ -89,7 +89,7 @@ $pdo = $bdd->bddConnect();
         
         if(!$testForm){
             $bdd->addNote($pdo, $notationDate, $matter, $notationName, $notationInput, $class, $student, $teacher);
-            header('Location: /controller/noteCtrl.php');
+            header('Refresh:0');
         }
     }
     
@@ -98,6 +98,7 @@ $pdo = $bdd->bddConnect();
     $dataArray = [];
 
     while ($data = $request->fetch(PDO::FETCH_ASSOC)){
+        
         if($_SESSION['rank'] == "student"){
             if($data['lastname'] == $_SESSION['lastname']){
                 array_push($dataArray, $data);
@@ -109,5 +110,4 @@ $pdo = $bdd->bddConnect();
             }
         }
     }
-    
 include(dirname(__FILE__).'/../view/note.php');

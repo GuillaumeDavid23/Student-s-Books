@@ -1,8 +1,10 @@
 <?php 
+    
     session_start();
     if(empty($_SESSION['rank'])){
         header('Location: controller/connectCtrl.php');
     }
+    setlocale (LC_TIME, 'fr_FR.utf8','fra'); 
     //Connexion BDD
     require_once(dirname(__FILE__).'/model/model.php');
     $bdd = new BDD();
@@ -13,6 +15,37 @@
         $prob = $_POST['prob'];
         mail('guillaume.david744@orange.fr', "$object", "$prob");
     }
+
+    $request = $bdd->selectAll($pdo, "notation");
+
+    $dataArray = [];
+
+    while ($data = $request->fetch(PDO::FETCH_ASSOC)){
+        
+        if($_SESSION['rank'] == "student"){
+            if($data['lastname'] == $_SESSION['lastname']){
+                array_push($dataArray, $data);
+            }
+        }
+        elseif($_SESSION['rank'] == "teacher"){
+            if($data['teacher'] == $_SESSION['lastname']){
+                array_push($dataArray, $data);
+            }
+        }
+    }
+    
+    $request = $bdd->selectAll($pdo, "edt");
+    $dataArrayEdt = [];
+
+    while ($data = $request->fetch(PDO::FETCH_ASSOC)){
+        array_push($dataArrayEdt, $data);
+    }
+    $jour = array(null, "Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi");
+    foreach ($dataArrayEdt as $key => $currentArray) {
+    $rdv[$currentArray['day']][$currentArray['hour']] = $currentArray['matter']. '<br> Salle '. $currentArray['room'];
+    }
+    $time = time();
+    $currentDay = ucfirst(strftime('%A', $time));
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -56,7 +89,7 @@
                 </a>
             </div>
             <div class="col-4 mt-5 navBtnMob">
-                <a href="../view/edt.php" class="d-flex justify-content-center">
+                <a href="../controller/edtCtrl.php" class="d-flex justify-content-center">
                     <img src="public/img/Edt.webp" class="img-fluid w-75"  alt="">
                 </a>
             </div>
@@ -105,18 +138,20 @@
                             <h2>Notes</h2>
                         </a>
                         
-                        <div id="noteBloc">
-                            <div class="noteEl d-flex w-100 mb-2">
-                                <div class="notationBloc">
-                                    <div id="notation" class="d-flex justify-content-center align-items-center">14</div>
-                                    <div id="onTwenty" class="d-flex justify-content-center align-items-center">20</div>
+                        <?php foreach ($dataArray as $key => $currentArray) {
+                                if($currentArray['lastname'] == $_SESSION['lastname']){
+                                ?>
+                                <div class="noteEl d-flex w-100 mb-2 bg-egg">
+                                    <div class="notationBloc">
+                                        <div id="notation" class="d-flex justify-content-center align-items-center"><?=$currentArray['notation']?></div>
+                                        <div id="onTwenty" class="d-flex justify-content-center align-items-center">20</div>
+                                    </div>
+                                    <div class="ps-1 bg-egg" id="infoNote">
+                                        <div id="noteMatter" class="fw-bold"><?= $currentArray['matter'].' - '.$currentArray['name'] ?></div>
+                                        <div id="noteProf" class="prof">Mr/Mme <?=$currentArray['teacher']?></div>
+                                    </div>
                                 </div>
-                                <div class="ps-1 bg-egg" id="infoNote">
-                                    <div id="noteMatter" class="fw-bold">EPS - Course d'orientation</div>
-                                    <div id="noteProf" class="prof">Mr Delaporte</div>
-                                </div>
-                            </div>
-                        </div>
+                            <?php }} ?>
                     </div>
                     <div class="offset-1 col-5 h-100 resumeBloc">
                         <a href="../controller/assignmentCtrl.php" class="text-decoration-none">
@@ -149,23 +184,28 @@
                 </div>
                 <div class="row w-100 h-50 mt-4">
                     <div class="col-5 h-100 resumeBloc">
-                        <a href="../view/edt.php" class="text-decoration-none">
+                        <a href="../controller/edtCtrl.php" class="text-decoration-none">
                             <h2>Emploi du temps</h2>
                         </a>
                         
-                        <div id="edtBloc">
-                            <div class="edtEl d-flex w-100 mb-2">
-                                <div class="edtDateBloc h-100">
-                                    <div id="edtLocal" class="text-center fw-bold text-white subInfo">Salle 23</div>
-                                </div>
-                                <div class="ps-1 w-100 bg-egg d-flex align-items-center">
-                                    <div id="infoBloc" class="fw-bold">
-                                        <span id="hours">8h :</span>
-                                        <span id="edtMatter">Français - </span>
-                                        <span id="edtProf" class="prof">Mme Lafoins</span>
+                        <div id="edtBloc" class="text-center text-white">
+                            <?php foreach ($dataArrayEdt as $key => $currentArray) {
+
+                                if($currentArray['day'] == $currentDay ){ ?>
+                                    <div class="edtEl d-flex w-100 mb-2">
+                                        <div class="edtDateBloc h-100">
+                                            <div id="edtLocal" class="text-center fw-bold text-white subInfo">Salle <?=' '.$currentArray['room']?></div>
+                                        </div>
+                                        <div class="ps-1 w-100 bg-egg d-flex align-items-center">
+                                            <div id="infoBloc" class="fw-bold text-dark">
+                                                <span id="hours"><?=$currentArray['hour']?>h</span>
+                                                <span id="edtMatter"><?=$currentArray['matter']?> - </span>
+                                                <span id="edtProf" class="prof">Mme Lafoins</span>
+                                            </div>
+                                        </div>
                                     </div>
-                                </div>
-                            </div>
+                                <?php }
+                            } ?>
                         </div>
                     </div>
                     <div class="offset-1 col-3 h-100 resumeBloc">
@@ -240,9 +280,9 @@
                 <form action="#" method="post">
                     <div class="modal-body d-flex flex-column">
                         <label for="object" class="mb-2">Titre de votre demande</label>
-                        <input type="text" name="object" id="" class="mb-3">
+                        <input type="text" name="object" id="object" class="mb-3">
                         <label for="prob">Décrivez votre problème</label>
-                        <textarea name="prob" id="" cols="30" rows="10"></textarea>
+                        <textarea name="prob" id="prob" cols="30" rows="10"></textarea>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
