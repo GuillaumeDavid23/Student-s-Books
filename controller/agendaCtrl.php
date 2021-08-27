@@ -1,23 +1,23 @@
 <?php
+    session_start();
+    if(empty($_SESSION['rank'])){
+        header('Location: ../controller/connectCtrl.php');
+    }
     //Tableau de test des mois
     $arrayTestOfMonth = array('January','February', 'March', "April", 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'); 
+    $code = null;
     
-    require_once('../model/model.php');
-    //Connexion à la base et récupération des données
-    $bdd = new BDD();
-    $pdo = $bdd->bddConnect();
+    require_once(dirname(__FILE__).'/../model/bdd.php');
+    require_once(dirname(__FILE__).'/../model/calendar.php');
+    require_once(dirname(__FILE__).'/../public/config/config.php');
     
     //AJOUT DANS LA BDD
     if (!empty($_POST['dateEvent']) && !empty($_POST['eventName'])) {
         $fullDate = $_POST['dateEvent'];
         $eventName = $_POST['eventName'];
-        $dateCut = explode("-", $fullDate);
-        $eventDay = $dateCut[2];
-        $eventMonth = $arrayTestOfMonth[(int)$dateCut[1]-1];
-        $eventYear = $dateCut[0];
-        
-        $bdd->addEvent($pdo, $eventDay,$eventMonth,$eventYear,$eventName);
-        header("Location: agendaCtrl.php");
+        $calendar = new Calendar("",$eventName,$fullDate,$_SESSION['id']);
+        $code = $calendar->Add();
+        //header("Refresh:0");
     }
     
     $empty = false;//Test du select
@@ -28,8 +28,6 @@
     else{
         function CreateCalendar()
         {
-            //définition de la langue.
-            setlocale(LC_TIME, ['fr', 'fra', 'fr_FR']);
             
             //Déclaration des variables
             $arrayTestOfMonth = array('January','February', 'March', "April", 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'); //Tableau de test des mois
@@ -42,15 +40,11 @@
             $endCalendar = true;//Test de la fin du calendrier
             $empty = false;//Test du select
             $emptyCase = '<td class="empty"></td>';
-
-            //Connexion à la base et récupération des données
-            $bdd = new BDD();
-            $pdo = $bdd->bddConnect();
-            // récupérer toutes les données
-            $request = $bdd->selectAll($pdo, "events");
-            $dataDB = $request->fetchAll();
             
-              //Attribution du premier jour.
+            $calendar = new Calendar();
+            $dataDB = $calendar->SelectAll();
+
+            //Attribution du premier jour.
             if((int)$keyOfFirstDay == 0){
                 $keyOfFirstDay = 7;
             }
@@ -108,10 +102,16 @@
                     else{
                         echo $fillCase;
                     }
-                    foreach($dataDB as $row)
-                    {
-                        if($row['month'] == $arrayTestOfMonth[$month] && $row['year'] == $year && $row['day'] == $count){
-                            echo '<br>'.$row['message'];
+                    foreach($dataDB as $event)
+                    {   
+                        $date = $event['event_date']; //Récupération des valeurs du SelectAll dans un array
+                        $cut = explode('-', $date); //Découpage du tableau $date pour séparer les valeurs
+                        $DByear = $cut[0]; //Année
+                        $DBmonth = $cut[1]; //mois
+                        $DBmonth = ltrim($DBmonth, '0');
+                        $DBday = $cut[2]; //jour 
+                        if($DBmonth == array_search($arrayTestOfMonth[$DBmonth], $arrayTestOfMonth)  && $DByear == $year && $DBday == $count){
+                            echo '<br>'.$event['event'];
                         }
                     }
                     echo "</td>";
@@ -146,5 +146,5 @@
         }
     }
     
-    include(dirname(__FILE__).'../view/agenda.php');
+    include(dirname(__FILE__).'/../view/agenda.php');
 ?>

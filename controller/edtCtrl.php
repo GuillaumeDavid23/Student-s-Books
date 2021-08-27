@@ -16,4 +16,5 @@ $rdv[$currentArray['day']][$currentArray['hour']] = $currentArray['matter']. '<b
 }
 $time = time();
 $currentDay = ucfirst(strftime('%A', $time));
+
 include("../view/edt.php");

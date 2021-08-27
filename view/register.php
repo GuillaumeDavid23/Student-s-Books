@@ -15,11 +15,17 @@
 
 <body>
     <div class="row h-100 justify-content-center align-items-center">
+        
         <div class="col-8 col-lg-4  text-center" id="connectBloc">
             <img src="../public/img/LogoStudentBook.webp" alt="logo student's books école facile"
                 class="imgConnexion img-fluid mb-5 mt-4" width="50%">
             <fieldset class="form-group">
                 <legend>Inscription</legend>
+                <?php if($code) :?>
+                    <div class="text-center h5 alert <?= $messageCode[$code]['type'] ?>">
+                        <?= $messageCode[$code]['msg'] ?>
+                    </div>
+                <?php endif ?>
                 <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="POST"
                     class="d-flex flex-column text-center align-items-center">
 
@@ -58,26 +64,42 @@
                     <div class="error"><?= $testError = array_key_exists('rank', $stockError) ? $stockError['rank']:'';?></div>
                     <select name="rank" id="rank"
                         <?= $classError = array_key_exists('rank', $stockError)? 'class="inputError"':'';?>
-                        <?= $required = $requiredInput['mail'] == true? 'required':'' ; ?>>
+                        <?= $required = $requiredInput['rank'] == true? 'required':'' ; ?>>
                         <option value=""></option>
-                        <option value="student">Etudiant</option>
-                        <option value="parent">Parent</option>
-                        <option value="teacher">Professeur</option>
+                        <option value="1">Etudiant</option>
+                        <option value="2">Parent</option>
+                        <option value="3">Professeur</option>
                     </select>
                     <!-- Matière -->
                     <div class="d-flex flex-column d-none" id="subjectBloc">
                         <label for="subject">Matière :</label>
                         <div class="error"><?= $testError = array_key_exists('subject', $stockError) ? $stockError['subject']:'';?></div>
                         <select name="subject" id="subject"
+                            <?= $required = $requiredInput['subject'] == true? 'required':'' ; ?>
                             <?= $classError = array_key_exists('subject', $stockError)? 'class="inputError"':'';?>>
                             <option value="" selected></option>
-                            <option value="Math">Math</option>
-                            <option value="Français">Français</option>
-                            <option value="Science">Science</option>
-                            <option value="SVT">SVT</option>
-                            <option value="Anglais">Anglais</option>
-                            <option value="Latin">Latin</option>
-                            <option value="Sport">Sport</option>
+                            <option value="1">Histoire</option>
+                            <option value="2">Math</option>
+                            <option value="3">Français</option>
+                            <option value="4">Science</option>
+                            <option value="5">SVT</option>
+                            <option value="6">Anglais</option>
+                            <option value="7">Latin</option>
+                            <option value="8">Sport</option>
+                        </select>
+                    </div>
+
+                    <div class="d-flex flex-column d-none" id="classes">
+                        <label for="class">Classe :</label>
+                        <div class="error"><?= $testError = array_key_exists('class', $stockError) ? $stockError['class']:'';?></div>
+                        <select name="class" id="class"
+                            <?= $required = $requiredInput['class'] == true? 'required':'' ; ?>
+                            <?= $classError = array_key_exists('class', $stockError)? 'class="inputError"':'';?>>
+                            <option value="" selected></option>
+                            <option value="1">6ème</option>
+                            <option value="2">5ème</option>
+                            <option value="3">4ème</option>
+                            <option value="4">3ème</option>
                         </select>
                     </div>
                     

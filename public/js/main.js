@@ -11,6 +11,10 @@ let mailInput = document.getElementById("mail");
 let rankInput = document.getElementById("rank");
 let subjectBloc = document.getElementById("subjectBloc");
 let subjectInput = document.getElementById("subject");
+let classesInput = document.getElementById("class");
+let classesBloc = document.getElementById("classes");
+
+
 
 //Ajout des eventlistener pour vérifier les champs
 lastnameInput.addEventListener('keyup', (event) => {
@@ -53,7 +57,7 @@ mailInput.addEventListener('keyup', (event) => {
 });
 
 rankInput.addEventListener('change', (event) => {
-    if (rankInput.value == "teacher") {
+    if (rankInput.value == '3') {
         subjectBloc.classList.remove("d-none");
         subjectInput.setAttribute("required", "");
     } else {
@@ -62,5 +66,16 @@ rankInput.addEventListener('change', (event) => {
         }
 
         subjectInput.removeAttribute("required", "");
+    }
+
+    if (rankInput.value == '1') {
+        classesBloc.classList.remove("d-none");
+        classesInput.setAttribute("required", "");
+    } else {
+        if (!classesBloc.classList.contains("d-none")) {
+            classesBloc.classList.add("d-none");
+        }
+
+        classesInput.removeAttribute("required", "");
     }
 });

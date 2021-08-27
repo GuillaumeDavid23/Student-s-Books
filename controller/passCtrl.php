@@ -5,14 +5,18 @@
     }
     require(dirname(__FILE__).'/../model/model.php');
 
+    require_once(dirname(__FILE__).'/../model/bdd.php');
+    require_once(dirname(__FILE__).'/../model/user.php');
+    require_once(dirname(__FILE__).'/../public/config/config.php');
+
     //Déclaration des variables
     $error = '';
     $stockError = [];
     $errorInForm = true;
 
-    
+    var_dump($_SESSION);
      //Fonction de validation des données
-    function valid_data($index, $data)
+    function valid_data($data)
     {
         $data = trim($data);
         $data = stripslashes($data);
@@ -24,7 +28,7 @@
     if($_SERVER['REQUEST_METHOD'] == "POST"){
         //Correction et validation de toutes les données
             foreach ($_POST as $key => $value) {
-                $_POST[$key] = valid_data($key,$value);
+                $_POST[$key] = valid_data($value);
             }
             if(!empty($_POST['inputPass'])){
                 $firstPass = $_POST['inputPass'];
@@ -46,21 +50,23 @@
                     //MOT DE PASSE OK
                     $mail = $_SESSION['mail'];
                     $ctrlPass = password_hash($ctrlPass, PASSWORD_BCRYPT);
-                    $bdd = new BDD();
-                    $pdo = $bdd->bddConnect();
-                    $request = $bdd->selectAll($pdo, "users");
-                    while ($data = $request->fetch(PDO::FETCH_ASSOC)){
-                        if ($data['mail'] == $_SESSION["mail"]){
-                            $sql = "UPDATE users SET changePass = '0', password = '$ctrlPass' WHERE mail = '$mail' ";
-                            $pdo->query($sql);
+                    $users = new User();
+                    $dataArray = $users->SelectAll();
+                    
+                    foreach ($dataArray as $data)
+                    {
+                        if ($data['id'] == $_SESSION["id"]){
+                            $changePass = 0;
+                            $id = $_SESSION['id'];
+                            $mail = $_SESSION['mail'];
+                            $users = new User($id,$_SESSION['firstname'], $_SESSION['lastname'], $_SESSION['birthdate'],$mail,$ctrlPass,$changePass);
+                            $test = $users->Modify();
                             $_SESSION["password"] = $ctrlPass;
-                            $_SESSION['changePass'] = 0;
+                            $_SESSION['changePass'] = $changePass;
                             header('Location: /index.php');
+                            exit;
                         }
                     }
-                }
-                else{
-                    echo "NO";
                 }
             }   
             

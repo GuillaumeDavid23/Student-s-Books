@@ -26,6 +26,11 @@
             return $sql;
         }
 
+        public function select($pdo, $column, $table, $addSql)
+        {  
+            $sql = $pdo->query("SELECT ".$column." FROM ".$table.' '.$addSql);
+            return $sql;
+        }
         public function addNote($pdo, $notationDate, $matter, $notationName, $notationInput, $class, $student, $teacher )
         {   
             $sql = $pdo->prepare("INSERT INTO `notation`(`date`, `matter`, `name`, `notation`, `class`, `lastname`, `teacher`) 

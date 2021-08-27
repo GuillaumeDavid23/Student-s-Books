@@ -5,13 +5,21 @@ if(empty($_SESSION['rank'])){
     header('Location: ../controller/connectCtrl.php');
 }
 
-if($_SESSION['rank'] == "teacher"){
+if($_SESSION['rank'] == "3"){
     $matter = $_SESSION['subject'];
-    $teacher = $_SESSION['lastname'];
+    $teacher = $_SESSION['id'];
 }
-
+// var_dump($_POST);
+// die;
 //Connexion BDD
 require_once(dirname(__FILE__).'/../model/model.php');
+
+require_once(dirname(__FILE__).'/../model/bdd.php');
+require_once(dirname(__FILE__).'/../model/user.php');
+require_once(dirname(__FILE__).'/../model/marks.php');
+require_once(dirname(__FILE__).'/../public/config/config.php');
+
+
 $bdd = new BDD();
 $pdo = $bdd->bddConnect();
 //Variables
@@ -88,26 +96,34 @@ $pdo = $bdd->bddConnect();
         }
         
         if(!$testForm){
-            $bdd->addNote($pdo, $notationDate, $matter, $notationName, $notationInput, $class, $student, $teacher);
-            header('Refresh:0');
+            $marks = new Mark("", $notationDate, $notationInput, $notationName, $student, $teacher);
+            $code = $marks->Add();
+            //header('Refresh:0');
         }
     }
     
-    $request = $bdd->selectAll($pdo, "notation");
+    $marks = new Mark();
+    $marksArray = $marks->SelectAll();
 
     $dataArray = [];
 
-    while ($data = $request->fetch(PDO::FETCH_ASSOC)){
+    foreach ($marksArray as $data){
+        $users = new User($data['id_users_teacher_marks']);
+        $matter = $users->SelectOne('matters');
+        $data['matter'] = $matter->matter;
+        if($_SESSION['rank'] == "1"){
+            if($data['id_users'] == $_SESSION['id']){
+                array_push($dataArray, $data);
+            }
+        }
+        elseif($_SESSION['rank'] == "3"){
+            if($data['id_users_teacher_marks'] == $_SESSION['id']){
+                array_push($dataArray, $data);
+            }
+        }
         
-        if($_SESSION['rank'] == "student"){
-            if($data['lastname'] == $_SESSION['lastname']){
-                array_push($dataArray, $data);
-            }
-        }
-        elseif($_SESSION['rank'] == "teacher"){
-            if($data['teacher'] == $_SESSION['lastname']){
-                array_push($dataArray, $data);
-            }
-        }
     }
+
+    $users = new User();
+    $dataUsers = $users->SelectAll();
 include(dirname(__FILE__).'/../view/note.php');

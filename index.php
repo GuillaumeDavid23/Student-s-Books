@@ -1,5 +1,4 @@
-<?php 
-    
+<?php
     session_start();
     if(empty($_SESSION['rank'])){
         header('Location: controller/connectCtrl.php');
@@ -7,8 +6,13 @@
     setlocale (LC_TIME, 'fr_FR.utf8','fra'); 
     //Connexion BDD
     require_once(dirname(__FILE__).'/model/model.php');
-    $bdd = new BDD();
-    $pdo = $bdd->bddConnect();
+    require_once(dirname(__FILE__).'/model/bdd.php');
+    require_once(dirname(__FILE__).'/model/user.php');
+    require_once(dirname(__FILE__).'/public/config/config.php');
+    $users = new User();
+    $dataArrayNote = [];
+    $dataArrayEdt = [];
+    
     
     if($_SERVER['REQUEST_METHOD'] == "POST"){
         $object = $_POST['object'];
@@ -16,33 +20,30 @@
         mail('guillaume.david744@orange.fr', "$object", "$prob");
     }
 
-    $request = $bdd->selectAll($pdo, "notation");
+    $noteArray = $users->SelectAll('marks');
+    $edtArray = $users->SelectAll('schedule');
+    $jour = array(null, "Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi");
 
-    $dataArray = [];
-
-    while ($data = $request->fetch(PDO::FETCH_ASSOC)){
+    foreach ($noteArray as $note){
         
-        if($_SESSION['rank'] == "student"){
-            if($data['lastname'] == $_SESSION['lastname']){
-                array_push($dataArray, $data);
+        if($_SESSION['rank'] == "1"){
+            if($note['id_users'] == $_SESSION['id']){
+                array_push($dataArrayNote, $note);
             }
         }
-        elseif($_SESSION['rank'] == "teacher"){
-            if($data['teacher'] == $_SESSION['lastname']){
-                array_push($dataArray, $data);
+        elseif($_SESSION['rank'] == "3"){
+            if($note['id_users_teacher_marks'] == $_SESSION['id']){
+                array_push($dataArrayNote, $note);
             }
         }
     }
     
-    $request = $bdd->selectAll($pdo, "edt");
-    $dataArrayEdt = [];
-
-    while ($data = $request->fetch(PDO::FETCH_ASSOC)){
-        array_push($dataArrayEdt, $data);
+    foreach ($edtArray as $edt){
+        array_push($dataArrayEdt, $edt);
     }
-    $jour = array(null, "Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi");
+
     foreach ($dataArrayEdt as $key => $currentArray) {
-    $rdv[$currentArray['day']][$currentArray['hour']] = $currentArray['matter']. '<br> Salle '. $currentArray['room'];
+        $rdv[$currentArray['day']][$currentArray['hour']] = $currentArray['matter']. '<br> Salle '. $currentArray['room'];
     }
     $time = time();
     $currentDay = ucfirst(strftime('%A', $time));
@@ -125,7 +126,9 @@
             <div class="ms-4 w-100 d-flex align-items-center justify-content-center">
                 <h1>Tableau de bord</h1>
             </div>
-
+            <div class="align-self-end">
+                <a href="controller/profilCtrl.php" class="link-warning">Bonjour <?= $_SESSION['lastname'] ?></a> 
+            </div>
             <div class="logoBloc">
                 <img src="public/img/LOGO SOLO.png" class="ms-3 h-100" alt="">
             </div>
@@ -138,8 +141,8 @@
                             <h2>Notes</h2>
                         </a>
                         
-                        <?php foreach ($dataArray as $key => $currentArray) {
-                                if($currentArray['lastname'] == $_SESSION['lastname']){
+                        <?php foreach ($dataArrayNote as $key => $currentArray) {
+                                if($currentArray['id'] == $_SESSION['id']){
                                 ?>
                                 <div class="noteEl d-flex w-100 mb-2 bg-egg">
                                     <div class="notationBloc">
@@ -160,22 +163,26 @@
                         
                         <div id="homeworkBloc">
                             <?php 
-                            $sql = "SELECT * FROM assignment";
-                            $request = $pdo->query($sql);
-                            while ($data = $request->fetch(PDO::FETCH_ASSOC)){ 
-                                $save = explode("-", $data['date']);
+                            $users = new User();
+                            $dataArrayHw = $users->SelectAll('assignements');
+                            foreach ($dataArrayHw as $data){ 
+                                $save = explode("-", $data['end_date']);
                                 $year = $save[0];
                                 $month = $save[1];
                                 $day = $save[2];
-                                $month = strftime('%h', strtotime("$day-$month-$year"))
+                                $month = strftime('%h', strtotime("$day-$month-$year"));
+                                $users = new User($data['id_users']);
+                                $teacher = $users->SelectOne();
+                                $users = new User($teacher->id_matters);
+                                $matters = $users->SelectOne('matters');
                             ?>
                             <div class="hwEl d-flex w-100 mb-2">
                                 <div class="hwDateBloc h-100">
                                     <div id="hwDate" class="text-center fw-bold text-white subInfo"><?= $day ?> <br> <?= $month ?></div>
                                 </div>
                                 <div class="ps-1 w-100 bg-egg">
-                                    <div id="hwMatter" class="fw-bold"><?= $data['subject'] ?> - <?= $data['name'] ?></div>
-                                    <div id="hwProf" class="prof">Mme/Mr <?= $data['teacherName']?></div>
+                                    <div id="hwMatter" class="fw-bold"><?= $matters->matter ?> - <?= $data['assignement'] ?></div>
+                                    <div id="hwProf" class="prof">Mme/Mr <?= $teacher->lastname?></div>
                                 </div>
                             </div>
                             <?php } ?>

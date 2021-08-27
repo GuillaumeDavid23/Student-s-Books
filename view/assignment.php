@@ -35,20 +35,25 @@
             <div class="col-10 col-lg-4 resumeBloc h-100 mb-4">
             
                 <h2>A rendre</h2>
+
                 <?php foreach ($dataArray as $key => $currentArray) {
-                        $save = explode("-", $currentArray['date']);
+                        $save = explode("-", $currentArray[$key]['end_date']);
                         $year = $save[0];
                         $month = $save[1];
                         $day = $save[2];
-                        $month = strftime('%h', strtotime("$day-$month-$year"))
-                    ?>
+                        $month = strftime('%h', strtotime("$day-$month-$year"));
+                        $users = new User($currentArray[$key]['id_users']);
+                        $teacher = $users->SelectOne();
+                        $users = new User($teacher->id_matters);
+                        $matters = $users->SelectOne('matters');
+                ?>
                     <div class="hwEl d-flex w-100 mb-2">
                         <div class="hwDateBloc h-100">
                             <div id="hwDate" class="text-center fw-bold text-white subInfo"><?= $day ?> <br> <?= $month ?></div>
                         </div>
                         <div class="ps-1 w-100 bg-egg">
-                            <div id="hwMatter" class="fw-bold"><?= $currentArray['subject'] ?> - <?= $currentArray['name'] ?></div>
-                            <div id="hwProf" class="prof">Mme/Mr <?= $currentArray['teacherName']?></div>
+                            <div id="hwMatter" class="fw-bold"><?= $matters->matter ?> - <?= $currentArray[$key]['assignement'] ?></div>
+                            <div id="hwProf" class="prof">Mme/Mr <?= $teacher->lastname?></div>
                         </div>
                     </div>
                 <?php } ?>
@@ -58,8 +63,8 @@
                 <h2>Rendu</h2>
                 <div class="text-center text-white">Aucun devoirs rendu pour le moment.</div>
             </div>
-            <?php if($_SESSION['rank'] == 'teacher'){ ?>
-            <div>
+            <?php if($_SESSION['rank'] == '3'){ ?>
+            <div class="d-flex justify-content-center">
                 <form action="<?= htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="POST">
                     <label for="assignmentDate">Date de rendu du devoirs</label>
                     <input type="date" name="assignmentDate" id="assignmentDate">
@@ -70,10 +75,10 @@
                     <label for="class">Classe</label>
                     <select name="class" id="class">
                         <option value=""></option>
-                        <option value="6ème">6 ème</option>
-                        <option value="5ème">5 ème</option>
-                        <option value="4ème">4 ème</option>
-                        <option value="3ème">3 ème</option>
+                        <option value="1">6 ème</option>
+                        <option value="2">5 ème</option>
+                        <option value="3">4 ème</option>
+                        <option value="4">3 ème</option>
                     </select>
 
                     <button type="submit">Ajouter le devoir</button>

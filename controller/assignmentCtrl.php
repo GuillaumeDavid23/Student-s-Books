@@ -1,5 +1,4 @@
 <?php 
-    setlocale(LC_TIME, ['fr', 'fra', 'fr_FR']);
     define("REGEX_BIRTHDAY", "^([12]\d{3}[-](0[1-9]|1[0-2])[-](0[1-9]|[12]\d|3[01]))$");
     session_start();
     // var_dump($_SESSION);
@@ -8,12 +7,17 @@
         exit();
     }else{
         $rank = $_SESSION['rank'];
-        $teacherName = $_SESSION['lastname'];
+        $id_users = $_SESSION['id'];
     }
+    
     //Connexion BDD
-    require_once(dirname(__FILE__).'/../model/model.php');
-    $bdd = new BDD();
-    $pdo = $bdd->bddConnect();
+    require_once(dirname(__FILE__).'/../model/bdd.php');
+    require_once(dirname(__FILE__).'/../model/user.php');
+    require_once(dirname(__FILE__).'/../model/assignements.php');
+    require_once(dirname(__FILE__).'/../public/config/config.php');
+
+    $assign = new Assign();
+
 
     //Variables
     $testForm = false;
@@ -81,17 +85,12 @@
         }
 
         if(!$testForm){
-            $bdd->addAssignment($pdo, $hwDate, $hwName,$teacherName, $subject,$class);
+            
+            $assign = new Assign("", $hwDate, $hwName, $class, $id_users);
+            $code = $assign->Add();
             header('Refresh:0');
         }
     }
+    $dataArray = $assign->SelectAll();
     
-    $sql = "SELECT * FROM assignment";
-    $request = $pdo->query($sql);
-    $dataArray = [];
-    while ($data = $request->fetch(PDO::FETCH_ASSOC)){
-            array_push($dataArray, $data);
-    }
     include(dirname(__FILE__).'/../view/assignment.php');
-
-    

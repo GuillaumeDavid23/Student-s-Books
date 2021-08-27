@@ -4,36 +4,41 @@
         $_SESSION = [];
         session_destroy();
         session_start();
+        var_dump($_SESSION);
     }
-    require_once(dirname(__FILE__).'/../model/model.php');
-    $bdd = new BDD();
-    //Déclaration des variables
+
+    require_once(dirname(__FILE__).'/../model/bdd.php');
+    require_once(dirname(__FILE__).'/../model/user.php');
+    require_once(dirname(__FILE__).'/../public/config/config.php');
+
     $error = '';
     $stockError = [];
     $errorInForm = true;
     $verifyMail = false;
     $verifyPass = false;
-     //Fonction de validation des données
-    function valid_data($index, $data)
-    {
-        if($index != "inputPass"){
-            $data = stripslashes($data);
-            $data = htmlspecialchars($data);
-        }
-        $data = trim($data);
-        return $data;
-    }
-
+    
     //Les données sont-elles envoyées ?
     if($_SERVER['REQUEST_METHOD'] == "POST"){
+         //Fonction de validation des données
+        function valid_data($index, $data)
+        {
+            if($index != "inputPass"){
+                $data = stripslashes($data);
+                $data = htmlspecialchars($data);
+            }
+            $data = trim($data);
+            return $data;
+        }
+        
         //Test des champs
-        if(empty($_POST['inputMail'])){
-            echo("<script>alert('VRAI')</script>");
+        if(empty($_POST['inputMail']))
+        {
             $error = 'mail vide !';
             $stockError['mail'] = $error;
             $errorInForm = true;
 
-            if(empty($_POST['inputPass'])){
+            if(empty($_POST['inputPass']))
+            {
                 $errorInForm = true;
                 $error = 'Mot de passe vide !';
                 $stockError['password'] = $error;
@@ -51,7 +56,8 @@
                 $stockError['password'] = $error;
             }
         }
-        else{
+        else
+        {
             //Affichage des données
             $errorInForm = false;
 
@@ -61,7 +67,6 @@
             }
 
             //Assignation des données dans des variables
-            
             filter_input(INPUT_POST, 'inputMail', FILTER_SANITIZE_EMAIL);
 
             if(!filter_input(INPUT_POST, 'inputMail', FILTER_VALIDATE_EMAIL) && !empty($_POST['inputMail'])){
@@ -75,23 +80,28 @@
             $password = $_POST['inputPass'];
 
             if(!$errorInForm){
-                $pdo = $bdd->bddConnect();
-                $sql = "SELECT * FROM users";
-                $request = $pdo->query($sql);
-                while ($data = $request->fetch(PDO::FETCH_ASSOC)){
+                $users = new User();
+                $dataArray = $users->SelectAll();
+                
+                foreach ($dataArray as $data){
                     if ($data['mail'] == $mail){
                         $verifyMail = true;
                     }
                     if(password_verify($password, $data["password"])){
                         $verifyPass = true;
                     }
-                    if ($data['mail'] == $mail && password_verify($password, $data["password"])){
-                        session_start();
-                        $_SESSION["rank"] = $data['rank'];
-                        $_SESSION["subject"] = $data['subject'];
+                    if ($verifyMail && $verifyPass){
+                        $_SESSION["id"] = $data['id'];
+                        
                         $_SESSION["mail"] = $data['mail'];
                         $_SESSION["lastname"] = $data['lastname'];
+                        $_SESSION["firstname"] = $data['firstname'];
+                        $_SESSION["birthdate"] = $data['birthdate'];
                         $_SESSION["password"] = $data['password'];
+                        $_SESSION["rank"] = $data['id_ranks'];
+                        $_SESSION["subject"] = $data['id_matters']; //CONDITION A FAIRE
+                        $_SESSION["classes"] = $data['id_classes'];//CONDITION A FAIRE
+
                         if ($data['changePass']){
                             $_SESSION['changePass'] = $data['changePass'];
                             header("Location: passCtrl.php");
@@ -102,14 +112,14 @@
                             exit;
                         }
                     }
-                    elseif($verifyMail == false && $verifyPass == false ){
+                    elseif(!$verifyMail && !$verifyPass){
                         $error = "<br>Mail non trouvé";
                         $stockError['mail'] = $error;
                         $error = "<br>Le mot de passe ne correspond pas";
                         $stockError['password'] = $error;
                         $errorInForm = true;
                     }
-                    elseif($verifyPass == false){
+                    elseif(!$verifyPass){
                         $error = "<br>Le mot de passe ne correspond pas";
                         $stockError['password'] = $error;
                         $errorInForm = true;

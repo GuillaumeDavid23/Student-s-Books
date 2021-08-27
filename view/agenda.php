@@ -1,9 +1,3 @@
-<?php 
-    session_start();
-    if(empty($_SESSION['rank'])){
-        header('Location: ../controller/connectCtrl.php');
-    }
-?>
 <!DOCTYPE html>
 <html lang="fr">
 
@@ -69,10 +63,16 @@
         </table>
     </div>
     <div class="add">
+    <?php if($code) :?>
+        <div class="text-center h5 alert <?= $messageCode[$code]['type'] ?>">
+            <?= $messageCode[$code]['msg'] ?>
+        </div>
+    <?php endif ?>
     <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="POST" class="text-center">
+        <input type="hidden" name="month" value="<?= $_POST['month'] ?? '' ?>">
         <label for="dateEvent">Date de l'événement</label>
         <input type="date" name="dateEvent" id="dateEvent" class="form-control" required>
-         <label for="eventName">Nom de l'événement</label>
+        <label for="eventName">Nom de l'événement</label>
         <input type="text" name="eventName" id="eventName" class="form-control" required>
         <button type="submit" id="addEvent" class="btn btn-info">Ajouter l'évènement</button>
     </form>

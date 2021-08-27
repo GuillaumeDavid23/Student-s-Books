@@ -42,8 +42,8 @@
                     <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne"
                         data-bs-parent="#accordionFlushExample">
                         <div class="accordion-body">
-                            <?php foreach ($dataArray as $key => $currentArray) {
-                                if($currentArray['matter'] == "Math"){
+                            <?php foreach ($dataArray as $currentArray) {
+                                if($currentArray['matter'] == "Mathématique"){
                                 ?>
                                 <div class="noteEl d-flex w-100 mb-2 bg-egg">
                                     <div class="notationBloc">
@@ -242,12 +242,12 @@
                                 ?>
                                 <div class="noteEl d-flex w-100 mb-2 bg-egg">
                                     <div class="notationBloc">
-                                        <div id="notation" class="d-flex justify-content-center align-items-center"><?=$currentArray['notation']?></div>
+                                        <div id="notation" class="d-flex justify-content-center align-items-center"><?=$currentArray['note']?></div>
                                         <div id="onTwenty" class="d-flex justify-content-center align-items-center">20</div>
                                     </div>
                                     <div class="ps-1 bg-egg" id="infoNote">
-                                        <div id="noteMatter" class="fw-bold"><?= $currentArray['matter'].' - '.$currentArray['name'] ?></div>
-                                        <div id="noteProf" class="prof">Mr/Mme <?=$currentArray['teacher']?></div>
+                                        <div id="noteMatter" class="fw-bold"><?= $currentArray['matter'].' - '.$currentArray['notation'] ?></div>
+                                        <div id="noteProf" class="prof">Mr/Mme <?=$currentArray['id_users_teacher_marks']?></div>
                                     </div>
                                 </div>
                             <?php }} ?>
@@ -313,7 +313,7 @@
             </div>
         </div>
         <div class="row justify-content-center mb-lg-5 mt-5">
-            <?php if($_SESSION['rank'] == 'teacher'){ ?>
+            <?php if($_SESSION['rank'] == '3'){ ?>
             <div class="col-8 col-md-6 col-lg-5 col-xl-4">
                 <form action="<?= htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="POST" class="w-100 d-flex flex-column justify-content-center">
                     <label for="notationDate">Date de la note</label>
@@ -328,28 +328,23 @@
                     <label for="class">Classe</label>
                     <select name="class" id="class">
                         <option value=""></option>
-                        <option value="6ème">6 ème</option>
-                        <option value="5ème">5 ème</option>
-                        <option value="4ème">4 ème</option>
-                        <option value="3ème">3 ème</option>
+                        <option value="1">6 ème</option>
+                        <option value="2">5 ème</option>
+                        <option value="3">4 ème</option>
+                        <option value="4">3 ème</option>
                     </select>
 
                     <label for="student">élève :</label>
                     <select name="student" id="student">
                         <option value=""></option>
-                    <?php 
-
-                    $sql = "SELECT * FROM users";
-                    $request = $pdo->query($sql);
+                    <?php   
                     
-                    // $request = $bdd->selectAll($pdo, 'users');
-                    
-                    while ($data = $request->fetch(PDO::FETCH_ASSOC)){ 
-                        if($data['rank'] == 'student'){?>
-                            <option value="<?=$data['lastname']?>"><?=$data['firstname'].' '.$data['lastname'] ?></option>
+                    foreach ($dataUsers as $data){ 
+                        if($data['id_ranks'] == '1'){?>
+                            <option value="<?=$data['id']?>"><?=$data['firstname'].' '.$data['lastname'] ?></option>
                     <?php }}?>
                     </select>
-                    <button type="submit">Ajouter la note</button>
+                    <button class="btn btn-info mt-3" type="submit">Ajouter la note</button>
                 </form>
             </div>
             <?php } ?>
