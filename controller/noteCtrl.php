@@ -9,21 +9,27 @@ if($_SESSION['rank'] == "3"){
     $matter = $_SESSION['subject'];
     $teacher = $_SESSION['id'];
 }
-// var_dump($_POST);
-// die;
-//Connexion BDD
-require_once(dirname(__FILE__).'/../model/model.php');
 
 require_once(dirname(__FILE__).'/../model/bdd.php');
 require_once(dirname(__FILE__).'/../model/user.php');
 require_once(dirname(__FILE__).'/../model/marks.php');
 require_once(dirname(__FILE__).'/../public/config/config.php');
-
-
-$bdd = new BDD();
-$pdo = $bdd->bddConnect();
 //Variables
-    $testForm = false;
+$testForm = false;
+$arrayOfMatters = [
+    'Mathématique',
+    'Histoire-Géographie',
+    'Français',
+    'Sciences de la vie et de la terre',
+    'Sciences Physiques',
+    'Technologie',
+    'Musique',
+    'Anglais',
+    'Art Plastiques',
+    'Latin',
+    'Education physique et sportive'
+];
+
     //Fonction de validation des données
     function valid_data($index, $data)
     {
@@ -126,4 +132,6 @@ $pdo = $bdd->bddConnect();
 
     $users = new User();
     $dataUsers = $users->SelectAll();
-include(dirname(__FILE__).'/../view/note.php');
+include dirname(__FILE__).'/../view/templates/header.php';
+include dirname(__FILE__).'/../view/note.php';
+include dirname(__FILE__).'/../view/templates/footer.php';

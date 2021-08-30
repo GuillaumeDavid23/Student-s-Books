@@ -4,7 +4,6 @@
         $_SESSION = [];
         session_destroy();
         session_start();
-    
     }
 
     require_once(dirname(__FILE__).'/../model/bdd.php');
@@ -126,6 +125,8 @@
     }
 
     if(empty($_SESSION["rank"])){
-            require(dirname(__FILE__).'/../view/connect.php');
+            include dirname(__FILE__).'/../view/templates/header.php';
+            include dirname(__FILE__).'/../view/connect.php';
+            include dirname(__FILE__).'/../view/templates/footer.php';
     }
 

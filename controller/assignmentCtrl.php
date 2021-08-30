@@ -17,7 +17,8 @@
     require_once(dirname(__FILE__).'/../public/config/config.php');
 
     $assign = new Assign();
-
+    $title = 'Page des devoirs : voir ou rendre un devoir';
+    $meta = '';
 
     //Variables
     $testForm = false;
@@ -92,5 +93,7 @@
         }
     }
     $dataArray = $assign->SelectAll();
-    
+
+    include dirname(__FILE__).'/../view/templates/header.php';
     include(dirname(__FILE__).'/../view/assignment.php');
+    include dirname(__FILE__).'/../view/templates/footer.php';

@@ -75,5 +75,8 @@
                     echo "<div class='error'>$value</div>";
                 }
             }
-            require(dirname(__FILE__).'/../view/changePass.php');
+            include dirname(__FILE__).'/../view/templates/header.php';
+            include(dirname(__FILE__).'/../view/changePass.php');
+            include dirname(__FILE__).'/../view/templates/footer.php';
+
     } 

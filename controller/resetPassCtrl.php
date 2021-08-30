@@ -136,6 +136,9 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
 
     
 }
+include dirname(__FILE__).'/../view/templates/header.php';
+include dirname(__FILE__).'/../view/resetPass.php';
+include dirname(__FILE__).'/../view/templates/footer.php';
 
-    require(dirname(__FILE__).'/../view/resetPass.php');
+
 

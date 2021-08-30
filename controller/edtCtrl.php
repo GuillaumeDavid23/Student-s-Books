@@ -1,4 +1,8 @@
 <?php
+session_start();
+if(empty($_SESSION['rank'])){
+    header('Location: ../controller/connectCtrl.php');
+}
 setlocale (LC_TIME, 'fr_FR.utf8','fra'); 
 //Connexion BDD
 require_once(dirname(__FILE__).'/../model/model.php');
@@ -17,4 +21,6 @@ $rdv[$currentArray['day']][$currentArray['hour']] = $currentArray['matter']. '<b
 $time = time();
 $currentDay = ucfirst(strftime('%A', $time));
 
-include("../view/edt.php");
+include dirname(__FILE__).'/../view/templates/header.php';
+include(dirname(__FILE__).'/../view/edt.php');
+include dirname(__FILE__).'/../view/templates/footer.php';

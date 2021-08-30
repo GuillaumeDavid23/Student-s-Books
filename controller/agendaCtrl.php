@@ -145,6 +145,7 @@
             echo $arrayOfMonthForTable[$month].' '.$year;
         }
     }
-    
-    include(dirname(__FILE__).'/../view/agenda.php');
+
+    include dirname(__FILE__).'/../view/templates/header.php';
+    include dirname(__FILE__).'/../view/agenda.php';
 ?>

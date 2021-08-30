@@ -95,7 +95,7 @@
                 </a>
             </div>
             <div class="col-4 mt-5  offset-1 navBtnMob">
-                <a href="../view/absences.php" class="d-flex justify-content-center">
+                <a href="../controller/absencesCtrl.php" class="d-flex justify-content-center">
                     <img src="public/img/absences.webp" class="img-fluid w-75"  alt="">
                 </a>
             </div>
@@ -216,7 +216,7 @@
                         </div>
                     </div>
                     <div class="offset-1 col-3 h-100 resumeBloc">
-                        <a href="../view/absences.php" class="text-decoration-none">
+                        <a href="../controller/absencesCtrl.php" class="text-decoration-none">
                             <h2>Absences</h2>
                         </a>
                         
@@ -269,8 +269,7 @@
 
 
         <footer class="d-flex flex-column justify-content-center align-items-center">
-
-            <a href="../view/mention.php" class="text-white " data-bs-toggle="modal" data-bs-target="#exampleModal">
+            <a href="#" class="text-white " data-bs-toggle="modal" data-bs-target="#exampleModal">
                 Un problème ?
             </a>
             <a href="../view/mention.php" class="text-white">Mentions légales</a>

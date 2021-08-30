@@ -202,4 +202,7 @@ if(!$testForm){
     
     
 }
-include (dirname(__FILE__).'/../view/register.php');
+include dirname(__FILE__).'/../view/templates/header.php';
+include dirname(__FILE__).'/../view/register.php';
+include dirname(__FILE__).'/../view/templates/footer.php';
+
