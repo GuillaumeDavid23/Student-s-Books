@@ -36,7 +36,7 @@ $requiredInput = [
 //Les données sont-elles envoyées ?
 if($_SERVER['REQUEST_METHOD'] == "POST"){
     //Fonction de validation des données
-    function valid_data($index, $data)
+    function valid_data($data)
     {
         $data = trim($data);
         $data = stripslashes($data);
@@ -75,7 +75,7 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
 
     //Correction et validation de toutes les données
     foreach ($_POST as $key => $value) {
-        $_POST[$key] = valid_data($key,$value);
+        $_POST[$key] = valid_data($value);
     }
 
     //Assignation des données dans des variables

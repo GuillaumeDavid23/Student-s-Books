@@ -13,8 +13,6 @@
     $error = '';
     $stockError = [];
     $errorInForm = true;
-
-    var_dump($_SESSION);
      //Fonction de validation des données
     function valid_data($data)
     {

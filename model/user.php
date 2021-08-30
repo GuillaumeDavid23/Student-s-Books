@@ -126,9 +126,30 @@ class User {
             
             try {
                 $result = $sql->execute();
-                return $result;
+                return 3;
             } catch (PDOException $ex) {
-                return $ex;
+                return 4;
+            }
+        }
+        /**
+         * Modifier un patient
+         * @param int $id
+         * @return true|11
+         */
+        public function ResetPass($token)
+        {
+            $sql = $this->pdo->prepare("UPDATE `users`
+            SET `resetPass` = :resetPass,
+            WHERE `users`.`mail` = :mail");
+            
+            $sql->bindParam(':resetPass', $token, PDO::PARAM_STR);
+            $sql->bindParam(':mail', $this->mail, PDO::PARAM_STR);
+            
+            try {
+                $result = $sql->execute();
+                return 3;
+            } catch (PDOException $ex) {
+                return 4;
             }
         }
         /**

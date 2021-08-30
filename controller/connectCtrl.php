@@ -4,7 +4,7 @@
         $_SESSION = [];
         session_destroy();
         session_start();
-        var_dump($_SESSION);
+    
     }
 
     require_once(dirname(__FILE__).'/../model/bdd.php');
@@ -86,13 +86,17 @@
                 foreach ($dataArray as $data){
                     if ($data['mail'] == $mail){
                         $verifyMail = true;
+                    }else{
+                        $verifyMail = false;
                     }
                     if(password_verify($password, $data["password"])){
                         $verifyPass = true;
+                    }else{
+                        $verifyPass = false;
                     }
+
                     if ($verifyMail && $verifyPass){
                         $_SESSION["id"] = $data['id'];
-                        
                         $_SESSION["mail"] = $data['mail'];
                         $_SESSION["lastname"] = $data['lastname'];
                         $_SESSION["firstname"] = $data['firstname'];
@@ -101,7 +105,6 @@
                         $_SESSION["rank"] = $data['id_ranks'];
                         $_SESSION["subject"] = $data['id_matters']; //CONDITION A FAIRE
                         $_SESSION["classes"] = $data['id_classes'];//CONDITION A FAIRE
-
                         if ($data['changePass']){
                             $_SESSION['changePass'] = $data['changePass'];
                             header("Location: passCtrl.php");
@@ -112,20 +115,8 @@
                             exit;
                         }
                     }
-                    elseif(!$verifyMail && !$verifyPass){
-                        $error = "<br>Mail non trouvé";
-                        $stockError['mail'] = $error;
-                        $error = "<br>Le mot de passe ne correspond pas";
-                        $stockError['password'] = $error;
-                        $errorInForm = true;
-                    }
-                    elseif(!$verifyPass){
-                        $error = "<br>Le mot de passe ne correspond pas";
-                        $stockError['password'] = $error;
-                        $errorInForm = true;
-                    }
                     else{
-                        $error = "<br>Mail non trouvé";
+                        $error = "<br>Mail ou mot de passe incorrect !";
                         $stockError['mail'] = $error;
                         $errorInForm = true;
                     }

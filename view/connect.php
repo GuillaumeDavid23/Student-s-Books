@@ -34,7 +34,7 @@
                         <label for="inputPass">Mot de passe : </label>
                         <?= $testError = array_key_exists('password', $stockError) ? $stockError['password']:'';?>
                         <input type="password" name="inputPass" id="inputPass" <?= $classError = array_key_exists('password', $stockError) ? 'class="inputError"':'';?>>
-                        
+                        <a href="../controller/resetPassCtrl.php" class="link link-warning">Mot de passe oublié ?</a>
                         <button type="submit" class="m-2 rounded-circle" id="btnSubmit"><img src="../public/img/arrow.png" alt="" class="img-fluid" width="40"></button>
                     </form>
                 </fieldset>
