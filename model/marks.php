@@ -86,7 +86,7 @@ class Mark{
          */
         public function SelectAll()
         {
-            $sql= ("SELECT * FROM `marks`");
+            $sql= ("SELECT date, note, notation, id_users, id_users_teacher_marks FROM `marks`");
             try {
                 $sql = $this->pdo->query($sql);
                 $result = $sql->fetchAll(PDO::FETCH_ASSOC);

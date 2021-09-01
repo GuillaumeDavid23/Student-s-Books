@@ -8,6 +8,8 @@
     require_once(dirname(__FILE__).'/model/model.php');
     require_once(dirname(__FILE__).'/model/bdd.php');
     require_once(dirname(__FILE__).'/model/user.php');
+    require_once(dirname(__FILE__).'/model/marks.php');
+    require_once(dirname(__FILE__).'/model/matters.php');
     require_once(dirname(__FILE__).'/public/config/config.php');
     $users = new User();
     $dataArrayNote = [];
@@ -19,10 +21,9 @@
         $prob = $_POST['prob'];
         mail('guillaume.david744@orange.fr', "$object", "$prob");
     }
+    $marks = new Mark();
+    $noteArray = $marks->SelectAll('marks');
 
-    $noteArray = $users->SelectAll('marks');
-    $edtArray = $users->SelectAll('schedule');
-    $jour = array(null, "Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi");
 
     foreach ($noteArray as $note){
         
@@ -37,14 +38,7 @@
             }
         }
     }
-    
-    foreach ($edtArray as $edt){
-        array_push($dataArrayEdt, $edt);
-    }
 
-    foreach ($dataArrayEdt as $key => $currentArray) {
-        $rdv[$currentArray['day']][$currentArray['hour']] = $currentArray['matter']. '<br> Salle '. $currentArray['room'];
-    }
     $time = time();
     $currentDay = ucfirst(strftime('%A', $time));
 ?>
@@ -127,7 +121,7 @@
                 <h1>Tableau de bord</h1>
             </div>
             <div class="align-self-end">
-                <a href="controller/profilCtrl.php" class="link-warning">Bonjour <?= $_SESSION['lastname'] ?></a> 
+                <a href="controller/profilCtrl.php" class="link-warning fw-bold">Bonjour <?= $_SESSION['lastname'] ?></a> 
             </div>
             <div class="logoBloc">
                 <img src="public/img/LOGO SOLO.png" class="ms-3 h-100" alt="">
@@ -141,20 +135,30 @@
                             <h2>Notes</h2>
                         </a>
                         
-                        <?php foreach ($dataArrayNote as $key => $currentArray) {
-                                if($currentArray['id'] == $_SESSION['id']){
+                        <?php 
+                            foreach ($dataArrayNote as $key => $currentArray) {
+                                if($currentArray['id_users'] == $_SESSION['id']){
+                                    $teachers = new User($currentArray['id_users_teacher_marks']);
+                                    $teacher = $teachers->SelectOne();
+                                    $matters = new Matter($teacher->id_matters);
+                                    $matter = $matters->SelectOne();
                                 ?>
                                 <div class="noteEl d-flex w-100 mb-2 bg-egg">
                                     <div class="notationBloc">
-                                        <div id="notation" class="d-flex justify-content-center align-items-center"><?=$currentArray['notation']?></div>
+                                        <div id="notation" class="d-flex justify-content-center align-items-center"><?=$currentArray['note']?></div>
                                         <div id="onTwenty" class="d-flex justify-content-center align-items-center">20</div>
                                     </div>
                                     <div class="ps-1 bg-egg" id="infoNote">
-                                        <div id="noteMatter" class="fw-bold"><?= $currentArray['matter'].' - '.$currentArray['name'] ?></div>
-                                        <div id="noteProf" class="prof">Mr/Mme <?=$currentArray['teacher']?></div>
+                                        <div id="noteMatter" class="fw-bold"><?= $matter.' - '.$currentArray['notation'] ?></div>
+                                        <div id="noteProf" class="prof">Mr/Mme <?=$teacher?></div>
                                     </div>
                                 </div>
-                            <?php }} ?>
+                        <?php 
+                            }}
+                            if($_SESSION['rank'] == 3 || $_SESSION['rank'] == 4){
+                                echo "<p class='text-center text-danger fw-bold'>Vous êtes professeur ou administrateur, la prévisualition des notes n'est donc pas possible.</p>";
+                            }
+                        ?>
                     </div>
                     <div class="offset-1 col-5 h-100 resumeBloc">
                         <a href="../controller/assignmentCtrl.php" class="text-decoration-none">

@@ -41,8 +41,8 @@
                 <div class="text-center text-white">Aucun devoirs rendu pour le moment.</div>
             </div>
             <?php if($_SESSION['rank'] == '3'){ ?>
-            <div class="d-flex justify-content-center">
-                <form action="<?= htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="POST">
+            <div class="mt-5">
+                <form action="<?= htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="POST" class="d-flex flex-column align-items-center">
                     <label for="assignmentDate">Date de rendu du devoirs</label>
                     <input type="date" name="assignmentDate" id="assignmentDate">
 
@@ -58,7 +58,7 @@
                         <option value="4">3 ème</option>
                     </select>
 
-                    <button type="submit">Ajouter le devoir</button>
+                    <button type="submit" class="mt-3">Ajouter le devoir</button>
                 </form>
             </div>
             <?php } ?>

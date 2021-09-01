@@ -72,11 +72,11 @@
                             $_SESSION["password"] = $ctrlPass;
                             $_SESSION['changePass'] = $changePass;
                         }
-                        // else{
-                        //     //une erreur est survenue reconnexion demandée
-                        //     header("Location: /controller/connectCtrl.php");
-                        //     exit;
-                        // }
+                        else{
+                            //une erreur est survenue reconnexion demandée
+                            header("Location: /controller/connectCtrl.php");
+                            exit;
+                        }
                     }
                 }
             }   

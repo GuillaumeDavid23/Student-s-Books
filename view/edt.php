@@ -22,8 +22,8 @@
                                 echo "<td class=\"time\">".$heure."</td>";
                             }
                             echo "<td>";
-                            if(isset($rdv[$jour[$i+1]][$heure])) {
-                                echo $rdv[$jour[$i+1]][$heure];
+                            if(isset($rdv1[$jour[$i+1]][$heure])) {
+                                echo $rdv1[$jour[$i+1]][$heure];
                             }
                             echo "</td>";
                         }
@@ -31,4 +31,53 @@
                     }
                 ?>
             </table>
+            <?php if($_SESSION['rank'] == 4){ ?>
+                <div class="mt-5">
+                    <h4 class="text-center">Ajouter ou modifier l'emploi du temps</h4>
+                    <form action="<?= htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="POST" class="d-flex flex-column align-items-center">
+                        <div class="mt-3">
+                            <label for="days">Choisir le jour :</label>
+                            <select name="days" id="days">
+                                <option value=""></option>
+                                <?php 
+                                    for($x = 1; $x < 6; $x++) //Affichage des nom des jour
+                                        echo "<option value='$jour[$x]'>".$jour[$x]."</option>"; 
+                                ?>
+                            </select>
+                        </div>
+                        <div class="mt-3">
+                            <label for="slots">Crénaux :</label>
+                            <select name="slots" id="slots">
+                                <option value=""></option>
+                                <?php 
+                                    foreach($slotsArray as $value) //Affichage des nom des jour
+                                        echo "<option value='".$value['id']."'>".$value['slot']."</option>"; 
+                                ?>
+                            </select>
+                        </div>
+                        <div class="mt-3">
+                            <label for="slots">Matière :</label>
+                            <select name="matters" id="matters">
+                                <option value=""></option>
+                                <?php 
+                                    foreach($mattersArray as $value) //Affichage des nom des jour
+                                        echo "<option value='".$value['id']."'>".$value['matter']."</option>"; 
+                                ?>
+                            </select>
+                        </div>
+                        <div class="mt-3">
+                            <label for="slots">Salle :</label>
+                            <select name="rooms" id="rooms">
+                                <option value=""></option>
+                                <?php 
+                                    foreach($roomsArray as $value) //Affichage des nom des jour
+                                        echo "<option value='".$value['id']."'>".$value['room']."</option>"; 
+                                ?>
+                            </select>
+                        </div>
+
+                        <button class="mt-3" type="submit">Ajouter</button>
+                    </form>
+                </div>
+            <?php } ?>
         </div>
