@@ -136,6 +136,10 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
 
     
 }
+$title = "Reinitialisation du mot de passe";
+$meta = "";
+$head = "Reinitialisation du mot de passe";
+
 include dirname(__FILE__).'/../view/templates/header.php';
 include dirname(__FILE__).'/../view/resetPass.php';
 include dirname(__FILE__).'/../view/templates/footer.php';

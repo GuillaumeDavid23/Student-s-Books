@@ -202,6 +202,9 @@ if(!$testForm){
     
     
 }
+$title = "Enregistrement d'un nouvel utilisateur";
+$meta = "";
+$head = "Inscription d'utilisateur";
 include dirname(__FILE__).'/../view/templates/header.php';
 include dirname(__FILE__).'/../view/register.php';
 include dirname(__FILE__).'/../view/templates/footer.php';

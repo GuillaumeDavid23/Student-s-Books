@@ -75,6 +75,10 @@
                     echo "<div class='error'>$value</div>";
                 }
             }
+            $title = "Changement du mot de passe Students'Books";
+            $meta = "";
+            $head = "Changer votre mot de passe";
+
             include dirname(__FILE__).'/../view/templates/header.php';
             include(dirname(__FILE__).'/../view/changePass.php');
             include dirname(__FILE__).'/../view/templates/footer.php';

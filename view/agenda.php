@@ -1,16 +1,9 @@
-
-
-    <div class="container-fluid h-100 p-0">
-        <header class="w-100 mb-5 d-flex align-items-center">
-            <img src="../public/img/LOGO SOLO.png" class="ms-3 h-100" alt="">
-            <a href="../index.php" class="h-100 d-flex align-items-center">
-                <img src="../public/img/backward.png" class="img-fluid" width="50" alt="">
-            </a>
-            <h1 class="ms-4 align-self-center text-center m-0">Agenda</h1>
-        </header>
-
-        <div class="row justify-content-center align-items-center">
-         <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="POST" id="formToCreateCalendar">
+    
+    <div class="row justify-content-center align-items-center">
+        <?php if (empty($_POST['month'])) {
+            echo "<h2 style:'color:red;'>Veuillez renseigner votre date !</h2>";
+        } ?>
+        <form action="<?= htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="POST" id="formToCreateCalendar">
             <label for="date">Choisissez un mois et une année</label>
             <input type="month" name="month" id="date" required>
         </form>
@@ -47,7 +40,7 @@
             <?= $messageCode[$code]['msg'] ?>
         </div>
     <?php endif ?>
-    <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="POST" class="text-center">
+    <form action="<?= htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="POST" class="text-center">
         <input type="hidden" name="month" value="<?= $_POST['month'] ?? '' ?>">
         <label for="dateEvent">Date de l'événement</label>
         <input type="date" name="dateEvent" id="dateEvent" class="form-control" required>

@@ -132,6 +132,9 @@ $arrayOfMatters = [
 
     $users = new User();
     $dataUsers = $users->SelectAll();
+    $title = "Page des notes : Students'Books";
+    $meta = "";
+    $head = "Notes";
 include dirname(__FILE__).'/../view/templates/header.php';
 include dirname(__FILE__).'/../view/note.php';
 include dirname(__FILE__).'/../view/templates/footer.php';

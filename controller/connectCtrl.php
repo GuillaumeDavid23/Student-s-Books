@@ -15,7 +15,7 @@
     $errorInForm = true;
     $verifyMail = false;
     $verifyPass = false;
-    
+
     //Les données sont-elles envoyées ?
     if($_SERVER['REQUEST_METHOD'] == "POST"){
          //Fonction de validation des données
@@ -125,6 +125,9 @@
     }
 
     if(empty($_SESSION["rank"])){
+            $title = "Page de connexion : Students'Books";
+            $meta = "";
+            $head = "Connexion";
             include dirname(__FILE__).'/../view/templates/header.php';
             include dirname(__FILE__).'/../view/connect.php';
             include dirname(__FILE__).'/../view/templates/footer.php';

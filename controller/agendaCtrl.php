@@ -22,13 +22,11 @@
     
     $empty = false;//Test du select
     if (empty($_POST['month'])) {
-        echo "<h2 style:'color:red;'>Veuillez renseigner votre date !</h2>";
         $empty = true;
     }
     else{
         function CreateCalendar()
         {
-            
             //Déclaration des variables
             $arrayTestOfMonth = array('January','February', 'March', "April", 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'); //Tableau de test des mois
             $date = $_POST['month']; //Récupération des valeurs du select dans un array
@@ -145,7 +143,9 @@
             echo $arrayOfMonthForTable[$month].' '.$year;
         }
     }
-
+    $title = "Agenda Students'Books";
+    $meta = "";
+    $head = "Agenda";
     include dirname(__FILE__).'/../view/templates/header.php';
     include dirname(__FILE__).'/../view/agenda.php';
 ?>

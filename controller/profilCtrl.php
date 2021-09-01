@@ -82,6 +82,10 @@
             }   
             
     }
+$title = "Profil Students'Books";
+$meta = "";
+$head = "Votre profil";
+
 include dirname(__FILE__).'/../view/templates/header.php';
 include dirname(__FILE__)."/../view/profile.php";
 include dirname(__FILE__).'/../view/templates/footer.php';
