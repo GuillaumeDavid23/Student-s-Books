@@ -13,17 +13,17 @@
                         </a>
                     </div>
                     <div class="col-1 navBtnMob">
-                        <a href="absences.php">
+                        <a href="../controller/absencesCtrl.php">
                             <img src="../public/img/absences.webp" class="img-fluid" width="100"  alt="Page des absences" title="Vers les absences..">
                         </a>
                     </div>
                     <!-- <div class="col-1 navBtnMob ">
-                        <a href="agenda.php">
+                        <a href="../controller/agendaCtrl.php">
                             <img src="../public/img/agenda.png" class="img-fluid" width="100" alt="Page de l\'agenda" title="Vers les agenda..">
                         </a>
                     </div> -->
                     <div class="col-1 navBtnMob">
-                        <a href="tchat.php">
+                        <a href="../controller/tchatCtrl.php">
                             <img src="../public/img/message.png" class="img-fluid" width="100" alt="Page de la messagerie" title="Vers la messagerie..">
                         </a>
                     </div>
@@ -42,17 +42,17 @@
                             </a>
                         </div>
                         <div class="col-1 navBtnMob">
-                            <a href="absences.php">
+                            <a href="../controller/absencesCtrl.php">
                                 <img src="../public/img/absences.webp" class="img-fluid" width="100"  alt="Page des absences" title="Vers les absences..">
                             </a>
                         </div>
                         <!-- <div class="col-1 navBtnMob ">
-                            <a href="agenda.php">
+                            <a href="../controller/agendaCtrl.php">
                                 <img src="../public/img/agenda.png" class="img-fluid" width="100" alt="Page de l\'agenda" title="Vers les agenda..">
                             </a>
                         </div> -->
                         <div class="col-1 navBtnMob">
-                            <a href="tchat.php">
+                            <a href="../controller/tchatCtrl.php">
                                 <img src="../public/img/message.png" class="img-fluid" width="100" alt="Page de la messagerie" title="Vers la messagerie..">
                             </a>
                         </div>
@@ -76,12 +76,12 @@
                             </a>
                         </div>
                         <!-- <div class="col-1 navBtnMob ">
-                            <a href="agenda.php">
+                            <a href="../controller/agendaCtrl.php">
                                 <img src="../public/img/agenda.png" class="img-fluid" width="100" alt="Page de l\'agenda" title="Vers les agenda..">
                             </a>
                         </div> -->
                         <div class="col-1 navBtnMob">
-                            <a href="tchat.php">
+                            <a href="../controller/tchatCtrl.php">
                                 <img src="../public/img/message.png" class="img-fluid" width="100" alt="Page de la messagerie" title="Vers la messagerie..">
                             </a>
                         </div>
@@ -100,17 +100,17 @@
                             </a>
                         </div>
                         <div class="col-1 navBtnMob">
-                            <a href="edt.php">
+                            <a href="../controller/edtCtrl.php">
                                 <img src="../public/img/Edt.webp" class="img-fluid" width="100" alt="Page emploi du temps" title="Vers l\'emploi du temps..">
                             </a>
                         </div>
                         <!-- <div class="col-1 navBtnMob ">
-                            <a href="agenda.php">
+                            <a href="../controller/agendaCtrl.php">
                                 <img src="../public/img/agenda.png" class="img-fluid" width="100" alt="Page de l\'agenda" title="Vers les agenda..">
                             </a>
                         </div> -->
                         <div class="col-1 navBtnMob">
-                            <a href="tchat.php">
+                            <a href="../controller/tchatCtrl.php">
                                 <img src="../public/img/message.png" class="img-fluid" width="100" alt="Page de la messagerie" title="Vers la messagerie..">
                             </a>
                         </div>

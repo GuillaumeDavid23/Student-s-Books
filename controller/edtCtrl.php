@@ -57,6 +57,7 @@ $roomsArray = $rooms->SelectAll();
 $title = "Emploi du temps Student's Book's";
 $meta = "";
 $head = "Emploi du temps";
+
 include dirname(__FILE__).'/../view/templates/header.php';
 include(dirname(__FILE__).'/../view/edt.php');
 include dirname(__FILE__).'/../view/templates/footer.php';

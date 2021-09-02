@@ -201,7 +201,6 @@
                         
                         <div id="edtBloc" class="text-center text-white">
                             <?php foreach ($dataArrayEdt as $key => $currentArray) {
-
                                 if($currentArray['day'] == $currentDay ){ ?>
                                     <div class="edtEl d-flex w-100 mb-2">
                                         <div class="edtDateBloc h-100">
