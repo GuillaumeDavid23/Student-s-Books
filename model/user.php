@@ -159,16 +159,15 @@ class User {
          * @param string $addSql Paramètres SQL (optionnel)
          * @return array|false Retourne un tableau associatif ou False
          */
-        public function SelectAll($table = 'users')
+        public function SelectAll()
         {
-            $sql= ("SELECT * FROM".' `'.$table.'`;');
-            
+            $sql = "SELECT * FROM `users` ";
             try {
                 $stmt = $this->pdo->query($sql);
                 $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
                 return $result;
             } catch (PDOException $ex) {
-                return 11;
+                return 404;
             }
         }
 
@@ -181,10 +180,10 @@ class User {
          */
         public function SelectOne($table = 'users')
         {
-            $sql= ("SELECT * FROM".' `'.$table.'` '."WHERE `id` = $this->id");
+            $sql = ("SELECT * FROM".' `'.$table.'` '."WHERE `id` = $this->id");
             try {
-                $sql = $this->pdo->query($sql);
-                $result = $sql->fetch(PDO::FETCH_OBJ);
+                $stmt = $this->pdo->query($sql);
+                $result = $stmt->fetch(PDO::FETCH_OBJ);
                 return $result;
             } catch (PDOException $ex) {
                 return 11;

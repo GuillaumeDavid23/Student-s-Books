@@ -75,7 +75,7 @@
                                 <option value="<?=$data['id']?>"><?=$data['firstname'].' '.$data['lastname'] ?></option>
                         <?php }}?>
                         </select>
-                        <button class="btn btn-info mt-3" type="submit">Ajouter la note</button>
+                        <button class="btn btn-outline-success mt-3" type="submit">Ajouter la note</button>
                     </form>
                 </div>
             </div>

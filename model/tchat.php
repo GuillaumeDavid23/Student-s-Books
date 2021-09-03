@@ -29,9 +29,20 @@ class Chat {
          * @param string $addSql Paramètres SQL (optionnel)
          * @return array|false Retourne un tableau associatif ou False
          */
-        public function SelectAll($filtre = "")
+        public function SelectAll($lastId = "")
         {
-            $sql= ("SELECT `messages`.`id`,`message`,`messages`.`create_at`,`id_users`, `users`.`firstname`, `users`.`lastname`  FROM `messages` INNER JOIN `users` ON `users`.`id` = `messages`.`id_users`".' '.$filtre.' '." ORDER BY `create_at` DESC LIMIT 5;");
+            $filtre = ($lastId > 0) ? " WHERE `messages`.`id` > $lastId" : '';
+            $sql= ("SELECT `messages`.`id`,
+            `message`,
+            `messages`.`create_at`,
+            `id_users`,
+            `users`.`firstname`,
+            `users`.`lastname`  
+            FROM `messages` 
+            INNER JOIN `users` 
+            ON `users`.`id` = `messages`.`id_users`".' '.$filtre.' '." 
+            ORDER BY `create_at` 
+            DESC LIMIT 10;");
             
             try {
                 $stmt = $this->pdo->query($sql);

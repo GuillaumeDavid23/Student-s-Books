@@ -15,7 +15,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
         $donneesJson = file_get_contents('php://input');
         // On convertit les données
         $donnees = json_decode($donneesJson);
-
+        
         // On vérifie qu'il y a un message
         if(isset($donnees->message) && !empty($donnees->message)){
             // Le message n'est pas vide
@@ -24,6 +24,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
             $chat = new Chat("", strip_tags($donnees->message), $_SESSION['id']);
             $code = $chat->Add();
             if($code == 3){
+                $_SESSION['derniere_action'] = time(); // mise à jour de la variable
                 http_response_code(201);
                 echo json_encode(['message' => 'Message enregistré']);
             }else{

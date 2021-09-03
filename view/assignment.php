@@ -49,7 +49,7 @@
                         <option value="4">3 ème</option>
                     </select>
 
-                    <button type="submit" class="mt-3">Ajouter le devoir</button>
+                    <button type="submit" class="mt-3 btn btn-outline-success">Ajouter le devoir</button>
                 </form>
             </div>
             <?php } ?>

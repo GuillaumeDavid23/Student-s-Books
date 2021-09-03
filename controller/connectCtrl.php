@@ -95,6 +95,7 @@
                     }
 
                     if ($verifyMail && $verifyPass){
+                        $_SESSION['derniere_action'] = time(); // mise à jour de la variable
                         $_SESSION["id"] = $data['id'];
                         $_SESSION["mail"] = $data['mail'];
                         $_SESSION["lastname"] = $data['lastname'];

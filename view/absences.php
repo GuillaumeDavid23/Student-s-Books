@@ -1,25 +1,26 @@
 <?php if($_SESSION['rank'] == 3){ ?>
     <div class="row h-50 justify-content-center justify-content-lg-evenly mb-5">
-        <div class="col-10 col-lg-6 resumeBloc h-100 d-flex flex-column align-items ">
-            <h3 class="mb-3">Ajouter une absence</h3>  
-            <form action="<?= htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post" class="">
-                <div>
+        <div class="col-10 col-lg-6 resumeBloc h-100 d-flex flex-column align-items text-white">
+            
+            <form action="<?= htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post" class="d-flex flex-column h-100 align-items-center justify-content-center">
+                <h3 class="mb-3 text-decoration-underline">Ajouter une absence</h3>      
+                <div class="mb-3">
                     <label for="start_date">Date de début d'absence : </label>
                     <input type="date" name="start_date" id="start_date">
                 </div>
-                <div>
+                <div class="mb-3">
                     <label for="end_date">Heure de début d'absence : </label>
                     <input type="time" name="start_hour" id="start_hour">
                 </div>
-                <div>
+                <div class="mb-3">
                     <label for="end_date">Date de fin d'absence : </label>
                     <input type="date" name="end_date" id="end_date">
                 </div>
-                <div>
+                <div class="mb-3">
                     <label for="end_date">Heure de fin d'absence : </label>
                     <input type="time" name="end_hour" id="end_hour">
                 </div>
-                <div>
+                <div class="mb-3">
                     <label for="end_date">Heure de fin d'absence : </label>
                     <input type="time" name="end_hour" id="end_hour">
                 </div>

@@ -3,11 +3,13 @@
     if(empty($_SESSION['rank'])){
         header('Location: controller/connectCtrl.php');
     }
-    setlocale (LC_TIME, 'fr_FR.utf8','fra'); 
+    setlocale (LC_TIME, 'fr_FR.utf8','fra');
+    
     //Connexion BDD
     require_once(dirname(__FILE__).'/model/model.php');
     require_once(dirname(__FILE__).'/model/bdd.php');
     require_once(dirname(__FILE__).'/model/user.php');
+    require_once(dirname(__FILE__).'/model/assignements.php');
     require_once(dirname(__FILE__).'/model/marks.php');
     require_once(dirname(__FILE__).'/model/matters.php');
     require_once(dirname(__FILE__).'/public/config/config.php');
@@ -121,7 +123,7 @@
                 <h1>Tableau de bord</h1>
             </div>
             <div class="align-self-end">
-                <a href="controller/profilCtrl.php" class="link-warning fw-bold">Bonjour <?= $_SESSION['lastname'] ?></a> 
+                <a href="controller/profilCtrl.php" class="btn btn-outline-dark fw-bold">Profil</a> 
             </div>
             <div class="logoBloc">
                 <img src="public/img/LOGO SOLO.png" class="ms-3 h-100" alt="">
@@ -156,7 +158,7 @@
                         <?php 
                             }}
                             if($_SESSION['rank'] == 3 || $_SESSION['rank'] == 4){
-                                echo "<p class='text-center text-danger fw-bold'>Vous êtes professeur ou administrateur, la prévisualition des notes n'est donc pas possible.</p>";
+                                echo "<p class='text-center text-white text-decoration-underline fw-bold'>Vous êtes professeur ou administrateur, la prévisualition des notes n'est donc pas possible.</p>";
                             }
                         ?>
                     </div>
@@ -167,8 +169,8 @@
                         
                         <div id="homeworkBloc">
                             <?php 
-                            $users = new User();
-                            $dataArrayHw = $users->SelectAll('assignements');
+                            $users = new Assign();
+                            $dataArrayHw = $users->SelectAll();
                             foreach ($dataArrayHw as $data){ 
                                 $save = explode("-", $data['end_date']);
                                 $year = $save[0];
@@ -242,18 +244,14 @@
             <div class="row h-100 w-25">
                 <div class="col-12 h-100 p-0" id="chatBloc">
                     <div id="topChat" class="d-flex">
-                        <div id="chatContact" class="d-flex flex-column align-items-center pt-1">
-                            <img src="public/img/avatar.jpg" class="img-fluid rounded-circle" width="50" alt="Avatar">
-                            <div class="rounded-circle bg-light mt-2 d-flex justify-content-md-center align-items-center"
-                                style="width: 50px; height: 50px;">PROF</div>
-                            <div class="rounded-circle bg-light mt-2 d-flex justify-content-md-center align-items-center"
-                                style="width: 50px; height: 50px;">Thom..</div>
-                            <div class="rounded-circle bg-light mt-2 d-flex justify-content-md-center align-items-center"
-                                style="width: 50px; height: 50px;">Classe</div>
-                            <div class="rounded-circle bg-light mt-2 d-flex justify-content-md-center align-items-center"
-                                style="width: 50px; height: 50px;">Autres</div>
+                        <div id="chatContact" class="d-flex flex-column align-items-center pt-1 p-2">
+                            <strong class="text-center">En ligne :</strong> 
+                            <div id="connected" class="rounded-circle bg-light text-success mt-2 d-flex justify-content-center align-items-center"
+                                style="width: 50px; height: 50px;">
+                                <!-- Code js ICI -->
+                            </div>
                         </div>
-                        <div id="chatMessage">
+                        <div id="chatMessage" class="text-white overflow-scroll d-flex flex-column w-100" data-id="<?= $_SESSION['id'] ?>">
 
                         </div>
                     </div>
@@ -301,8 +299,11 @@
             </div>
         </div>
     </div>
-
+    
+    <script src="../public/js/chat.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <!-- Bootstrap JavaScript -->
+    
     <script src="public/js/bootstrap/bootstrap.js"></script>
 </body>
 

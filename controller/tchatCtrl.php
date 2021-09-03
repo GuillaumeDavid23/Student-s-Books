@@ -3,6 +3,9 @@ session_start();
 if(empty($_SESSION['rank'])){
         header('Location: ../controller/connectCtrl.php');
 } 
+setlocale (LC_TIME, 'fr_FR.utf8','fra'); 
+date_default_timezone_set('Europe/Paris');
+
 require_once(dirname(__FILE__).'/../model/bdd.php');
 require_once(dirname(__FILE__).'/../model/tchat.php');
 require_once(dirname(__FILE__).'/../model/user.php');

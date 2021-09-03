@@ -12,6 +12,7 @@ window.onload = () => {
     valid.addEventListener("click", ajoutMessage)
 
     setInterval(chargeMessages, 1000)
+    setInterval(alive, 5000)
 }
 
 function verifEntree(e) {
@@ -55,7 +56,7 @@ function ajoutMessage() {
         }
 
         // On ouvre la requête
-        xmlhttp.open("POST", "ajax/addMessage.php");
+        xmlhttp.open("POST", "/controller/ajax/addMessage.php");
 
         // On envoie la requête avec les données
         xmlhttp.send(donneesJson);
@@ -75,25 +76,34 @@ function chargeMessages() {
                 // On convertit le JSON en objet JS
 
                 let messages = JSON.parse(this.response)
-
                 // On retourne la liste pour traiter l'ID le plus élevé en dernier
                 messages.reverse();
 
                 // On récupère la div "discussion"
                 let discussion = $("#chatMessage")
 
+                let addClass = "";
+                let bloc = document.getElementById('chatMessage');
+                let idUser = bloc.dataset.id
+
                 // On boucle sur les messages
                 messages.map((message) => {
                     // On transforme la date en objet JS
                     let dateMessage = new Date(message.create_at)
 
+                    if (idUser == message.id_users) {
+                        addClass = "subInfo align-self-end"
+                    } else {
+                        addClass = "meChat align-self-start"
+                    }
                     // On ajoute le message avant le contenu déjà en place
                     discussion.append(
-                        `<p>${message.firstname} a écrit le ${dateMessage.toLocaleString()} : <br> ${message.message}</p>`
+                        `<p class="m-1 mb-3 p-1 rounded ${addClass}">${message.firstname} a écrit le ${dateMessage.toLocaleString()} : <br> ${message.message}</p>`
                     )
 
                     // On met à jour l'id
                     lastId = message.id
+                    bloc.scrollTo(0, bloc.scrollHeight);
                 })
 
 
@@ -107,7 +117,26 @@ function chargeMessages() {
     }
 
     // On ouvre la requête
-    xmlhttp.open("GET", "ajax/loadMessages.php?lastId=" + lastId)
+    xmlhttp.open("GET", "/controller/ajax/loadMessages.php?lastId=" + lastId)
+    // On envoie la requête
+    xmlhttp.send()
+}
+
+function alive() {
+    // On charge les messages en Ajax
+    // On instancie XMLHttpRequest
+    let xmlhttp = new XMLHttpRequest()
+    xmlhttp.onreadystatechange = function () {
+        if (this.readyState == 4) {
+            let onlines = JSON.parse(this.response)
+            let contact = document.getElementById('connected')
+            contact.innerHTML = onlines.nb
+            // On ajoute le nombre de personne connecté
+
+        }
+    }
+    // On ouvre la requête
+    xmlhttp.open("GET", "/controller/ajax/connectChat.php")
     // On envoie la requête
     xmlhttp.send()
 }
