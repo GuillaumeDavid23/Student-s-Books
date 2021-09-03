@@ -7,7 +7,7 @@ caption
     font-family: Arial, Times, "Times New Roman", serif;
     font-weight: bold;
     font-size: 1.2em;
-    color: #009900;
+    color: #476686;
     margin-bottom: 20px;
     /* Pour éviter que le titre ne soit trop collé au tableau en-dessous */
 }
@@ -18,7 +18,7 @@ table
     {
     margin: auto;
     /* Centre le tableau */
-    border: 4px outset green;
+    border: 4px outset #476686;
     /* Bordure du tableau avec effet 3D (outset) */
     border-collapse: collapse;
     /* Colle les bordures entre elles */
@@ -29,11 +29,11 @@ th
 
 /* Les cellules d'en-tête */
     {
-    background-color: #006600;
+    background-color: #476686;
     color: white;
     font-size: 1.1em;
     font-family: Arial, "Arial Black", Times, "Times New Roman", serif;
-    border: 1px solid red;
+    border: 1px solid black;
 }
 
 td

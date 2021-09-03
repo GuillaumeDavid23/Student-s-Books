@@ -1,7 +1,8 @@
 <?php 
-    define("REGEX_BIRTHDAY", "^([12]\d{3}[-](0[1-9]|1[0-2])[-](0[1-9]|[12]\d|3[01]))$");
+    //Démarrage de la session
     session_start();
-    // var_dump($_SESSION);
+
+    //TEST de la session utilisateur
     if(empty($_SESSION['rank'])){
         header('Location: ../controller/connectCtrl.php');
         exit();
@@ -10,27 +11,30 @@
         $id_users = $_SESSION['id'];
     }
     
-    //Connexion BDD
+    //Inclusion des fichiers 
     require_once(dirname(__FILE__).'/../model/bdd.php');
     require_once(dirname(__FILE__).'/../model/user.php');
     require_once(dirname(__FILE__).'/../model/assignements.php');
     require_once(dirname(__FILE__).'/../public/config/config.php');
 
+    //Déclaration des variables et constantes
+    define("REGEX_BIRTHDAY", "^([12]\d{3}[-](0[1-9]|1[0-2])[-](0[1-9]|[12]\d|3[01]))$");
     $assign = new Assign();
-
-
-    //Variables
     $testForm = false;
-    //Fonction de validation des données
-    function valid_data($index, $data)
-    {
-        $data = trim($data);
-        $data = stripslashes($data);
-        $data = htmlspecialchars($data);
-        return $data;
-    }
+
+
 
     if($_SERVER['REQUEST_METHOD'] == "POST"){
+
+        //Fonction de validation des données
+        function valid_data($index, $data)
+        {
+            $data = trim($data);
+            $data = stripslashes($data);
+            $data = htmlspecialchars($data);
+            return $data;
+        }
+
         foreach ($_POST as $key => $value) {
             $_POST[$key] = valid_data($key,$value);
         }
@@ -70,7 +74,7 @@
         if(!preg_match("/".REGEX_BIRTHDAY."/", $hwDate)){
                 $error = "ERREUR Le format de la date du devoir est incorrect (Format : YYYY-MM-JJ)";
                 $stockError['assignmentDate'] = $error;
-                $testForm = true;//Affichage du formulaire si vide
+                $testForm = true;//Affichage du formulaire si format invalide
         }else{
             $save = explode("-", $hwDate);
             $year = $save[0];
@@ -85,18 +89,20 @@
         }
 
         if(!$testForm){
-            
+            //Ajout dans la base
             $assign = new Assign("", $hwDate, $hwName, $class, $id_users);
             $code = $assign->Add();
             header('Refresh:0');
         }
     }
 
+    //Préparation de l'affichage
     $dataArray = $assign->SelectAll();
-
     $title = 'Page des devoirs : voir ou rendre un devoir';
     $meta = '';
     $head = "Devoirs";
+
+    //Inclusion des vues
     include dirname(__FILE__).'/../view/templates/header.php';
     include(dirname(__FILE__).'/../view/assignment.php');
     include dirname(__FILE__).'/../view/templates/footer.php';

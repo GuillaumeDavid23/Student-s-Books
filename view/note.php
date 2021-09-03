@@ -43,9 +43,11 @@
 
         <!-- Ajout de note -->
         <?php if($_SESSION['rank'] == '3'){ ?>
+
             <div class="row justify-content-center mb-lg-5 mt-5">
-                <h3 class="text-center">Ajouter une note</h3>
-                <div class="col-8 col-md-6 col-lg-5 col-xl-4">
+                
+                <div class="col-8 resumeBloc text-white col-md-6 col-lg-5 col-xl-4 p-3">
+                    <h3 class="text-center">Ajouter une note</h3>
                     <form action="<?= htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="POST" class="w-100 d-flex flex-column justify-content-center">
                         <label for="notationDate">Date de la note</label>
                         <input type="date" name="notationDate" id="notationDate">
