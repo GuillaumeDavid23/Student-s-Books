@@ -94,6 +94,20 @@ class Online {
             }
         }
 
+        public function checkOffline($timestamp)
+        {
+            $sql= ("SELECT last_action, id_users_online FROM `online` WHERE last_action < :timestamp");
+            
+            try {
+                $stmt = $this->pdo->prepare($sql);
+                $stmt->bindValue(':timestamp', $timestamp);
+                $stmt->execute();
+                $result = $stmt->fetchAll();
+                return $result;
+            } catch (PDOException $ex) {
+                return 11;
+            }
+        }
         /**
          * Sélection de colonne dans une ou plusieurs table.
          * @param string $column Colonnes choisies

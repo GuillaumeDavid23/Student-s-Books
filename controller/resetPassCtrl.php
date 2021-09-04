@@ -104,9 +104,11 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
                     $errorInForm = true;
             }
             if(!$errorInForm){
+                //On va checrher le tableau des utilisateurs
                 $users = new User();
                 $dataArray = $users->SelectAll();
                 $verifyMail = false;
+
                 foreach ($dataArray as $data){
                     if(!$verifyMail){
                         var_dump($verifyMail);

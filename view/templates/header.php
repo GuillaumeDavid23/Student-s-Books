@@ -13,8 +13,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
     <!-- Bootstrap CSS -->
-    <!-- <link rel="stylesheet" href="/public/css/bootstrap/bootstrap.css"> -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+    <link rel="stylesheet" href="/public/css/bootstrap/bootstrap.css">
     <!-- CSS -->
     <link rel="stylesheet" href="/public/css/dash.css">
     <?php 

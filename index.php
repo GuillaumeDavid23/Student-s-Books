@@ -101,7 +101,7 @@
                 </a>
             </div> -->
             <div class="col-4 mt-5 offset-1 navBtnMob">
-                <a href="../view/tchat.php" class="d-flex justify-content-center">
+                <a href="../controller/tchatCtrl.php" class="d-flex justify-content-center">
                     <img src="public/img/message.png" class="img-fluid w-75"  alt="">
                 </a>
             </div>
@@ -241,8 +241,11 @@
                 </div>
 
             </div>
-            <div class="row h-100 w-25">
-                <div class="col-12 h-100 p-0" id="chatBloc">
+            <div class="row h-100">
+                <div class="col-12 h-100 p-0 resumeBloc" id="chatBloc">
+                    <a href="../controller/tchatCtrl.php" class="text-decoration-none">
+                        <h2>Tchat</h2>
+                    </a>
                     <div id="topChat" class="d-flex">
                         <div id="chatContact" class="d-flex flex-column align-items-center pt-1 p-2">
                             <strong class="text-center">En ligne :</strong> 

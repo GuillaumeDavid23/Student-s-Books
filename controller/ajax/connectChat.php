@@ -21,7 +21,7 @@ if(isset($_SESSION['derniere_action']) && $_SESSION['derniere_action'] > time() 
     $messagesJson = json_encode($messages);
 
     // On envoie
-    echo $messagesJson;
+    //echo $messagesJson;
 } else {
     $online = new Online("", $_SESSION['id']);
     $online->Delete();
@@ -31,6 +31,10 @@ if(isset($_SESSION['derniere_action']) && $_SESSION['derniere_action'] > time() 
     $messagesJson = json_encode($messages);
 
     // On envoie
-    echo $messagesJson;
+    //echo $messagesJson;
     /* soit derniere action vielle de plus de 5 minutes => deconexion */
 }
+
+$online = new Online();
+$test = $online->checkOffline(time() - 300);
+var_dump($test);
