@@ -2,21 +2,20 @@
     session_start();    
     if(empty($_SESSION['rank'])){
         header('Location: ../controller/connectCtrl.php');
+        exit;
     }
     
-    require_once(dirname(__FILE__).'/../model/bdd.php');
     require_once(dirname(__FILE__).'/../model/user.php');
+    require_once(dirname(__FILE__).'/../model/matters.php');
+    require_once(dirname(__FILE__).'/../model/ranks.php');
     require_once(dirname(__FILE__).'/../public/config/config.php');
     
     //Déclaration des variables
-    $users = new User($_SESSION['id']);
-    $user = $users->SelectOne();
+    $user = User::SelectOne($_SESSION['id']);
 
-    $users = new User($user->id_matters);
-    $matter = $users->SelectOne('matters');
+    $matter = Matter::SelectOne($user->id_matters);
 
-    $users = new User($user->id_ranks);
-    $rank = $users->SelectOne('ranks');
+    $rank = Rank::SelectOne($user->id_ranks);
 
     $error = '';
     $stockError = [];
@@ -58,11 +57,10 @@
                     $mail = $_SESSION['mail'];
                     $ctrlPass = password_hash($ctrlPass, PASSWORD_BCRYPT);
                     $_SESSION['password'] = $ctrlPass; 
-                    $users = new User();
-                    $dataArray = $users->SelectAll();
+                    $dataArray = User::SelectAll();
                     
                     foreach ($dataArray as $data)
-                    {
+                    {   
                         if ($data['id'] == $_SESSION["id"]){
                             $changePass = 0;
                             $id = $_SESSION['id'];
@@ -71,13 +69,17 @@
                             $code = $users->Modify();
                             $_SESSION["password"] = $ctrlPass;
                             $_SESSION['changePass'] = $changePass;
-                        }
-                        else{
-                            //une erreur est survenue reconnexion demandée
-                            header("Location: /controller/connectCtrl.php");
-                            exit;
+                            if($code == 3){
+                                break;
+                            }else{
+                                header('Location: /controller/connectCtrl.php');
+                                exit;
+                            }
                         }
                     }
+                }else{
+                    $code = 12;
+                    $errorInForm = true;
                 }
             }   
             

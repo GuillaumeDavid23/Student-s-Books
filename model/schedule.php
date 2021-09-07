@@ -1,4 +1,6 @@
 <?php
+require_once(dirname(__FILE__).'/../public/utils/bdd.php');
+
 class Schedule{
         private $id;
         private $day;
@@ -20,16 +22,17 @@ class Schedule{
         }
 
         public function Add()
-        {
-            $sql = $this->pdo->prepare("INSERT INTO `schedule`(`day`, `id_slots`, `id_matters`, `id_rooms`)
-            VALUES(:day, :id_slots, :id_matters, :id_rooms)");
-            $sql->bindParam(':day', $this->day);
-            $sql->bindParam(':id_slots', $this->id_slots);
-            $sql->bindParam(':id_matters', $this->id_matters);
-            $sql->bindParam(':id_rooms', $this->id_rooms);
+        {   
+            $sql = 'INSERT INTO `schedule`(`day`, `id_slots`, `id_matters`, `id_rooms`)
+            VALUES(:day, :id_slots, :id_matters, :id_rooms)';
+            $stmt = $this->pdo->prepare($sql);
+            $stmt->bindParam(':day', $this->day);
+            $stmt->bindParam(':id_slots', $this->id_slots);
+            $stmt->bindParam(':id_matters', $this->id_matters);
+            $stmt->bindParam(':id_rooms', $this->id_rooms);
             
             try {
-                $test = $sql->execute();
+                $test = $stmt->execute();
                 return 3;
             } catch (PDOException $ex) {
                 return $ex;
@@ -59,11 +62,13 @@ class Schedule{
          * @param string $addSql Paramètres SQL (optionnel)
          * @return array|false Retourne un tableau associatif ou False
          */
-        public function SelectAll()
+        public static function SelectAll()
         {
+            $pdo = SPDO::getInstance();
+
             $sql= ("SELECT `day`, `id_slots`, `id_matters`, `id_rooms` FROM `schedule`");
             try {
-                $sql = $this->pdo->query($sql);
+                $sql = $pdo->query($sql);
                 $result = $sql->fetchAll(PDO::FETCH_ASSOC);
                 return $result;
             } catch (PDOException $ex) {

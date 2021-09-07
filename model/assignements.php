@@ -1,4 +1,6 @@
 <?php
+require_once(dirname(__FILE__).'/../public/utils/bdd.php');
+
 class Assign{
         private $id;
         private $end_date;
@@ -81,11 +83,13 @@ class Assign{
          * @param string $addSql Paramètres SQL (optionnel)
          * @return array|false Retourne un tableau associatif ou False
          */
-        public function SelectAll()
+        public static function SelectAll()
         {
+            $pdo = SPDO::getInstance();
+
             $sql= ("SELECT * FROM `assignements`");
             try {
-                $sql = $this->pdo->query($sql);
+                $sql = $pdo->query($sql);
                 $result = $sql->fetchAll(PDO::FETCH_ASSOC);
                 return $result;
             } catch (PDOException $ex) {

@@ -7,7 +7,6 @@ if(empty($_SESSION['rank'])){
 } 
 
 //Inclusion des différents fichiers
-require_once(dirname(__FILE__).'/../model/bdd.php');
 require_once(dirname(__FILE__).'/../model/tchat.php');
 require_once(dirname(__FILE__).'/../model/user.php');
 require_once(dirname(__FILE__).'/../public/config/config.php');

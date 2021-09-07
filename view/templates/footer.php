@@ -17,11 +17,11 @@
                             <img src="../public/img/absences.webp" class="img-fluid" width="100"  alt="Page des absences" title="Vers les absences..">
                         </a>
                     </div>
-                    <!-- <div class="col-1 navBtnMob ">
+                    <div class="col-1 navBtnMob ">
                         <a href="../controller/agendaCtrl.php">
                             <img src="../public/img/agenda.png" class="img-fluid" width="100" alt="Page de l\'agenda" title="Vers les agenda..">
                         </a>
-                    </div> -->
+                    </div>
                     <div class="col-1 navBtnMob">
                         <a href="../controller/tchatCtrl.php">
                             <img src="../public/img/message.png" class="img-fluid" width="100" alt="Page de la messagerie" title="Vers la messagerie..">
@@ -46,11 +46,11 @@
                                 <img src="../public/img/absences.webp" class="img-fluid" width="100"  alt="Page des absences" title="Vers les absences..">
                             </a>
                         </div>
-                        <!-- <div class="col-1 navBtnMob ">
+                        <div class="col-1 navBtnMob ">
                             <a href="../controller/agendaCtrl.php">
                                 <img src="../public/img/agenda.png" class="img-fluid" width="100" alt="Page de l\'agenda" title="Vers les agenda..">
                             </a>
-                        </div> -->
+                        </div>
                         <div class="col-1 navBtnMob">
                             <a href="../controller/tchatCtrl.php">
                                 <img src="../public/img/message.png" class="img-fluid" width="100" alt="Page de la messagerie" title="Vers la messagerie..">
@@ -75,11 +75,11 @@
                                 <img src="../public/img/absences.webp" class="img-fluid" width="100"  alt="Page des absences" title="Vers les absences..">
                             </a>
                         </div>
-                        <!-- <div class="col-1 navBtnMob ">
+                        <div class="col-1 navBtnMob ">
                             <a href="../controller/agendaCtrl.php">
                                 <img src="../public/img/agenda.png" class="img-fluid" width="100" alt="Page de l\'agenda" title="Vers les agenda..">
                             </a>
-                        </div> -->
+                        </div>
                         <div class="col-1 navBtnMob">
                             <a href="../controller/tchatCtrl.php">
                                 <img src="../public/img/message.png" class="img-fluid" width="100" alt="Page de la messagerie" title="Vers la messagerie..">
@@ -104,11 +104,40 @@
                                 <img src="../public/img/Edt.webp" class="img-fluid" width="100" alt="Page emploi du temps" title="Vers l\'emploi du temps..">
                             </a>
                         </div>
-                        <!-- <div class="col-1 navBtnMob ">
+                        <div class="col-1 navBtnMob ">
                             <a href="../controller/agendaCtrl.php">
                                 <img src="../public/img/agenda.png" class="img-fluid" width="100" alt="Page de l\'agenda" title="Vers les agenda..">
                             </a>
-                        </div> -->
+                        </div>
+                        <div class="col-1 navBtnMob">
+                            <a href="../controller/tchatCtrl.php">
+                                <img src="../public/img/message.png" class="img-fluid" width="100" alt="Page de la messagerie" title="Vers la messagerie..">
+                            </a>
+                        </div>
+                    ';
+                }
+                elseif($adresse == '/controller/profilCtrl.php'){
+                    echo '
+                        <div class="col-1 navBtnMob">
+                            <a href="../controller/assignmentCtrl.php">
+                                <img src="../public/img/devoirs.webp" class="img-fluid" width="100" alt="Page des devoirs" title="Vers les devoirs..">
+                            </a>
+                        </div>
+                        <div class="col-1 navBtnMob">
+                            <a href="../controller/noteCtrl.php">
+                                <img src="../public/img/LogoNote.webp" class="img-fluid" width="100" alt="Page des devoirs" title="Vers les devoirs..">
+                            </a>
+                        </div>
+                        <div class="col-1 navBtnMob">
+                            <a href="../controller/edtCtrl.php">
+                                <img src="../public/img/Edt.webp" class="img-fluid" width="100" alt="Page emploi du temps" title="Vers l\'emploi du temps..">
+                            </a>
+                        </div>
+                        <div class="col-1 navBtnMob ">
+                            <a href="../controller/agendaCtrl.php">
+                                <img src="../public/img/agenda.png" class="img-fluid" width="100" alt="Page de l\'agenda" title="Vers les agenda..">
+                            </a>
+                        </div>
                         <div class="col-1 navBtnMob">
                             <a href="../controller/tchatCtrl.php">
                                 <img src="../public/img/message.png" class="img-fluid" width="100" alt="Page de la messagerie" title="Vers la messagerie..">
@@ -152,7 +181,15 @@
     </div>
 
     <!-- Bootstrap JavaScript -->
-    <script src="../public/js/main.js"></script>
+    <?php
+        if($adresse == '/controller/profilCtrl.php'){
+            echo '<script src="../public/js/changePass.js"></script>';
+        }
+        if($adresse == '/controller/registerCtrl.php'){
+            echo '<script src="../public/js/main.js"></script>';
+        }
+    ?>
+    
     <script src="/public/js/bootstrap/bootstrap.js"></script>
 </body>
 

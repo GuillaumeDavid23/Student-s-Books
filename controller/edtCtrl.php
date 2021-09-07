@@ -5,9 +5,6 @@ if(empty($_SESSION['rank'])){
 }
 setlocale (LC_TIME, 'fr_FR.utf8','fra'); 
 //Connexion BDD
-require_once(dirname(__FILE__).'/../model/model.php');
-
-require_once(dirname(__FILE__).'/../model/bdd.php');
 require_once(dirname(__FILE__).'/../model/user.php');
 require_once(dirname(__FILE__).'/../model/schedule.php');
 require_once(dirname(__FILE__).'/../model/slots.php');
@@ -25,8 +22,7 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
     $code = $schedule->Add();
 }
 
-$schedule = new Schedule();
-$edt = $schedule->SelectAll();
+$edt = Schedule::SelectAll();
 $jour = array(null, "Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi");
 $dataArray1 = [];
 $time = time();
@@ -37,23 +33,18 @@ foreach ($edt as $slot) {
 }
 
 foreach ($dataArray1 as $key => $currentArray) {
-    $slots = new Slot($currentArray['id_slots']);
-    $slot = $slots->SelectOne();
-
-    $matters = new Matter($currentArray['id_matters']);
-    $matter = $matters->SelectOne();
-
-    $rooms = new Room($currentArray['id_rooms']);
-    $room = $rooms->SelectOne();
+    $slot = Slot::SelectOne($currentArray['id_slots']);
+    $matter = Matter::SelectOne($currentArray['id_matters']);
+    $room = Room::SelectOne($currentArray['id_rooms']);
 
     $rdv1[$currentArray['day']][$slot->slot] = $matter->matter. '<br> Salle '.$room->room;
 }
 
 
 
-$slotsArray = $slots->SelectAll();
-$mattersArray = $matters->SelectAll();
-$roomsArray = $rooms->SelectAll();
+$slotsArray = Slot::SelectAll();
+$mattersArray = Matter::SelectAll();
+$roomsArray = Room::SelectAll();
 $title = "Emploi du temps Student's Book's";
 $meta = "";
 $head = "Emploi du temps";

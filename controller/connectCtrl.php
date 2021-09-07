@@ -9,7 +9,6 @@ if(!empty($_SESSION)){
 }
 
 //Inclusion des fichiers
-require_once(dirname(__FILE__).'/../model/bdd.php');
 require_once(dirname(__FILE__).'/../model/user.php');
 require_once(dirname(__FILE__).'/../public/config/config.php');
 
@@ -83,8 +82,7 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
         $password = $_POST['inputPass'];
 
         if(!$errorInForm){
-            $users = new User();
-            $dataArray = $users->SelectAll();
+            $dataArray = User::SelectAll();
             
             foreach ($dataArray as $data){
                 if ($data['mail'] == $mail){

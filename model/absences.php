@@ -1,4 +1,6 @@
 <?php
+require_once(dirname(__FILE__).'/../public/utils/bdd.php');
+
 /**
  * Explication de @param Slots
  * @param int $id
@@ -37,8 +39,10 @@ class Absence {
          * @param string $addSql Paramètres SQL (optionnel)
          * @return array|false Retourne un tableau associatif ou False
          */
-        public function SelectAll()
+        public static function SelectAll()
         {
+            $pdo = SPDO::getInstance();
+
             $sql= ("SELECT `start_date`,
             `end_date`,
             `start_hour`,
@@ -48,7 +52,7 @@ class Absence {
             FROM `absences`;");
             
             try {
-                $stmt = $this->pdo->query($sql);
+                $stmt = $pdo->query($sql);
                 $result = $stmt->fetchAll(PDO::FETCH_OBJ);
                 return $result;
             } catch (PDOException $ex) {

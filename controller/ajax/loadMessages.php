@@ -1,5 +1,4 @@
 <?php
-require_once(dirname(__FILE__).'/../../model/bdd.php');
 require_once(dirname(__FILE__).'/../../model/tchat.php');
 
 // On vérifie la méthode utilisée par la requête ajax
@@ -9,14 +8,10 @@ if($_SERVER['REQUEST_METHOD'] == 'GET'){
     if(isset($_GET['lastId'])){
         // On récupère l'id et on nettoie
         $lastId = (int)strip_tags($_GET['lastId']);
-        
         // On va chercher les messages
-        $chat = new Chat();
-        $messages = $chat->SelectAll($lastId);
-        
+        $messages = Chat::SelectAll($lastId);
         // On convertit en json
         $messagesJson = json_encode($messages);
-
         // On envoie
         echo $messagesJson;
     }

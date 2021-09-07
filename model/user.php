@@ -1,6 +1,7 @@
 <?php
+require_once(dirname(__FILE__).'/../public/utils/bdd.php');
 /**
- * Explication de @param Patient
+ * Explication de @param User
  * @param int $id
  * @param string $lastname 
  * @param string $firstname
@@ -50,7 +51,7 @@ class User {
         }
         
         /**
-         * Ajouter un patient
+         * Ajouter un utilisateurs
          */
         public function add()
         {
@@ -78,7 +79,6 @@ class User {
             }else{
                 return 2; //Doublon 2
             }
-            
         }
 
         /**
@@ -159,11 +159,13 @@ class User {
          * @param string $addSql Paramètres SQL (optionnel)
          * @return array|false Retourne un tableau associatif ou False
          */
-        public function SelectAll()
+        public static function SelectAll()
         {
-            $sql = "SELECT * FROM `users` ";
+            $pdo = SPDO::getInstance();
+
+            $sql = "SELECT * FROM `users`";
             try {
-                $stmt = $this->pdo->query($sql);
+                $stmt = $pdo->query($sql);
                 $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
                 return $result;
             } catch (PDOException $ex) {
@@ -176,13 +178,17 @@ class User {
          * @param string $column Colonnes choisies
          * @param string $table Tables choisies
          * @param string $addSql Paramètres SQL (optionnel)
-         * @return object|int(11) Retourne un tableau associatif ou False
+         * @return object|11 Retourne un objet ou code 11
          */
-        public function SelectOne($table = 'users')
-        {
-            $sql = ("SELECT * FROM".' `'.$table.'` '."WHERE `id` = $this->id");
+        public static function SelectOne($id)
+        {   
+            $pdo = SPDO::getInstance();
+            
+            $sql= ("SELECT * FROM `users` WHERE `id` = :id");
+            $stmt = $pdo->prepare($sql);
+            $stmt->bindValue(':id', $id);
             try {
-                $stmt = $this->pdo->query($sql);
+                $stmt->execute();
                 $result = $stmt->fetch(PDO::FETCH_OBJ);
                 return $result;
             } catch (PDOException $ex) {

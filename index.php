@@ -6,8 +6,6 @@
     setlocale (LC_TIME, 'fr_FR.utf8','fra');
     
     //Connexion BDD
-    require_once(dirname(__FILE__).'/model/model.php');
-    require_once(dirname(__FILE__).'/model/bdd.php');
     require_once(dirname(__FILE__).'/model/user.php');
     require_once(dirname(__FILE__).'/model/assignements.php');
     require_once(dirname(__FILE__).'/model/marks.php');
@@ -24,7 +22,7 @@
         mail('guillaume.david744@orange.fr', "$object", "$prob");
     }
     $marks = new Mark();
-    $noteArray = $marks->SelectAll('marks');
+    $noteArray = $marks->SelectAll();
 
 
     foreach ($noteArray as $note){
@@ -140,10 +138,8 @@
                         <?php 
                             foreach ($dataArrayNote as $key => $currentArray) {
                                 if($currentArray['id_users'] == $_SESSION['id']){
-                                    $teachers = new User($currentArray['id_users_teacher_marks']);
-                                    $teacher = $teachers->SelectOne();
-                                    $matters = new Matter($teacher->id_matters);
-                                    $matter = $matters->SelectOne();
+                                    $teacher = User::SelectOne($currentArray['id_users_teacher_marks']);
+                                    $matter = Matter::SelectOne($teacher->id_matters);
                                 ?>
                                 <div class="noteEl d-flex w-100 mb-2 bg-egg">
                                     <div class="notationBloc">
@@ -177,10 +173,8 @@
                                 $month = $save[1];
                                 $day = $save[2];
                                 $month = strftime('%h', strtotime("$day-$month-$year"));
-                                $users = new User($data['id_users']);
-                                $teacher = $users->SelectOne();
-                                $users = new User($teacher->id_matters);
-                                $matters = $users->SelectOne('matters');
+                                $teacher = User::SelectOne($data['id_users']);
+                                $matters = Matter::SelectOne($teacher->id_matters);
                             ?>
                             <div class="hwEl d-flex w-100 mb-2">
                                 <div class="hwDateBloc h-100">

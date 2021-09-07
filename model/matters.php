@@ -1,4 +1,5 @@
 <?php
+require_once(dirname(__FILE__).'/../public/utils/bdd.php');
 /**
  * Explication de @param Slots
  * @param int $id
@@ -27,16 +28,17 @@ class Matter {
          * @param string $addSql Paramètres SQL (optionnel)
          * @return array|false Retourne un tableau associatif ou False
          */
-        public function SelectAll($table = 'matters')
+        public static function SelectAll()
         {
-            $sql= ("SELECT * FROM `matters`;");
-            
+            $pdo = SPDO::getInstance();
+
+            $sql = "SELECT * FROM `matters`";
             try {
-                $stmt = $this->pdo->query($sql);
+                $stmt = $pdo->query($sql);
                 $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
                 return $result;
             } catch (PDOException $ex) {
-                return 11;
+                return 404;
             }
         }
 
@@ -45,14 +47,18 @@ class Matter {
          * @param string $column Colonnes choisies
          * @param string $table Tables choisies
          * @param string $addSql Paramètres SQL (optionnel)
-         * @return object|int(11) Retourne un tableau associatif ou False
+         * @return object|11 Retourne un objet ou code 11
          */
-        public function SelectOne()
-        {
-            $sql= ("SELECT matter FROM `matters` WHERE `id` = $this->id");
+        public static function SelectOne($id)
+        {   
+            $pdo = SPDO::getInstance();
+            
+            $sql= ("SELECT `matter` FROM `matters` WHERE `id` = :id");
+            $stmt = $pdo->prepare($sql);
+            $stmt->bindValue(':id', $id);
             try {
-                $sql = $this->pdo->query($sql);
-                $result = $sql->fetch(PDO::FETCH_OBJ);
+                $stmt->execute();
+                $result = $stmt->fetch(PDO::FETCH_OBJ);
                 return $result;
             } catch (PDOException $ex) {
                 return 11;

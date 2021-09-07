@@ -1,23 +1,22 @@
 <?php
 require_once(dirname(__FILE__).'/../public/utils/bdd.php');
-
 /**
  * Explication de @param Slots
  * @param int $id
  * @param string $slot
  * @return void
  */
-class Room {
+class Rank {
         private $id;
-        private $room;
+        private $rank;
 
         public $pdo;
 
         //Construction de la classe
-        function __construct($id = "" ,$room = "")
+        function __construct($id = "" ,$rank = "")
         {
             $this->id = $id;
-            $this->room = $room;
+            $this->rank = $rank;
             
             $this->pdo = SPDO::getInstance();
         }
@@ -29,17 +28,16 @@ class Room {
          * @param string $addSql Paramètres SQL (optionnel)
          * @return array|false Retourne un tableau associatif ou False
          */
-        public static function SelectAll()
+        public function SelectAll()
         {
-            $pdo = SPDO::getInstance();
-
-            $sql = "SELECT * FROM `rooms`";
+            $sql= ("SELECT * FROM `ranks`;");
+            
             try {
-                $stmt = $pdo->query($sql);
+                $stmt = $this->pdo->query($sql);
                 $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
                 return $result;
             } catch (PDOException $ex) {
-                return 404;
+                return 11;
             }
         }
 
@@ -54,7 +52,7 @@ class Room {
         {   
             $pdo = SPDO::getInstance();
             
-            $sql= ("SELECT `room` FROM `rooms` WHERE `id` = :id");
+            $sql= ("SELECT `rank` FROM `ranks` WHERE `id` = :id");
             $stmt = $pdo->prepare($sql);
             $stmt->bindValue(':id', $id);
             try {

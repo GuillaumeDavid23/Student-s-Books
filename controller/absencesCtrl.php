@@ -5,10 +5,10 @@ session_start();
 //TEST de l'existance de la session utilisateur.
 if(empty($_SESSION['rank'])){
         header('Location: ../controller/connectCtrl.php');
+        exit;
 }
 
 //Inclusion des différents fichiers
-require_once(dirname(__FILE__).'/../model/bdd.php');
 require_once(dirname(__FILE__).'/../model/user.php');
 require_once(dirname(__FILE__).'/../model/absences.php');
 
@@ -16,10 +16,7 @@ require_once(dirname(__FILE__).'/../model/absences.php');
 setlocale (LC_TIME, 'fr_FR.utf8','fra.utf8'); 
 
 //Déclaration des variables
-$absences= new Absence();
-$absencesArray = $absences->SelectAll();
-
-
+$absencesArray = Absence::SelectAll();
 
 //Préparation de l'affichage de la vue.
 $title = 'Page des absences, Students\'Books : Les devoirs à la maison facilement';

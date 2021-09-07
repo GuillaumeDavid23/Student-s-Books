@@ -5,7 +5,6 @@
     }
     require(dirname(__FILE__).'/../model/model.php');
 
-    require_once(dirname(__FILE__).'/../model/bdd.php');
     require_once(dirname(__FILE__).'/../model/user.php');
     require_once(dirname(__FILE__).'/../public/config/config.php');
 
@@ -48,8 +47,7 @@
                     //MOT DE PASSE OK
                     $mail = $_SESSION['mail'];
                     $ctrlPass = password_hash($ctrlPass, PASSWORD_BCRYPT);
-                    $users = new User();
-                    $dataArray = $users->SelectAll();
+                    $dataArray = User::SelectAll();
                     
                     foreach ($dataArray as $data)
                     {
@@ -82,5 +80,4 @@
             include dirname(__FILE__).'/../view/templates/header.php';
             include(dirname(__FILE__).'/../view/changePass.php');
             include dirname(__FILE__).'/../view/templates/footer.php';
-
     } 

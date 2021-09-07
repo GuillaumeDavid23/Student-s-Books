@@ -1,7 +1,6 @@
 <?php
 session_start();
 
-require_once(dirname(__FILE__).'/../model/bdd.php');
 require_once(dirname(__FILE__).'/../model/user.php');
 require_once(dirname(__FILE__).'/../public/config/config.php');
 
@@ -33,8 +32,7 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
 
     if(!empty($_SESSION['token']) && !empty($token)){
         if($token == $_SESSION['token']){
-            $users = new User();
-            $dataArray = $users->SelectAll();
+            $dataArray = User::SelectAll();
             foreach ($dataArray as $data) {
                 if(password_verify($data['mail'],$token)){
                     $errorInForm = false;
@@ -105,8 +103,7 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
             }
             if(!$errorInForm){
                 //On va checrher le tableau des utilisateurs
-                $users = new User();
-                $dataArray = $users->SelectAll();
+                $dataArray = User::SelectAll();
                 $verifyMail = false;
 
                 foreach ($dataArray as $data){

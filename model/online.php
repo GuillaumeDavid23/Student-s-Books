@@ -1,4 +1,6 @@
 <?php
+require_once(dirname(__FILE__).'/../public/utils/bdd.php');
+
 /**
  * Explication de @param Slots
  * @param int $id
@@ -8,14 +10,16 @@
 class Online {
         private $id;
         private $id_users_online;
+        private $last_action;
 
         public $pdo;
 
         //Construction de la classe
-        function __construct($id = "" ,$id_users_online = "")
+        function __construct($id = "" , $id_users_online = "", $last_action = "")
         {
             $this->id = $id;
             $this->id_users_online = $id_users_online;
+            $this->last_action = $last_action;
             
             $this->pdo = SPDO::getInstance();
         }
@@ -24,9 +28,10 @@ class Online {
         {   
             $res = $this::checkDuplicate($this->id_users_online);
             if($res === false){
-                $sql = $this->pdo->prepare("INSERT INTO `online`(`id_users_online`)
-                VALUES(:id_users_online)");
+                $sql = $this->pdo->prepare("INSERT INTO `online`(`id_users_online`, `last_action`)
+                VALUES(:id_users_online, :last_action)");
                 $sql->bindParam(':id_users_online', $this->id_users_online);
+                $sql->bindParam(':last_action', $this->last_action);
                 
                 try {
                     $test = $sql->execute();
@@ -81,12 +86,13 @@ class Online {
          * @param string $addSql Paramètres SQL (optionnel)
          * @return array|false Retourne un tableau associatif ou False
          */
-        public function SelectAll()
+        public static function SelectAll()
         {
+            $pdo = SPDO::getInstance();
             $sql= ("SELECT COUNT(*) AS nb FROM `online` INNER JOIN users ON users.id = online.id_users_online;");
             
             try {
-                $stmt = $this->pdo->query($sql);
+                $stmt = $pdo->query($sql);
                 $result = $stmt->fetch();
                 return $result;
             } catch (PDOException $ex) {
@@ -94,15 +100,15 @@ class Online {
             }
         }
 
-        public function checkOffline($timestamp)
+        public static function checkOffline($timestamp)
         {
-            $sql= ("SELECT last_action, id_users_online FROM `online` WHERE last_action < :timestamp");
+            $pdo = SPDO::getInstance();
+            $sql= ("DELETE FROM `online` WHERE last_action < :timestamp");
             
             try {
-                $stmt = $this->pdo->prepare($sql);
+                $stmt = $pdo->prepare($sql);
                 $stmt->bindValue(':timestamp', $timestamp);
-                $stmt->execute();
-                $result = $stmt->fetchAll();
+                $result = $stmt->execute();
                 return $result;
             } catch (PDOException $ex) {
                 return 11;

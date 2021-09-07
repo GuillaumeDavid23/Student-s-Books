@@ -2,8 +2,9 @@
 // Ce fichier ajoute un message dans la base de données
 session_start();
 
-require_once(dirname(__FILE__).'/../../model/bdd.php');
 require_once(dirname(__FILE__).'/../../model/tchat.php');
+require_once(dirname(__FILE__).'/../../model/online.php');
+
 
 // On vérifie la méthode
 if($_SERVER['REQUEST_METHOD'] == 'POST'){

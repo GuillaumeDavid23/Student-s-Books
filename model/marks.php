@@ -1,4 +1,6 @@
 <?php
+require_once(dirname(__FILE__).'/../public/utils/bdd.php');
+
 class Mark{
         private $id;
         private $date;
@@ -84,15 +86,17 @@ class Mark{
          * @param string $addSql Paramètres SQL (optionnel)
          * @return array|false Retourne un tableau associatif ou False
          */
-        public function SelectAll()
+        public static function SelectAll()
         {
-            $sql= ("SELECT date, note, notation, id_users, id_users_teacher_marks FROM `marks`");
+            $pdo = SPDO::getInstance();
+
+            $sql = "SELECT date, note, notation, id_users, id_users_teacher_marks FROM `marks`";
             try {
-                $sql = $this->pdo->query($sql);
-                $result = $sql->fetchAll(PDO::FETCH_ASSOC);
+                $stmt = $pdo->query($sql);
+                $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
                 return $result;
             } catch (PDOException $ex) {
-                return 11;
+                return 404;
             }
         }
 

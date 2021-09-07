@@ -8,4 +8,5 @@ $messageCode = [
     4 => ['type' => 'alert-success', 'msg' => 'Erreur lors de la modification du compte !'],
     5 => ['type' => 'alert-success', 'msg' => 'Un email vous a bien été envoyé !'],
     11 => ['type' => 'alert-danger', 'msg' => 'Une erreur est survenue'],
+    12 => ['type' => 'alert-danger', 'msg' => 'Les mots de passes sont différents'],
 ];

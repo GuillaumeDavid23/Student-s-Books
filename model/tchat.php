@@ -1,4 +1,5 @@
 <?php
+require_once(dirname(__FILE__).'/../public/utils/bdd.php');
 /**
  * Explication de @param Slots
  * @param int $id
@@ -29,8 +30,9 @@ class Chat {
          * @param string $addSql Paramètres SQL (optionnel)
          * @return array|false Retourne un tableau associatif ou False
          */
-        public function SelectAll($lastId = "")
+        public static function SelectAll($lastId = "")
         {
+            $pdo = SPDO::getInstance();
             $filtre = ($lastId > 0) ? " WHERE `messages`.`id` > $lastId" : '';
             $sql= ("SELECT `messages`.`id`,
             `message`,
@@ -45,7 +47,7 @@ class Chat {
             DESC LIMIT 10;");
             
             try {
-                $stmt = $this->pdo->query($sql);
+                $stmt = $pdo->query($sql);
                 $result = $stmt->fetchAll(PDO::FETCH_OBJ);
                 return $result;
             } catch (PDOException $ex) {

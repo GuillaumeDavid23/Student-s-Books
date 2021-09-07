@@ -7,7 +7,6 @@ if(empty($_SESSION['rank'])){
 }
 
 //Inclusion des différents fichiers
-require_once(dirname(__FILE__).'/../model/bdd.php');
 require_once(dirname(__FILE__).'/../model/calendar.php');
 require_once(dirname(__FILE__).'/../public/config/config.php');
 
@@ -46,8 +45,7 @@ else{
         $empty = false;//Test du select
         $emptyCase = '<td class="empty"></td>';
         
-        $calendar = new Calendar();
-        $dataDB = $calendar->SelectAll();
+        $dataDB = Calendar::SelectAll();
 
         //Attribution du premier jour.
         if((int)$keyOfFirstDay == 0){
@@ -115,7 +113,7 @@ else{
                     $DBmonth = $cut[1]; //mois
                     $DBmonth = ltrim($DBmonth, '0');
                     $DBday = $cut[2]; //jour 
-                    if($DBmonth == array_search($arrayTestOfMonth[$DBmonth], $arrayTestOfMonth)  && $DByear == $year && $DBday == $count){
+                    if($month+1 == array_search($arrayTestOfMonth[$DBmonth], $arrayTestOfMonth) && $DByear == $year && $DBday == $count){
                         echo '<br>'.$event['event'];
                     }
                 }
