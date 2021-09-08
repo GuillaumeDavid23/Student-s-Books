@@ -1,145 +1,145 @@
         <div class="row justify-content-evenly w-100 d-none d-lg-flex">
             <?php
-                if($adresse == '/controller/assignmentCtrl.php'){
+                if($adresse == '/index.php?page=2'){
                         echo '
                     <div class="col-1 navBtnMob">
-                        <a href="../controller/noteCtrl.php">
+                        <a href="../index.php?page=1">
                             <img src="../public/img/LogoNote.webp" class="img-fluid" width="100" alt="Page des devoirs" title="Vers les devoirs..">
                         </a>
                     </div>
                     <div class="col-1 navBtnMob">
-                        <a href="../controller/edtCtrl.php">
+                        <a href="/index.php?page=3">
                             <img src="../public/img/Edt.webp" class="img-fluid" width="100" alt="Page emploi du temps" title="Vers l\'emploi du temps..">
                         </a>
                     </div>
                     <div class="col-1 navBtnMob">
-                        <a href="../controller/absencesCtrl.php">
+                        <a href="/index.php?page=4">
                             <img src="../public/img/absences.webp" class="img-fluid" width="100"  alt="Page des absences" title="Vers les absences..">
                         </a>
                     </div>
                     <div class="col-1 navBtnMob ">
-                        <a href="../controller/agendaCtrl.php">
+                        <a href="/index.php?page=5">
                             <img src="../public/img/agenda.png" class="img-fluid" width="100" alt="Page de l\'agenda" title="Vers les agenda..">
                         </a>
                     </div>
                     <div class="col-1 navBtnMob">
-                        <a href="../controller/tchatCtrl.php">
+                        <a href="/index.php?page=8">
                             <img src="../public/img/message.png" class="img-fluid" width="100" alt="Page de la messagerie" title="Vers la messagerie..">
                         </a>
                     </div>
                     ';
                 }
-                elseif($adresse == '/controller/noteCtrl.php'){
+                elseif($adresse == '/index.php?page=1'){
                         echo '
                         <div class="col-1 navBtnMob">
-                            <a href="../controller/assignmentCtrl.php">
+                            <a href="/index.php?page=2">
                                 <img src="../public/img/devoirs.webp" class="img-fluid" width="100" alt="Page des devoirs" title="Vers les devoirs..">
                             </a>
                         </div>
                         <div class="col-1 navBtnMob">
-                            <a href="../controller/edtCtrl.php">
+                            <a href="/index.php?page=3">
                                 <img src="../public/img/Edt.webp" class="img-fluid" width="100" alt="Page emploi du temps" title="Vers l\'emploi du temps..">
                             </a>
                         </div>
                         <div class="col-1 navBtnMob">
-                            <a href="../controller/absencesCtrl.php">
+                            <a href="/index.php?page=4">
                                 <img src="../public/img/absences.webp" class="img-fluid" width="100"  alt="Page des absences" title="Vers les absences..">
                             </a>
                         </div>
                         <div class="col-1 navBtnMob ">
-                            <a href="../controller/agendaCtrl.php">
+                            <a href="/index.php?page=5">
                                 <img src="../public/img/agenda.png" class="img-fluid" width="100" alt="Page de l\'agenda" title="Vers les agenda..">
                             </a>
                         </div>
                         <div class="col-1 navBtnMob">
-                            <a href="../controller/tchatCtrl.php">
+                            <a href="/index.php?page=8">
                                 <img src="../public/img/message.png" class="img-fluid" width="100" alt="Page de la messagerie" title="Vers la messagerie..">
                             </a>
                         </div>
                         ';
                 }
-                elseif($adresse == '/controller/edtCtrl.php'){
+                elseif($adresse == '/index.php?page=3'){
                     echo '
                         <div class="col-1 navBtnMob">
-                            <a href="../controller/assignmentCtrl.php">
+                            <a href="/index.php?page=2">
                                 <img src="../public/img/devoirs.webp" class="img-fluid" width="100" alt="Page des devoirs" title="Vers les devoirs..">
                             </a>
                         </div>
                         <div class="col-1 navBtnMob">
-                            <a href="../controller/noteCtrl.php">
+                            <a href="../index.php?page=1">
                                 <img src="../public/img/LogoNote.webp" class="img-fluid" width="100" alt="Page des devoirs" title="Vers les devoirs..">
                             </a>
                         </div>
                         <div class="col-1 navBtnMob">
-                            <a href="../controller/absencesCtrl.php">
+                            <a href="/index.php?page=4">
                                 <img src="../public/img/absences.webp" class="img-fluid" width="100"  alt="Page des absences" title="Vers les absences..">
                             </a>
                         </div>
                         <div class="col-1 navBtnMob ">
-                            <a href="../controller/agendaCtrl.php">
+                            <a href="/index.php?page=5">
                                 <img src="../public/img/agenda.png" class="img-fluid" width="100" alt="Page de l\'agenda" title="Vers les agenda..">
                             </a>
                         </div>
                         <div class="col-1 navBtnMob">
-                            <a href="../controller/tchatCtrl.php">
+                            <a href="/index.php?page=8">
                                 <img src="../public/img/message.png" class="img-fluid" width="100" alt="Page de la messagerie" title="Vers la messagerie..">
                             </a>
                         </div>
                     ';
                 }
-                elseif($adresse == '/controller/absencesCtrl.php'){
+                elseif($adresse == '/index.php?page=4'){
                     echo '
                         <div class="col-1 navBtnMob">
-                            <a href="../controller/assignmentCtrl.php">
+                            <a href="/index.php?page=2">
                                 <img src="../public/img/devoirs.webp" class="img-fluid" width="100" alt="Page des devoirs" title="Vers les devoirs..">
                             </a>
                         </div>
                         <div class="col-1 navBtnMob">
-                            <a href="../controller/noteCtrl.php">
+                            <a href="../index.php?page=1">
                                 <img src="../public/img/LogoNote.webp" class="img-fluid" width="100" alt="Page des devoirs" title="Vers les devoirs..">
                             </a>
                         </div>
                         <div class="col-1 navBtnMob">
-                            <a href="../controller/edtCtrl.php">
+                            <a href="/index.php?page=3">
                                 <img src="../public/img/Edt.webp" class="img-fluid" width="100" alt="Page emploi du temps" title="Vers l\'emploi du temps..">
                             </a>
                         </div>
                         <div class="col-1 navBtnMob ">
-                            <a href="../controller/agendaCtrl.php">
+                            <a href="/index.php?page=5">
                                 <img src="../public/img/agenda.png" class="img-fluid" width="100" alt="Page de l\'agenda" title="Vers les agenda..">
                             </a>
                         </div>
                         <div class="col-1 navBtnMob">
-                            <a href="../controller/tchatCtrl.php">
+                            <a href="/index.php?page=8">
                                 <img src="../public/img/message.png" class="img-fluid" width="100" alt="Page de la messagerie" title="Vers la messagerie..">
                             </a>
                         </div>
                     ';
                 }
-                elseif($adresse == '/controller/profilCtrl.php'){
+                elseif($adresse == '/index.php?page=7'){
                     echo '
                         <div class="col-1 navBtnMob">
-                            <a href="../controller/assignmentCtrl.php">
+                            <a href="/index.php?page=2">
                                 <img src="../public/img/devoirs.webp" class="img-fluid" width="100" alt="Page des devoirs" title="Vers les devoirs..">
                             </a>
                         </div>
                         <div class="col-1 navBtnMob">
-                            <a href="../controller/noteCtrl.php">
+                            <a href="../index.php?page=1">
                                 <img src="../public/img/LogoNote.webp" class="img-fluid" width="100" alt="Page des devoirs" title="Vers les devoirs..">
                             </a>
                         </div>
                         <div class="col-1 navBtnMob">
-                            <a href="../controller/edtCtrl.php">
+                            <a href="/index.php?page=3">
                                 <img src="../public/img/Edt.webp" class="img-fluid" width="100" alt="Page emploi du temps" title="Vers l\'emploi du temps..">
                             </a>
                         </div>
                         <div class="col-1 navBtnMob ">
-                            <a href="../controller/agendaCtrl.php">
+                            <a href="/index.php?page=5">
                                 <img src="../public/img/agenda.png" class="img-fluid" width="100" alt="Page de l\'agenda" title="Vers les agenda..">
                             </a>
                         </div>
                         <div class="col-1 navBtnMob">
-                            <a href="../controller/tchatCtrl.php">
+                            <a href="/index.php?page=8">
                                 <img src="../public/img/message.png" class="img-fluid" width="100" alt="Page de la messagerie" title="Vers la messagerie..">
                             </a>
                         </div>
@@ -182,10 +182,10 @@
 
     <!-- Bootstrap JavaScript -->
     <?php
-        if($adresse == '/controller/profilCtrl.php'){
+        if($page == 7){
             echo '<script src="../public/js/changePass.js"></script>';
         }
-        if($adresse == '/controller/registerCtrl.php'){
+        if($page == 11){
             echo '<script src="../public/js/main.js"></script>';
         }
     ?>

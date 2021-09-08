@@ -65,7 +65,7 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
                             $code = $users->Modify();
                             
                             if($code = 3){
-                                header("Location: /controller/connectCtrl.php");
+                                header("Location: /index.php?page=10");
                                 exit;
                             }
                         }

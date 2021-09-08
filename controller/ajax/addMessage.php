@@ -10,7 +10,7 @@ require_once(dirname(__FILE__).'/../../model/online.php');
 if($_SERVER['REQUEST_METHOD'] == 'POST'){
     // Bonne méthode
     // On vérifie si l'utilisateur est connecté
-    if(isset($_SESSION['id'])){
+    if(isset($_SESSION['user']->id)){
         // L'utilisateur est connecté
         // On récupère les données
         $donneesJson = file_get_contents('php://input');
@@ -22,7 +22,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
             // Le message n'est pas vide
             // On peut l'enregistrer
             // On se connecte
-            $chat = new Chat("", strip_tags($donnees->message), $_SESSION['id']);
+            $chat = new Chat("", strip_tags($donnees->message), $_SESSION['user']->id);
             $code = $chat->Add();
             if($code == 3){
                 $_SESSION['derniere_action'] = time(); // mise à jour de la variable

@@ -1,7 +1,7 @@
 <?php 
     session_start();    
-    if(empty($_SESSION['rank'])){
-        header('Location: ../controller/connectCtrl.php');
+    if(empty($_SESSION['user'])){
+        header('Location: /index.php?page=10');
         exit;
     }
     
@@ -11,7 +11,7 @@
     require_once(dirname(__FILE__).'/../public/config/config.php');
     
     //Déclaration des variables
-    $user = User::SelectOne($_SESSION['id']);
+    $user = User::SelectOne($_SESSION['user']->id);
 
     $matter = Matter::SelectOne($user->id_matters);
 
@@ -63,16 +63,16 @@
                     {   
                         if ($data['id'] == $_SESSION["id"]){
                             $changePass = 0;
-                            $id = $_SESSION['id'];
+                            $id = $_SESSION['user']->id;
                             $mail = $_SESSION['mail'];
-                            $users = new User($id,$_SESSION['firstname'], $_SESSION['lastname'], $_SESSION['birthdate'],$mail,$ctrlPass,$changePass);
+                            $users = new User($id,$_SESSION['user']->firstname, $_SESSION['user']->lastname, $_SESSION['user']->birthdate,$mail,$ctrlPass,$changePass);
                             $code = $users->Modify();
                             $_SESSION["password"] = $ctrlPass;
                             $_SESSION['changePass'] = $changePass;
                             if($code == 3){
                                 break;
                             }else{
-                                header('Location: /controller/connectCtrl.php');
+                                header('Location: /index.php?page=10');
                                 exit;
                             }
                         }

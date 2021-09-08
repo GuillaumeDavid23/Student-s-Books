@@ -10,10 +10,8 @@
                         $month = $save[1];
                         $day = $save[2];
                         $month = strftime('%h', strtotime("$day-$month-$year"));
-                        $users = new User($currentArray['id_users']);
-                        $teacher = $users->SelectOne();
-                        $users = new User($teacher->id_matters);
-                        $matters = $users->SelectOne('matters');
+                        $teacher = User::SelectOne($currentArray['id_users']);
+                        $matters = Matter::SelectOne($teacher->id_matters);
                 ?>
                     <div class="hwEl d-flex w-100 mb-2">
                         <div class="hwDateBloc h-100">
@@ -31,9 +29,9 @@
                 <h2>Rendu</h2>
                 <div class="text-center text-white">Aucun devoirs rendu pour le moment.</div>
             </div>
-            <?php if($_SESSION['rank'] == '3'){ ?>
+            <?php if($_SESSION['user']->id_ranks == '3'){ ?>
             <div class="mt-5">
-                <form action="<?= htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="POST" class="d-flex flex-column align-items-center">
+                <form action="<?= htmlspecialchars($_SERVER["PHP_SELF"]);?>?page=<?= $page ?>" method="POST" class="d-flex flex-column align-items-center">
                     <label for="assignmentDate">Date de rendu du devoirs</label>
                     <input type="date" name="assignmentDate" id="assignmentDate">
 

@@ -3,7 +3,7 @@
         <?php if (empty($_POST['month'])) {
             echo "<h2 style:'color:red;'>Veuillez renseigner votre date !</h2>";
         } ?>
-        <form action="<?= htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="POST" id="formToCreateCalendar">
+        <form action="<?= htmlspecialchars($_SERVER["PHP_SELF"]);?>?page=<?= $page ?>" method="POST" id="formToCreateCalendar">
             <label for="date">Choisissez un mois et une année</label>
             <input type="month" name="month" id="date" required>
         </form>
@@ -40,7 +40,7 @@
             <?= $messageCode[$code]['msg'] ?>
         </div>
     <?php endif ?>
-    <form action="<?= htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="POST" class="text-center">
+    <form action="<?= htmlspecialchars($_SERVER["PHP_SELF"]);?>?page=<?= $page ?>" method="POST" class="text-center">
         <input type="hidden" name="month" value="<?= $_POST['month'] ?? '' ?>">
         <label for="dateEvent">Date de l'événement</label>
         <input type="date" name="dateEvent" id="dateEvent" class="form-control" required>
@@ -52,12 +52,12 @@
         </div>
         <div class="row justify-content-evenly w-100 d-none d-lg-flex">
             <div class="col-1 navBtnMob">
-                <a href="../controller/assignmentCtrl.php">
+                <a href="/index.php?page=2">
                     <img src="../public/img/devoirs.webp" class="img-fluid" width="100" alt="Page des devoirs" title="Vers les devoirs..">
                 </a>
             </div>
             <div class="col-1 navBtnMob ">
-                <a href="../controller/noteCtrl.php">
+                <a href="../index.php?page=1">
                     <img src="../public/img/LogoNote.webp" class="img-fluid" width="100" alt="Page des notes" title="Vers les notes..">
                 </a>
             </div>

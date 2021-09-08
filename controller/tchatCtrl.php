@@ -2,8 +2,8 @@
 //Démmarrage de la session
 session_start();
 //TEST de l'exitsance de la session
-if(empty($_SESSION['rank'])){
-        header('Location: ../controller/connectCtrl.php');
+if(empty($_SESSION['user'])){
+        header('Location: /index.php?page=10');
 } 
 
 //Inclusion des différents fichiers

@@ -16,28 +16,28 @@
     <!-- CSS -->
     <link rel="stylesheet" href="/public/css/dash.css">
     <?php 
-    if($adresse == '/controller/agendaCtrl.php'){
+    if($page == 5){
         echo '<link rel="stylesheet" href="/public/css/agenda.css">';
     }
-    if($adresse == '/controller/connectCtrl.php' || $adresse == '/controller/passCtrl.php' || $adresse == '/controller/resetPassCtrl.php'){
+    if($page == 10 || $page == 6 || $page == 11){
         echo '
             <link rel="stylesheet" href="/public/css/general.css">
             <link rel="stylesheet" href="/public/css/connect.css">
             ';
     }
-    if($adresse == '/controller/edtCtrl.php'){
+    if($page == 3){
         echo '
             <link rel="stylesheet" href="/public/css/edt.css">
             ';
     }
-    if($adresse == '/controller/registerCtrl.php'){
+    if($page == 11){
         echo '
-            <link rel="stylesheet" href="../public/css/register.css">
+            <link rel="stylesheet" href="/public/css/register.css">
             ';
     }
-    if($adresse == '/controller/profilCtrl.php'){
+    if($page == 7){
         echo '
-            <link rel="stylesheet" href="../public/css/profil.css">
+            <link rel="stylesheet" href="/public/css/profil.css">
             ';
     }
     ?>
@@ -52,9 +52,9 @@
 <body>
     <div class="container-fluid h-100 p-0">
         <header class="w-100 mb-5 d-flex align-items-center">
-            <img src="../public/img/LOGO SOLO.png" class="ms-3 h-100" alt="">
-            <a href="../index.php" class="h-100 d-flex align-items-center">
-                <img src="../public/img/backward.png" class="img-fluid" width="50" alt="">
+            <img src="/public/img/LOGO SOLO.png" class="ms-3 h-100" alt="">
+            <a href="/index.php" class="h-100 d-flex align-items-center">
+                <img src="/public/img/backward.png" class="img-fluid" width="50" alt="">
             </a>
             <h1 class="ms-4 align-self-center text-center m-0"><?= $head ?></h1>
         </header>

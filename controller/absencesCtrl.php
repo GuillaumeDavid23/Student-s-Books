@@ -3,8 +3,8 @@
 session_start();
 
 //TEST de l'existance de la session utilisateur.
-if(empty($_SESSION['rank'])){
-        header('Location: ../controller/connectCtrl.php');
+if(empty($_SESSION['user'])){
+        header('Location: /index.php?page=10');
         exit;
 }
 

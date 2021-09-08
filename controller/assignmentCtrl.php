@@ -3,17 +3,18 @@
 session_start();
 
 //TEST de la session utilisateur
-if(empty($_SESSION['rank'])){
-    header('Location: ../controller/connectCtrl.php');
+if(empty($_SESSION['user'])){
+    header('Location: /index.php?page=10');
     exit();
 }else{
-    $rank = $_SESSION['rank'];
-    $id_users = $_SESSION['id'];
+    $rank = $_SESSION['user']->id_ranks;
+    $id_users = $_SESSION['user']->id;
 }
 
 //Inclusion des fichiers 
 require_once(dirname(__FILE__).'/../model/user.php');
 require_once(dirname(__FILE__).'/../model/assignements.php');
+require_once(dirname(__FILE__).'/../model/matters.php');
 require_once(dirname(__FILE__).'/../public/config/config.php');
 
 //Déclaration des variables et constantes
@@ -51,12 +52,12 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
         $hwName = $_POST['assignmentName'];
     }
 
-    if(empty($_SESSION['subject'])){
+    if(empty($_SESSION['user']->id_matters)){
         $error = "<br>ERREUR Votre matière de professeur n'est pas renseigné !";
         $stockError['subject'] = $error;
         $testForm = true;//Affichage du formulaire si vide
     }else{
-        $subject = $_SESSION['subject'];
+        $subject = $_SESSION['user']->id_matters;
     }
 
     if(empty($_POST['class'])){

@@ -1,8 +1,8 @@
-<?php if($_SESSION['rank'] == 3){ ?>
+<?php if($_SESSION['user']->id_ranks == 3){ ?>
     <div class="row h-50 justify-content-center justify-content-lg-evenly mb-5">
         <div class="col-10 col-lg-6 resumeBloc h-100 d-flex flex-column align-items text-white">
             
-            <form action="<?= htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post" class="d-flex flex-column h-100 align-items-center justify-content-center">
+            <form action="<?= htmlspecialchars($_SERVER["PHP_SELF"]);?>?page=<?= $page ?>" method="post" class="d-flex flex-column h-100 align-items-center justify-content-center">
                 <h3 class="mb-3 text-decoration-underline">Ajouter une absence</h3>      
                 <div class="mb-3">
                     <label for="start_date">Date de début d'absence : </label>
@@ -38,7 +38,7 @@
             $timestamp_start = strtotime($absencesObj->start_date.' '.$absencesObj->start_hour);
             $timestamp_end = strtotime($absencesObj->end_date.' '.$absencesObj->end_hour);
             $date = strftime('%d %B', $timestamp_start);
-            if($_SESSION['id'] == $find->id ){?>
+            if($_SESSION['user']->id == $find->id ){?>
                 <div class="absentEl d-flex w-100 mb-2">
                     <div class="absentDateBloc">
                         <div id="absentBloc" class="text-center fw-bold text-white subInfo"><?= $date ?></div>

@@ -1,307 +1,40 @@
 <?php
-    session_start();
-    if(empty($_SESSION['rank'])){
-        header('Location: controller/connectCtrl.php');
-    }
-    setlocale (LC_TIME, 'fr_FR.utf8','fra');
-    
-    //Connexion BDD
-    require_once(dirname(__FILE__).'/model/user.php');
-    require_once(dirname(__FILE__).'/model/assignements.php');
-    require_once(dirname(__FILE__).'/model/marks.php');
-    require_once(dirname(__FILE__).'/model/matters.php');
-    require_once(dirname(__FILE__).'/public/config/config.php');
-    $users = new User();
-    $dataArrayNote = [];
-    $dataArrayEdt = [];
-    
-    
-    if($_SERVER['REQUEST_METHOD'] == "POST"){
-        $object = $_POST['object'];
-        $prob = $_POST['prob'];
-        mail('guillaume.david744@orange.fr', "$object", "$prob");
-    }
-    $marks = new Mark();
-    $noteArray = $marks->SelectAll();
-
-
-    foreach ($noteArray as $note){
-        
-        if($_SESSION['rank'] == "1"){
-            if($note['id_users'] == $_SESSION['id']){
-                array_push($dataArrayNote, $note);
-            }
-        }
-        elseif($_SESSION['rank'] == "3"){
-            if($note['id_users_teacher_marks'] == $_SESSION['id']){
-                array_push($dataArrayNote, $note);
-            }
-        }
-    }
-
-    $time = time();
-    $currentDay = ucfirst(strftime('%A', $time));
-?>
-<!DOCTYPE html>
-<html lang="fr">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- FONTS -->
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="public/css/bootstrap/bootstrap.css">
-    <!-- CSS -->
-    <link rel="stylesheet" href="public/css/dash.css">
-    <!-- FavIcon -->
-    <link rel="shortcut icon" href="public/img/favicon.ico" type="image/x-icon">
-    <!-- META Description -->
-    <meta name="description" content="Bienvenue sur Students'Books, c'est ici que commence la révolution scolaire.
-    Emploi du temps/ devoirs/ absences... retrouver toutes les information scolaire içi">
-    <!-- Titre du site -->
-    <title>Accueil Students'Books : Les devoirs à la maison facilement</title>
-</head>
-
-<body>
-    <!-- VERSION MOBILE -->
-    <div class="container-fluid h-100 p-0 d-flex flex-column align-items-center d-xl-none">
-        <header class="w-100 mb-5 d-flex ">
-            <img src="public/img/LOGO SOLO.png" class="ms-3 h-100" alt="">
-            <h1 class="ms-4 align-self-center text-center">Tableau de bord</h1>
-        </header>
-        <div class="row justify-content-center w-100">
-            <div class="col-4 navBtnMob ">
-                <a href="../controller/assignmentCtrl.php" class="d-flex justify-content-center">
-                    <img src="public/img/devoirs.webp" class="img-fluid w-75"  alt="">
-                </a>
-            </div>
-            <div class="col-4 offset-1 navBtnMob">
-                <a href="../controller/noteCtrl.php" class="d-flex justify-content-center">
-                    <img src="public/img/LogoNote.webp" class="img-fluid w-75"  alt="">
-                </a>
-            </div>
-            <div class="col-4 mt-5 navBtnMob">
-                <a href="../controller/edtCtrl.php" class="d-flex justify-content-center">
-                    <img src="public/img/Edt.webp" class="img-fluid w-75"  alt="">
-                </a>
-            </div>
-            <div class="col-4 mt-5  offset-1 navBtnMob">
-                <a href="../controller/absencesCtrl.php" class="d-flex justify-content-center">
-                    <img src="public/img/absences.webp" class="img-fluid w-75"  alt="">
-                </a>
-            </div>
-            <!-- <div class="col-4 mt-5 navBtnMob ">
-                <a href="../view/agenda.php" class="d-flex justify-content-center">
-                    <img src="public/img/agenda.png" class="img-fluid w-75"  alt="">
-                </a>
-            </div> -->
-            <div class="col-4 mt-5 offset-1 navBtnMob">
-                <a href="../controller/tchatCtrl.php" class="d-flex justify-content-center">
-                    <img src="public/img/message.png" class="img-fluid w-75"  alt="">
-                </a>
-            </div>
-        </div>
-        <footer class="d-flex flex-column justify-content-center align-items-center position-fixed bottom-0">
-            <a href="../view/mention.php" class="text-white " data-bs-toggle="modal" data-bs-target="#exampleModal">Un
-                problème ?</a>
-            <a href="../view/mention.php" class="text-white">Mentions légales</a>
-        </footer>
-
-    </div>
-    <!-- VERSION DESKTOP -->
-    <div class="container-fluid d-none d-lg-none d-xl-block h-100 p-0 align-items-center">
-        <header class="mb-5 d-flex w-100">
-            <div class="logoBloc">
-                <img src="public/img/LOGO SOLO.png" class="ms-3 h-100" alt="">
-            </div>
-            <div class="ms-4 w-100 d-flex align-items-center justify-content-center">
-                <h1>Tableau de bord</h1>
-            </div>
-            <div class="align-self-end">
-                <a href="controller/profilCtrl.php" class="btn btn-outline-dark fw-bold">Profil</a> 
-            </div>
-            <div class="logoBloc">
-                <img src="public/img/LOGO SOLO.png" class="ms-3 h-100" alt="">
-            </div>
-        </header>
-        <div class="h-75 w-100 d-flex ps-5 pe-5">
-            <div class="row h-100 w-75 ">
-                <div class="row w-100 h-50">
-                    <div class="offset-1 col-3 h-100 resumeBloc">
-                        <a href="../controller/noteCtrl.php" class="text-decoration-none">
-                            <h2>Notes</h2>
-                        </a>
-                        
-                        <?php 
-                            foreach ($dataArrayNote as $key => $currentArray) {
-                                if($currentArray['id_users'] == $_SESSION['id']){
-                                    $teacher = User::SelectOne($currentArray['id_users_teacher_marks']);
-                                    $matter = Matter::SelectOne($teacher->id_matters);
-                                ?>
-                                <div class="noteEl d-flex w-100 mb-2 bg-egg">
-                                    <div class="notationBloc">
-                                        <div id="notation" class="d-flex justify-content-center align-items-center"><?=$currentArray['note']?></div>
-                                        <div id="onTwenty" class="d-flex justify-content-center align-items-center">20</div>
-                                    </div>
-                                    <div class="ps-1 bg-egg" id="infoNote">
-                                        <div id="noteMatter" class="fw-bold"><?= $matter.' - '.$currentArray['notation'] ?></div>
-                                        <div id="noteProf" class="prof">Mr/Mme <?=$teacher?></div>
-                                    </div>
-                                </div>
-                        <?php 
-                            }}
-                            if($_SESSION['rank'] == 3 || $_SESSION['rank'] == 4){
-                                echo "<p class='text-center text-white text-decoration-underline fw-bold'>Vous êtes professeur ou administrateur, la prévisualition des notes n'est donc pas possible.</p>";
-                            }
-                        ?>
-                    </div>
-                    <div class="offset-1 col-5 h-100 resumeBloc">
-                        <a href="../controller/assignmentCtrl.php" class="text-decoration-none">
-                            <h2>Devoirs</h2>
-                        </a>
-                        
-                        <div id="homeworkBloc">
-                            <?php 
-                            $users = new Assign();
-                            $dataArrayHw = $users->SelectAll();
-                            foreach ($dataArrayHw as $data){ 
-                                $save = explode("-", $data['end_date']);
-                                $year = $save[0];
-                                $month = $save[1];
-                                $day = $save[2];
-                                $month = strftime('%h', strtotime("$day-$month-$year"));
-                                $teacher = User::SelectOne($data['id_users']);
-                                $matters = Matter::SelectOne($teacher->id_matters);
-                            ?>
-                            <div class="hwEl d-flex w-100 mb-2">
-                                <div class="hwDateBloc h-100">
-                                    <div id="hwDate" class="text-center fw-bold text-white subInfo"><?= $day ?> <br> <?= $month ?></div>
-                                </div>
-                                <div class="ps-1 w-100 bg-egg">
-                                    <div id="hwMatter" class="fw-bold"><?= $matters->matter ?> - <?= $data['assignement'] ?></div>
-                                    <div id="hwProf" class="prof">Mme/Mr <?= $teacher->lastname?></div>
-                                </div>
-                            </div>
-                            <?php } ?>
-                        </div>
-                    </div>
-                </div>
-                <div class="row w-100 h-50 mt-4">
-                    <div class="col-5 h-100 resumeBloc">
-                        <a href="../controller/edtCtrl.php" class="text-decoration-none">
-                            <h2>Emploi du temps</h2>
-                        </a>
-                        
-                        <div id="edtBloc" class="text-center text-white">
-                            <?php foreach ($dataArrayEdt as $key => $currentArray) {
-                                if($currentArray['day'] == $currentDay ){ ?>
-                                    <div class="edtEl d-flex w-100 mb-2">
-                                        <div class="edtDateBloc h-100">
-                                            <div id="edtLocal" class="text-center fw-bold text-white subInfo">Salle <?=' '.$currentArray['room']?></div>
-                                        </div>
-                                        <div class="ps-1 w-100 bg-egg d-flex align-items-center">
-                                            <div id="infoBloc" class="fw-bold text-dark">
-                                                <span id="hours"><?=$currentArray['hour']?>h</span>
-                                                <span id="edtMatter"><?=$currentArray['matter']?> - </span>
-                                                <span id="edtProf" class="prof">Mme Lafoins</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                <?php }
-                            } ?>
-                        </div>
-                    </div>
-                    <div class="offset-1 col-3 h-100 resumeBloc">
-                        <a href="../controller/absencesCtrl.php" class="text-decoration-none">
-                            <h2>Absences</h2>
-                        </a>
-                        
-                        <div id="absentBloc">
-                            <div class="absentEl d-flex w-100 mb-2">
-                                <div class="absentDateBloc">
-                                    <div id="absentBloc" class="text-center fw-bold text-white subInfo">27 février</div>
-                                </div>
-                                <div class="ps-1 w-100 bg-egg d-flex align-items-center">
-                                    <div id="reasonBloc" class="fw-bold">
-                                        <span id="reason">Retard - 8h à 8h30</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-            <div class="row h-100">
-                <div class="col-12 h-100 p-0 resumeBloc" id="chatBloc">
-                    <a href="../controller/tchatCtrl.php" class="text-decoration-none">
-                        <h2>Tchat</h2>
-                    </a>
-                    <div id="topChat" class="d-flex">
-                        <div id="chatContact" class="d-flex flex-column align-items-center pt-1 p-2">
-                            <strong class="text-center">En ligne :</strong> 
-                            <div id="connected" class="rounded-circle bg-light text-success mt-2 d-flex justify-content-center align-items-center"
-                                style="width: 50px; height: 50px;">
-                                <!-- Code js ICI -->
-                            </div>
-                        </div>
-                        <div id="chatMessage" class="text-white overflow-scroll d-flex flex-column w-100" data-id="<?= $_SESSION['id'] ?>">
-
-                        </div>
-                    </div>
-                    <div id="chatBar" class="d-flex">
-                        <div id="chatBtnBloc">
-                            <button id="chatBtnSend">
-                                <img src="public/img/envoie.png" alt="Bouton enoyer un message dans le tchat"
-                                    class="img-fluid w-75">
-                            </button>
-                        </div>
-                        <textarea type="text" name="" id="chatInput"></textarea>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-
-        <footer class="d-flex flex-column justify-content-center align-items-center">
-            <a href="#" class="text-white " data-bs-toggle="modal" data-bs-target="#exampleModal">
-                Un problème ?
-            </a>
-            <a href="../view/mention.php" class="text-white">Mentions légales</a>
-        </footer>
-    </div>
-    <!-- Modal -->
-    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Un problème ?</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <form action="#" method="post">
-                    <div class="modal-body d-flex flex-column">
-                        <label for="object" class="mb-2">Titre de votre demande</label>
-                        <input type="text" name="object" id="object" class="mb-3">
-                        <label for="prob">Décrivez votre problème</label>
-                        <textarea name="prob" id="prob" cols="30" rows="10"></textarea>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
-                        <button type="submit" class="btn btn-info text-white">Envoyer</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-    
-    <script src="../public/js/chat.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <!-- Bootstrap JavaScript -->
-    
-    <script src="public/js/bootstrap/bootstrap.js"></script>
-</body>
-
-</html>
+$page = intval(trim(filter_input(INPUT_GET, 'page', FILTER_SANITIZE_NUMBER_INT)));
+switch ($page) {
+    case 1:
+        include dirname(__FILE__).'/controller/noteCtrl.php';
+        break;
+    case 2:
+        include dirname(__FILE__).'/controller/assignmentCtrl.php';
+        break;
+    case 3:
+        include dirname(__FILE__).'/controller/edtCtrl.php';
+        break;
+    case 4:
+        include dirname(__FILE__).'/controller/absencesCtrl.php';
+        break;
+    case 5:
+        include dirname(__FILE__).'/controller/agendaCtrl.php';
+        break;
+    case 6:
+        include dirname(__FILE__).'/controller/passCtrl.php';
+        break;
+    case 7:
+        include dirname(__FILE__).'/controller/profilCtrl.php';
+        break;
+    case 8:
+        include dirname(__FILE__).'/controller/tchatCtrl.php';
+        break;
+    case 9:
+        include dirname(__FILE__).'/controller/resetPassCtrl.php';
+        break;
+    case 10:
+        include dirname(__FILE__).'/controller/connectCtrl.php';
+        break;
+    case 11:
+        include dirname(__FILE__).'/controller/registerCtrl.php';
+        break;
+    default:
+        include dirname(__FILE__).'/controller/homeCtrl.php';
+        break;
+}

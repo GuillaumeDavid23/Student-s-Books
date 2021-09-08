@@ -10,7 +10,7 @@
                         <?= $messageCode[$code]['msg'] ?>
                     </div>
                 <?php endif ?>
-                <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="POST" class="d-flex flex-column text-center align-items-center">
+                <form action="<?= htmlspecialchars($_SERVER["PHP_SELF"]);?>?page=<?= $page ?>" method="POST" class="d-flex flex-column text-center align-items-center">
                     
                     <label for="resetMail">E-mail :</label>
                     <?= $testError = array_key_exists('mail', $stockError) ? $stockError['mail']:'';?>

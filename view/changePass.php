@@ -4,7 +4,7 @@
             <img src="../public/img/LogoStudentBook.webp" alt="logo student's books école facile" class="imgConnexion img-fluid mb-5 mt-4" width="50%">
             <fieldset  class="form-group">
                 <legend>Changer votre mot de passe</legend>
-                <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="POST" class="d-flex flex-column text-center align-items-center">
+                <form action="<?= htmlspecialchars($_SERVER["PHP_SELF"]);?>?page=<?= $page ?>" method="POST" class="d-flex flex-column text-center align-items-center">
                     <label for="inputPass">Mot de passe :</label>
                     <input type="password" name="inputPass" id="inputPass" required class="mb-4  <?= $classError = array_key_exists('inputPass', $stockError) ? 'inputError':'';?>" pattern="^((\w[^\W]+)[\.\-]?){1,}\@(([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3})|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$" >
                     <label for="inputCtrlPass">Confirmation du mot de passe : </label>

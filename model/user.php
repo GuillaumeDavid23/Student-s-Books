@@ -196,6 +196,29 @@ class User {
             }
         }
 
+                /**
+         * Sélection de colonne dans une ou plusieurs table.
+         * @param string $column Colonnes choisies
+         * @param string $table Tables choisies
+         * @param string $addSql Paramètres SQL (optionnel)
+         * @return object|11 Retourne un objet ou code 11
+         */
+        public static function SelectOneByMail($email)
+        {   
+            $pdo = SPDO::getInstance();
+            
+            $sql= ("SELECT * FROM `users` WHERE `mail` = :mail");
+            $stmt = $pdo->prepare($sql);
+            $stmt->bindValue(':mail', $email);
+            try {
+                $stmt->execute();
+                $result = $stmt->fetch(PDO::FETCH_OBJ);
+                return $result;
+            } catch (PDOException $ex) {
+                return 11;
+            }
+        }
+
         
         
 

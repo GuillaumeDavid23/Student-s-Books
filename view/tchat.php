@@ -8,14 +8,14 @@
                     <!-- Code js ICI -->
                 </div>
             </div>
-            <div id="chatMessage" class="text-white overflow-scroll d-flex flex-column w-100" data-id="<?= $_SESSION['id'] ?>">
+            <div id="chatMessage" class="text-white overflow-scroll d-flex flex-column w-100" data-id="<?= $_SESSION['user']->id ?>">
                 
             </div>
         </div>
         <div id="chatBar" class="d-flex">
             <div id="chatBtnBloc">
                 <button type="submit" id="chatBtnSend">
-                    <img src="../public/img/envoie.png" alt="Bouton envoyer un message dans le tchat"
+                    <img src="/public/img/envoie.png" alt="Bouton envoyer un message dans le tchat"
                         class="img-fluid w-50">
                 </button>
             </div>
@@ -23,5 +23,5 @@
         </div>
     </div>
 </div>
-<script src="../public/js/chat.js"></script>
+<script src="/public/js/chat.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>

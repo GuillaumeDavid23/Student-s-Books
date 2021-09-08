@@ -1,7 +1,7 @@
 <?php
 session_start();
-if(empty($_SESSION['rank'])){
-    header('Location: ../controller/connectCtrl.php');
+if(empty($_SESSION['user'])){
+    header('Location: /index.php?page=10');
 }
 setlocale (LC_TIME, 'fr_FR.utf8','fra'); 
 //Connexion BDD

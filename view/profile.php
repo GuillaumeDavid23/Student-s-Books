@@ -19,7 +19,7 @@
                     <?php endif ?>
                     <div id="msg" class="text-center h5 alert-danger"></div>
                     <h5>Changer votre mot de passe</h5>
-                    <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post" id="changePass" class="d-flex flex-column">
+                    <form action="<?= htmlspecialchars($_SERVER["PHP_SELF"]);?>?page=<?= $page ?>" method="post" id="changePass" class="d-flex flex-column">
                         
                         <label for="pass" class="form-label">Nouveau mot de passe</label>
                         <input type="password" name="pass" id="pass" class="form-control" *required>

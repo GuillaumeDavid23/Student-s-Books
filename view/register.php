@@ -9,7 +9,7 @@
                     <?= $messageCode[$code]['msg'] ?>
                 </div>
             <?php endif ?>
-            <form action="<?= htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="POST"
+            <form action="<?= htmlspecialchars($_SERVER["PHP_SELF"]);?>?page=<?= $page ?>" method="POST"
                 class="d-flex flex-column text-center align-items-center">
 
                 <!-- Nom / Prénom -->

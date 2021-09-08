@@ -1,7 +1,7 @@
 <?php
     session_start();
-    if(empty($_SESSION['rank'])){
-        header('Location: connectCtrl.php');
+    if(empty($_SESSION['user'])){
+        header('Location: /index?page=10');
     }
     require(dirname(__FILE__).'/../model/model.php');
 
@@ -53,7 +53,7 @@
                     {
                         if ($data['id'] == $_SESSION["id"]){
                             $changePass = 0;
-                            $id = $_SESSION['id'];
+                            $id = $_SESSION['user']->id;
                             $mail = $_SESSION['mail'];
                             $users = new User($id,$_SESSION['firstname'], $_SESSION['lastname'], $_SESSION['birthdate'],$mail,$ctrlPass,$changePass);
                             $test = $users->Modify();

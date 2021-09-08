@@ -22,10 +22,10 @@
             }
         ?>
     </table>
-    <?php if($_SESSION['rank'] == 4){ ?>
+    <?php if($_SESSION['user']->id_ranks == 4){ ?>
         <div class="mt-5">
             <h4 class="text-center">Ajouter ou modifier l'emploi du temps</h4>
-            <form action="<?= htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="POST" class="d-flex flex-column align-items-center">
+            <form action="<?= htmlspecialchars($_SERVER["PHP_SELF"]);?>?page=<?= $page ?>" method="POST" class="d-flex flex-column align-items-center">
                 <div class="mt-3">
                     <label for="days">Choisir le jour :</label>
                     <select name="days" id="days">

@@ -9,7 +9,7 @@ date_default_timezone_set('Europe/Paris');
 if(isset($_SESSION['derniere_action']) && $_SESSION['derniere_action'] > time() - 300 ) {
     /* time() - 300 secondes = heure actuelle - 5 min */
     /* donc dans ce cas, la dernière action date de moins de 5 minutes */
-    $online = new Online("", $_SESSION['id'], $_SESSION['derniere_action']);
+    $online = new Online("", $_SESSION['user']->id, $_SESSION['derniere_action']);
     $test = $online->Add();
     $messages = Online::SelectAll();
     // On convertit en json

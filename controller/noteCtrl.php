@@ -1,18 +1,19 @@
 <?php
 session_start();
 define("REGEX_BIRTHDAY", "^([12]\d{3}[-](0[1-9]|1[0-2])[-](0[1-9]|[12]\d|3[01]))$");
-if(empty($_SESSION['rank'])){
-    header('Location: ../controller/connectCtrl.php');
+if(empty($_SESSION['user'])){
+    header('Location: /index.php?page=10');
     exit;
 }
 
-if($_SESSION['rank'] == "3"){
-    $matter = $_SESSION['subject'];
-    $teacher = $_SESSION['id'];
+if($_SESSION['user']->id_ranks == "3"){
+    $matter = $_SESSION['user']->id_matters;
+    $teacher = $_SESSION['user']->id;
 }
 
 require_once(dirname(__FILE__).'/../model/user.php');
 require_once(dirname(__FILE__).'/../model/marks.php');
+require_once(dirname(__FILE__).'/../model/matters.php');
 require_once(dirname(__FILE__).'/../public/config/config.php');
 //Variables
 $testForm = false;
@@ -116,13 +117,13 @@ $dataArray = [];
 foreach ($marksArray as $data){
     $matter = Matter::SelectOne($data['id_users_teacher_marks']);
     $data['matter'] = $matter->matter;
-    if($_SESSION['rank'] == "1"){
-        if($data['id_users'] == $_SESSION['id']){
+    if($_SESSION['user']->id_ranks == "1"){
+        if($data['id_users'] == $_SESSION['user']->id){
             array_push($dataArray, $data);
         }
     }
-    elseif($_SESSION['rank'] == "3"){
-        if($data['id_users_teacher_marks'] == $_SESSION['id']){
+    elseif($_SESSION['user']->id_ranks == "3"){
+        if($data['id_users_teacher_marks'] == $_SESSION['user']->id){
             array_push($dataArray, $data);
         }
     }

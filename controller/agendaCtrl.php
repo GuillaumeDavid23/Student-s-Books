@@ -2,8 +2,8 @@
 //démarrage de la session
 session_start();
 //TEST de l'existance de la session utilisateur
-if(empty($_SESSION['rank'])){
-    header('Location: ../controller/connectCtrl.php');
+if(empty($_SESSION['user'])){
+    header('Location: /index.php?page=10');
 }
 
 //Inclusion des différents fichiers
@@ -20,7 +20,7 @@ if (!empty($_POST['dateEvent']) && !empty($_POST['eventName'])) {
     $fullDate = trim(filter_input(INPUT_POST, 'dateEvent', FILTER_SANITIZE_STRING));
     $eventName = trim(filter_input(INPUT_POST, 'eventName', FILTER_SANITIZE_STRING));;
     //on ajoute dans la base
-    $calendar = new Calendar("",$eventName,$fullDate,$_SESSION['id']);
+    $calendar = new Calendar("",$eventName,$fullDate,$_SESSION['user']->id);
     $code = $calendar->Add();
     //header("Refresh:0");
 }

@@ -3,8 +3,7 @@
 session_start();
 //TEST de l'existance d'une ancienne session pour destruction
 if(!empty($_SESSION)){
-    $_SESSION = [];
-    session_destroy();
+    unset($_SESSION['users']);
     session_start();
 }
 
@@ -18,9 +17,9 @@ $stockError = [];
 $errorInForm = true;
 $verifyMail = false;
 $verifyPass = false;
-
 //Les données sont-elles envoyées ?
 if($_SERVER['REQUEST_METHOD'] == "POST"){
+
         //Fonction de validation des données
     function valid_data($index, $data)
     {
@@ -82,52 +81,30 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
         $password = $_POST['inputPass'];
 
         if(!$errorInForm){
-            $dataArray = User::SelectAll();
-            
-            foreach ($dataArray as $data){
-                if ($data['mail'] == $mail){
-                    $verifyMail = true;
-                }else{
-                    $verifyMail = false;
-                }
-                if(password_verify($password, $data["password"])){
-                    $verifyPass = true;
-                }else{
-                    $verifyPass = false;
-                }
-
-                if ($verifyMail && $verifyPass){
-                    $_SESSION['derniere_action'] = time(); // mise à jour de la variable
-                    $_SESSION["id"] = $data['id'];
-                    $_SESSION["mail"] = $data['mail'];
-                    $_SESSION["lastname"] = $data['lastname'];
-                    $_SESSION["firstname"] = $data['firstname'];
-                    $_SESSION["birthdate"] = $data['birthdate'];
-                    $_SESSION["password"] = $data['password'];
-                    $_SESSION["rank"] = $data['id_ranks'];
-                    $_SESSION["subject"] = $data['id_matters']; //CONDITION A FAIRE
-                    $_SESSION["classes"] = $data['id_classes'];//CONDITION A FAIRE
-                    if ($data['changePass']){
-                        $_SESSION['changePass'] = $data['changePass'];
-                        header("Location: passCtrl.php");
-                        exit;
-                    }
-                    else{
-                        header("Location: ../index.php");
-                        exit;
-                    }
+            $user = User::SelectOneByMail($mail);
+            if (password_verify($password, $user->password)){
+                $_SESSION['derniere_action'] = time(); // mise à jour de la variable
+                $_SESSION['user'] = $user;
+                if($_SESSION['user']->changePass){
+                    header("Location: /index.php?page=6");
+                    exit;
                 }
                 else{
-                    $error = "<br>Mail ou mot de passe incorrect !";
-                    $stockError['mail'] = $error;
-                    $errorInForm = true;
+                    header("Location: /index.php");
+                    exit;
                 }
+            }
+            else{
+                $error = "<br>Mail ou mot de passe incorrect !";
+                $stockError['mail'] = $error;
+                $errorInForm = true;
             }
         }
     }
 }
 
-if(empty($_SESSION["rank"])){
+
+if(empty($_SESSION['users'])){
         $title = "Page de connexion : Students'Books";
         $meta = "";
         $head = "Connexion";
