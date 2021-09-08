@@ -70,11 +70,14 @@
             <div class="logoBloc">
                 <img src="/public/img/LOGO SOLO.png" class="ms-3 img-fluid" width="70" alt="">
             </div>
-            <div class="ms-4 w-100 d-flex align-items-center justify-content-center">
+            <div class="ms-5 w-100 d-flex align-items-center justify-content-center">
                 <h1>Tableau de bord</h1>
             </div>
             <div class="align-self-end">
-                <a href="/index.php?page=7" class="btn btn-outline-dark fw-bold">Profil</a> 
+                <a href="/index.php?page=7" class="btn btn-outline-dark fw-bold me-3">Profil</a> 
+            </div>
+            <div class="align-self-end">
+                <a href="/index.php?page=12" class="btn btn-outline-danger fw-bold">Déconnexion</a> 
             </div>
             <div class="logoBloc">
                 <img src="/public/img/LOGO SOLO.png" class="ms-3 img-fluid" width="70" alt="">

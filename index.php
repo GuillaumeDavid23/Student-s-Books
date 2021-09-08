@@ -34,6 +34,9 @@ switch ($page) {
     case 11:
         include dirname(__FILE__).'/controller/registerCtrl.php';
         break;
+    case 12:
+        include dirname(__FILE__).'/controller/logOutCtrl.php';
+        break;
     default:
         include dirname(__FILE__).'/controller/homeCtrl.php';
         break;

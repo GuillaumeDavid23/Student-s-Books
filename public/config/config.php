@@ -9,4 +9,5 @@ $messageCode = [
     5 => ['type' => 'alert-success', 'msg' => 'Un email vous a bien été envoyé !'],
     11 => ['type' => 'alert-danger', 'msg' => 'Une erreur est survenue'],
     12 => ['type' => 'alert-danger', 'msg' => 'Les mots de passes sont différents'],
+    13 => ['type' => 'alert-warning', 'msg' => 'Email ou mot de passe incorrect !']
 ];
