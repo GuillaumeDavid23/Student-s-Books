@@ -12,12 +12,12 @@
                     <?php endif ?>
                     <label for="inputMail">E-mail :</label>
                     <?= $testError = array_key_exists('mail', $stockError) ? $stockError['mail']:'';?>
-                    <input type="mail" name="inputMail" id="inputMail" class="mb-4 <?= $classError = array_key_exists('mail', $stockError) ? 'inputError':'';?>" pattern="^((\w[^\W]+)[\.\-]?){1,}\@(([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3})|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$" >
+                    <input type="mail" name="inputMail" id="inputMail" value="<?= $mail ?? '' ?>" class="mb-4 <?= $classError = array_key_exists('mail', $stockError) ? 'inputError':'';?>" pattern="^((\w[^\W]+)[\.\-]?){1,}\@(([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3})|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$" >
                     
                     <label for="inputPass">Mot de passe : </label>
                     <?= $testError = array_key_exists('password', $stockError) ? $stockError['password']:'';?>
                     <input type="password" name="inputPass" id="inputPass" <?= $classError = array_key_exists('password', $stockError) ? 'class="inputError"':'';?>>
-                    <a href="/controller/resetPassCtrl.php" class="link link-warning">Mot de passe oublié ?</a>
+                    <a href="/index.php?page=9" class="link link-warning">Mot de passe oublié ?</a>
                     <button type="submit" class="m-2 rounded-circle" id="btnSubmit"><img src="/public/img/arrow.png" alt="" class="img-fluid" width="40"></button>
                 </form>
             </fieldset>

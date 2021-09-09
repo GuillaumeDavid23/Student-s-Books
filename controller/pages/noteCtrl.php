@@ -1,20 +1,12 @@
 <?php
-session_start();
-define("REGEX_BIRTHDAY", "^([12]\d{3}[-](0[1-9]|1[0-2])[-](0[1-9]|[12]\d|3[01]))$");
-if(empty($_SESSION['user'])){
-    header('Location: /index.php?page=10');
-    exit;
-}
+//test de session
+require_once(dirname(__FILE__).'/../session/sessionCtrl.php');
+//Modèles
+require_once(dirname(__FILE__).'/../../model/user.php');
+require_once(dirname(__FILE__).'/../../model/marks.php');
+require_once(dirname(__FILE__).'/../../model/matters.php');
+require_once(dirname(__FILE__).'/../../public/config/config.php');
 
-if($_SESSION['user']->id_ranks == "3"){
-    $matter = $_SESSION['user']->id_matters;
-    $teacher = $_SESSION['user']->id;
-}
-
-require_once(dirname(__FILE__).'/../model/user.php');
-require_once(dirname(__FILE__).'/../model/marks.php');
-require_once(dirname(__FILE__).'/../model/matters.php');
-require_once(dirname(__FILE__).'/../public/config/config.php');
 //Variables
 $testForm = false;
 $arrayOfMatters = [
@@ -30,7 +22,10 @@ $arrayOfMatters = [
     'Latin',
     'Education physique et sportive'
 ];
-
+if($_SESSION['user']->id_ranks == "3"){
+    $matter = $_SESSION['user']->id_matters;
+    $teacher = $_SESSION['user']->id;
+}
 
 if($_SERVER['REQUEST_METHOD'] == "POST"){
 
@@ -136,6 +131,6 @@ $title = "Page des notes : Students'Books";
 $meta = "";
 $head = "Notes";
 
-include dirname(__FILE__).'/../view/templates/header.php';
-include dirname(__FILE__).'/../view/note.php';
-include dirname(__FILE__).'/../view/templates/footer.php';
+include dirname(__FILE__).'/../../view/templates/header.php';
+include dirname(__FILE__).'/../../view/pages/note.php';
+include dirname(__FILE__).'/../../view/templates/footer.php';

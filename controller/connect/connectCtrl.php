@@ -1,17 +1,14 @@
 <?php
-//démarrage de la session
 session_start();
-//TEST de l'existance d'une ancienne session pour destruction
 if(!empty($_SESSION['user'])){
     unset($_SESSION['user']);
 }
 
 //Inclusion des fichiers
-require_once(dirname(__FILE__).'/../model/user.php');
-require_once(dirname(__FILE__).'/../public/config/config.php');
+require_once(dirname(__FILE__).'/../../model/user.php');
+require_once(dirname(__FILE__).'/../../public/config/config.php');
 
 //Déclaration des variables
-$error = '';
 $stockError = [];
 $errorInForm = false;
 $verifyPass = false;
@@ -20,7 +17,7 @@ $code = null;
 //Les données sont-elles envoyées ?
 if($_SERVER['REQUEST_METHOD'] == 'POST'){
     //Correction et validation de toutes les données
-    $mail = strtolower(trim(filter_input(INPUT_POST, 'inputMail', FILTER_SANITIZE_EMAIL)));
+    $mail = strtolower(strip_tags(trim(filter_input(INPUT_POST, 'inputMail', FILTER_SANITIZE_EMAIL))));
     $password = $_POST['inputPass'];
     //Si les deux champs sont vides
     if(empty($password) || empty($mail))
@@ -45,6 +42,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
     }
     else
     {
+        //On valide le format de l'email
         if(!filter_var($mail, FILTER_VALIDATE_EMAIL)){
                 $stockError['mail'] = "<br>L'email n'est pas au bon format";
                 $errorInForm = true;
@@ -70,16 +68,19 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
             {   
                 //Utilisateur non trouvé
                 $code = 13;
+                $stockError['mail'] = "";
+                $stockError['password'] = "";
                 $errorInForm = true;
             }
         }
     }
 }
+//<script>alert('COUCOU')</script>
 
 //Affichage de la vue
 $title = 'Page de connexion : Students\'Books';
 $meta = '';
 $head = 'Connexion';
-include dirname(__FILE__).'/../view/templates/header.php';
-include dirname(__FILE__).'/../view/connect.php';
-include dirname(__FILE__).'/../view/templates/footer.php';
+include dirname(__FILE__).'/../../view/templates/header.php';
+include dirname(__FILE__).'/../../view/connect/connect.php';
+include dirname(__FILE__).'/../../view/templates/footer.php';

@@ -1,6 +1,6 @@
 <div class="row h-100 justify-content-center align-items-center">
     <div class="col-8 col-lg-4  text-center" id="connectBloc">
-        <img src="../public/img/LogoStudentBook.webp" alt="logo student's books école facile"
+        <img src="/public/img/LogoStudentBook.webp" alt="logo student's books école facile"
             class="imgConnexion img-fluid mb-5 mt-4" width="50%">
         <fieldset class="form-group">
             <legend>Inscription</legend>

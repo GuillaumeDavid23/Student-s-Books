@@ -11,3 +11,8 @@ $messageCode = [
     12 => ['type' => 'alert-danger', 'msg' => 'Les mots de passes sont différents'],
     13 => ['type' => 'alert-warning', 'msg' => 'Email ou mot de passe incorrect !']
 ];
+
+//REGEX 
+
+define("REGEX_BIRTHDAY", "^([12]\d{3}[-](0[1-9]|1[0-2])[-](0[1-9]|[12]\d|3[01]))$");
+

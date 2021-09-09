@@ -2,40 +2,40 @@
 $page = intval(trim(filter_input(INPUT_GET, 'page', FILTER_SANITIZE_NUMBER_INT)));
 switch ($page) {
     case 1:
-        include dirname(__FILE__).'/controller/noteCtrl.php';
+        include dirname(__FILE__).'/controller/pages/noteCtrl.php';
         break;
     case 2:
-        include dirname(__FILE__).'/controller/assignmentCtrl.php';
+        include dirname(__FILE__).'/controller/pages/assignmentCtrl.php';
         break;
     case 3:
-        include dirname(__FILE__).'/controller/edtCtrl.php';
+        include dirname(__FILE__).'/controller/pages/edtCtrl.php';
         break;
     case 4:
-        include dirname(__FILE__).'/controller/absencesCtrl.php';
+        include dirname(__FILE__).'/controller/pages/absencesCtrl.php';
         break;
     case 5:
-        include dirname(__FILE__).'/controller/agendaCtrl.php';
+        include dirname(__FILE__).'/controller/pages/agendaCtrl.php';
         break;
     case 6:
-        include dirname(__FILE__).'/controller/passCtrl.php';
+        include dirname(__FILE__).'/controller/connect/passCtrl.php';
         break;
     case 7:
-        include dirname(__FILE__).'/controller/profilCtrl.php';
+        include dirname(__FILE__).'/controller/user/profilCtrl.php';
         break;
     case 8:
-        include dirname(__FILE__).'/controller/tchatCtrl.php';
+        include dirname(__FILE__).'/controller/pages/tchatCtrl.php';
         break;
     case 9:
-        include dirname(__FILE__).'/controller/resetPassCtrl.php';
+        include dirname(__FILE__).'/controller/connect/resetPassCtrl.php';
         break;
     case 10:
-        include dirname(__FILE__).'/controller/connectCtrl.php';
+        include dirname(__FILE__).'/controller/connect/connectCtrl.php';
         break;
     case 11:
-        include dirname(__FILE__).'/controller/registerCtrl.php';
+        include dirname(__FILE__).'/controller/user/registerCtrl.php';
         break;
     case 12:
-        include dirname(__FILE__).'/controller/logOutCtrl.php';
+        include dirname(__FILE__).'/controller/session/logOutCtrl.php';
         break;
     default:
         include dirname(__FILE__).'/controller/homeCtrl.php';

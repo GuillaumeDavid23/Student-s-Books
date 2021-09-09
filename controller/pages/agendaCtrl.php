@@ -7,8 +7,8 @@ if(empty($_SESSION['user'])){
 }
 
 //Inclusion des différents fichiers
-require_once(dirname(__FILE__).'/../model/calendar.php');
-require_once(dirname(__FILE__).'/../public/config/config.php');
+require_once(dirname(__FILE__).'/../../model/calendar.php');
+require_once(dirname(__FILE__).'/../../public/config/config.php');
 
 //Déclaration des variables
 $arrayTestOfMonth = array('January','February', 'March', "April", 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'); 
@@ -17,12 +17,11 @@ $code = null;
 //Test d'existance des variables de l'envoi 
 if (!empty($_POST['dateEvent']) && !empty($_POST['eventName'])) {
     //On traite les données.
-    $fullDate = trim(filter_input(INPUT_POST, 'dateEvent', FILTER_SANITIZE_STRING));
-    $eventName = trim(filter_input(INPUT_POST, 'eventName', FILTER_SANITIZE_STRING));;
+    $fullDate = trim(htmlspecialchars(filter_input(INPUT_POST, 'dateEvent', FILTER_SANITIZE_STRING)));
+    $eventName = trim(htmlspecialchars(filter_input(INPUT_POST, 'eventName', FILTER_SANITIZE_STRING)));;
     //on ajoute dans la base
     $calendar = new Calendar("",$eventName,$fullDate,$_SESSION['user']->id);
     $code = $calendar->Add();
-    //header("Refresh:0");
 }
 
 $empty = false;//Test du select
@@ -157,6 +156,6 @@ $meta = "";
 $head = "Agenda";
 
 //Inclusion des vues
-include dirname(__FILE__).'/../view/templates/header.php';
-include dirname(__FILE__).'/../view/agenda.php';
+include dirname(__FILE__).'/../../view/templates/header.php';
+include dirname(__FILE__).'/../../view/pages/agenda.php';
 ?>

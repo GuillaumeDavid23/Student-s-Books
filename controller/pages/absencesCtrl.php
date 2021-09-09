@@ -9,8 +9,8 @@ if(empty($_SESSION['user'])){
 }
 
 //Inclusion des différents fichiers
-require_once(dirname(__FILE__).'/../model/user.php');
-require_once(dirname(__FILE__).'/../model/absences.php');
+require_once(dirname(__FILE__).'/../../model/user.php');
+require_once(dirname(__FILE__).'/../../model/absences.php');
 
 //On définit la localité
 setlocale (LC_TIME, 'fr_FR.utf8','fra.utf8'); 
@@ -25,6 +25,6 @@ $meta = 'Bienvenue sur Students\'Books, c\'est ici que commence la révolution s
 $head = "Absences";
 
 //Inclusion des vues
-include dirname(__FILE__).'/../view/templates/header.php';
-include dirname(__FILE__).'/../view/absences.php';
-include dirname(__FILE__).'/../view/templates/footer.php';
+include dirname(__FILE__).'/../../view/templates/header.php';
+include dirname(__FILE__).'/../../view/pages/absences.php';
+include dirname(__FILE__).'/../../view/templates/footer.php';

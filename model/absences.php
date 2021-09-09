@@ -65,14 +65,18 @@ class Absence {
          * @param string $column Colonnes choisies
          * @param string $table Tables choisies
          * @param string $addSql Paramètres SQL (optionnel)
-         * @return object|int(11) Retourne un tableau associatif ou False
+         * @return object|11 Retourne un objet ou code 11
          */
-        public function SelectOne()
-        {
-            $sql= ("SELECT `start_date`, `end_date`, `start_hour`, `end_hour`, `justification`, `id_users` FROM `absences` WHERE `id` = $this->id");
+        public static function SelectOne($id)
+        {   
+            $pdo = SPDO::getInstance();
+            
+            $sql= ("SELECT `start_date`, `end_date`, `start_hour`, `end_hour`, `justification`, `id_users` FROM `absences` WHERE `id` = :id");
+            $stmt = $pdo->prepare($sql);
+            $stmt->bindValue(':id', $id);
             try {
-                $sql = $this->pdo->query($sql);
-                $result = $sql->fetch(PDO::FETCH_OBJ);
+                $stmt->execute();
+                $result = $stmt->fetch(PDO::FETCH_OBJ);
                 return $result;
             } catch (PDOException $ex) {
                 return 11;

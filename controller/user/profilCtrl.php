@@ -5,10 +5,10 @@
         exit;
     }
     
-    require_once(dirname(__FILE__).'/../model/user.php');
-    require_once(dirname(__FILE__).'/../model/matters.php');
-    require_once(dirname(__FILE__).'/../model/ranks.php');
-    require_once(dirname(__FILE__).'/../public/config/config.php');
+    require_once(dirname(__FILE__).'/../../model/user.php');
+    require_once(dirname(__FILE__).'/../../model/matters.php');
+    require_once(dirname(__FILE__).'/../../model/ranks.php');
+    require_once(dirname(__FILE__).'/../../public/config/config.php');
     
     //Déclaration des variables
     $user = User::SelectOne($_SESSION['user']->id);
@@ -88,6 +88,6 @@ $title = "Profil Students'Books";
 $meta = "";
 $head = "Votre profil";
 
-include dirname(__FILE__).'/../view/templates/header.php';
-include dirname(__FILE__)."/../view/profile.php";
-include dirname(__FILE__).'/../view/templates/footer.php';
+include dirname(__FILE__).'/../../view/templates/header.php';
+include dirname(__FILE__)."/../../view/user/profile.php";
+include dirname(__FILE__).'/../../view/templates/footer.php';

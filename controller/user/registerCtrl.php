@@ -15,8 +15,8 @@ $testForm = true;
 $code =null;
 
 //Connexion BDD
-require_once(dirname(__FILE__).'/../model/user.php');
-require_once(dirname(__FILE__).'/../public/config/config.php');
+require_once(dirname(__FILE__).'/../../model/user.php');
+require_once(dirname(__FILE__).'/../../public/config/config.php');
 
 $requiredInput = [
             'firstname' => true,
@@ -196,7 +196,7 @@ $title = "Enregistrement d'un nouvel utilisateur";
 $meta = "";
 $head = "Inscription d'utilisateur";
 
-include dirname(__FILE__).'/../view/templates/header.php';
-include dirname(__FILE__).'/../view/register.php';
-include dirname(__FILE__).'/../view/templates/footer.php';
+include dirname(__FILE__).'/../../view/templates/header.php';
+include dirname(__FILE__).'/../../view/user/register.php';
+include dirname(__FILE__).'/../../view/templates/footer.php';
 

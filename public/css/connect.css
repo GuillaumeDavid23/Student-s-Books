@@ -12,13 +12,14 @@
 #btnSubmit {
     width: 6em;
     height: 6em;
-    background-color: #A99BD4;
-    border: 2px solid grey;
+    background-color: #3498DB;
+    border: 2px solid black;
     transform: scale(1);
     transition: 0.5s;
 }
 
 #btnSubmit:hover {
+    background-color: rgb(98, 197, 197);
     transform: scale(1.1);
     transition: 0.5s;
 }
