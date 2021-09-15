@@ -58,8 +58,26 @@ class User {
             $res = $this::checkDuplicate($this->mail);
             if($res === false){
                 $sql = $this->pdo->prepare(
-                    "INSERT INTO `users`(`firstname`, `lastname`, `birthdate`,`mail`, `password`, `changePass`, `statut`, `id_ranks`, `id_matters`, `id_classes`) 
-                    VALUES(:firstname, :lastname, :birthdate, :mail, :password, :changePass, :statut, :id_ranks, :id_matters, :id_classes);");
+                    "INSERT INTO `users` (`firstname`,
+                                        `lastname`,
+                                        `birthdate`,
+                                        `mail`, 
+                                        `password`, 
+                                        `changePass`, 
+                                        `statut`, 
+                                        `id_ranks`, 
+                                        `id_matters`, 
+                                        `id_classes`) 
+                    VALUES(:firstname, 
+                            :lastname, 
+                            :birthdate, 
+                            :mail, 
+                            :password, 
+                            :changePass, 
+                            :statut, 
+                            :id_ranks, 
+                            :id_matters, 
+                            :id_classes);");
                 $sql->bindParam(':firstname', $this->firstname);
                 $sql->bindParam(':lastname', $this->lastname);
                 $sql->bindParam(':birthdate', $this->birthdate);
@@ -84,7 +102,7 @@ class User {
         /**
          * Test si le mail est déjà dans la Base SQL
          * @param string $mail Mail à tester
-         * @return string|false Retourne le mail doublon ou False
+         * @return string|int Retourne le mail doublon ou code erreur 11
          */
         public static function checkDuplicate($mail)
         {
@@ -103,7 +121,7 @@ class User {
         /**
          * Modifier un patient
          * @param int $id
-         * @return true|11
+         * @return true|int Validé ou Erreur
          */
         public function Modify()
         {
@@ -134,7 +152,7 @@ class User {
         /**
          * Modifier un patient
          * @param int $id
-         * @return true|11
+         * @return true|int
          */
         public function ResetPass($token)
         {
@@ -174,11 +192,9 @@ class User {
         }
 
         /**
-         * Sélection de colonne dans une ou plusieurs table.
-         * @param string $column Colonnes choisies
-         * @param string $table Tables choisies
-         * @param string $addSql Paramètres SQL (optionnel)
-         * @return object|11 Retourne un objet ou code 11
+         * Sélection d'un user par son id.
+         * @param int $id
+         * @return object|int Retourne un objet ou code 11
          */
         public static function SelectOne($id)
         {   
@@ -196,12 +212,10 @@ class User {
             }
         }
 
-                /**
-         * Sélection de colonne dans une ou plusieurs table.
-         * @param string $column Colonnes choisies
-         * @param string $table Tables choisies
-         * @param string $addSql Paramètres SQL (optionnel)
-         * @return object|11 Retourne un objet ou code 11
+        /**
+         * Sélection d'un user par son mail.
+         * @param string $email Colonnes choisies
+         * @return object|int Retourne un objet ou code 11
          */
         public static function SelectOneByMail($email)
         {   
@@ -219,9 +233,61 @@ class User {
             }
         }
 
-        
-        
+        public static function Desactivate($id)
+        {   
+            $pdo = SPDO::getInstance();
 
+            $sql = "UPDATE `users`
+            SET `statut` = 0
+            WHERE `users`.`id` = :id";
+            $stmt = $pdo->prepare($sql);
+            $stmt->bindValue(':id', $id);
+            try {
+                $result = $stmt->execute();
+                return 14;
+            } catch (PDOException $ex) {
+                return 11;
+            }
+            
+        }
+
+        public static function SetAvatar($id, $ext)
+        {   
+            $pdo = SPDO::getInstance();
+
+            $sql = "UPDATE `users`
+            SET `pic` = :ext
+            WHERE `users`.`id` = :id";
+            $stmt = $pdo->prepare($sql);
+            $stmt->bindValue(':id', $id);
+            $stmt->bindValue(':ext', $ext);
+            try {
+                $result = $stmt->execute();
+                return 15;
+            } catch (PDOException $ex) {
+                return 11;
+            }
+            
+        }
+        
+        
+        /**
+         * Supprime une entrée dans la Base
+         * @param string $table Table sélectionnée
+         * @param string $addSql Paramètre supplémentaire SQL
+         */
+        public function Delete()
+        {   
+            $sql = "DELETE FROM `users` WHERE `id` = $this->id";
+            try {
+                $sql = $this->pdo->query($sql);
+                return $sql;
+            } catch (PDOException $ex) {
+                return 11;
+            }
+        }
+
+        
         /**
          * Sélection de colonne dans une ou plusieurs table.
          * @param string $column Colonnes choisies
@@ -241,24 +307,6 @@ class User {
             }
         }
 
-
-        /**
-         * Supprime une entrée dans la Base
-         * @param string $table Table sélectionnée
-         * @param string $addSql Paramètre supplémentaire SQL
-         */
-        public function Delete()
-        {   
-            $sql = "DELETE FROM `users` WHERE `patients`.`id` = $this->id";
-            try {
-                $sql = $this->pdo->query($sql);
-                return $sql;
-            } catch (PDOException $ex) {
-                return 11;
-            }
-            
-        }
-
         public function Count($table, $addSql = "")
         {
             $sql = $this->pdo->query("SELECT COUNT(*) AS nb FROM".' '.$table.' '.$addSql);
@@ -275,7 +323,6 @@ class User {
         }
 
         public function Show()
-
         {
              // On détermine sur quelle page on se trouve
             if(isset($_GET['page']) && !empty($_GET['page'])){

@@ -112,7 +112,7 @@ h2:hover {
 #notation {
     height: 50%;
     text-align: center;
-    background-color: #A99BD4;
+    background-color: #3498DB;
     color: white;
     border-bottom: 1px solid black;
 }
@@ -121,7 +121,7 @@ h2:hover {
     height: 50%;
     text-align: center;
     color: white;
-    background-color: #2E4053;
+    background-color: #476686;
 }
 
 .prof {
@@ -145,6 +145,14 @@ h2:hover {
     background-color: #476686;
 }
 
-.meChat {
+.otherChat {
     background-color: #2E4053;
+    border-radius: 10px;
+    border-top-left-radius: 0;
+}
+
+.meChat {
+    border-radius: 10px;
+    border-top-right-radius: 0;
+    background-color: #476686;
 }

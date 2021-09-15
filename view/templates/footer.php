@@ -1,6 +1,6 @@
         <div class="row justify-content-evenly w-100 d-none d-lg-flex">
             <?php
-                if($adresse == '/index.php?page=2'){
+                if($page == 2){
                         echo '
                     <div class="col-1 navBtnMob">
                         <a href="../index.php?page=1">
@@ -29,7 +29,7 @@
                     </div>
                     ';
                 }
-                elseif($adresse == '/index.php?page=1'){
+                elseif($page == 1){
                         echo '
                         <div class="col-1 navBtnMob">
                             <a href="/index.php?page=2">
@@ -58,7 +58,7 @@
                         </div>
                         ';
                 }
-                elseif($adresse == '/index.php?page=3'){
+                elseif($page == 3){
                     echo '
                         <div class="col-1 navBtnMob">
                             <a href="/index.php?page=2">
@@ -87,7 +87,7 @@
                         </div>
                     ';
                 }
-                elseif($adresse == '/index.php?page=4'){
+                elseif($page == 4){
                     echo '
                         <div class="col-1 navBtnMob">
                             <a href="/index.php?page=2">
@@ -150,18 +150,18 @@
         
         <footer class="d-flex flex-column justify-content-center align-items-center">
 
-            <a href="#" class="text-white " data-bs-toggle="modal" data-bs-target="#exampleModal">
+            <a href="#" class="text-white " data-bs-toggle="modal" data-bs-target="#Prob">
                 Un problème ?
             </a>
-            <a href="/view/mention.php" class="text-white">Mentions légales</a>
+            <a href="/index.php?page=13" class="text-white">Mentions légales</a>
         </footer>
     </div>
     <!-- Modal -->
-    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="Prob" tabindex="-1" aria-labelledby="ProbLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Un problème ?</h5>
+                    <h5 class="modal-title" id="ProbLabel">Un problème ?</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <form action="#" method="post">
@@ -189,7 +189,7 @@
             echo '<script src="../public/js/main.js"></script>';
         }
     ?>
-    
+
     <script src="/public/js/bootstrap/bootstrap.js"></script>
 </body>
 

@@ -67,7 +67,7 @@ class Chat {
                 $test = $sql->execute();
                 return 3;
             } catch (PDOException $ex) {
-                return $ex;
+                return false;
             }
         }
     }  

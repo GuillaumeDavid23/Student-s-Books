@@ -41,16 +41,17 @@ function ajoutMessage() {
         // On gère la réponse
         xmlhttp.onreadystatechange = function () {
             if (this.readyState == 4) {
-
+                console.log(this.status)
                 if (this.status == 201) {
                     // On a une réponse
                     // On efface le champ texte
                     document.querySelector("#chatInput").value = ""
                 } else {
                     // On reçoit une erreur, on l'affiche
-
+                    document.querySelector("#chatInput").value = ""
                     let reponse = JSON.parse(this.response)
                     alert(reponse.message)
+
                 }
             }
         }
@@ -92,13 +93,32 @@ function chargeMessages() {
                     let dateMessage = new Date(message.create_at)
 
                     if (idUser == message.id_users) {
-                        addClass = "subInfo align-self-end"
+                        addClass = "meChat align-self-end"
+                        imgClass = "align-self-end"
+                        img = ""
                     } else {
-                        addClass = "meChat align-self-start"
+                        addClass = "otherChat align-self-start"
+                        img = `<img width = '25'
+                        class = "rounded-circle align-self-start"
+                        src = "/uploads/users/${message.id_users}.jpg"
+                        alt = "" >`
+                    }
+
+                    if (dateMessage.getMinutes() < 10) {
+                        time = dateMessage.getHours() + ":0" + dateMessage.getMinutes()
+                    } else {
+                        time = dateMessage.getHours() + ":" + dateMessage.getMinutes()
                     }
                     // On ajoute le message avant le contenu déjà en place
+                    console.log(message);
                     discussion.append(
-                        `<p class="m-1 mb-3 p-1 rounded ${addClass}">${message.firstname} a écrit le ${dateMessage.toLocaleString()} : <br> ${message.message}</p>`
+
+                        `
+                        ${img}
+                        <div class="${addClass} m-1 mb-3 p-1 d-flex flex-column">
+                            <p class="${addClass}">${message.firstname} à ${time} : <br> ${message.message}</p>
+                        </div>
+                        `
                     )
 
                     // On met à jour l'id

@@ -5,7 +5,6 @@ require_once(dirname(__FILE__).'/../../public/config/config.php');
 
 //Déclaration des variables
 $stockError = [];
-$errorInForm = false;    
 
 //Les données sont-elles envoyées ?
 if($_SERVER['REQUEST_METHOD'] == "POST"){
@@ -15,18 +14,15 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
 
     if(empty($firstPass)){ //Contrôle de l'input
         $stockError['inputPass'] = "<br>ERREUR une donnée est vide : Nouveau mot de passe";
-        $errorInForm = true;
     }
     elseif(empty($ctrlPass)){
         $stockError['inputCtrlPass'] = "<br>ERREUR une donnée est vide : Confirmation du mot de passe";
-        $errorInForm = true;
     }
     elseif($firstPass != $ctrlPass){
         $stockError['different'] = "<br>ERREUR les mots de passes ne sont pas identiques";
-        $errorInForm = true;
     }
 
-    if (!$errorInForm){ //MOT DE PASSE OK
+    if (empty($stockError)){ //MOT DE PASSE OK
         $ctrlPass = password_hash($ctrlPass, PASSWORD_BCRYPT);
         $users = new User($_SESSION['user']->id, $_SESSION['user']->firstname, $_SESSION['user']->lastname, $_SESSION['user']->birthdate, $_SESSION['user']->mail, $ctrlPass, 0);
         $code = $users->Modify();

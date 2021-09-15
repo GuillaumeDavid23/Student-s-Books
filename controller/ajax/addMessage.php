@@ -16,7 +16,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
         $donneesJson = file_get_contents('php://input');
         // On convertit les données
         $donnees = json_decode($donneesJson);
-        
+        $donnees->message = trim($donnees->message);
         // On vérifie qu'il y a un message
         if(isset($donnees->message) && !empty($donnees->message)){
             // Le message n'est pas vide

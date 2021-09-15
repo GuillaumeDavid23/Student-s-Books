@@ -10,3 +10,30 @@
 .inputValide {
     border: 2px solid yellowgreen;
 }
+
+/* Conteneur de chaque Lien */
+.avatarBtn {
+    position: absolute;
+    width: 150px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    opacity: 0;
+    background: rgba(0, 0, 0, 0.5);
+    transition: opacity .5s ease-in-out;
+}
+
+/* Action quand souris passe dessus */
+.avatarBtn:hover {
+    opacity: 1;
+}
+
+/* Réglage texte */
+.avatarBloc a.text {
+    color: #FFF;
+    font-size: 20px;
+}
+
+/* FIN EFFET FADE */

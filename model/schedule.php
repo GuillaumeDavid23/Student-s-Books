@@ -30,12 +30,11 @@ class Schedule{
             $stmt->bindParam(':id_slots', $this->id_slots);
             $stmt->bindParam(':id_matters', $this->id_matters);
             $stmt->bindParam(':id_rooms', $this->id_rooms);
-            
             try {
                 $test = $stmt->execute();
-                return 3;
+                return 16;
             } catch (PDOException $ex) {
-                return $ex;
+                return 11;
             }
         }
 
@@ -66,11 +65,28 @@ class Schedule{
         {
             $pdo = SPDO::getInstance();
 
-            $sql= ("SELECT `day`, `id_slots`, `id_matters`, `id_rooms` FROM `schedule`");
+            $sql= ("SELECT `day`, `id_slots`, `id_matters`, `id_rooms`, `id_class` FROM `schedule` INNER JOIN `classes_schedule` ON `schedule`.id = `classes_schedule`.id_schedule");
             try {
                 $sql = $pdo->query($sql);
                 $result = $sql->fetchAll(PDO::FETCH_ASSOC);
                 return $result;
+            } catch (PDOException $ex) {
+                return 11;
+            }
+        }
+                /**
+         * Sélection de colonne dans une ou plusieurs table.
+         * @param string $column Colonnes choisies
+         * @param string $table Tables choisies
+         * @param string $addSql Paramètres SQL (optionnel)
+         * @return array|false Retourne un tableau associatif ou False
+         */
+        public static function getLastId()
+        {
+            $pdo = SPDO::getInstance();
+           
+            try {
+                return $pdo->lastInsertId();
             } catch (PDOException $ex) {
                 return 11;
             }

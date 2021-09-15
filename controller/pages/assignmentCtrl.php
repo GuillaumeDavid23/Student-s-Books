@@ -19,29 +19,25 @@ require_once(dirname(__FILE__).'/../../model/matters.php');
 require_once(dirname(__FILE__).'/../../public/config/config.php');
 
 //Déclaration des variables et constantes
-$testForm = false;
+$code = null;
 
 if($_SERVER['REQUEST_METHOD'] == "POST"){
 
     if(empty($_POST['assignmentDate']))
     {
         $stockError['assignmentDate'] = "<br>ERREUR Champs 'assignmentDate' vide !";
-        $testForm = true;
     }
     elseif(empty($_POST['assignmentName']))
     {
         $stockError['assignmentName'] = "<br>ERREUR Champs 'assignmentName' vide !";
-        $testForm = true;
     }
     elseif(empty($_POST['class']))
     {
         $stockError['class'] = "<br>ERREUR Classe non renseigné!";
-        $testForm = true;
     }
     elseif(empty($subject))
     {
         $stockError['subject'] = "<br>ERREUR Votre matière de professeur n'est pas renseigné !";
-        $testForm = true;
     }
     else
     {
@@ -51,21 +47,17 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
         
         if(!preg_match("/".REGEX_BIRTHDAY."/", $hwDate)){
                 $stockError['assignmentDate'] = "ERREUR Le format de la date du devoir est incorrect (Format : YYYY-MM-JJ)";
-                $testForm = true;
         }else{
             $save = explode("-", $hwDate);
             if(!checkdate($save[1], $save[2], $save[0])){
                 $stockError['assignmentDate'] = "ERREUR La date saisie n'existe pas";
-                $testForm = true;
             }
         }
 
-        if(!$testForm){
+        if(empty($stockError)){
             //Ajout dans la base
             $assign = new Assign("", $hwDate, $hwName, $class, $id_users);
             $code = $assign->Add();
-            header('Refresh:0');
-            exit;
         }
     }
 }

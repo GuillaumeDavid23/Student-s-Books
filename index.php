@@ -37,6 +37,15 @@ switch ($page) {
     case 12:
         include dirname(__FILE__).'/controller/session/logOutCtrl.php';
         break;
+    case 13:
+        $head = "Mentions légales";
+        $title = "Mentions légales";
+        $meta = "Mentions légales";
+        include dirname(__FILE__).'/view/templates/header.php';
+        include dirname(__FILE__).'/view/mention.php';
+        include dirname(__FILE__).'/view/templates/footer.php';
+
+        break;
     default:
         include dirname(__FILE__).'/controller/homeCtrl.php';
         break;

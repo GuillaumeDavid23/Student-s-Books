@@ -73,10 +73,10 @@
             <div class="ms-5 w-100 d-flex align-items-center justify-content-center">
                 <h1>Tableau de bord</h1>
             </div>
-            <div class="align-self-end">
+            <div class="align-self-center">
                 <a href="/index.php?page=7" class="btn btn-outline-dark fw-bold me-3">Profil</a> 
             </div>
-            <div class="align-self-end">
+            <div class="align-self-center">
                 <a href="/index.php?page=12" class="btn btn-outline-danger fw-bold">Déconnexion</a> 
             </div>
             <div class="logoBloc">
@@ -103,8 +103,8 @@
                                         <div id="onTwenty" class="d-flex justify-content-center align-items-center">20</div>
                                     </div>
                                     <div class="ps-1 bg-egg" id="infoNote">
-                                        <div id="noteMatter" class="fw-bold"><?= $matter.' - '.$currentArray['notation'] ?></div>
-                                        <div id="noteProf" class="prof">Mr/Mme <?=$teacher?></div>
+                                        <div id="noteMatter" class="fw-bold"><?= $matter->matter.' - '.$currentArray['notation'] ?></div>
+                                        <div id="noteProf" class="prof">Mr/Mme <?=$teacher->lastname?></div>
                                     </div>
                                 </div>
                         <?php 
@@ -174,18 +174,28 @@
                             <h2>Absences</h2>
                         </a>
                         
-                        <div id="absentBloc">
-                            <div class="absentEl d-flex w-100 mb-2">
-                                <div class="absentDateBloc">
-                                    <div id="absentBloc" class="text-center fw-bold text-white subInfo">27 février</div>
-                                </div>
-                                <div class="ps-1 w-100 bg-egg d-flex align-items-center">
-                                    <div id="reasonBloc" class="fw-bold">
-                                        <span id="reason">Retard - 8h à 8h30</span>
+                        <?php foreach ($absencesArray as $absencesObj) { 
+                            $timestamp_start = strtotime($absencesObj->start_date.' '.$absencesObj->start_hour);
+                            $timestamp_end = strtotime($absencesObj->end_date.' '.$absencesObj->end_hour);
+
+                            $day_start = strftime('%d', $timestamp_start);
+                            $month_start = strftime('%B', $timestamp_start);
+
+                            $day_end = strftime('%d', $timestamp_end);
+                            $month_end = strftime('%B', $timestamp_end);
+
+                            if($_SESSION['user']->id == $absencesObj->id_users ){?>
+                                <div class="absentEl d-flex w-100 mb-2">
+                                    <div class="absentDateBloc ">
+                                        <div id="absentBloc" class="text-center fw-bold text-white subInfo ps-2 pe-2"><?= $day_start.' au '.$day_end.'<br>'.$month_start ?></div>
+                                    </div>
+                                    <div class="ps-1 w-100 bg-egg d-flex align-items-center">
+                                        <div id="reasonBloc" class="fw-bold">
+                                            <span id="reason"><?= $absencesObj->justification ?> - de <?= date('H:i', $timestamp_start) ?> à <?= date('H:i', $timestamp_end) ?> </span>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        </div>
+                        <?php }} ?>
                     </div>
                 </div>
 
@@ -226,7 +236,7 @@
         <a href="#" class="text-white " data-bs-toggle="modal" data-bs-target="#exampleModal">
             Un problème ?
         </a>
-        <a href="/view/mention.php" class="text-white">Mentions légales</a>
+        <a href="/index.php?page=13" class="text-white">Mentions légales</a>
     </footer>
 
     <!-- Modal de contact -->

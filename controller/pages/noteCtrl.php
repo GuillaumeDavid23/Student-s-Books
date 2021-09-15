@@ -5,6 +5,7 @@ require_once(dirname(__FILE__).'/../session/sessionCtrl.php');
 require_once(dirname(__FILE__).'/../../model/user.php');
 require_once(dirname(__FILE__).'/../../model/marks.php');
 require_once(dirname(__FILE__).'/../../model/matters.php');
+require_once(dirname(__FILE__).'/../../model/classes.php');
 require_once(dirname(__FILE__).'/../../public/config/config.php');
 
 //Variables
@@ -108,23 +109,27 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
 
 $marksArray = Mark::SelectAll();
 $dataArray = [];
-
-foreach ($marksArray as $data){
-    $matter = Matter::SelectOne($data['id_users_teacher_marks']);
-    $data['matter'] = $matter->matter;
-    if($_SESSION['user']->id_ranks == "1"){
+$marksSum = 0;
+$count = 0;
+if($_SESSION['user']->id_ranks == "1"){
+    foreach ($marksArray as $data){
+        $matters = Matter::SelectOne($data['id_users_teacher_marks']);
+        $data['matter'] = $matters->matter;
         if($data['id_users'] == $_SESSION['user']->id){
             array_push($dataArray, $data);
+            $marksSum += $data['note'];
+            $count++;
         }
     }
-    elseif($_SESSION['user']->id_ranks == "3"){
-        if($data['id_users_teacher_marks'] == $_SESSION['user']->id){
-            array_push($dataArray, $data);
-        }
-    }
-    
+}
+if($count > 0 && $marksSum > 0){
+    $avg = $marksSum/$count;
+}
+else{
+    $avg = 0;
 }
 
+$classesArray = Classes::SelectAll();
 $dataUsers = User::SelectAll();
 
 $title = "Page des notes : Students'Books";

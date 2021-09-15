@@ -13,56 +13,54 @@ $stockError = [];
 $errorInForm = false;
 $verifyPass = false;
 $code = null;
+if(!empty($_GET['code'])){
+    $code = intval(trim(filter_input(INPUT_GET, 'code', FILTER_SANITIZE_NUMBER_INT)));
+}
 
-//Les données sont-elles envoyées ?
-if($_SERVER['REQUEST_METHOD'] == 'POST'){
-    //Correction et validation de toutes les données
+if($_SERVER['REQUEST_METHOD'] == 'POST'){ //Les données sont-elles envoyées ?
+    //Attribtion et validation de toutes les données
     $mail = strtolower(strip_tags(trim(filter_input(INPUT_POST, 'inputMail', FILTER_SANITIZE_EMAIL))));
     $password = $_POST['inputPass'];
-    //Si les deux champs sont vides
-    if(empty($password) || empty($mail))
+    
+    if(empty($password) || empty($mail)) //Si les deux champs sont vides
     {
-        //Affichage du formulaire si vide
-        $errorInForm = true;
         $stockError['password'] = 'Mot de passe vide !';
-        $stockError['mail'] = 'mail vide !';
+        $stockError['mail'] = 'Email vide !';
     }
-    //Si mail est vide
-    elseif(empty($mail))
+    elseif(empty($mail))//Si mail est vide
     {
         $stockError['mail'] = 'mail vide !';
-        $errorInForm = true;
     }
-    //Si password est vide
-    elseif(empty($password))
+    elseif(empty($password))//Si password est vide
     {
-        //Affichage du formulaire si vide
-        $errorInForm = true;
         $stockError['password'] = 'Mot de passe vide !';
     }
     else
     {
-        //On valide le format de l'email
-        if(!filter_var($mail, FILTER_VALIDATE_EMAIL)){
-                $stockError['mail'] = "<br>L'email n'est pas au bon format";
-                $errorInForm = true;
+        if(!filter_var($mail, FILTER_VALIDATE_EMAIL)){ //On valide le format de l'email
+            $stockError['mail'] = "<br>L'email n'est pas au bon format";
         }
 
-        if(!$errorInForm){
+        if(empty($stockError)){
             $user = User::SelectOneByMail($mail);
             if(is_object($user)){
-                if (password_verify($password, $user->password)){
-                    $_SESSION['derniere_action'] = time(); // mise à jour de la variable de dernière action
-                    $_SESSION['user'] = $user;
-                    if($_SESSION['user']->changePass){
-                        header("Location: /index.php?page=6");
-                        exit;
+                if($user->statut != 0){
+                    if (password_verify($password, $user->password)){
+                        $_SESSION['derniere_action'] = time(); // mise à jour de la variable de dernière action
+                        $_SESSION['user'] = $user;
+                        if($_SESSION['user']->changePass){
+                            header("Location: /index.php?page=6");
+                            exit;
+                        }
+                        else{
+                            header("Location: /index.php");
+                            exit;
+                        }
                     }
-                    else{
-                        header("Location: /index.php");
-                        exit;
-                    }
+                }else{
+                    $code = 15;
                 }
+                
             }
             else
             {   
@@ -75,7 +73,6 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
         }
     }
 }
-//<script>alert('COUCOU')</script>
 
 //Affichage de la vue
 $title = 'Page de connexion : Students\'Books';

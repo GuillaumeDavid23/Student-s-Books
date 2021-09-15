@@ -13,13 +13,16 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="/public/css/bootstrap/bootstrap.css">
+    <!-- font Awesome -->
+    <script src="https://kit.fontawesome.com/8fbc0d958d.js" crossorigin="anonymous"></script>
+
     <!-- CSS -->
     <link rel="stylesheet" href="/public/css/dash.css">
     <?php 
     if($page == 5){
         echo '<link rel="stylesheet" href="/public/css/agenda.css">';
     }
-    if($page == 10 || $page == 6 || $page == 11){
+    if($page == 10 || $page == 6 || $page == 11 || $page == 9){
         echo '
             <link rel="stylesheet" href="/public/css/general.css">
             <link rel="stylesheet" href="/public/css/connect.css">
