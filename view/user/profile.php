@@ -4,7 +4,7 @@
     <img width='150' class="rounded-circle" src="/uploads/users/<?= $_SESSION['user']->id.'.jpg' ?>" alt="">
 
     <div class="avatarBtn">
-        <a href="#" data-bs-toggle="modal" data-bs-target="#Avatar" class="text"><i class="fas fa-user-edit fa-lg"></i></i></a>
+        <a href="#" data-bs-toggle="modal" data-bs-target="#Avatar" class="text"><i class="fas fa-user-edit fa-lg">i</i></a>
     </div>
 </div>
 <div class="text-center mt-3">

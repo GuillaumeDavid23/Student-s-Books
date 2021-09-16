@@ -43,6 +43,11 @@
             <link rel="stylesheet" href="/public/css/profil.css">
             ';
     }
+    if($page == 8){
+        echo '
+            <link rel="stylesheet" href="/public/css/chat.css">
+            ';
+    }
     ?>
     <!-- FavIcon -->    
     <link rel="shortcut icon" href="/public/img/favicon.ico" type="image/x-icon">
@@ -54,10 +59,24 @@
 
 <body>
     <div class="container-fluid h-100 p-0">
-        <header class="w-100 mb-5 d-flex align-items-center">
-            <img src="/public/img/LOGO SOLO.png" class="ms-3 h-100" alt="">
-            <a href="/index.php" class="h-100 d-flex align-items-center">
-                <img src="/public/img/backward.png" class="img-fluid" width="50" alt="">
-            </a>
-            <h1 class="ms-4 align-self-center text-center m-0"><?= $head ?></h1>
+        <header class="d-flex w-100 align-items-center">
+            <div class="logoBloc ms-1">
+                <img src="/public/img/LOGO SOLO.png" width="70" alt="">
+            </div>
+            <div class="ps-2">
+                <a href="/index.php" class="h-100 d-flex align-items-center text-decoration-none text-white">
+                    <i class="fas fa-angle-double-left fa-2x"></i>
+                </a>
+            </div>
+            
+            <div class="w-100 d-flex align-items-center justify-content-center">
+                <h1 class="m-0"><?= $head ?></h1>
+            </div>
+            <div class="align-self-center">
+                <a href="/index.php?page=7" class="btn btn-outline-dark fw-bold me-3"><i class="fas fa-user-alt"></i></a> 
+            </div>
+            <div class="align-self-center me-2">
+                <a href="/index.php?page=12" class="btn btn-outline-danger fw-bold"><i class="fas fa-sign-out-alt"></i></a> 
+            </div>
         </header>
+        <main class="container-fluid">

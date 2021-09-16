@@ -1,153 +1,74 @@
-        <div class="row justify-content-evenly w-100 d-none d-lg-flex">
-            <?php
-                if($page == 2){
-                        echo '
+ <?php
+switch ($page) {
+    case 1:
+        $pages =  [
+            2 => (object) ['alt' => 'Page des devoirs','title' => 'Vers les devoirs..'],
+            3 => (object) ['alt' => 'Page emploi du temps','title' => 'Vers l\'emploi du temps..'],
+            4 => (object) ['alt' => 'Page des absences','title' => 'Vers les absences..'],
+            5 => (object) ['alt' => 'Page de l\'agenda','title' => 'Vers l\'agenda..'],
+            8 => (object) ['alt' => 'Page de la messagerie','title' => 'Vers la messagerie..']
+        ];
+        break;
+    case 2:
+        $pages =  [
+            1 => (object) ['alt' => 'Page des notes','title' => 'Vers les notes..'],
+            3 => (object) ['alt' => 'Page emploi du temps','title' => 'Vers l\'emploi du temps..'],
+            4 => (object) ['alt' => 'Page des absences','title' => 'Vers les absences..'],
+            5 => (object) ['alt' => 'Page de l\'agenda','title' => 'Vers l\'agenda..'],
+            8 => (object) ['alt' => 'Page de la messagerie','title' => 'Vers la messagerie..']
+        ];
+        break;
+    case 3:
+        $pages =  [
+            2 => (object) ['alt' => 'Page des devoirs','title' => 'Vers les devoirs..'],
+            1 => (object) ['alt' => 'Page des notes','title' => 'Vers les notes..'],
+            4 => (object) ['alt' => 'Page des absences','title' => 'Vers les absences..'],
+            5 => (object) ['alt' => 'Page de l\'agenda','title' => 'Vers l\'agenda..'],
+            8 => (object) ['alt' => 'Page de la messagerie','title' => 'Vers la messagerie..']
+        ];
+        break;
+    case 4:
+        $pages =  [
+            2 => (object) ['alt' => 'Page des devoirs','title' => 'Vers les devoirs..'],
+            1 => (object) ['alt' => 'Page des notes','title' => 'Vers les notes..'],
+            3 => (object) ['alt' => 'Page emploi du temps','title' => 'Vers l\'emploi du temps..'],
+            5 => (object) ['alt' => 'Page de l\'agenda','title' => 'Vers l\'agenda..'],
+            8 => (object) ['alt' => 'Page de la messagerie','title' => 'Vers la messagerie..']
+        ];
+        break;
+    case 7:
+        $pages =  [
+            2 => (object) ['alt' => 'Page des devoirs','title' => 'Vers les devoirs..'],
+            1 => (object) ['alt' => 'Page des notes','title' => 'Vers les notes..'],
+            3 => (object) ['alt' => 'Page emploi du temps','title' => 'Vers l\'emploi du temps..'],
+            5 => (object) ['alt' => 'Page de l\'agenda','title' => 'Vers l\'agenda..'],
+            8 => (object) ['alt' => 'Page de la messagerie','title' => 'Vers la messagerie..']
+        ];
+        break;
+    case 8:
+        $pages =  [
+            2 => (object) ['alt' => 'Page des devoirs','title' => 'Vers les devoirs..'],
+            1 => (object) ['alt' => 'Page des notes','title' => 'Vers les notes..'],
+            3 => (object) ['alt' => 'Page emploi du temps','title' => 'Vers l\'emploi du temps..'],
+            5 => (object) ['alt' => 'Page de l\'agenda','title' => 'Vers l\'agenda..'],
+            8 => (object) ['alt' => 'Page de la messagerie','title' => 'Vers la messagerie..']
+        ];
+        break;
+    default:
+        # code...
+        break;
+}
+?>        
+            <div class="mt-5 row justify-content-evenly w-100 d-none d-lg-flex">
+                <?php foreach ($pages as $key => $value) { ?>
                     <div class="col-1 navBtnMob">
-                        <a href="../index.php?page=1">
-                            <img src="../public/img/LogoNote.webp" class="img-fluid" width="100" alt="Page des devoirs" title="Vers les devoirs..">
+                        <a href="../index.php?page=<?= $key ?>">
+                            <img src="../public/img/nav/<?= $key ?>.webp" class="img-fluid" width="100" alt="Page des devoirs" title="Vers les devoirs..">
                         </a>
                     </div>
-                    <div class="col-1 navBtnMob">
-                        <a href="/index.php?page=3">
-                            <img src="../public/img/Edt.webp" class="img-fluid" width="100" alt="Page emploi du temps" title="Vers l\'emploi du temps..">
-                        </a>
-                    </div>
-                    <div class="col-1 navBtnMob">
-                        <a href="/index.php?page=4">
-                            <img src="../public/img/absences.webp" class="img-fluid" width="100"  alt="Page des absences" title="Vers les absences..">
-                        </a>
-                    </div>
-                    <div class="col-1 navBtnMob ">
-                        <a href="/index.php?page=5">
-                            <img src="../public/img/agenda.png" class="img-fluid" width="100" alt="Page de l\'agenda" title="Vers les agenda..">
-                        </a>
-                    </div>
-                    <div class="col-1 navBtnMob">
-                        <a href="/index.php?page=8">
-                            <img src="../public/img/message.png" class="img-fluid" width="100" alt="Page de la messagerie" title="Vers la messagerie..">
-                        </a>
-                    </div>
-                    ';
-                }
-                elseif($page == 1){
-                        echo '
-                        <div class="col-1 navBtnMob">
-                            <a href="/index.php?page=2">
-                                <img src="../public/img/devoirs.webp" class="img-fluid" width="100" alt="Page des devoirs" title="Vers les devoirs..">
-                            </a>
-                        </div>
-                        <div class="col-1 navBtnMob">
-                            <a href="/index.php?page=3">
-                                <img src="../public/img/Edt.webp" class="img-fluid" width="100" alt="Page emploi du temps" title="Vers l\'emploi du temps..">
-                            </a>
-                        </div>
-                        <div class="col-1 navBtnMob">
-                            <a href="/index.php?page=4">
-                                <img src="../public/img/absences.webp" class="img-fluid" width="100"  alt="Page des absences" title="Vers les absences..">
-                            </a>
-                        </div>
-                        <div class="col-1 navBtnMob ">
-                            <a href="/index.php?page=5">
-                                <img src="../public/img/agenda.png" class="img-fluid" width="100" alt="Page de l\'agenda" title="Vers les agenda..">
-                            </a>
-                        </div>
-                        <div class="col-1 navBtnMob">
-                            <a href="/index.php?page=8">
-                                <img src="../public/img/message.png" class="img-fluid" width="100" alt="Page de la messagerie" title="Vers la messagerie..">
-                            </a>
-                        </div>
-                        ';
-                }
-                elseif($page == 3){
-                    echo '
-                        <div class="col-1 navBtnMob">
-                            <a href="/index.php?page=2">
-                                <img src="../public/img/devoirs.webp" class="img-fluid" width="100" alt="Page des devoirs" title="Vers les devoirs..">
-                            </a>
-                        </div>
-                        <div class="col-1 navBtnMob">
-                            <a href="../index.php?page=1">
-                                <img src="../public/img/LogoNote.webp" class="img-fluid" width="100" alt="Page des devoirs" title="Vers les devoirs..">
-                            </a>
-                        </div>
-                        <div class="col-1 navBtnMob">
-                            <a href="/index.php?page=4">
-                                <img src="../public/img/absences.webp" class="img-fluid" width="100"  alt="Page des absences" title="Vers les absences..">
-                            </a>
-                        </div>
-                        <div class="col-1 navBtnMob ">
-                            <a href="/index.php?page=5">
-                                <img src="../public/img/agenda.png" class="img-fluid" width="100" alt="Page de l\'agenda" title="Vers les agenda..">
-                            </a>
-                        </div>
-                        <div class="col-1 navBtnMob">
-                            <a href="/index.php?page=8">
-                                <img src="../public/img/message.png" class="img-fluid" width="100" alt="Page de la messagerie" title="Vers la messagerie..">
-                            </a>
-                        </div>
-                    ';
-                }
-                elseif($page == 4){
-                    echo '
-                        <div class="col-1 navBtnMob">
-                            <a href="/index.php?page=2">
-                                <img src="../public/img/devoirs.webp" class="img-fluid" width="100" alt="Page des devoirs" title="Vers les devoirs..">
-                            </a>
-                        </div>
-                        <div class="col-1 navBtnMob">
-                            <a href="../index.php?page=1">
-                                <img src="../public/img/LogoNote.webp" class="img-fluid" width="100" alt="Page des devoirs" title="Vers les devoirs..">
-                            </a>
-                        </div>
-                        <div class="col-1 navBtnMob">
-                            <a href="/index.php?page=3">
-                                <img src="../public/img/Edt.webp" class="img-fluid" width="100" alt="Page emploi du temps" title="Vers l\'emploi du temps..">
-                            </a>
-                        </div>
-                        <div class="col-1 navBtnMob ">
-                            <a href="/index.php?page=5">
-                                <img src="../public/img/agenda.png" class="img-fluid" width="100" alt="Page de l\'agenda" title="Vers les agenda..">
-                            </a>
-                        </div>
-                        <div class="col-1 navBtnMob">
-                            <a href="/index.php?page=8">
-                                <img src="../public/img/message.png" class="img-fluid" width="100" alt="Page de la messagerie" title="Vers la messagerie..">
-                            </a>
-                        </div>
-                    ';
-                }
-                elseif($adresse == '/index.php?page=7'){
-                    echo '
-                        <div class="col-1 navBtnMob">
-                            <a href="/index.php?page=2">
-                                <img src="../public/img/devoirs.webp" class="img-fluid" width="100" alt="Page des devoirs" title="Vers les devoirs..">
-                            </a>
-                        </div>
-                        <div class="col-1 navBtnMob">
-                            <a href="../index.php?page=1">
-                                <img src="../public/img/LogoNote.webp" class="img-fluid" width="100" alt="Page des devoirs" title="Vers les devoirs..">
-                            </a>
-                        </div>
-                        <div class="col-1 navBtnMob">
-                            <a href="/index.php?page=3">
-                                <img src="../public/img/Edt.webp" class="img-fluid" width="100" alt="Page emploi du temps" title="Vers l\'emploi du temps..">
-                            </a>
-                        </div>
-                        <div class="col-1 navBtnMob ">
-                            <a href="/index.php?page=5">
-                                <img src="../public/img/agenda.png" class="img-fluid" width="100" alt="Page de l\'agenda" title="Vers les agenda..">
-                            </a>
-                        </div>
-                        <div class="col-1 navBtnMob">
-                            <a href="/index.php?page=8">
-                                <img src="../public/img/message.png" class="img-fluid" width="100" alt="Page de la messagerie" title="Vers la messagerie..">
-                            </a>
-                        </div>
-                    ';
-                }
-            ?>
-        </div>
-        
+                <?php } ?>
+            </div>
+        </main>
         <footer class="d-flex flex-column justify-content-center align-items-center">
 
             <a href="#" class="text-white " data-bs-toggle="modal" data-bs-target="#Prob">

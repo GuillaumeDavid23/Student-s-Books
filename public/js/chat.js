@@ -110,7 +110,6 @@ function chargeMessages() {
                         time = dateMessage.getHours() + ":" + dateMessage.getMinutes()
                     }
                     // On ajoute le message avant le contenu déjà en place
-                    console.log(message);
                     discussion.append(
 
                         `

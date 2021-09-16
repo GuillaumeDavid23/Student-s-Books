@@ -11,7 +11,11 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="/public/css/bootstrap/bootstrap.css">
+    <!-- FONT AWESOME -->
+    <script src="https://kit.fontawesome.com/8fbc0d958d.js" crossorigin="anonymous"></script>
+
     <!-- CSS -->
+    
     <link rel="stylesheet" href="/public/css/dash.css">
     <!-- FavIcon -->
     <link rel="shortcut icon" href="/public/img/favicon.ico" type="image/x-icon">
@@ -66,21 +70,18 @@
 
     <!-- VERSION DESKTOP -->
     <div class="container-fluid d-none d-lg-none d-xl-block h-100 p-0 align-items-center">
-        <header class="mb-5 d-flex w-100">
-            <div class="logoBloc">
-                <img src="/public/img/LOGO SOLO.png" class="ms-3 img-fluid" width="70" alt="">
+        <header class="mb-5 d-flex w-100 align-items-center">
+            <div class="logoBloc ms-1">
+                <img src="/public/img/LOGO SOLO.png" width="70" alt="">
             </div>
-            <div class="ms-5 w-100 d-flex align-items-center justify-content-center">
-                <h1>Tableau de bord</h1>
-            </div>
-            <div class="align-self-center">
-                <a href="/index.php?page=7" class="btn btn-outline-dark fw-bold me-3">Profil</a> 
+            <div class="w-100 d-flex align-items-center justify-content-center">
+                <h1 class="m-0">Tableau de bord</h1>
             </div>
             <div class="align-self-center">
-                <a href="/index.php?page=12" class="btn btn-outline-danger fw-bold">Déconnexion</a> 
+                <a href="/index.php?page=7" class="btn btn-outline-dark fw-bold me-3"><i class="fas fa-user-alt"></i></a> 
             </div>
-            <div class="logoBloc">
-                <img src="/public/img/LOGO SOLO.png" class="ms-3 img-fluid" width="70" alt="">
+            <div class="align-self-center me-2">
+                <a href="/index.php?page=12" class="btn btn-outline-danger fw-bold"><i class="fas fa-sign-out-alt"></i></a> 
             </div>
         </header>
         <div class="h-75 w-100 d-flex ps-5 pe-5">
@@ -202,9 +203,6 @@
             </div>
             <div class="row h-100">
                 <div class="col-12 h-100 p-0 resumeBloc" id="chatBloc">
-                    <a href="/index.php?page=8" class="text-decoration-none">
-                        <h2>Tchat</h2>
-                    </a>
                     <div id="topChat" class="d-flex">
                         <div id="chatContact" class="d-flex flex-column align-items-center pt-1 p-2">
                             <strong class="text-center">En ligne :</strong> 

@@ -5,16 +5,18 @@ class Assign{
         private $id;
         private $end_date;
         private $assignement;
+        private $returnAssign;
         private $id_classes;
         private $id_users;
         private $pdo;
 
 
-        function __construct($id = "", $end_date = "", $assignement = "", $id_classes = "", $id_users = "")
+        function __construct($id = "", $end_date = "", $assignement = "", $returnAssign = "",$id_classes = "", $id_users = "")
         {
             $this->id = $id;
             $this->end_date = $end_date;
             $this->assignement = $assignement;
+            $this->returnAssign = $returnAssign;
             $this->id_classes = $id_classes;
             $this->id_users = $id_users;
 
@@ -23,16 +25,17 @@ class Assign{
 
         public function Add()
         {
-            $sql = $this->pdo->prepare("INSERT INTO `assignements`(`end_date`, `assignement`, `id_classes`, `id_users`)
-            VALUES(:end_date, :assignement, :id_classes, :id_users)");
+            $sql = $this->pdo->prepare("INSERT INTO `assignements`(`end_date`, `assignement`,`returnAssign` ,`id_classes`, `id_users`)
+            VALUES(:end_date, :assignement, :returnAssign,:id_classes, :id_users)");
             $sql->bindParam(':end_date', $this->end_date);
             $sql->bindParam(':assignement', $this->assignement);
+            $sql->bindParam(':returnAssign', $this->returnAssign);
             $sql->bindParam(':id_classes', $this->id_classes);
             $sql->bindParam(':id_users', $this->id_users);
             
             try {
                 $sql->execute();
-                return 3;
+                return 18;
             } catch (PDOException $ex) {
                 return 11;
             }
@@ -102,19 +105,18 @@ class Assign{
          * @param string $column Colonnes choisies
          * @param string $table Tables choisies
          * @param string $addSql Paramètres SQL (optionnel)
-         * @return array|false Retourne un tableau associatif ou False
+         * @return Object|false Retourne un tableau associatif ou False
          */
-        public function SelectOne()
-        {
-            $sql= ("SELECT * 
-                    FROM appointments 
-                    INNER JOIN `patients` 
-                    ON `appointments`.`idPatients` = `patients`.`id` 
-                    WHERE `appointments`.`idPatients` = $this->idPatient
-                    AND `appointments`.`id` = $this->idAssign");
+        public static function SelectOne($id)
+        {   
+            $pdo = SPDO::getInstance();
+            
+            $sql= ("SELECT * FROM `assignements` WHERE `id` = :id");
+            $stmt = $pdo->prepare($sql);
+            $stmt->bindValue(':id', $id);
             try {
-                $sql = $this->pdo->query($sql);
-                $result = $sql->fetchAll(PDO::FETCH_ASSOC);
+                $stmt->execute();
+                $result = $stmt->fetch(PDO::FETCH_OBJ);
                 return $result;
             } catch (PDOException $ex) {
                 return 11;
