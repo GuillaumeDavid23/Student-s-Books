@@ -80,7 +80,10 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
         } 
     }
 }
-
+$pic = '/uploads/user/'.$_SESSION['user']->id.'jpg';
+if(!file_exists($pic)){
+    $pic='/uploads/users/default-profile.jpg';
+}
 $title = "Profil Students'Books";
 $meta = "";
 $head = "Votre profil";

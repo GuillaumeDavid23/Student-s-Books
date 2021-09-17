@@ -15,13 +15,13 @@
         <div id="chatBar" class="d-flex">
             <div id="chatBtnBloc">
                 <button id="chatBtnSend" class="btn btn-primary">
-                    <img src="/public/img/envoie.png" alt="Bouton enoyer un message dans le tchat"
-                        class="img-fluid w-75">
+                    <i class="fas fa-paper-plane fa-lg"></i>
                 </button>
             </div>
             <textarea type="text" name="" id="chatInput"></textarea>
         </div>
     </div>
 </div>
+
 <script src="/public/js/chat.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>

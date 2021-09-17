@@ -15,7 +15,6 @@ let classesInput = document.getElementById("class");
 let classesBloc = document.getElementById("classes");
 
 
-
 //Ajout des eventlistener pour vérifier les champs
 lastnameInput.addEventListener('keyup', (event) => {
     if (lastnameInput.value.match(nameRegex)) {

@@ -37,32 +37,32 @@
         <div class="row justify-content-center h-100 w-100">
             <div class="col-5 navBtnMob ">
                 <a href="/index.php?page=2" class="d-flex justify-content-center">
-                    <img src="/public/img/devoirs.webp" class="img-fluid w-75"  alt="">
+                    <img src="/public/img/nav/2.webp" class="img-fluid w-75"  alt="">
                 </a>
             </div>
             <div class="col-5 offset-1 navBtnMob">
                 <a href="/index.php?page=1" class="d-flex justify-content-center">
-                    <img src="/public/img/LogoNote.webp" class="img-fluid w-75"  alt="">
+                    <img src="/public/img/nav/1.webp" class="img-fluid w-75"  alt="">
                 </a>
             </div>
             <div class="col-5 mt-5 navBtnMob">
                 <a href="/index.php?page=3" class="d-flex justify-content-center">
-                    <img src="/public/img/Edt.webp" class="img-fluid w-75"  alt="">
+                    <img src="/public/img/nav/3.webp" class="img-fluid w-75"  alt="">
                 </a>
             </div>
             <div class="col-5 mt-5  offset-1 navBtnMob">
                 <a href="/index.php?page=4" class="d-flex justify-content-center">
-                    <img src="/public/img/absences.webp" class="img-fluid w-75"  alt="">
+                    <img src="/public/img/nav/4.webp" class="img-fluid w-75"  alt="">
                 </a>
             </div>
             <div class="col-5 mt-5 navBtnMob ">
                 <a href="/index.php?page=5" class="d-flex justify-content-center">
-                    <img src="/public/img/agenda.png" class="img-fluid w-75"  alt="">
+                    <img src="/public/img/nav/5.webp" class="img-fluid w-75"  alt="">
                 </a>
             </div>
             <div class="col-5 mt-5 offset-1 navBtnMob">
                 <a href="/index.php?page=8" class="d-flex justify-content-center">
-                    <img src="/public/img/message.png" class="img-fluid w-75"  alt="">
+                    <img src="/public/img/nav/8.webp" class="img-fluid w-75"  alt="">
                 </a>
             </div>
         </div>
