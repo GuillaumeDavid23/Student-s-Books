@@ -64,7 +64,7 @@
                         
                         <label for="class">Classe</label>
                         <select name="class" id="class">
-                            <option value=""></option>
+                            <option value="">Sélectionner une classe</option>
                             <?php foreach ($classesArray as $data){ ?>
                                     <option value="<?=$data['id']?>"><?=$data['class']?></option>
                             <?php }?>
@@ -72,15 +72,11 @@
 
                         <label for="student">élève :</label>
                         <select name="student" id="student">
-                            <option value=""></option>
-                        <?php   
-                        foreach ($dataUsers as $data){ 
-                            if($data['id_ranks'] == '1'){?>
-                                <option value="<?=$data['id']?>"><?=$data['firstname'].' '.$data['lastname'] ?></option>
-                        <?php }}?>
+                            <option value="">Sélectionner un élève</option>
                         </select>
                         <button class="btn btn-outline-success mt-3" type="submit">Ajouter la note</button>
                     </form>
                 </div>
             </div>
         <?php } ?>
+<script src="/public/js/link.js"></script>

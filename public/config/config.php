@@ -13,9 +13,11 @@ $messageCode = [
     14 => ['type' => 'alert-success', 'msg' => 'Votre compte a bien été désactivé '],
     15 => ['type' => 'alert-warning', 'msg' => 'Compte désactivé, contactez votre administrateur'],
     15 => ['type' => 'alert-success', 'msg' => 'Votre photo de profil a bien été ajouté'],
-    16 => ['type' => 'alert-success', 'msg' => 'Cours ajouté'],
-    17 => ['type' => 'alert-success', 'msg' => 'Devoirs rendu !'],
-    18 => ['type' => 'alert-success', 'msg' => 'Devoirs ajouté !'],
+    16 => ['type' => 'alert-success', 'msg' => 'Cour ajouté'],
+    17 => ['type' => 'alert-success', 'msg' => 'Devoir rendu !'],
+    18 => ['type' => 'alert-success', 'msg' => 'Devoir ajouté !'],
+    19 => ['type' => 'alert-success', 'msg' => 'Devoir supprimé !'],
+    20 => ['type' => 'alert-success', 'msg' => 'Devoir non supprimé !'],
 ];
 
 //REGEX 

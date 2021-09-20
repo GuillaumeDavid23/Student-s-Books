@@ -42,8 +42,12 @@ footer {
     background-color: #1A5276;
     border-radius: 20px;
     box-shadow: 5px 5px 25px black;
-    overflow: scroll;
     overflow-x: hidden;
+}
+
+.valueBloc {
+    height: 80%;
+    overflow-y: scroll;
 }
 
 h2 {
@@ -154,4 +158,61 @@ h2:hover {
     border-radius: 10px;
     border-top-right-radius: 0;
     background-color: #476686;
+}
+
+caption
+
+/* Titre du tableau */
+    {
+    margin: auto;
+    /* Centre le titre du tableau */
+    font-family: Arial, Times, "Times New Roman", serif;
+    font-weight: bold;
+    font-size: 1.2em;
+    color: #476686;
+    margin-bottom: 20px;
+    /* Pour éviter que le titre ne soit trop collé au tableau en-dessous */
+}
+
+table
+
+/* Le tableau en lui-même */
+    {
+    background-color: #F6F4E4;
+    color: black;
+    margin: auto;
+    /* Centre le tableau */
+    border: 4px outset #476686;
+    /* Bordure du tableau avec effet 3D (outset) */
+    border-collapse: collapse;
+    /* Colle les bordures entre elles */
+    width: 100%;
+}
+
+th
+
+/* Les cellules d'en-tête */
+    {
+    background-color: #476686;
+    color: white;
+    font-size: 1.1em;
+    font-family: Arial, "Arial Black", Times, "Times New Roman", serif;
+    border: 1px solid black;
+}
+
+td
+
+/* Les cellules normales */
+    {
+    width: 12%;
+    border: 1px solid black;
+    font-family: "Comic Sans MS", "Trebuchet MS", Times, "Times New Roman", serif;
+    text-align: center;
+    /* Tous les textes des cellules seront centrés*/
+    padding: 5px;
+    /* Petite marge intérieure aux cellules pour éviter que le texte touche les bordures */
+}
+
+td.time {
+    width: 5%;
 }

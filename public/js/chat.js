@@ -88,7 +88,7 @@ function chargeMessages() {
                 let idUser = bloc.dataset.id
 
                 // On boucle sur les messages
-                messages.map(async (message) => {
+                messages.map((message) => {
                     // On transforme la date en objet JS
                     let dateMessage = new Date(message.create_at)
 
@@ -98,21 +98,10 @@ function chargeMessages() {
                         img = ""
                     } else {
                         let image_url = `/uploads/users/${message.id_users}.jpg`;
-
-                        let exist = await fetch(image_url)
-                            .then(function (response) {
-                                return response
-                            }).then(function (data) {
-                                if (data.status == 404) {
-                                    return pic = `/uploads/users/default-profile.jpg`;
-                                } else {
-                                    return pic = `/uploads/users/${message.id_users}.jpg`
-                                }
-                            })
                         addClass = "otherChat align-self-start"
                         img = `<img width = '25'
                         class = "rounded-circle align-self-start"
-                        src = "${exist}"
+                        src = "${image_url}"
                         alt = "" >`
                     }
 

@@ -29,7 +29,7 @@
 <body>
 
     <!-- NAV VERSION MOBILE -->
-    <div class="container-fluid p-0 d-flex flex-column align-items-center d-xl-none">
+    <div class="container-fluid p-0 d-flex flex-column align-items-center d-xl-none mb-5">
         <header class="w-100 mb-5 d-flex ">
             <img src="/public/img/LOGO SOLO.png" class="ms-3 img-fluid" width="70" alt="">
             <h1 class="ms-4 align-self-center text-center">Tableau de bord</h1>
@@ -88,11 +88,11 @@
             <div class="row h-100 w-75 ">
                 <div class="row w-100 h-50">
                     <div class="offset-1 col-3 h-100 resumeBloc">
-                        <a href="/index.php?page=1" class="text-decoration-none">
+                        <a href="/index.php?page=1" class="text-decoration-none ">
                             <h2>Notes</h2>
                         </a>
-                        
-                        <?php 
+                        <div class="valueBloc">
+                            <?php 
                             foreach ($dataArrayNote as $key => $currentArray) {
                                 if($currentArray['id_users'] == $_SESSION['user']->id){
                                     $teacher = User::SelectOne($currentArray['id_users_teacher_marks']);
@@ -108,19 +108,20 @@
                                         <div id="noteProf" class="prof">Mr/Mme <?=$teacher->lastname?></div>
                                     </div>
                                 </div>
-                        <?php 
-                            }}
-                            if($_SESSION['user']->id_ranks == 3 || $_SESSION['user']->id_ranks == 4){
-                                echo "<p class='text-center text-white text-decoration-underline fw-bold'>Vous êtes professeur ou administrateur, la prévisualition des notes n'est donc pas possible.</p>";
-                            }
-                        ?>
+                            <?php 
+                                }}
+                                if($_SESSION['user']->id_ranks == 3 || $_SESSION['user']->id_ranks == 4){
+                                    echo "<p class='text-center text-white text-decoration-underline fw-bold'>Vous êtes professeur ou administrateur, la prévisualition des notes n'est donc pas possible.</p>";
+                                }
+                            ?>
+                        </div>
                     </div>
                     <div class="offset-1 col-5 h-100 resumeBloc">
                         <a href="/index.php?page=2" class="text-decoration-none">
                             <h2>Devoirs</h2>
                         </a>
                         
-                        <div id="homeworkBloc">
+                        <div id="homeworkBloc" class="valueBloc">
                             <?php 
                             $dataArrayHw = Assign::SelectAll();
                             foreach ($dataArrayHw as $data){ 
@@ -151,23 +152,31 @@
                             <h2>Emploi du temps</h2>
                         </a>
                         
-                        <div id="edtBloc" class="text-center text-white">
-                            <?php foreach ($dataArrayEdt as $key => $currentArray) {
-                                if($currentArray['day'] == $currentDay ){ ?>
-                                    <div class="edtEl d-flex w-100 mb-2">
-                                        <div class="edtDateBloc h-100">
-                                            <div id="edtLocal" class="text-center fw-bold text-white subInfo">Salle <?=' '.$currentArray['room']?></div>
-                                        </div>
-                                        <div class="ps-1 w-100 bg-egg d-flex align-items-center">
-                                            <div id="infoBloc" class="fw-bold text-dark">
-                                                <span id="hours"><?=$currentArray['hour']?>h</span>
-                                                <span id="edtMatter"><?=$currentArray['matter']?> - </span>
-                                                <span id="edtProf" class="prof">Mme Lafoins</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                <?php }
-                            } ?>
+                        <div class="text-center text-white valueBloc">
+                            <!-- VERSION MOBILE -->
+                            <table class="text-center"> 
+                                <tr>
+                                    <th>Heure</th>
+                                    <!-- Affichage du jour -->
+                                    <th><?=$jour[$currentDayNumber] ?></th>
+                                </tr>
+                                <?php for($j = 8; $j < 18; $j += 1) { ?> <!-- Heure -->
+                                    <tr>
+                                        <?php for($i = 0; $i < 1; $i++) //Jours en lignes
+                                        {
+                                            if($i == 0) {
+                                                $heure = str_replace(".5", ":30", $j);
+                                                echo "<td class=\"time\">".$heure."</td>";
+                                            }
+                                            echo "<td>";
+                                            if(isset($rdv1[$jour[$currentDayNumber]][$heure])) {
+                                                echo $rdv1[$jour[$currentDayNumber]][$heure];
+                                            }
+                                            echo "</td>";
+                                        }?>
+                                    </tr>
+                                <?php } ?>
+                            </table>
                         </div>
                     </div>
                     <div class="offset-1 col-3 h-100 resumeBloc">

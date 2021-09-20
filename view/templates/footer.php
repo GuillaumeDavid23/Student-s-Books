@@ -55,12 +55,15 @@ switch ($page) {
         ];
         break;
     default:
-        # code...
+        $pages = [];
         break;
 }
-?>        
+?>
+            <?php if(!empty($pages)){?>        
             <div class="mt-5 row justify-content-evenly w-100 d-none d-lg-flex">
-                <?php foreach ($pages as $key => $value) { ?>
+                <?php 
+                
+                foreach ($pages as $key => $value) { ?>
                     <div class="col-1 navBtnMob">
                         <a href="../index.php?page=<?= $key ?>">
                             <img src="../public/img/nav/<?= $key ?>.webp" class="img-fluid" width="100" alt="Page des devoirs" title="Vers les devoirs..">
@@ -68,6 +71,8 @@ switch ($page) {
                     </div>
                 <?php } ?>
             </div>
+            <?php } ?>
+            
         </main>
         <footer class="d-flex flex-column justify-content-center align-items-center">
 
@@ -112,6 +117,8 @@ switch ($page) {
     ?>
 
     <script src="/public/js/bootstrap/bootstrap.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
 </body>
 
 </html>

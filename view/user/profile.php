@@ -1,12 +1,13 @@
 <h1 class="text-center">Vos informations</h1>
 
 <div class="avatarBloc d-flex position-relative justify-content-center" id="pic">
-    <img width='150' class="rounded-circle" src="<?= $pic ?>" alt="">
+    <img width='150' class="rounded-circle profil-img" src="<?= $pic ?>" alt="">
 
     <div class="avatarBtn">
         <a href="#" data-bs-toggle="modal" data-bs-target="#Avatar" class="text"><i class="fas fa-user-edit fa-lg"></i></a>
     </div>
 </div>
+
 <div class="text-center mt-3">
     <small class="alert-danger"><?= $stockError['avatar'] ?? '' ?></small>
 </div>

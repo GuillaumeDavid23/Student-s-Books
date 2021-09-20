@@ -80,8 +80,11 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
         } 
     }
 }
-$pic = '/uploads/user/'.$_SESSION['user']->id.'jpg';
-if(!file_exists($pic)){
+$testPic = dirname(__FILE__).'/../../uploads/users/'.$_SESSION['user']->id.'.jpg';
+
+if(file_exists($testPic)){
+    $pic='/uploads/users/'.$_SESSION['user']->id.'.jpg';
+}else{
     $pic='/uploads/users/default-profile.jpg';
 }
 $title = "Profil Students'Books";

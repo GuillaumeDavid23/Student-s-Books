@@ -191,6 +191,22 @@ class User {
             }
         }
 
+        public static function SelectAllByClass($idClass)
+        {
+            $pdo = SPDO::getInstance();
+
+            $sql = "SELECT * FROM `users` WHERE `id_classes`= :id_class ";
+            $stmt = $pdo->prepare($sql);
+            $stmt->bindValue(':id_class', $idClass);
+            try {
+                $stmt->execute();
+                $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+                return $result;
+            } catch (PDOException $ex) {
+                return 404;
+            }
+        }
+
         /**
          * Sélection d'un user par son id.
          * @param int $id

@@ -63,20 +63,24 @@
             <div class="logoBloc ms-1">
                 <img src="/public/img/LOGO SOLO.png" width="70" alt="">
             </div>
-            <div class="ps-2">
-                <a href="/index.php" class="h-100 d-flex align-items-center text-decoration-none text-white">
-                    <i class="fas fa-angle-double-left fa-2x"></i>
-                </a>
-            </div>
+            <?php if($page != 10){?>
+                <div class="ps-2">
+                    <a href="/index.php" class="h-100 d-flex align-items-center text-decoration-none text-white">
+                        <i class="fas fa-angle-double-left fa-2x"></i>
+                    </a>
+                </div>
+            <?php } ?>
             
             <div class="w-100 d-flex align-items-center justify-content-center">
                 <h1 class="m-0"><?= $head ?></h1>
             </div>
-            <div class="align-self-center">
-                <a href="/index.php?page=7" class="btn btn-outline-dark fw-bold me-3"><i class="fas fa-user-alt"></i></a> 
-            </div>
-            <div class="align-self-center me-2">
-                <a href="/index.php?page=12" class="btn btn-outline-danger fw-bold"><i class="fas fa-sign-out-alt"></i></a> 
-            </div>
+            <?php if(!empty($_SESSION['user'])){?>
+                <div class="align-self-center">
+                    <a href="/index.php?page=7" class="btn btn-outline-dark fw-bold me-3"><i class="fas fa-user-alt"></i></a> 
+                </div>
+                <div class="align-self-center me-2">
+                    <a href="/index.php?page=12" class="btn btn-outline-danger fw-bold"><i class="fas fa-sign-out-alt"></i></a> 
+                </div>
+            <?php } ?>
         </header>
         <main class="container-fluid">

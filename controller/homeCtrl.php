@@ -11,13 +11,17 @@ require_once(dirname(__FILE__).'/../model/user.php');
 require_once(dirname(__FILE__).'/../model/assignements.php');
 require_once(dirname(__FILE__).'/../model/absences.php');
 require_once(dirname(__FILE__).'/../model/marks.php');
+require_once(dirname(__FILE__).'/../model/schedule.php');
+require_once(dirname(__FILE__).'/../model/slots.php');
+require_once(dirname(__FILE__).'/../model/rooms.php');
+require_once(dirname(__FILE__).'/../model/classes.php');
+require_once(dirname(__FILE__).'/../model/classes_schedule.php');
 require_once(dirname(__FILE__).'/../model/matters.php');
 require_once(dirname(__FILE__).'/../public/config/config.php');
 
 //Déclaration des variables
 $users = new User();
 $dataArrayNote = [];
-$dataArrayEdt = [];
 $noteArray = Mark::SelectAll();
 $absencesArray = Absence::SelectAll();
 
@@ -43,6 +47,25 @@ foreach ($noteArray as $note){
         }
     }
 }
+//EDT//
+$jour = array(null, "Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi");
+$edt = Schedule::SelectAll();
+
+$currentDayNumber = strftime('%w', time());
+if($currentDayNumber == 0 || $currentDayNumber == 6){
+    $currentDayNumber = 1;
+}
+
+foreach ($edt as $currentArray) {
+    if($_SESSION['user']->id_classes == $currentArray['id_class']){
+        $slot = Slot::SelectOne($currentArray['id_slots']);
+        $matter = Matter::SelectOne($currentArray['id_matters']);
+        $room = Room::SelectOne($currentArray['id_rooms']);
+        
+        $rdv1[$currentArray['day']][$slot->slot] = $matter->matter. '<br> Salle '.$room->room;
+    }
+}
+
 
 $time = time();
 $currentDay = ucfirst(strftime('%A', $time));

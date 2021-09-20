@@ -46,6 +46,9 @@ switch ($page) {
         include dirname(__FILE__).'/view/templates/footer.php';
 
         break;
+    case 14:
+        include dirname(__FILE__).'/controller/pages/deleteFiles.php';
+        break;
     default:
         include dirname(__FILE__).'/controller/homeCtrl.php';
         break;
