@@ -1,6 +1,5 @@
 <div class="row justify-content-center mb-5 pt-5 pb-5 w-100">
     <!-- VERSION DESKTOP -->
-
     <table class="text-center d-none d-md-table w-75 ">
         <tr>
             <th>Heure</th>

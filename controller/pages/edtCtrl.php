@@ -1,7 +1,5 @@
 <?php
 require_once(dirname(__FILE__).'/../../controller/session/sessionCtrl.php');
-setlocale (LC_TIME, 'fr_FR.utf8','fra'); 
-
 require_once(dirname(__FILE__).'/../../model/schedule.php');
 require_once(dirname(__FILE__).'/../../model/slots.php');
 require_once(dirname(__FILE__).'/../../model/classes.php');
@@ -14,7 +12,6 @@ $currentDayNumber = strftime('%w', time());
 if($currentDayNumber == 0 || $currentDayNumber == 6){
     $currentDayNumber = 1;
 }
-
 
 if($_SERVER['REQUEST_METHOD'] == "POST"){
     $dayInput = trim(strip_tags(filter_input(INPUT_POST, 'days', FILTER_SANITIZE_STRING)));
@@ -48,7 +45,6 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
         
         $pdo->rollBack();
     }
-
 }
 
 $edt = Schedule::SelectAll();

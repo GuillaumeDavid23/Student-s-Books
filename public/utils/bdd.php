@@ -1,5 +1,5 @@
 <?php 
-require_once(dirname(__FILE__).'/../public/config/config.php');
+require_once(dirname(__FILE__).'/../config/config.php');
 class SPDO
 {
     private static $instance = null;
