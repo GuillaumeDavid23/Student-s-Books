@@ -132,10 +132,4 @@ else{
 $classesArray = Classes::SelectAll();
 $dataUsers = User::SelectAll();
 
-$title = "Page des notes : Students'Books";
-$meta = "";
-$head = "Notes";
-
-include dirname(__FILE__).'/../../view/templates/header.php';
 include dirname(__FILE__).'/../../view/pages/note.php';
-include dirname(__FILE__).'/../../view/templates/footer.php';

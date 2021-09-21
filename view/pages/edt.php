@@ -1,6 +1,11 @@
-<div class="row justify-content-center mb-5 pt-5 pb-5 w-100">
+<div class="row h-100 justify-content-center align-items-center m-0">
+    <div class="d-flex justify-content-between">
+        <a href="/index.php?page=3&day=<?= $currentDayNumber-1 ?>"><i class="fas fa-chevron-circle-left fa-2x"></i></a>
+
+        <a href="/index.php?page=3&day=<?= $currentDayNumber+1 ?>"><i class="fas fa-chevron-circle-right fa-2x"></i></a>
+    </div>
     <!-- VERSION DESKTOP -->
-    <table class="text-center d-none d-md-table w-75 ">
+    <table class="text-center d-none d-md-table w-75">
         <tr>
             <th>Heure</th>
             <?php for($x = 1; $x < 6; $x++){ ?><!-- Affichage des nom des jours -->
@@ -49,6 +54,8 @@
             </tr>
         <?php } ?>
     </table>
+
+    <!-- Partie Admin -->
     <?php if($_SESSION['user']->id_ranks == 3){ ?>
         <div class="col-lg-6 mt-5 resumeBloc pt-3 pb-3 text-white ">
             <h4 class="text-center">Ajouter ou modifier l'emploi du temps</h4>

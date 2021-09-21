@@ -58,16 +58,10 @@ if($currentDayNumber == 0 || $currentDayNumber == 6){
 
 foreach ($edt as $currentArray) {
     if($_SESSION['user']->id_classes == $currentArray['id_class']){
-        $slot = Slot::SelectOne($currentArray['id_slots']);
-        $matter = Matter::SelectOne($currentArray['id_matters']);
-        $room = Room::SelectOne($currentArray['id_rooms']);
-        
-        $rdv1[$currentArray['day']][$slot->slot] = $matter->matter. '<br> Salle '.$room->room;
+        $rdv1[$currentArray['day']][$currentArray['slot']] = $currentArray['matter']. '<br> Salle '.$currentArray['room'];
     }
 }
 
-
-$time = time();
-$currentDay = ucfirst(strftime('%A', $time));
+$currentDay = ucfirst(strftime('%A', time()));
 
 include dirname(__FILE__).'/../view/home.php';

@@ -35,12 +35,4 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
     }   
 }
 
-
-$title = "Changement du mot de passe Students'Books";
-$meta = "";
-$head = "Changer votre mot de passe";
-
-include dirname(__FILE__).'/../../view/templates/header.php';
 include(dirname(__FILE__).'/../../view/connect/changePass.php');
-include dirname(__FILE__).'/../../view/templates/footer.php';
-

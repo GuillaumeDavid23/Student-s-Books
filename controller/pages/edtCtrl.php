@@ -8,11 +8,20 @@ require_once(dirname(__FILE__).'/../../model/rooms.php');
 
 $jour = array(null, "Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi");
 $code = null;
-$currentDayNumber = strftime('%w', time());
-if($currentDayNumber == 0 || $currentDayNumber == 6){
-    $currentDayNumber = 1;
+
+if(!empty($_GET['day'])){
+    $currentDayNumber = trim(strip_tags(filter_input(INPUT_GET, 'day', FILTER_SANITIZE_NUMBER_INT)));
+    if($currentDayNumber < 0 || $currentDayNumber > 6){
+        $currentDayNumber = strftime('%w', time());
+    }
+}else{
+    $currentDayNumber = strftime('%w', time());
 }
 
+if
+($currentDayNumber == 0 || $currentDayNumber == 6){
+    $currentDayNumber = 1;
+}
 if($_SERVER['REQUEST_METHOD'] == "POST"){
     $dayInput = trim(strip_tags(filter_input(INPUT_POST, 'days', FILTER_SANITIZE_STRING)));
     $slotInput = trim(strip_tags(filter_input(INPUT_POST, 'slots', FILTER_SANITIZE_NUMBER_INT)));
@@ -60,10 +69,5 @@ $slotsArray = Slot::SelectAll();
 $classArray = Classes::SelectAll();
 $mattersArray = Matter::SelectAll();
 $roomsArray = Room::SelectAll();
-$title = "Emploi du temps Student's Book's";
-$meta = "";
-$head = "Emploi du temps";
 
-include dirname(__FILE__).'/../../view/templates/header.php';
 include(dirname(__FILE__).'/../../view/pages/edt.php');
-include dirname(__FILE__).'/../../view/templates/footer.php';

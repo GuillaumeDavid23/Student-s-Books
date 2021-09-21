@@ -106,11 +106,6 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
 //Préparation de l'affichage
 $dataArray = Assign::SelectAll();
 $classesArray = Classes::SelectAll();
-$title = 'Page des devoirs : voir ou rendre un devoir';
-$meta = '';
-$head = "Devoirs";
 
 //Inclusion des vues
-include dirname(__FILE__).'/../../view/templates/header.php';
 include(dirname(__FILE__).'/../../view/pages/assignment.php');
-include dirname(__FILE__).'/../../view/templates/footer.php';

@@ -72,7 +72,7 @@
             <?php } ?>
             
             <div class="w-100 d-flex align-items-center justify-content-center">
-                <h1 class="m-0"><?= $head ?></h1>
+                <h1 class="m-0 text-center"><?= $head ?></h1>
             </div>
             <?php if(!empty($_SESSION['user'])){?>
                 <div class="align-self-center">

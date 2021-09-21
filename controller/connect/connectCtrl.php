@@ -75,9 +75,4 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){ //Les données sont-elles envoyées ?
 }
 
 //Affichage de la vue
-$title = 'Page de connexion : Students\'Books';
-$meta = '';
-$head = 'Connexion';
-include dirname(__FILE__).'/../../view/templates/header.php';
 include dirname(__FILE__).'/../../view/connect/connect.php';
-include dirname(__FILE__).'/../../view/templates/footer.php';

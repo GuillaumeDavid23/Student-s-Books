@@ -60,7 +60,7 @@ switch ($page) {
 }
 ?>
             <?php if(!empty($pages)){?>        
-            <div class="mt-5 row justify-content-evenly w-100 d-none d-lg-flex">
+            <div class="mt-5 mb-5 row justify-content-evenly w-100 d-none d-lg-flex">
                 <?php 
                 
                 foreach ($pages as $key => $value) { ?>

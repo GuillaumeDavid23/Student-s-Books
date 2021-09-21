@@ -150,12 +150,8 @@ else{
     }
 }
 
-//Préparation de l'affichage 
-$title = "Agenda Students'Books";
-$meta = "";
-$head = "Agenda";
+
 
 //Inclusion des vues
-include dirname(__FILE__).'/../../view/templates/header.php';
 include dirname(__FILE__).'/../../view/pages/agenda.php';
 ?>

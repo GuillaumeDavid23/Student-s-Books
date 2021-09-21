@@ -1,5 +1,6 @@
 <?php
 setlocale(LC_TIME, ['fr.utf8', 'fra', 'fr_FR']);
+date_default_timezone_set('Europe/Paris');
 
 $messageCode = [
     1 => ['type' => 'alert-success', 'msg' => 'L\'utilisateur à bien été ajouté'],

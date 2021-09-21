@@ -15,7 +15,6 @@
     <script src="https://kit.fontawesome.com/8fbc0d958d.js" crossorigin="anonymous"></script>
 
     <!-- CSS -->
-    
     <link rel="stylesheet" href="/public/css/dash.css">
     <!-- FavIcon -->
     <link rel="shortcut icon" href="/public/img/favicon.ico" type="image/x-icon">
@@ -237,43 +236,3 @@
             </div>
         </div>
     </div>
-    
-    <!-- FOOTER -->
-    <footer class="d-flex flex-column justify-content-center align-items-center w-100">
-        <a href="#" class="text-white " data-bs-toggle="modal" data-bs-target="#exampleModal">
-            Un problème ?
-        </a>
-        <a href="/index.php?page=13" class="text-white">Mentions légales</a>
-    </footer>
-
-    <!-- Modal de contact -->
-    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Un problème ?</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <form action="#" method="post">
-                    <div class="modal-body d-flex flex-column">
-                        <label for="object" class="mb-2">Titre de votre demande</label>
-                        <input type="text" name="object" id="object" class="mb-3">
-                        <label for="prob">Décrivez votre problème</label>
-                        <textarea name="prob" id="prob" cols="30" rows="10"></textarea>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
-                        <button type="submit" class="btn btn-info text-white">Envoyer</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-    
-    <!-- Script -->
-    <script src="../public/js/chat.js"></script>
-    <script src="/public/js/jquery.min.js"></script>
-    <script src="public/js/bootstrap/bootstrap.js"></script>
-</body>
-
-</html>
