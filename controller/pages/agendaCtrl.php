@@ -8,7 +8,7 @@ if(empty($_SESSION['user'])){
 
 //Inclusion des différents fichiers
 require_once(dirname(__FILE__).'/../../model/calendar.php');
-require_once(dirname(__FILE__).'/../../public/config/config.php');
+ 
 
 //Déclaration des variables
 $arrayTestOfMonth = array('January','February', 'March', "April", 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'); 

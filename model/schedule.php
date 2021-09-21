@@ -65,7 +65,12 @@ class Schedule{
         {
             $pdo = SPDO::getInstance();
 
-            $sql= ("SELECT `day`, `id_slots`, `id_matters`, `id_rooms`, `id_class` FROM `schedule` INNER JOIN `classes_schedule` ON `schedule`.id = `classes_schedule`.id_schedule");
+            $sql= ("SELECT `schedule`.`day`, `rooms`.`room`, `matters`.`matter`, `slots`.`slot`, `classes_schedule`.`id_class` 
+                    FROM `schedule` 
+                    INNER JOIN `rooms` ON `schedule`.`id_rooms` = `rooms`.`id` 
+                    INNER JOIN `matters` ON `schedule`.`id_matters` = `matters`.`id` 
+                    INNER JOIN `slots` ON `schedule`.`id_slots` = `slots`.`id` 
+                    INNER JOIN `classes_schedule` ON `schedule`.id = `classes_schedule`.`id_schedule`;");
             try {
                 $sql = $pdo->query($sql);
                 $result = $sql->fetchAll(PDO::FETCH_ASSOC);

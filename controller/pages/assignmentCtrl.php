@@ -17,7 +17,7 @@ require_once(dirname(__FILE__).'/../../model/user.php');
 require_once(dirname(__FILE__).'/../../model/assignements.php');
 require_once(dirname(__FILE__).'/../../model/matters.php');
 require_once(dirname(__FILE__).'/../../model/classes.php');
-require_once(dirname(__FILE__).'/../../public/config/config.php');
+ 
 
 //Déclaration des variables et constantes
 $code = null;

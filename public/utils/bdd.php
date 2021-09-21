@@ -1,11 +1,12 @@
 <?php 
+require_once(dirname(__FILE__).'/../public/config/config.php');
 class SPDO
 {
     private static $instance = null;
 
-    const DEFAULT_SQL_USER = 'root';
+    const DEFAULT_SQL_USER = 'students_books';
     const DEFAULT_SQL_HOST = 'localhost';
-    const DEFAULT_SQL_PASS = '';
+    const DEFAULT_SQL_PASS = 'j@Ms@7pA&?Eie9pb';
     const DEFAULT_SQL_DTB = 'studentbook1';
 
     public static function getInstance()

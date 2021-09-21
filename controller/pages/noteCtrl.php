@@ -6,7 +6,7 @@ require_once(dirname(__FILE__).'/../../model/user.php');
 require_once(dirname(__FILE__).'/../../model/marks.php');
 require_once(dirname(__FILE__).'/../../model/matters.php');
 require_once(dirname(__FILE__).'/../../model/classes.php');
-require_once(dirname(__FILE__).'/../../public/config/config.php');
+ 
 
 //Variables
 $testForm = false;

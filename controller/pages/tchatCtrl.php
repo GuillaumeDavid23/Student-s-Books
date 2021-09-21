@@ -9,7 +9,7 @@ if(empty($_SESSION['user'])){
 //Inclusion des différents fichiers
 require_once(dirname(__FILE__).'/../../model/tchat.php');
 require_once(dirname(__FILE__).'/../../model/user.php');
-require_once(dirname(__FILE__).'/../../public/config/config.php');
+ 
 
 //On définit la langue par défault et la zone pour l'heure
 setlocale (LC_TIME, 'fr_FR.utf8','fra'); 

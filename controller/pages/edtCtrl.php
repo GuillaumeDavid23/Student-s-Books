@@ -2,19 +2,19 @@
 require_once(dirname(__FILE__).'/../../controller/session/sessionCtrl.php');
 setlocale (LC_TIME, 'fr_FR.utf8','fra'); 
 
-require_once(dirname(__FILE__).'/../../model/user.php');
 require_once(dirname(__FILE__).'/../../model/schedule.php');
 require_once(dirname(__FILE__).'/../../model/slots.php');
 require_once(dirname(__FILE__).'/../../model/classes.php');
-require_once(dirname(__FILE__).'/../../model/classes_schedule.php');
 require_once(dirname(__FILE__).'/../../model/matters.php');
 require_once(dirname(__FILE__).'/../../model/rooms.php');
-require_once(dirname(__FILE__).'/../../public/config/config.php');
 
 $jour = array(null, "Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi");
-$dataArray1 = [];
-$time = time();
 $code = null;
+$currentDayNumber = strftime('%w', time());
+if($currentDayNumber == 0 || $currentDayNumber == 6){
+    $currentDayNumber = 1;
+}
+
 
 if($_SERVER['REQUEST_METHOD'] == "POST"){
     $dayInput = trim(strip_tags(filter_input(INPUT_POST, 'days', FILTER_SANITIZE_STRING)));
@@ -51,31 +51,19 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
 
 }
 
+$edt = Schedule::SelectAll();
+
+foreach ($edt as $currentArray) {
+    if($_SESSION['user']->id_classes == $currentArray['id_class']){
+        $rdv1[$currentArray['day']][$currentArray['slot']] = $currentArray['matter']. '<br> Salle '.$currentArray['room'];
+    }
+}
+
+//Préparation pour la vue
 $slotsArray = Slot::SelectAll();
 $classArray = Classes::SelectAll();
 $mattersArray = Matter::SelectAll();
 $roomsArray = Room::SelectAll();
-$edt = Schedule::SelectAll();
-
-$currentDayNumber = strftime('%w', time());
-if($currentDayNumber == 0 || $currentDayNumber == 6){
-    $currentDayNumber = 1;
-}
-
-foreach ($edt as $slot) {
-    array_push($dataArray1, $slot);
-}
-
-foreach ($dataArray1 as $currentArray) {
-    if($_SESSION['user']->id_classes == $currentArray['id_class']){
-        $slot = Slot::SelectOne($currentArray['id_slots']);
-        $matter = Matter::SelectOne($currentArray['id_matters']);
-        $room = Room::SelectOne($currentArray['id_rooms']);
-        
-        $rdv1[$currentArray['day']][$slot->slot] = $matter->matter. '<br> Salle '.$room->room;
-    }
-}
-
 $title = "Emploi du temps Student's Book's";
 $meta = "";
 $head = "Emploi du temps";

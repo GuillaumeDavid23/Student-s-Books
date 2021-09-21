@@ -2,7 +2,7 @@
 session_start();
 
 require_once(dirname(__FILE__).'/../../model/online.php');
-require_once(dirname(__FILE__).'/../../public/config/config.php');
+ 
 
 date_default_timezone_set('Europe/Paris');
 

@@ -2,7 +2,7 @@
 session_start();
 
 require_once(dirname(__FILE__).'/../../model/user.php');
-require_once(dirname(__FILE__).'/../../public/config/config.php');
+ 
 
 $stockError = [];
 $token = "";
