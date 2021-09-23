@@ -20,13 +20,15 @@
                 <?= $messageCode[$code]['msg'] ?>
             </div>
         <?php endif ?>
-        <h3>Bonjour <?=$user->firstname.' '.$user->lastname?></h3>
+        <h3>Bonjour <?=$_SESSION['user']->firstname.' '.$_SESSION['user']->lastname?></h3>
         <div class="list">
-            <strong>Votre date de naissance est :</strong>  <?=$user->birthdate?> <br>
-            <strong>Votre e-mail :</strong>  <?=$user->mail?> <br>
+            <strong>Votre date de naissance est :</strong>  <?=$_SESSION['user']->birthdate?> <br>
+            <strong>Votre e-mail :</strong>  <?=$_SESSION['user']->mail?> <br>
             <strong>Votre rang :</strong>  <?=$rank->rank?> <br>
-            <?php if($user->id_ranks == "3"){?>
+            <?php if($_SESSION['user']->id_ranks == 3){?>
                 <strong>Votre matière : </strong> <?= $matter->matter?><br>
+            <?php }elseif($_SESSION['user']->id_ranks == 1){ ?>
+                <strong>Votre classe : </strong> <?= $classes->class?><br>
             <?php } ?>
         </div>
         <div class="border-top border-2 border-dark mt-5 pt-3 mb-5">

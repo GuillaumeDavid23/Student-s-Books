@@ -1,5 +1,75 @@
-<?php if($_SESSION['user']->id_ranks == '3'){ //PROF ?>
+<?php if($_SESSION['user']->id_ranks == 3 || $_SESSION['user']->id_ranks == 4){ //PROF OU ADMIN ?>
     <div class="row pt-5 w-100 h-75 justify-content-center justify-content-lg-evenly m-0 text-white">
+        <?php if($code) :?>
+            <div class="text-center h5 alert <?= $messageCode[$code]['type'] ?>">
+                <?= $messageCode[$code]['msg'] ?>
+            </div>
+        <?php endif ?>
+        <!-- colonne tout les devoirs -->
+        <div class="col-10 h-100 col-lg-4 resumeBloc mb-5">
+            <h2>Tous les devoirs</h2>
+            <div class="h-75 overflow-scroll">
+                <?php foreach ($dataArray as $assign) { ?>
+                    <div class="hwEl d-flex w-100 mb-2 text-dark">
+                        <div class="ps-1 w-100 bg-egg">
+                            <div id="hwMatter" class="fw-bold"><?= $assign->assignement ?></div>
+                            <div id="hwProf" class="prof">Elève : <?= $assign->id_users.' '.$assign->id_users?></div>
+                        </div>
+                        <button type="button" data-bs-toggle="modal" data-bs-target="#modifModal<?= $assign->id ?>" class="btn btn-warning">
+                            <i class="fas fa-pen"></i>
+                        </button>
+                    </div>
+                        <!-- Modal modification -->
+                        <div class="modal fade" id="modifModal<?= $assign->id ?>" tabindex="-1" aria-labelledby="modifModalLabel<?= $assign->id ?>" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content text-dark">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="modifModalLabel<?= $assign->id ?>">Modifier le devoir :</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <?php 
+                                        $modifyAssign = Assign::SelectOne($assign->id);
+                                    ?>
+                                    <form action="<?= htmlspecialchars($_SERVER["PHP_SELF"]);?>?page=<?= $page ?>" method="post" enctype='multipart/form-data'>
+                                        <div class="modal-body d-flex flex-column justify-content-center">
+                                            <input type="hidden" name="idAssign" value="<?=$assign->id?>">
+                                            <label for="assignmentDate">Date de rendu du devoir</label>
+                                            <input type="date" name="assignmentDate" id="assignmentDate" value="<?= $modifyAssign->end_date ?>">
+                                            <div class="error"><?= $testError = array_key_exists('ModalAssignmentDate', $stockError) ? $stockError['ModalAssignmentDate']:'';?></div>
+
+                                            <label for="assignmentName">Nom du devoir</label>
+                                            <input type="text" name="assignmentName" id="assignmentName" value="<?= $modifyAssign->assignement ?>">
+                                            <div class="error"><?= $testError = array_key_exists('ModalAssignmentName', $stockError) ? $stockError['ModalAssignmentName']:'';?></div>
+
+                                            <label for="class">Classe</label>
+                                            <select name="class" id="class">
+                                                <option value="">Choisissez une classe</option>
+                                                <?php foreach ($classesArray as $value) {?>
+                                                    <option value="<?= $value['id']?>" <?= $test = $modifyAssign->id_classes == $value['id'] ? 'selected' : '';?>><?= $value['class'] ?></option>;
+                                                <?php } ?>
+                                            </select>
+                                            <div class="error"><?= $testError = array_key_exists('ModalClass', $stockError) ? $stockError['ModalClass']:'';?></div>
+                                            <div class="form-check form-switch mt-2">
+                                                <input class="form-check-input" type="checkbox" name="returnAssign" value="1" id="flexSwitchCheckDefault" <?= $test = $modifyAssign->returnAssign == 1 ? 'checked' : '' ; ?>>
+                                                <label class="form-check-label" for="flexSwitchCheckDefault">Rendu en ligne ?</label>
+                                            </div>
+                                            <div class="error"><?= $testError = array_key_exists('returnAssign', $stockError) ? $stockError['returnAssign']:'';?></div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+                                            <button type="submit" class="btn btn-primary">Envoyer le fichier</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                <?php } ?>
+            </div>
+            
+
+            
+
+        </div>
         <!-- colonne rendu -->
         <div class="col-10 h-100 col-lg-4 resumeBloc mb-5">
             <h2>Rendu</h2>
@@ -39,11 +109,6 @@
         </div>
         <div class="col-10 h-50 col-lg-3 resumeBloc p-3 align-self-center">
             <h3 class="text-center">Ajouter un devoir</h3>
-            <?php if($code) :?>
-                <div class="text-center h5 alert <?= $messageCode[$code]['type'] ?>">
-                    <?= $messageCode[$code]['msg'] ?>
-                </div>
-            <?php endif ?>
             <form action="<?= htmlspecialchars($_SERVER["PHP_SELF"]);?>?page=<?= $page ?>" method="POST" class="d-flex flex-column align-items-center">
 
                 <label for="assignmentDate">Date de rendu du devoirs</label>

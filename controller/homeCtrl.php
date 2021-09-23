@@ -5,7 +5,6 @@ if(empty($_SESSION['user'])){
     exit;
 }
 setlocale (LC_TIME, 'fr_FR.utf8','fra');
-
 //Inclusion des fichiers
 require_once(dirname(__FILE__).'/../model/user.php');
 require_once(dirname(__FILE__).'/../model/assignements.php');

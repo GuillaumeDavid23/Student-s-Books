@@ -24,11 +24,16 @@ $code = null;
 $uploadDir = 'uploads/assign/';
 $stockError = [];
 
-
+//Les données sont envoyés ?
 if($_SERVER['REQUEST_METHOD'] == "POST"){
-    if(isset($_FILES['assignFile']) && !empty($_FILES['assignFile']['name'])){
-        $idAssign = strip_tags(trim(filter_input(INPUT_POST, 'idAssign', FILTER_SANITIZE_NUMBER_INT)));
+    $hwDate = strip_tags(trim(filter_input(INPUT_POST, 'assignmentDate', FILTER_SANITIZE_STRING)));
+    $hwName = strip_tags(trim(filter_input(INPUT_POST, 'assignmentName', FILTER_SANITIZE_STRING)));
+    $class = strip_tags(trim(filter_input(INPUT_POST, 'class', FILTER_SANITIZE_STRING)));
+    $returnAssign = strip_tags(trim(filter_input(INPUT_POST, 'returnAssign', FILTER_SANITIZE_NUMBER_INT)));
+    $idAssign = strip_tags(trim(filter_input(INPUT_POST, 'idAssign', FILTER_SANITIZE_NUMBER_INT)));
 
+    
+    if(isset($_FILES['assignFile']) && !empty($_FILES['assignFile']['name'])){
         if($_FILES['assignFile']['size'] <= LIMIT_SIZE) 
         {
             $mime = mime_content_type($_FILES['assignFile']['tmp_name']);
@@ -48,14 +53,58 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
         } else {
             $stockError['assignFile'] = 'Votre devoirs ne doit pas dépasser 2Mo';
         }
-    }else{
+    }elseif(!empty($idAssign)){
+        //Modification D'UN DEVOIR
+        if(empty($hwDate))
+        {
+            $stockError['ModalAssignmentDate'] = "<br>ERREUR Champs 'assignmentDate' vide !";
+        }
+        elseif(empty($hwName))
+        {
+            $stockError['ModalAssignmentName'] = "<br>ERREUR Champs 'assignmentName' vide !";
+        }
+        elseif(empty($class))
+        {
+            $stockError['ModalClass'] = "<br>ERREUR Classe non renseigné!";
+        }
+        elseif(empty($subject))
+        {
+            $stockError['subject'] = "<br>ERREUR Votre matière de professeur n'est pas renseigné !";
+        }
+        else
+        {
+            if(empty($returnAssign))
+            {
+                $returnAssign = 0;
+            }
+            elseif($returnAssign > 1)
+            {
+                $stockError['returnAssign'] = "<br>Valeur non valide !";
+            }
+            
+            if(!preg_match("/".REGEX_BIRTHDAY."/", $hwDate)){
+                    $stockError['assignmentDate'] = "ERREUR Le format de la date du devoir est incorrect (Format : YYYY-MM-JJ)";
+            }else{
+                $save = explode("-", $hwDate);
+                if(!checkdate($save[1], $save[2], $save[0])){
+                    $stockError['assignmentDate'] = "ERREUR La date saisie n'existe pas";
+                }
+            }
+            
+            if(empty($stockError)){
+                //Modification dans la base
+                $modifyAssign = Assign::SelectOne($idAssign);
+                if($_SESSION['user']->id == $modifyAssign->id_users){
+                    $assign = new Assign($idAssign, $hwDate, $hwName, $returnAssign,$class);
+                    $code = $assign->Modify();
+                }else{
+                    $code=23;
+                }
+            }
+        }
+    }
+    else{
         //AJOUT D'UN DEVOIR
-        $hwDate = strip_tags(trim(filter_input(INPUT_POST, 'assignmentDate', FILTER_SANITIZE_STRING)));
-        $hwName = strip_tags(trim(filter_input(INPUT_POST, 'assignmentName', FILTER_SANITIZE_STRING)));
-        $class = strip_tags(trim(filter_input(INPUT_POST, 'class', FILTER_SANITIZE_STRING)));
-        $returnAssign = strip_tags(trim(filter_input(INPUT_POST, 'returnAssign', FILTER_SANITIZE_STRING)));
-
-        
         if(empty($hwDate))
         {
             $stockError['assignmentDate'] = "<br>ERREUR Champs 'assignmentDate' vide !";
@@ -104,7 +153,7 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
 }
 
 //Préparation de l'affichage
-$dataArray = Assign::SelectAll();
+$dataArray = Assign::SelectAllByTeacher($_SESSION['user']->id);
 $classesArray = Classes::SelectAll();
 
 //Inclusion des vues

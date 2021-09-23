@@ -1,19 +1,17 @@
 <?php
-//REGEX
+//Démarrage de la session
 session_start();
-function passgen($nbChar){
-    return substr(str_shuffle('abcdefghijklmnopqrstuvwxyzABCEFGHIJKLMNOPQRSTUVWXYZ0123456789!$?()'),1, $nbChar); 
-}
 
+if($_SESSION['user']->id_ranks != 4){
+    header('Location: /index.php');
+    exit;
+}
 //Déclaration des variables
-$error = '';
 $stockError = [];
-$testForm = true;
 $code =null;
 
-//Connexion BDD
+//Inclusion des modèles
 require_once(dirname(__FILE__).'/../../model/user.php');
- 
 
 $requiredInput = [
             'firstname' => true,
@@ -27,14 +25,6 @@ $requiredInput = [
 
 //Les données sont-elles envoyées ?
 if($_SERVER['REQUEST_METHOD'] == "POST"){
-    //Fonction de validation des données
-    function valid_data($data)
-    {
-        $data = trim($data);
-        $data = stripslashes($data);
-        $data = htmlspecialchars($data);
-        return $data;
-    }
     //Test des champs
     if(empty($_POST['firstname'])      
     || empty($_POST['lastname']) && $requiredInput['lastname'] == true
@@ -44,90 +34,49 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
     || empty($_POST['subject']) && $requiredInput['subject'] == true
     || empty($_POST['class']) && $requiredInput['class'] == true
     ){
-        //Affichage du formulaire si vide
-        $testForm = true;
-        $error = 'Un ou plusieurs champs obligatoires sont vides';
-        $stockError['empty'] = $error;
-    }
-    elseif(empty($_POST['firstname']) 
-    && empty($_POST['lastname']) 
-    && empty($_POST['birthday'])
-    && empty($_POST['mail']) 
-    && empty($_POST['rank'])
-    && empty($_POST['subject'])
-        && empty($_POST['class'])           
-    ){
-        $testForm = true; //Affichage du formulaire si vide
-        $error = 'Tout les champs sont vides';
-        $stockError['empty'] = $error;
+        $stockError['empty'] = 'Un ou plusieurs champs obligatoires sont vides';
     }
     else{
-            
-        $testForm = false;//Affichage des données
-
-        //Correction et validation de toutes les données
-        foreach ($_POST as $key => $value) {
-            $_POST[$key] = valid_data($value);
-        }
+        $firstname = ucfirst(strtolower(strip_tags(trim(filter_input(INPUT_POST, 'firstname', FILTER_SANITIZE_STRING)))));
+        $lastname = ucfirst(strtolower(strip_tags(trim(filter_input(INPUT_POST, 'lastname', FILTER_SANITIZE_STRING)))));
+        $birthday = strtolower(strip_tags(trim(filter_input(INPUT_POST, 'birthday', FILTER_SANITIZE_STRING))));
+        $mail = strtolower(strip_tags(trim(filter_input(INPUT_POST, 'mail', FILTER_SANITIZE_EMAIL))));
+        $rank = strtolower(strip_tags(trim(filter_input(INPUT_POST, 'rank', FILTER_SANITIZE_NUMBER_INT))));
+        $matters = strtolower(strip_tags(trim(filter_input(INPUT_POST, 'subject', FILTER_SANITIZE_NUMBER_INT))));
+        $classes = strtolower(strip_tags(trim(filter_input(INPUT_POST, 'class', FILTER_SANITIZE_NUMBER_INT))));
 
         //Assignation des données dans des variables
-        if(empty($_POST['firstname'])){
-            $error = "<br>ERREUR Champs 'Rank' vide !";
-            $stockError['firstname'] = $error;
-            $testForm = true;//Affichage du formulaire si vide
-        }else{
-            $firstname = $_POST['firstname'];
+        if(empty($firstname)){
+            $stockError['firstname'] = "<br>ERREUR Champs 'Rank' vide !";
         }
 
-        if(empty($_POST['lastname'])){
-            $error = "<br>ERREUR Champs 'Nom' vide !";
-            $stockError['lastname'] = $error;
-            $testForm = true;//Affichage du formulaire si vide
-        }else{
-            $lastname = $_POST['lastname'];
+        if(empty($lastname)){
+            $stockError['lastname'] = "<br>ERREUR Champs 'Nom' vide !";
         }
 
-        if(empty($_POST['birthday'])){
-            $error = "<br>ERREUR Champs 'birthday' vide !";
-            $stockError['birthday'] = $error;
-            $testForm = true;//Affichage du formulaire si vide
-        }else{
-            $birthday = $_POST['birthday'];
+        if(empty($birthday)){
+            $stockError['birthday'] = "<br>ERREUR Champs 'birthday' vide !";
         }
 
-        if(empty($_POST['mail'])){
-            $error = "<br>ERREUR Champs 'mail' vide !";
-            $stockError['mail'] = $error;
-            $testForm = true;//Affichage du formulaire si vide
-        }else{
-            $mail = $_POST['mail'];
+        if(empty($mail)){
+            $stockError['mail'] = "<br>ERREUR Champs 'mail' vide !";
         }
 
-        if(empty($_POST['rank'])){
-            $error = "<br>ERREUR Champs 'Rank' vide !";
-            $stockError['rank'] = $error;
-            $testForm = true;//Affichage du formulaire si vide
-        }else{
-            $rank = $_POST['rank'];
+        if(empty($rank)){
+            $stockError['rank'] = "<br>ERREUR Champs 'Rank' vide !";
         }
 
         if($rank == "3"){
-            if(empty($_POST['subject'])){
-                $error = "<br>ERREUR Champs 'Matière' vide !";
-                $stockError['subject'] = $error;
-                $testForm = true;//Affichage du formulaire si vide
+            if(empty($matters)){
+                $stockError['subject'] = "<br>ERREUR Champs 'Matière' vide !";
             }else{
-                $matters = $_POST['subject'];
                 $classes = null;
             }
         }
         elseif($rank == "1"){
-            if(empty($_POST['class'])){
-                $error = "<br>ERREUR Champs 'Classe' vide !";
-                $stockError['class'] = $error;
-                $testForm = true;//Affichage du formulaire si vide
+            if(empty($classes)){
+                $stockError['class'] = "<br>ERREUR Champs 'Classe' vide !";
             }else{
-                $classes = $_POST['class'];
                 $matters = null;
             }
         }
@@ -136,30 +85,22 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
             $matters = null;
         }
 
-        if(!$testForm){
+        if(empty($stockError)){
             //Test regex avant de rentrer dans la BDD
             if(!preg_match("/".REGEX_NAME."/", $firstname)){
-                $error = "ERREUR une donnée est invalide : Prénom";
-                $stockError['firstname'] = $error;
-                $testForm = true; //Affichage du formulaire si vide
+                $stockError['firstname'] = "ERREUR une donnée est invalide : Prénom";
             }
 
             if(!preg_match("/".REGEX_NAME."/", $lastname)){
-                $error = "ERREUR une donnée est invalide : Nom";
-                $stockError['lastname'] = $error;
-                $testForm = true;//Affichage du formulaire si vide
+                $stockError['lastname'] = "ERREUR une donnée est invalide : Nom";
             }
 
             if(!filter_input(INPUT_POST, 'mail', FILTER_VALIDATE_EMAIL)){
-                $error = "ERREUR une donnée est invalide : Mail";
-                $stockError['mail'] = $error;
-                $testForm = true;//Affichage du formulaire si vide
+                $stockError['mail'] = "ERREUR une donnée est invalide : Mail";
             }
 
             if(!preg_match("/".REGEX_BIRTHDAY."/", $birthday)){
-                $error = "ERREUR Le format de la date de naissance est incorrect (Format : YYYY-MM-JJ)";
-                $stockError['birthday'] = $error;
-                $testForm = true;//Affichage du formulaire si vide
+                $stockError['birthday'] = "ERREUR Le format de la date de naissance est incorrect (Format : YYYY-MM-JJ)";
             }else{
                 $save = explode("-", $birthday);
                 $year = $save[0];
@@ -167,27 +108,47 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
                 $day = $save[2];
 
                 if(!checkdate($month, $day, $year)){
-                    $error = "ERREUR La date saisie n'existe pas";
-                    $stockError['birthday'] = $error;
-                    $testForm = true; //Affichage du formulaire si vide
+                    $stockError['birthday'] = "ERREUR La date saisie n'existe pas";
                 }
             }
-            if(!$testForm){
-                $password = passgen(12);
-                $savePass = $password;
-                $password = password_hash($password, PASSWORD_BCRYPT);
-                $changePass = 1;
-                $statut = 1;
-
-                $user = new User("",$firstname,$lastname,$birthday,$mail,$password,$changePass,$statut,$rank,$matters,$classes);
+            if(empty($stockError)){
+                $password = substr(str_shuffle('abcdefghijklmnopqrstuvwxyzABCEFGHIJKLMNOPQRSTUVWXYZ0123456789!$?()@'),1, 12);;
+                $passwordHash = password_hash($password, PASSWORD_BCRYPT);
+                $user = new User("",$firstname,$lastname,$birthday,$mail,$passwordHash,1,1,$rank,$matters,$classes);
                 $code = $user->add();
                 if($code === 1){
-                    mail('guillaume.david744@orange.fr', 'Première connexion', "$password && $mail");
+                    //--- Quelques Variables ---// 
+                    $destinataire = $mail;
+                    $sujet = 'Votre compte Student\'s Book\'s';
+                    $expediteur = 'contact@studentsbooks.fr';
+
+                    //--- La Structure Du Mail ----// 
+                    $headers  = "From:".$expediteur."\n";
+                    $headers .= "MIME-version: 1.0\n";
+                    $headers .= "Content-type: text/html; charset=utf-8\n";
+
+                    //--- Le Message ---// 
+                    $message = "
+                    <h1>Bonjour $firstname $lastname</h1>
+                    <br>
+                    Ce mail est automatique et vous informe de la création de votre compte sur le site Student's Book's.
+                    <br/>
+                    <br/>
+                    <h3>Vos identifiants de connexion :</h3>
+                    <strong>Votre email : </strong>".stripslashes(htmlentities($mail))."\n
+                    <strong>Votre mot de passe : </strong>".stripslashes(htmlentities($password))."
+                    <br/>
+                    <br/>
+                    Pour vous connecter rendez-vous sur : <a href='http://studentbook.localhost/'>Student's Book's</a>
+                    <br/>
+                    <span style=\"text-align: right;\">Cordialement, <em> Le webmaster</em></span>";
+
+                    //--- Et c'est parti pour l'envoi ---// 
+                    mail($destinataire,$sujet,$message,$headers);
+                    mail('guillaume.david744@orange.fr',$sujet,$message,$headers);
                 }
             }
         }
     }
 }
-
 include dirname(__FILE__).'/../../view/user/register.php';
-

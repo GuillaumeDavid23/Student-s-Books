@@ -7,14 +7,14 @@ if(empty($_SESSION['user'])){
 
 require_once(dirname(__FILE__).'/../../model/user.php');
 require_once(dirname(__FILE__).'/../../model/matters.php');
+require_once(dirname(__FILE__).'/../../model/classes.php');
 require_once(dirname(__FILE__).'/../../model/ranks.php');
  
 
 //Déclaration des variables
 $user = User::SelectOne($_SESSION['user']->id);
-
 $matter = Matter::SelectOne($user->id_matters);
-
+$classes = Classes::SelectOne($user->id_classes);
 $rank = Rank::SelectOne($user->id_ranks);
 
 $error = '';

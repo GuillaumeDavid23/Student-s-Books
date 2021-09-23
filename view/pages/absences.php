@@ -29,32 +29,31 @@
         </div>
     </div>
 <?php }else{ ?>
-<div class="row h-50 justify-content-center justify-content-lg-evenly mb-5">
-    <div class="col-10 col-lg-6 resumeBloc h-100">
-        <h2>Absences</h2>
-        <?php foreach ($absencesArray as $absencesObj) { 
-            $timestamp_start = strtotime($absencesObj->start_date.' '.$absencesObj->start_hour);
-            $timestamp_end = strtotime($absencesObj->end_date.' '.$absencesObj->end_hour);
+    <div class="row h-100 justify-content-center justify-content-lg-evenly mb-5">
+        <div class="col-10 col-lg-6 resumeBloc h-100">
+            <h2>Absences</h2>
+            <?php foreach ($absencesArray as $absencesObj) { 
+                $timestamp_start = strtotime($absencesObj->start_date.' '.$absencesObj->start_hour);
+                $timestamp_end = strtotime($absencesObj->end_date.' '.$absencesObj->end_hour);
 
-            $day_start = strftime('%d', $timestamp_start);
-            $month_start = strftime('%B', $timestamp_start);
+                $day_start = strftime('%d', $timestamp_start);
+                $month_start = strftime('%B', $timestamp_start);
 
-            $day_end = strftime('%d', $timestamp_end);
-            $month_end = strftime('%B', $timestamp_end);
+                $day_end = strftime('%d', $timestamp_end);
+                $month_end = strftime('%B', $timestamp_end);
 
-            if($_SESSION['user']->id == $absencesObj->id_users ){?>
-                <div class="absentEl d-flex w-100 mb-2">
-                    <div class="absentDateBloc ">
-                        <div id="absentBloc" class="text-center fw-bold text-white subInfo ps-2 pe-2"><?= $day_start.' au '.$day_end.'<br>'.$month_start ?></div>
-                    </div>
-                    <div class="ps-1 w-100 bg-egg d-flex align-items-center">
-                        <div id="reasonBloc" class="fw-bold">
-                            <span id="reason"><?= $absencesObj->justification ?> - de <?= date('H:i', $timestamp_start) ?> à <?= date('H:i', $timestamp_end) ?> </span>
+                if($_SESSION['user']->id == $absencesObj->id_users ){?>
+                    <div class="absentEl d-flex w-100 mb-2">
+                        <div class="absentDateBloc ">
+                            <div id="absentBloc" class="text-center fw-bold text-white subInfo ps-2 pe-2"><?= $day_start.' au '.$day_end.'<br>'.$month_start ?></div>
+                        </div>
+                        <div class="ps-1 w-100 bg-egg d-flex align-items-center">
+                            <div id="reasonBloc" class="fw-bold">
+                                <span id="reason"><?= $absencesObj->justification ?> - de <?= date('H:i', $timestamp_start) ?> à <?= date('H:i', $timestamp_end) ?> </span>
+                            </div>
                         </div>
                     </div>
-                </div>
-        <?php }} ?>
-        
+            <?php }} ?>
+        </div>
     </div>
-</div>
 <?php } ?>

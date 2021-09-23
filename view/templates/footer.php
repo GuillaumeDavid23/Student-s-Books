@@ -114,6 +114,9 @@ switch ($page) {
         if($page == 11){
             echo '<script src="../public/js/main.js"></script>';
         }
+        if($page == 3){
+            echo '<script src="../public/js/edt.js"></script>';
+        }
     ?>
 
     <script src="/public/js/bootstrap/bootstrap.js"></script>

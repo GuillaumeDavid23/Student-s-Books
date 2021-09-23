@@ -38,6 +38,33 @@ class Schedule{
             }
         }
 
+        public function Modify()
+        {
+            $stmt = $this->pdo->prepare("UPDATE `schedule`
+            SET `day` = :day,
+                `id_slots` = :id_slots,
+                `id_matters` = :id_matters,
+                `id_rooms` = :id_rooms
+            WHERE `id` = :id;");
+
+            $stmt->bindParam(':day', $this->day);
+            $stmt->bindParam(':id_slots', $this->id_slots);
+            $stmt->bindParam(':id_matters', $this->id_matters);
+            $stmt->bindParam(':id_rooms', $this->id_rooms);
+            $stmt->bindParam(':id', $this->id);
+            
+            try {
+                $stmt->execute();
+                if($stmt->rowCount() == 0){
+                    return 22;
+                }else{
+                    return 21;
+                }
+            } catch (PDOException $ex) {
+                return $ex;
+            }
+        }
+
         /**
          * Supprime une entrée dans la Base
          * @param string $table Table sélectionnée
@@ -65,7 +92,7 @@ class Schedule{
         {
             $pdo = SPDO::getInstance();
 
-            $sql= ("SELECT `schedule`.`day`, `rooms`.`room`, `matters`.`matter`, `slots`.`slot`, `classes_schedule`.`id_class` 
+            $sql= ("SELECT `schedule`.`id`,`schedule`.`day`, `rooms`.`room`, `matters`.`matter`, `slots`.`slot`, `classes_schedule`.`id_class` 
                     FROM `schedule` 
                     INNER JOIN `rooms` ON `schedule`.`id_rooms` = `rooms`.`id` 
                     INNER JOIN `matters` ON `schedule`.`id_matters` = `matters`.`id` 
@@ -74,6 +101,23 @@ class Schedule{
             try {
                 $sql = $pdo->query($sql);
                 $result = $sql->fetchAll(PDO::FETCH_ASSOC);
+                return $result;
+            } catch (PDOException $ex) {
+                return 11;
+            }
+        }
+
+        public static function SelectOne($id)
+        {   
+            $pdo = SPDO::getInstance();
+            
+            $sql= ("SELECT `id`, `day`, `id_slots`, `id_matters`, `id_rooms` 
+                    FROM `schedule`");
+            $stmt = $pdo->prepare($sql);
+            $stmt->bindValue(':id', $id);
+            try {
+                $stmt->execute();
+                $result = $stmt->fetch(PDO::FETCH_OBJ);
                 return $result;
             } catch (PDOException $ex) {
                 return 11;

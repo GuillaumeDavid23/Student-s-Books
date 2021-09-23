@@ -91,7 +91,7 @@ function chargeMessages() {
                 messages.map((message) => {
                     // On transforme la date en objet JS
                     let dateMessage = new Date(message.create_at)
-
+                    console.log(message);
                     if (idUser == message.id_users) {
                         addClass = "meChat align-self-end"
                         imgClass = "align-self-end"

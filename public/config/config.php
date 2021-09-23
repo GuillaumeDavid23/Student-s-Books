@@ -19,11 +19,14 @@ $messageCode = [
     18 => ['type' => 'alert-success', 'msg' => 'Devoir ajouté !'],
     19 => ['type' => 'alert-success', 'msg' => 'Devoir supprimé !'],
     20 => ['type' => 'alert-success', 'msg' => 'Devoir non supprimé !'],
+    21 => ['type' => 'alert-success', 'msg' => 'Devoir modifié !'],
+    22 => ['type' => 'alert-warning', 'msg' => 'Devoir non modifié !'],
+    23 => ['type' => 'alert-danger', 'msg' => 'Vous n\'avez pas les droits pour faire cela !'],
+
 ];
 
 //REGEX 
 define("REGEX_NAME", "^[a-zA-ZàâæçéèêëîïôœùûüÿÀÂÆÇnÉÈÊËÎÏÔŒÙÛÜŸ]{2,15}(-| |')?([a-zA-ZàâæçéèêëîïôœùûüÿÀÂÆÇnÉÈÊËÎÏÔŒÙÛÜŸ]{2,15})?$");
-
 define("REGEX_BIRTHDAY", "^([12]\d{3}[-](0[1-9]|1[0-2])[-](0[1-9]|[12]\d|3[01]))$");
 define("LIMIT_SIZE", "2097152");
 define("SUPPORTED_FORMAT", array('image/jpeg'));

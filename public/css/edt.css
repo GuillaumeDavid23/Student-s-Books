@@ -52,3 +52,56 @@ td
 td.time {
     width: 5%;
 }
+
+.bg-green {
+    color: black;
+    background-color: rgb(162, 192, 102);
+}
+
+.bg-darkRed {
+    color: white;
+    background-color: rgb(87, 3, 94);
+}
+
+.bg-cyan {
+    color: white;
+    background-color: rgb(61, 141, 173);
+}
+
+.bg-pink {
+    color: white;
+    background-color: rgb(173, 61, 85);
+}
+
+.bg-orange {
+    color: black;
+    background-color: rgb(211, 203, 168);
+}
+
+.bg-red {
+    color: white;
+    background-color: rgb(190, 16, 16);
+}
+
+.bg-yellow {
+    color: black;
+    background-color: rgb(255, 230, 8);
+}
+
+.bg-royal {
+    color: white;
+    background-color: rgb(32, 66, 130);
+}
+
+.bg-arc {
+    background-image: -webkit-gradient(linear, left top, right top, color-stop(0, #f22), color-stop(0.15, #f2f), color-stop(0.3, #22f), color-stop(0.45, #2ff), color-stop(0.6, #2f2), color-stop(0.75, #2f2), color-stop(0.9, #ff2), color-stop(1, #f22));
+
+    background-image: gradient(linear, left top, right top, color-stop(0, #f22), color-stop(0.15, #f2f), color-stop(0.3, #22f), color-stop(0.45, #2ff), color-stop(0.6, #2f2), color-stop(0.75, #2f2), color-stop(0.9, #ff2), color-stop(1, #f22));
+    color: black;
+}
+
+.btn-blue {
+    color: #db9334;
+    background-color: rgba(153, 69, 69, 0.863);
+    border-radius: 50%;
+}

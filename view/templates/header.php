@@ -81,6 +81,12 @@
                 <div class="align-self-center me-2">
                     <a href="/index.php?page=12" class="btn btn-outline-danger fw-bold"><i class="fas fa-sign-out-alt"></i></a> 
                 </div>
+                <?php if($_SESSION['user']->id_ranks == 4){?>
+                    <div class="align-self-center me-2">
+                    <a href="/index.php?page=11" class="btn btn-outline-success fw-bold"><i class="fas fa-user-alt"></i></a> 
+                </div>
+                <?php } ?>
+
             <?php } ?>
         </header>
         <main class="container-fluid">

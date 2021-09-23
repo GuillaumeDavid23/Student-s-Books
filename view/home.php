@@ -76,12 +76,18 @@
             <div class="w-100 d-flex align-items-center justify-content-center">
                 <h1 class="m-0">Tableau de bord</h1>
             </div>
+            <?php if($_SESSION['user']->id_ranks == 4){?>
+                <div class="align-self-center me-2">
+                    <a href="/index.php?page=11" class="btn btn-success fw-bold"><i class="fas fa-user-plus"></i></a> 
+                </div>
+            <?php } ?>
             <div class="align-self-center">
                 <a href="/index.php?page=7" class="btn btn-outline-dark fw-bold me-3"><i class="fas fa-user-alt"></i></a> 
             </div>
             <div class="align-self-center me-2">
                 <a href="/index.php?page=12" class="btn btn-outline-danger fw-bold"><i class="fas fa-sign-out-alt"></i></a> 
             </div>
+            
         </header>
         <div class="h-75 w-100 d-flex ps-5 pe-5">
             <div class="row h-100 w-75 ">
@@ -124,24 +130,25 @@
                             <?php 
                             $dataArrayHw = Assign::SelectAll();
                             foreach ($dataArrayHw as $data){ 
-                                $save = explode("-", $data['end_date']);
+                                $save = explode("-", $data->end_date);
                                 $year = $save[0];
                                 $month = $save[1];
                                 $day = $save[2];
                                 $month = strftime('%h', strtotime("$day-$month-$year"));
-                                $teacher = User::SelectOne($data['id_users']);
+                                $teacher = User::SelectOne($data->id_users);
                                 $matters = Matter::SelectOne($teacher->id_matters);
+                                if($_SESSION['user']->id_classes == $data->id_classes){
                             ?>
                             <div class="hwEl d-flex w-100 mb-2">
                                 <div class="hwDateBloc h-100">
                                     <div id="hwDate" class="text-center fw-bold text-white subInfo"><?= $day ?> <br> <?= $month ?></div>
                                 </div>
                                 <div class="ps-1 w-100 bg-egg">
-                                    <div id="hwMatter" class="fw-bold"><?= $matters->matter ?> - <?= $data['assignement'] ?></div>
+                                    <div id="hwMatter" class="fw-bold"><?= $matters->matter ?> - <?= $data->assignement ?></div>
                                     <div id="hwProf" class="prof">Mme/Mr <?= $teacher->lastname?></div>
                                 </div>
                             </div>
-                            <?php } ?>
+                            <?php }} ?>
                         </div>
                     </div>
                 </div>
@@ -236,3 +243,4 @@
             </div>
         </div>
     </div>
+<script src="/public/js/chat.js"></script>

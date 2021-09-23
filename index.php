@@ -6,7 +6,6 @@ switch ($page) {
         $meta = "";
         $head = "Notes";
         include dirname(__FILE__).'/view/templates/header.php';
-
         include dirname(__FILE__).'/controller/pages/noteCtrl.php';
         break;
     case 2:
