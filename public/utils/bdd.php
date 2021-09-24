@@ -3,7 +3,13 @@ require_once(dirname(__FILE__).'/../config/config.php');
 class SPDO
 {
     private static $instance = null;
+    //DISTANT
+    // const DEFAULT_SQL_USER = 'c219davidg';
+    // const DEFAULT_SQL_HOST = 'localhost';
+    // const DEFAULT_SQL_PASS = 'Ua6r5pDDPE!om';
+    // const DEFAULT_SQL_DTB = 'c219studentsbooks';
 
+    //LOCAL
     const DEFAULT_SQL_USER = 'students_books';
     const DEFAULT_SQL_HOST = 'localhost';
     const DEFAULT_SQL_PASS = 'j@Ms@7pA&?Eie9pb';
