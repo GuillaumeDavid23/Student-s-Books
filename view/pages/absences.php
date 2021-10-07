@@ -20,10 +20,6 @@
                     <label for="end_date">Heure de fin d'absence : </label>
                     <input type="time" name="end_hour" id="end_hour">
                 </div>
-                <div class="mb-3">
-                    <label for="end_date">Heure de fin d'absence : </label>
-                    <input type="time" name="end_hour" id="end_hour">
-                </div>
                 <button type="submit" class="btn btn-success">Ajouter absence</button>
             </form>
         </div>

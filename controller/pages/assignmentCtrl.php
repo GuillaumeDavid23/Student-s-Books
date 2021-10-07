@@ -1,7 +1,6 @@
 <?php 
 //Démarrage de la session
-session_start();
-
+  
 //TEST de la session utilisateur
 if(empty($_SESSION['user'])){
     header('Location: /index.php?page=10');
@@ -23,7 +22,6 @@ require_once(dirname(__FILE__).'/../../model/classes.php');
 $code = null;
 $uploadDir = 'uploads/assign/';
 $stockError = [];
-
 //Les données sont envoyés ?
 if($_SERVER['REQUEST_METHOD'] == "POST"){
     $hwDate = strip_tags(trim(filter_input(INPUT_POST, 'assignmentDate', FILTER_SANITIZE_STRING)));
@@ -31,9 +29,11 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
     $class = strip_tags(trim(filter_input(INPUT_POST, 'class', FILTER_SANITIZE_STRING)));
     $returnAssign = strip_tags(trim(filter_input(INPUT_POST, 'returnAssign', FILTER_SANITIZE_NUMBER_INT)));
     $idAssign = strip_tags(trim(filter_input(INPUT_POST, 'idAssign', FILTER_SANITIZE_NUMBER_INT)));
+    $idRemove = strip_tags(trim(filter_input(INPUT_POST, 'idRemove', FILTER_SANITIZE_NUMBER_INT)));
+    
 
     
-    if(isset($_FILES['assignFile']) && !empty($_FILES['assignFile']['name'])){
+    if(isset($_FILES['assignFile']) && !empty($_FILES['assignFile']['name'])){ // rendu d'un devoir
         if($_FILES['assignFile']['size'] <= LIMIT_SIZE) 
         {
             $mime = mime_content_type($_FILES['assignFile']['tmp_name']);
@@ -53,8 +53,7 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
         } else {
             $stockError['assignFile'] = 'Votre devoirs ne doit pas dépasser 2Mo';
         }
-    }elseif(!empty($idAssign)){
-        //Modification D'UN DEVOIR
+    }elseif(!empty($idAssign)){ //Modification D'UN DEVOIR
         if(empty($hwDate))
         {
             $stockError['ModalAssignmentDate'] = "<br>ERREUR Champs 'assignmentDate' vide !";
@@ -94,17 +93,36 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
             if(empty($stockError)){
                 //Modification dans la base
                 $modifyAssign = Assign::SelectOne($idAssign);
-                if($_SESSION['user']->id == $modifyAssign->id_users){
-                    $assign = new Assign($idAssign, $hwDate, $hwName, $returnAssign,$class);
-                    $code = $assign->Modify();
+                if($modifyAssign){
+                    if($_SESSION['user']->id == $modifyAssign->id_users){
+                        $assign = new Assign($idAssign, $hwDate, $hwName, $returnAssign,$class);
+                        $code = $assign->Modify();
+                    }else{
+                        $code=23;
+                    }
                 }else{
-                    $code=23;
+                    $code = 24;
                 }
             }
         }
     }
-    else{
-        //AJOUT D'UN DEVOIR
+    elseif (!empty($idRemove)) { //Suppression D'UN DEVOIR
+        //Modification dans la base
+                $removeAssign = Assign::SelectOne($idRemove);
+                
+                if($removeAssign){
+                    if($_SESSION['user']->id == $removeAssign->id_users){
+                        $assign = new Assign();
+                        $code = $assign->Delete($idRemove);
+                    }else{
+                        $code=23;
+                    }
+                }else{
+                    $code = 24;
+                }
+                
+    }
+    else{ //AJOUT D'UN DEVOIR
         if(empty($hwDate))
         {
             $stockError['assignmentDate'] = "<br>ERREUR Champs 'assignmentDate' vide !";
@@ -153,7 +171,9 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
 }
 
 //Préparation de l'affichage
-$dataArray = Assign::SelectAllByTeacher($_SESSION['user']->id);
+$dataArrayClass = Assign::SelectAllByClass($_SESSION['user']->id_classes);
+
+$dataArrayTeacher = Assign::SelectAllByTeacher($_SESSION['user']->id);
 $classesArray = Classes::SelectAll();
 
 //Inclusion des vues

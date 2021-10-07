@@ -1,7 +1,5 @@
 <?php
 // Ce fichier ajoute un message dans la base de données
-session_start();
-
 require_once(dirname(__FILE__).'/../../model/user.php');
 
 // On vérifie la méthode utilisée par la requête ajax

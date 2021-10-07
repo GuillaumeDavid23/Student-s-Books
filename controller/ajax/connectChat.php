@@ -1,8 +1,7 @@
 <?php 
 session_start();
-
 require_once(dirname(__FILE__).'/../../model/online.php');
- 
+
 
 date_default_timezone_set('Europe/Paris');
 

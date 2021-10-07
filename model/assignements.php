@@ -46,12 +46,16 @@ class Assign{
          * @param string $table Table sélectionnée
          * @param string $addSql Paramètre supplémentaire SQL
          */
-        public function Delete()
+        public static function Delete($id)
         {   
-            $sql = "DELETE FROM `assignements` WHERE `id` = $this->id";
+            $pdo = SPDO::getInstance();
+
+            $sql = "DELETE FROM `assignements` WHERE `id` = :id";
+            $stmt = $pdo->prepare($sql);
+            $stmt->bindValue(':id', $id);
             try {
-                $sql = $this->pdo->query($sql);
-                return $sql;
+                $stmt->execute();
+                return 19;
             } catch (PDOException $ex) {
                 return 11;
             }
@@ -119,6 +123,21 @@ class Assign{
                 return 11;
             }
         }
+        public static function SelectAllByClass($id)
+        {
+            $pdo = SPDO::getInstance();
+
+            $sql= ("SELECT * FROM `assignements` WHERE `id_classes`= :id");
+            $stmt = $pdo->prepare($sql);
+            $stmt->bindValue(':id', $id);
+            try {
+                $stmt->execute();
+                $result = $stmt->fetchAll(PDO::FETCH_OBJ);
+                return $result;
+            } catch (PDOException $ex) {
+                return 11;
+            }
+        }
 
         /**
          * Sélection de colonne dans une ou plusieurs table.
@@ -142,50 +161,4 @@ class Assign{
                 return 11;
             }
         }
-
-        public function Show()
-        {
-             // On détermine sur quelle page on se trouve
-            if(isset($_GET['page']) && !empty($_GET['page'])){
-                $currentPage = (int) strip_tags($_GET['page']);
-            }else{
-                $currentPage = 1;
-            }
-            // On détermine le nombre d'articles par page
-            $parPage = 4;
-            // Calcul du 1er article de la page
-            $premier = ($currentPage * $parPage) - $parPage;
-
-            $sql = $this->pdo->prepare(
-                "SELECT `appointments`.id, `appointments`.`dateHour`, `patients`.`lastname`, `patients`.`firstname`, `patients`.`id` AS 'idPatients' 
-                FROM appointments 
-                INNER JOIN `patients` 
-                ON `appointments`.`idPatients` = `patients`.`id` 
-                LIMIT :premier, :parpage;");
-            $sql->bindValue(':premier', $premier, PDO::PARAM_INT);
-            $sql->bindValue(':parpage', $parPage, PDO::PARAM_INT);
-            // On exécute
-            try {
-                $sql->execute();
-                $result = $sql->fetchAll(PDO::FETCH_ASSOC);
-                return $result;
-            } catch (PDOException $ex) {
-                return 11;
-            } 
-        }
-
-        public function count($addSql = "")
-            {
-                $sql = $this->pdo->query("SELECT COUNT(*) AS nb FROM appointments INNER JOIN `patients` ON `appointments`.`idPatients` = `patients`.`id`");
-
-                // On récupère le nombre d'articles
-                
-                try {
-                    $result = $sql->fetch();
-                    return $result;
-                } catch (PDOException $ex) {
-                    return 11;
-                }
-                
-            }
 }

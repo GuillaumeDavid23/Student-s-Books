@@ -1,7 +1,6 @@
 <?php
 //Démmarrage de la session
-session_start();
-//TEST de l'exitsance de la session
+  //TEST de l'exitsance de la session
 if(empty($_SESSION['user'])){
         header('Location: /index.php?page=10');
 } 

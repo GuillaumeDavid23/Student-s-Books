@@ -70,12 +70,16 @@ class Schedule{
          * @param string $table Table sélectionnée
          * @param string $addSql Paramètre supplémentaire SQL
          */
-        public function Delete()
+        public static function Delete($id)
         {   
-            $sql = "DELETE FROM `schedule` WHERE `id` = $this->id";
+            $pdo = SPDO::getInstance();
+
+            $sql = "DELETE FROM `schedule` WHERE `id` = :id";
             try {
-                $sql = $this->pdo->query($sql);
-                return $sql;
+                $stmt = $pdo->prepare($sql);
+                $stmt->bindValue(':id', $id);
+                $stmt->execute();
+                return 26;
             } catch (PDOException $ex) {
                 return 11;
             }
@@ -92,7 +96,7 @@ class Schedule{
         {
             $pdo = SPDO::getInstance();
 
-            $sql= ("SELECT `schedule`.`id`,`schedule`.`day`, `rooms`.`room`, `matters`.`matter`, `slots`.`slot`, `classes_schedule`.`id_class` 
+            $sql= ("SELECT `schedule`.`id`,`schedule`.`day`,`schedule`.`id_matters`, `rooms`.`room`, `matters`.`matter`, `slots`.`slot`, `classes_schedule`.`id_class` 
                     FROM `schedule` 
                     INNER JOIN `rooms` ON `schedule`.`id_rooms` = `rooms`.`id` 
                     INNER JOIN `matters` ON `schedule`.`id_matters` = `matters`.`id` 

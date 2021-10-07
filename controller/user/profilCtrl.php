@@ -1,5 +1,4 @@
 <?php 
-session_start();    
 if(empty($_SESSION['user'])){
     header('Location: /index.php?page=10');
     exit;
@@ -9,17 +8,13 @@ require_once(dirname(__FILE__).'/../../model/user.php');
 require_once(dirname(__FILE__).'/../../model/matters.php');
 require_once(dirname(__FILE__).'/../../model/classes.php');
 require_once(dirname(__FILE__).'/../../model/ranks.php');
- 
 
 //Déclaration des variables
-$user = User::SelectOne($_SESSION['user']->id);
-$matter = Matter::SelectOne($user->id_matters);
-$classes = Classes::SelectOne($user->id_classes);
-$rank = Rank::SelectOne($user->id_ranks);
+$matter = Matter::SelectOne($_SESSION['user']->id_matters);
+$classes = Classes::SelectOne($_SESSION['user']->id_classes);
+$rank = Rank::SelectOne($_SESSION['user']->id_ranks);
 
-$error = '';
 $stockError = [];
-$errorInForm = true;
 $code = null;
 $uploadDir = 'uploads/users/';
 
@@ -80,12 +75,12 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
         } 
     }
 }
-$testPic = dirname(__FILE__).'/../../uploads/users/'.$_SESSION['user']->id.'.jpg';
 
+$testPic = dirname(__FILE__).'/../../uploads/users/'.$_SESSION['user']->id.'.jpg';
 if(file_exists($testPic)){
     $pic='/uploads/users/'.$_SESSION['user']->id.'.jpg';
 }else{
     $pic='/uploads/users/default-profile.jpg';
 }
-
+$message = "Bonjour, <br> Merci de votre inscription. <br> Afin de valider votre inscription, veuillez cliquer sur le lien ci-dessous : <br> <a href='https://yaka.myds.me/controllers/connexionInscription-ctrl.php?token='.$token.'><button type='button'>Validation</button></a>";
 include dirname(__FILE__)."/../../view/user/profile.php";

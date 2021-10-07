@@ -1,4 +1,5 @@
 <?php
+session_start();
 $page = intval(trim(filter_input(INPUT_GET, 'page', FILTER_SANITIZE_NUMBER_INT)));
 switch ($page) {
     case 1:
@@ -93,8 +94,33 @@ switch ($page) {
     case 14:
         include dirname(__FILE__).'/controller/pages/deleteFiles.php';
         break;
+    case 15:
+        $head = "Liste des utilisateurs";
+        $title = "Liste des utilisateurs";
+        $meta = "Liste des utilisateurs";
+        include dirname(__FILE__).'/view/templates/header.php';
+        include dirname(__FILE__).'/controller/admin/listCtrl.php';
+        break;
+    case 16:
+        include dirname(__FILE__).'/controller/user/desactivateCtrl.php';
+        break;
     default:
-        include dirname(__FILE__).'/controller/homeCtrl.php';
+        if($_SESSION['user']->id_ranks == 3){
+            $head = "Espace professeur";
+            $title = "Espace professeur";
+            $meta = "Espace professeur";
+            include dirname(__FILE__).'/view/templates/header.php';
+            include dirname(__FILE__).'/controller/teacher/teacher.php';
+        }
+        elseif($_SESSION['user']->id_ranks == 4){
+            $head = "Administration";
+            $title = "Administration";
+            $meta = "Administration";
+            include dirname(__FILE__).'/view/templates/header.php';
+            include dirname(__FILE__).'/controller/admin/adminCtrl.php';
+        }else{
+            include dirname(__FILE__).'/controller/pages/homeCtrl.php';
+        }
         break;
 }
 

@@ -76,11 +76,6 @@
             <div class="w-100 d-flex align-items-center justify-content-center">
                 <h1 class="m-0">Tableau de bord</h1>
             </div>
-            <?php if($_SESSION['user']->id_ranks == 4){?>
-                <div class="align-self-center me-2">
-                    <a href="/index.php?page=11" class="btn btn-success fw-bold"><i class="fas fa-user-plus"></i></a> 
-                </div>
-            <?php } ?>
             <div class="align-self-center">
                 <a href="/index.php?page=7" class="btn btn-outline-dark fw-bold me-3"><i class="fas fa-user-alt"></i></a> 
             </div>
@@ -128,7 +123,7 @@
                         
                         <div id="homeworkBloc" class="valueBloc">
                             <?php 
-                            $dataArrayHw = Assign::SelectAll();
+                            $dataArrayHw = Assign::SelectAllByClass($_SESSION['user']->id_classes);
                             foreach ($dataArrayHw as $data){ 
                                 $save = explode("-", $data->end_date);
                                 $year = $save[0];
@@ -148,7 +143,11 @@
                                     <div id="hwProf" class="prof">Mme/Mr <?= $teacher->lastname?></div>
                                 </div>
                             </div>
-                            <?php }} ?>
+                            <?php }} 
+                            if($_SESSION['user']->id_ranks == 3 || $_SESSION['user']->id_ranks == 4){
+                                    echo "<p class='text-center text-white text-decoration-underline fw-bold'>Vous êtes professeur ou administrateur, la prévisualition des notes n'est donc pas possible.</p>";
+                                }
+                            ?>
                         </div>
                     </div>
                 </div>
@@ -189,7 +188,6 @@
                         <a href="/index.php?page=4" class="text-decoration-none">
                             <h2>Absences</h2>
                         </a>
-                        
                         <?php foreach ($absencesArray as $absencesObj) { 
                             $timestamp_start = strtotime($absencesObj->start_date.' '.$absencesObj->start_hour);
                             $timestamp_end = strtotime($absencesObj->end_date.' '.$absencesObj->end_hour);
@@ -211,7 +209,11 @@
                                         </div>
                                     </div>
                                 </div>
-                        <?php }} ?>
+                        <?php }}
+                            if($_SESSION['user']->id_ranks == 3 || $_SESSION['user']->id_ranks == 4){
+                                echo "<p class='text-center text-white text-decoration-underline fw-bold'>Vous êtes professeur ou administrateur, la prévisualition des notes n'est donc pas possible.</p>";
+                            }
+                        ?>
                     </div>
                 </div>
 

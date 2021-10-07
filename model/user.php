@@ -294,6 +294,7 @@ class User {
          */
         public function Delete()
         {   
+
             $sql = "DELETE FROM `users` WHERE `id` = $this->id";
             try {
                 $sql = $this->pdo->query($sql);
@@ -311,26 +312,31 @@ class User {
          * @param string $addSql Paramètres SQL (optionnel)
          * @return array|false Retourne un tableau associatif ou False
          */
-        public function Search($search)
+        public static function Search($search)
         {
-            $sql = ('SELECT * FROM users WHERE lastname LIKE '.' '.'\'%'.$search.'%\'');
-            
+            $pdo = SPDO::getInstance();
+
+            $sql = 'SELECT * FROM users WHERE lastname LIKE :search WHERE `statut` = 1';
+            $stmt = $pdo->prepare($sql);
+            $stmt->bindValue(':search', '%'.$search.'%');
             try {
-                $stmt = $this->pdo->query($sql);
+                $stmt->execute();
                 return $stmt->fetchAll(PDO::FETCH_ASSOC);
             } catch (PDOException $ex) {
                 return 11;
             }
         }
 
-        public function Count($table, $addSql = "")
+        public static function Count()
         {
-            $sql = $this->pdo->query("SELECT COUNT(*) AS nb FROM".' '.$table.' '.$addSql);
+            $pdo = SPDO::getInstance();
+
+            $stmt = $pdo->query("SELECT COUNT(*) AS nb FROM users WHERE `statut` = 1");
 
             // On récupère le nombre d'articles
             
             try {
-                $result = $sql->fetch();
+                $result = $stmt->fetch();
                 return $result;
             } catch (PDOException $ex) {
                 return 11;
@@ -338,11 +344,13 @@ class User {
             
         }
 
-        public function Show()
+        public static function Show()
         {
+            $pdo = SPDO::getInstance();
+
              // On détermine sur quelle page on se trouve
-            if(isset($_GET['page']) && !empty($_GET['page'])){
-                $currentPage = (int) strip_tags($_GET['page']);
+            if(isset($_GET['list']) && !empty($_GET['list'])){
+                $currentPage = (int) strip_tags($_GET['list']);
             }else{
                 $currentPage = 1;
             }
@@ -352,13 +360,13 @@ class User {
             // Calcul du 1er article de la page
             $premier = ($currentPage * $parPage) - $parPage;
 
-            $sql = $this->pdo->prepare("SELECT * FROM users LIMIT :premier, :parpage;");
-            $sql->bindValue(':premier', $premier, PDO::PARAM_INT);
-            $sql->bindValue(':parpage', $parPage, PDO::PARAM_INT);
+            $stmt = $pdo->prepare("SELECT * FROM users WHERE `statut` = 1 LIMIT :premier, :parpage;");
+            $stmt->bindValue(':premier', $premier, PDO::PARAM_INT);
+            $stmt->bindValue(':parpage', $parPage, PDO::PARAM_INT);
             // On exécute
             try {
-                $sql->execute();
-                $result = $sql->fetchAll(PDO::FETCH_ASSOC);
+                $stmt->execute();
+                $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
                 return $result;
             } catch (PDOException $ex) {
                 return 11;

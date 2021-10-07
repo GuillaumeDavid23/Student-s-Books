@@ -1,22 +1,21 @@
 <?php
-session_start();
-if(empty($_SESSION['user'])){
+  if(empty($_SESSION['user'])){
     header('Location: /index.php?page=10');
     exit;
 }
 setlocale (LC_TIME, 'fr_FR.utf8','fra');
 //Inclusion des fichiers
-require_once(dirname(__FILE__).'/../model/user.php');
-require_once(dirname(__FILE__).'/../model/assignements.php');
-require_once(dirname(__FILE__).'/../model/absences.php');
-require_once(dirname(__FILE__).'/../model/marks.php');
-require_once(dirname(__FILE__).'/../model/schedule.php');
-require_once(dirname(__FILE__).'/../model/slots.php');
-require_once(dirname(__FILE__).'/../model/rooms.php');
-require_once(dirname(__FILE__).'/../model/classes.php');
-require_once(dirname(__FILE__).'/../model/classes_schedule.php');
-require_once(dirname(__FILE__).'/../model/matters.php');
-require_once(dirname(__FILE__).'/../public/config/config.php');
+require_once(dirname(__FILE__).'/../../model/user.php');
+require_once(dirname(__FILE__).'/../../model/assignements.php');
+require_once(dirname(__FILE__).'/../../model/absences.php');
+require_once(dirname(__FILE__).'/../../model/marks.php');
+require_once(dirname(__FILE__).'/../../model/schedule.php');
+require_once(dirname(__FILE__).'/../../model/slots.php');
+require_once(dirname(__FILE__).'/../../model/rooms.php');
+require_once(dirname(__FILE__).'/../../model/classes.php');
+require_once(dirname(__FILE__).'/../../model/classes_schedule.php');
+require_once(dirname(__FILE__).'/../../model/matters.php');
+require_once(dirname(__FILE__).'/../../public/config/config.php');
 
 //Déclaration des variables
 $users = new User();
@@ -63,4 +62,4 @@ foreach ($edt as $currentArray) {
 
 $currentDay = ucfirst(strftime('%A', time()));
 
-include dirname(__FILE__).'/../view/home.php';
+include dirname(__FILE__).'/../../view/pages/home.php';

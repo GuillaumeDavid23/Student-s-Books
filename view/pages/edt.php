@@ -1,17 +1,25 @@
 <div class="row h-100 justify-content-center align-items-center m-0">
     <div class="d-flex justify-content-between justify-content-md-center mb-md-3">
-        <a href="/index.php?page=3&day=<?= $currentDayNumber-1 ?>" class="d-md-none"><i class="fas fa-chevron-circle-left fa-2x"></i></a>
-        <form action="<?= htmlspecialchars($_SERVER["PHP_SELF"]);?>?page=<?= $page ?>&day=<?= $currentDayNumber ?>" method="POST" id="formClass" class="d-flex align-items-center">
+        
+        <a href="/index.php?page=3&day=<?= $currentDayNumber-1 ?>&idClass=<?= $selectClass ?? '' ?>" class="d-md-none"><i class="fas fa-chevron-circle-left fa-2x"></i></a>
+        <?php if($_SESSION['user']->id_ranks == 3 || $_SESSION['user']->id_ranks == 4){ ?>
+        <form action="<?= htmlspecialchars($_SERVER["PHP_SELF"]);?>?page=<?= $page ?>&day=<?= $currentDayNumber ?>&idClass=<?= $selectClass ?? '' ?>" method="POST" id="formClass" class="d-flex align-items-center">
             <select name="selectClass" id="selectClass">
                 <option value="">Sélectionner une classe</option>
                 <?php 
                     foreach($classArray as $value){?>
                         <option <?= $test = $selectClass == $value['id'] ? 'selected' : '' ?> value='<?=$value['id']?>'><?= $value['class']?></option.> 
-                   <?php }?>
+                    <?php }?>
             </select>
         </form>
-        <a href="/index.php?page=3&day=<?= $currentDayNumber+1 ?>" class="d-md-none"><i class="fas fa-chevron-circle-right fa-2x "></i></a>
+        <?php } ?>
+        <a href="/index.php?page=3&day=<?= $currentDayNumber+1 ?>&idClass=<?= $selectClass ?? '' ?>" class="d-md-none"><i class="fas fa-chevron-circle-right fa-2x "></i></a>
     </div>
+    <?php if($code) :?>
+        <div class="text-center h5 alert <?= $messageCode[$code]['type'] ?>">
+            <?= $messageCode[$code]['msg'] ?>
+        </div>
+    <?php endif ?>
     <!-- VERSION DESKTOP -->
     <table class="text-center d-none d-md-table w-75">
         <tr>
@@ -71,7 +79,7 @@
                                                     <option value=""></option>
                                                     <?php 
                                                         foreach($slotsArray as $value){ ?>
-                                                            <option <?= $test = $heure == $value['slot'] ? 'selected' : '' ?> value='<?=$value['id']?>'><?=$value['slot']?></option>; 
+                                                            <option <?= $test = $heure == $value['slot'] ? 'selected' : '' ?> value='<?=$value['id']?>'><?=$value['slot']?>h</option>; 
                                                         <?php } ?> 
                                                 </select>
                                             </div>
@@ -110,8 +118,12 @@
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
                                                 <button type="submit" class="btn btn-primary">Modifier le cours</button>
+                                            </form>
+                                            <form action="<?= htmlspecialchars($_SERVER["PHP_SELF"]);?>?page=<?= $page ?>" method="post">
+                                                <input type="hidden" name="idRemove" value="<?=$arrayRdvId[$count]?>">
+                                                <button type="submit" class="btn btn-danger">Supprimer le cours</button>
+                                            </form>
                                             </div>
-                                        </form>
                                     </div>
                                 </div>
                             </div>
@@ -134,20 +146,25 @@
             <th><?=$jour[$currentDayNumber] ?></th>
         </tr>
         <?php for($j = 8; $j < 18; $j += 1) { 
-            $AddClass = $j == 12 || $j == 13 ? 'bg-warning' : '';
         ?> <!-- Heure -->
-            <tr class="<?= $AddClass ?? '' ?>">
+            <tr>
                 <?php for($i = 0; $i < 1; $i++) //Jours en lignes
                 {
                     if($i == 0) {
                         $heure = str_replace(".5", ":30", $j);
                         echo "<td class=\"time\">".$heure."</td>";
                     }
-                    echo "<td>";
+                 
                     if(isset($rdv1[$jour[$currentDayNumber]][$heure])) {
+                        $str = $rdv1[$jour[$currentDayNumber]][$heure];
+                        $AddClass = ColorMatter($str);
+                        echo "<td ".' '.'class="'.$AddClass."\">";
                         echo $rdv1[$jour[$currentDayNumber]][$heure];
+                        echo "</td>";
+                    }else{
+                        echo '<td></td>';
                     }
-                    echo "</td>";
+                    
                 }?>
             </tr>
         <?php } ?>
@@ -156,12 +173,7 @@
     <!-- Partie Admin -->
     <?php if($_SESSION['user']->id_ranks == 4){ ?>
         <div class="col-lg-6 mt-5 resumeBloc pt-3 pb-3 text-white ">
-            <h4 class="text-center">Ajouter ou modifier l'emploi du temps</h4>
-            <?php if($code) :?>
-                <div class="text-center h5 alert <?= $messageCode[$code]['type'] ?>">
-                    <?= $messageCode[$code]['msg'] ?>
-                </div>
-            <?php endif ?>
+            <h4 class="text-center">Ajouter un cours</h4>
             <form action="<?= htmlspecialchars($_SERVER["PHP_SELF"]);?>?page=<?= $page ?>" method="POST" class="d-flex flex-column align-items-center">
                 <div class="mt-3">
                     <label for="days">Choisir le jour :</label>
@@ -179,7 +191,7 @@
                         <option value=""></option>
                         <?php 
                             foreach($slotsArray as $value) //Affichage des nom des jour
-                                echo "<option value='".$value['id']."'>".$value['slot']."</option>"; 
+                                echo "<option value='".$value['id']."'>".$value['slot']."h</option>"; 
                         ?>
                     </select>
                 </div>

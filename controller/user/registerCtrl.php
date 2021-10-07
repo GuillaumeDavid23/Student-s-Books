@@ -1,7 +1,6 @@
 <?php
 //Démarrage de la session
-session_start();
-
+  
 if($_SESSION['user']->id_ranks != 4){
     header('Location: /index.php');
     exit;

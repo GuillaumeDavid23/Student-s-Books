@@ -11,7 +11,7 @@ $messageCode = [
     11 => ['type' => 'alert-danger', 'msg' => 'Une erreur est survenue'],
     12 => ['type' => 'alert-danger', 'msg' => 'Les mots de passes sont différents'],
     13 => ['type' => 'alert-warning', 'msg' => 'Email ou mot de passe incorrect !'],
-    14 => ['type' => 'alert-success', 'msg' => 'Votre compte a bien été désactivé '],
+    14 => ['type' => 'alert-success', 'msg' => 'L\'utilisateur a bien été  désactivé !'],
     15 => ['type' => 'alert-warning', 'msg' => 'Compte désactivé, contactez votre administrateur'],
     15 => ['type' => 'alert-success', 'msg' => 'Votre photo de profil a bien été ajouté'],
     16 => ['type' => 'alert-success', 'msg' => 'Cour ajouté'],
@@ -22,6 +22,9 @@ $messageCode = [
     21 => ['type' => 'alert-success', 'msg' => 'Devoir modifié !'],
     22 => ['type' => 'alert-warning', 'msg' => 'Devoir non modifié !'],
     23 => ['type' => 'alert-danger', 'msg' => 'Vous n\'avez pas les droits pour faire cela !'],
+    24 => ['type' => 'alert-warning', 'msg' => 'Devoir inconnu'],
+    25 => ['type' => 'alert-warning', 'msg' => 'Le cours n\'existe pas'],
+    26 => ['type' => 'alert-warning', 'msg' => 'Le cours a été supprimé'],
 
 ];
 
