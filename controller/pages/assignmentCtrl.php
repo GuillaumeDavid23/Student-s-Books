@@ -163,7 +163,6 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
                 //Ajout dans la base
                 $assign = new Assign("", $hwDate, $hwName, $returnAssign,$class, $id_users);
                 $code = $assign->Add();
-                
             }
         }
     }

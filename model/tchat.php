@@ -30,10 +30,10 @@ class Chat {
          * @param string $addSql Paramètres SQL (optionnel)
          * @return array|false Retourne un tableau associatif ou False
          */
-        public static function SelectAll($lastId = "")
+        public static function SelectAll($lastId = "", $id_class = "")
         {
             $pdo = SPDO::getInstance();
-            $filtre = ($lastId > 0) ? " WHERE `messages`.`id` > $lastId" : '';
+            $filtre = ($lastId > 0) ? $lastId : '';
             $sql= ("SELECT `messages`.`id`,
             `message`,
             `messages`.`create_at`,
@@ -42,12 +42,16 @@ class Chat {
             `users`.`lastname`  
             FROM `messages` 
             INNER JOIN `users` 
-            ON `users`.`id` = `messages`.`id_users`".' '.$filtre.' '." 
+            ON `users`.`id` = `messages`.`id_users`
+            WHERE `messages`.`id` > :lastId
+            AND `users`.`id_classes` = :idClass
             ORDER BY `create_at` 
             DESC LIMIT 10;");
-            
+            $stmt = $pdo->prepare($sql);
+            $stmt->bindValue(':lastId', $filtre);
+            $stmt->bindValue(':idClass', $id_class);
             try {
-                $stmt = $pdo->query($sql);
+                $stmt->execute();
                 $result = $stmt->fetchAll(PDO::FETCH_OBJ);
                 return $result;
             } catch (PDOException $ex) {

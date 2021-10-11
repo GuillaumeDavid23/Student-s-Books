@@ -8,5 +8,6 @@ if(empty($_SESSION['user'])){
 //Inclusion des différents fichiers
 require_once(dirname(__FILE__).'/../../model/tchat.php');
 require_once(dirname(__FILE__).'/../../model/user.php');
-
+require_once(dirname(__FILE__).'/../../model/classes.php');
+$allClasses = Classes::SelectAll();
 include dirname(__FILE__).'/../../view/pages/tchat.php';

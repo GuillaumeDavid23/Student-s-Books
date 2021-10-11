@@ -14,16 +14,16 @@ class SPDO
     // const DEFAULT_SQL_DTB = 'c219studentsbooks';
 
     //Hosteur
-    // const DEFAULT_SQL_USER = 'students_books1';
-    // const DEFAULT_SQL_HOST = 'sql-server.k8s-o952ewod';
-    // const DEFAULT_SQL_PASS = '@McL[#m7Cn';
-    // const DEFAULT_SQL_DTB = 'studentsbooks1';
+    const DEFAULT_SQL_USER = 'students_books1';
+    const DEFAULT_SQL_HOST = 'sql-server.k8s-o952ewod';
+    const DEFAULT_SQL_PASS = '@McL[#m7Cn';
+    const DEFAULT_SQL_DTB = 'studentsbooks1';
 
     //LOCAL
-    const DEFAULT_SQL_USER = 'students_books';
-    const DEFAULT_SQL_HOST = 'localhost';
-    const DEFAULT_SQL_PASS = 'j@Ms@7pA&?Eie9pb';
-    const DEFAULT_SQL_DTB = 'studentbook1';
+    // const DEFAULT_SQL_USER = 'students_books';
+    // const DEFAULT_SQL_HOST = 'localhost';
+    // const DEFAULT_SQL_PASS = 'j@Ms@7pA&?Eie9pb';
+    // const DEFAULT_SQL_DTB = 'studentbook1';
 
     //Methode de création de l'instance 
     public static function getInstance()

@@ -113,7 +113,7 @@ $marksSum = 0;
 $count = 0;
 if($_SESSION['user']->id_ranks == "1"){
     foreach ($marksArray as $data){
-        $matters = Matter::SelectOne($data['id_users_teacher_marks']);
+        $matters = Matter::SelectOne($data['id_matters']);
         $data['matter'] = $matters->matter;
         if($data['id_users'] == $_SESSION['user']->id){
             array_push($dataArray, $data);

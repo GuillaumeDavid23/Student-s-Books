@@ -1,7 +1,9 @@
 window.onload = () => {
     // On va chercher la zone de texte
     let texte = document.querySelector("#class")
-    texte.addEventListener("change", link)
+    if (texte != null) {
+        texte.addEventListener("change", link)
+    }
 
 }
 

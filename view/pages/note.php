@@ -39,9 +39,6 @@
                     <?php } ?>
                 </div>
                 <div class="w-25 text-center h4 alert-<?= $result = $avg > 10 ? 'success' : 'danger'; ?>">Votre moyenne est de : <?= $avg ?></div>
-
-                </div>
-
             </div>
         <?php } ?>
 

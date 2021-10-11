@@ -46,7 +46,6 @@
                 <button type="submit" class="btn btn-outline-success mt-2" id="btnSubmit">Changer mon mot de passe.</button>
             </form>
         </div>
-        <a href="/controller/user/desactivateCtrl.php?id=<?= $_SESSION['user']->id ?>" class="btn btn-danger mt-5">Désactiver mon compte</a>
     </div>
 </div>
 

@@ -1,5 +1,6 @@
 // Variables globales
 var lastId = 0
+var idClass = 0
 
 
 window.onload = () => {
@@ -10,6 +11,11 @@ window.onload = () => {
     // On va chercher le bouton "valid"
     let valid = document.querySelector("#chatBtnSend")
     valid.addEventListener("click", ajoutMessage)
+
+    let selectClass = document.getElementById('idClass')
+    if (selectClass != null) {
+        selectClass.addEventListener("change", chargeMessages)
+    }
 
     setInterval(chargeMessages, 1000)
     setInterval(alive, 5000)
@@ -33,7 +39,6 @@ function ajoutMessage() {
 
         // On convertit les données en json
         let donneesJson = JSON.stringify(donnees)
-
         // On envoie les données en POST en Ajax
         // On instancie XMLHttpRequest
         let xmlhttp = new XMLHttpRequest()
@@ -91,7 +96,6 @@ function chargeMessages() {
                 messages.map((message) => {
                     // On transforme la date en objet JS
                     let dateMessage = new Date(message.create_at)
-                    console.log(message);
                     if (idUser == message.id_users) {
                         addClass = "meChat align-self-end"
                         imgClass = "align-self-end"
@@ -135,9 +139,12 @@ function chargeMessages() {
             }
         }
     }
-
+    let selectClass = document.getElementById('idClass')
+    if (selectClass != null) {
+        idClass = selectClass.value
+    }
     // On ouvre la requête
-    xmlhttp.open("GET", "/controller/ajax/loadMessages.php?lastId=" + lastId)
+    xmlhttp.open("GET", "/controller/ajax/loadMessages.php?lastId=" + lastId + "&idClass=" + idClass)
     // On envoie la requête
     xmlhttp.send()
 }

@@ -58,6 +58,9 @@ switch ($page) {
         $pages = [];
         break;
 }
+if(isset($_SESSION['user']) && $_SESSION['user']->id_ranks == 3){
+    unset($pages[4]);
+}
 ?>
             <?php if(!empty($pages)){?>        
             <div class="mt-5 mb-5 row justify-content-evenly w-100 d-none d-lg-flex">
@@ -66,7 +69,7 @@ switch ($page) {
                 foreach ($pages as $key => $value) { ?>
                     <div class="col-1 navBtnMob">
                         <a href="../index.php?page=<?= $key ?>">
-                            <img src="../public/img/nav/<?= $key ?>.webp" class="img-fluid" width="100" alt="Page des devoirs" title="Vers les devoirs..">
+                            <img src="../public/img/nav/<?= $key ?>.webp" class="img-fluid" width="100" alt="Page des devoirs" title="<?= $value->title ?>">
                         </a>
                     </div>
                 <?php } ?>

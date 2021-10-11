@@ -5,6 +5,10 @@
 if(empty($_SESSION['user'])){
         header('Location: /index.php?page=10');
         exit;
+}elseif($_SESSION['user']->id_ranks == 3){
+        header('Location: /index.php');
+        exit;
+
 }
 
 //Inclusion des différents fichiers

@@ -45,7 +45,7 @@
                         </div>
                         <div class="ps-1 w-100 bg-egg d-flex align-items-center">
                             <div id="reasonBloc" class="fw-bold">
-                                <span id="reason"><?= $absencesObj->justification ?> - de <?= date('H:i', $timestamp_start) ?> à <?= date('H:i', $timestamp_end) ?> </span>
+                                <span id="reason"><?= $absencesObj->justification ?> - du <?= $day_start.' à '.date('H:i', $timestamp_start).' au '.$day_end.' à '.date('H:i', $timestamp_end)?></span>
                             </div>
                         </div>
                     </div>

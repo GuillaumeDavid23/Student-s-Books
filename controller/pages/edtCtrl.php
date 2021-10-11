@@ -194,7 +194,7 @@ function ColorMatter($str){
             $result = 'bg-royal';
             break;
         case stristr($str, 'Arts-Plastiques'):
-            $result = 'bg-arc';
+            $result = 'bg-info';
             break;
         default:
             $result = '';

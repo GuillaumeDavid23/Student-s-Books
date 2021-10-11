@@ -82,5 +82,4 @@ if(file_exists($testPic)){
 }else{
     $pic='/uploads/users/default-profile.jpg';
 }
-$message = "Bonjour, <br> Merci de votre inscription. <br> Afin de valider votre inscription, veuillez cliquer sur le lien ci-dessous : <br> <a href='https://yaka.myds.me/controllers/connexionInscription-ctrl.php?token='.$token.'><button type='button'>Validation</button></a>";
 include dirname(__FILE__)."/../../view/user/profile.php";

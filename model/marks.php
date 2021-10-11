@@ -90,7 +90,7 @@ class Mark{
         {
             $pdo = SPDO::getInstance();
 
-            $sql = "SELECT date, note, notation, id_users, id_users_teacher_marks FROM `marks`";
+            $sql = "SELECT date, note, notation, id_users, `id_users_teacher_marks`, `users`.`id_matters` FROM `marks` INNER JOIN `users` ON `id_users_teacher_marks` = `users`.`id`";
             try {
                 $stmt = $pdo->query($sql);
                 $result = $stmt->fetchAll(PDO::FETCH_ASSOC);

@@ -37,7 +37,7 @@ class Assign{
                 $sql->execute();
                 return 18;
             } catch (PDOException $ex) {
-                return 11;
+                return $ex;
             }
         }
 

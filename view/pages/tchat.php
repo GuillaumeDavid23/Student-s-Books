@@ -1,4 +1,15 @@
 <div class="row h-25 justify-content-center">
+    <?php if($_SESSION['user']->id_ranks == 4 || $_SESSION['user']->id_ranks == 3){ ?>
+        <div class="col-12 d-flex justify-content-center">
+            <h3>Selectionner une classe</h3>
+            <select name="idClass" id="idClass">
+                <option value="0"></option>
+                <?php foreach ($allClasses as  $class) { ?>
+                    <option value="<?= $class['id'] ?>"><?= $class['class'] ?></option>
+                <?php } ?>
+            </select>
+        </div>
+    <?php } ?>
     <div class="col-10 col-md-6 h-100 p-0 resumeBloc" id="chatBloc">
         <div id="topChat" class="d-flex">
             <div id="chatContact" class="d-flex flex-column align-items-center pt-1 p-2">
